@@ -5,3 +5,4 @@ Authors:
 - Christian Marcy
 - Fred Budde
 - Dhruv Patel
+- Brandon Wheeler
