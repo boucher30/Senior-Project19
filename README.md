@@ -6,3 +6,4 @@ Authors:
 - Fred Budde
 - Dhruv Patel
 - Brandon Wheeler
+- Sean Klinglesmith
