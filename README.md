@@ -7,3 +7,4 @@ Authors:
 - Dhruv Patel
 - Brandon Wheeler
 - Sean Klinglesmith
+- Dylan Anderson
