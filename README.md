@@ -8,3 +8,4 @@ Authors:
 - Brandon Wheeler
 - Sean Klinglesmith
 - Dylan Anderson
+- RJ Boucher
