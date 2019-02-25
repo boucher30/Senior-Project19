@@ -6,7 +6,12 @@ import Avatar from '../images/avatar-man.png'
 
 const UserProfileCard = (props) => {
 	return (
-		<Row style={{ padding: '15px 0px', maxWidth: '1000px' }}>
+		<Row style={{
+			padding: '15px 0px',
+			maxWidth: '1000px',
+			boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
+			marginBottom: '20px'
+		}}>
 			{/* This column is for the users image */}
 			<Col xs="auto">
 				<Image style={{ height: '128px' }} src={Avatar} rounded />

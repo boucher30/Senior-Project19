@@ -52,7 +52,7 @@ export default class Dashboard extends Component {
 
 
 				{/* Second column that holds the page */}
-				<Col xs={10} style={{ textAlign: 'left' }}>
+				<Col xs={10} style={{ textAlign: 'left', borderLeft: '0.5px solid rgba(0, 0, 0, 0.5)' }}>
 					{component}
 				</Col>
 			</Row>
