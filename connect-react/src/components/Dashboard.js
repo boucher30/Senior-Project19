@@ -4,14 +4,16 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import ProfilePage from "./ProfilePage";
 import FeedPage from "./FeedPage";
+import ConnectionPage from "./ConnectionPage";
 
 export default class Dashboard extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			sel: 'My Profile',
+			sel: 'My Connections',
 			options: {
 				'My Profile': <ProfilePage/>,
+				'My Connections': <ConnectionPage/>,
 				'My Feed': <FeedPage/>
 			}
 		}
@@ -40,7 +42,7 @@ export default class Dashboard extends Component {
 
 				{/* First column that holds the menu items */}
 				<Col xs={2} style={{ paddingRight: '0px' }}>
-					<ListGroup variant="flush" defaultActiveKey="#1">
+					<ListGroup variant="flush" defaultActiveKey="#2">
 						{listItems}
 						<ListGroup.Item action href="#link3" onClick={() => { console.log('We clicked a button! Lets go to the api...'); }}>
 							This one is a button

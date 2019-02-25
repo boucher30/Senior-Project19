@@ -22,14 +22,21 @@ export default class ProfilePage extends Component {
 	}
 
 	render() {
-		console.log('User info length:', this.state.userInfoLength);
-		return (
-			<div>
-				<h2>Profile Page</h2>
-				<h6>Username</h6>
-				<p>First Name</p>
-				<p>Last Name</p>
-			</div>
-		);
+		if(this.state.userInfoLength > 0) {
+			const user = this.state.userInfo;
+
+			return (
+				<div>
+					<h2>Profile Page</h2>
+					<h6>Username: {user.username}</h6>
+					<p>First Name: {user.first_name}</p>
+					<p>Last Name: {user.last_name}</p>
+				</div>
+			);
+		} else {
+			return (
+				<div>Loading!</div>
+			);
+		}
 	}
 }
