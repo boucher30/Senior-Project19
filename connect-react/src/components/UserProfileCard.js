@@ -5,7 +5,6 @@ import Image from "react-bootstrap/Image";
 import Avatar from '../images/avatar-man.png'
 
 const UserProfileCard = (props) => {
-	console.log('Props', props);
 	return (
 		<Row style={{ padding: '15px 0px', maxWidth: '1000px' }}>
 			{/* This column is for the users image */}
