@@ -1,6 +1,6 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
-const mysql = require('mysql');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 
@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 8000;
 const con = require('./db');
 con.connect(function(err) {
   if (err) throw err;
-  console.log("Connected!");
+  console.log("Connected to MySQL database...");
 });
 
 // Define routes ahead of time
@@ -42,5 +42,5 @@ app.use('/users', userRoutes);
 
 // App listens on specific port or 8000 by default
 app.listen(PORT, () => {
-	console.log("Home Repair server started on port "+ PORT + "!");
+	console.log("Connect API started on port "+ PORT + "!");
 });
