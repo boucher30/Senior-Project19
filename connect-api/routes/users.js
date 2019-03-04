@@ -19,6 +19,7 @@ router.post('/', (req,res) => {
 	const { username, first_name, last_name } = req.body;
 
 	// Create insert query for new user
+	// Added a comment
 	var sql = "INSERT INTO user (username, first_name, last_name) VALUES "
 		+ "('" + username + "', '" + first_name + "', '" + last_name + "');";
 
