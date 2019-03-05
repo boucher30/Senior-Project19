@@ -11,6 +11,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Dog from '../images/dog.jpg';
 import Card from 'react-bootstrap/Card';
+import FeaturedUserCard from '../components/FeaturedUserCard';
 
 
 class SplashPage extends Component {
@@ -73,42 +74,23 @@ class SplashPage extends Component {
 <Container>
   <Row>
     <Col>
-    <Card style={{ width: '10rem' }}>
-        <Card.Img variant="top" src={Dog} />
-        <Card.Body>
-            <Card.Title>Card Title</Card.Title>
-            <Card.Text>
-            Featured User 1
-            </Card.Text>
-        </Card.Body>
-    </Card>
+        <FeaturedUserCard title = "Featured User 1" img = {Dog} text = "Loser1"/>
     </Col>
     <Col>
-        <Card style={{ width: '10rem' }}>
-        <Card.Img variant="top" src={Dog} />
-        <Card.Body>
-            <Card.Title>Card Title</Card.Title>
-            <Card.Text>
-            Featured User 2
-            </Card.Text>
-        </Card.Body>
-        </Card>
+        <FeaturedUserCard title = "Featured User 2" img = {Dog} text = "Loser2"/>
     </Col>
 
     <Col>
-    <Card style={{ width: '10rem' }}>
-        <Card.Img variant="top" src={Dog} />
-        <Card.Body>
-            <Card.Title>Card Title</Card.Title>
-            <Card.Text>
-            Featured User 3
-            </Card.Text>
-        </Card.Body>
-        </Card>
+        <FeaturedUserCard title = "Featured User 3" img = {Dog} text = "Loser3"/>
     </Col>
   </Row>
 </Container>
 
+
+    <Navbar bg="dark" variant="dark">
+        <Nav className="mr-auto" style = {{height: '60px'}}>
+        </Nav>
+    </Navbar>
 
 </>
 
