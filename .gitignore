@@ -1,6 +1,7 @@
 # Dependencies
 .idea/
 node_modules/
+.vscode/
 
 # Misc.
 .DS_Store
