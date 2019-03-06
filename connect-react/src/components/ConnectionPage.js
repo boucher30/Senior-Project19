@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import axios from 'axios'
 import helpers from '../util'
 import UserProfileCard from "./UserProfileCard";
