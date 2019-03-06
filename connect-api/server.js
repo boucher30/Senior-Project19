@@ -24,6 +24,7 @@ con.connect(function(err) {
 // so it can be called below
 const userRoutes = require('./routes/users');
 const buddyRoutes = require('./routes/buddylist');
+const venueRoutes = require('./routes/venue');
 
 // Set up app to handle requests and json etc...
 app.use(morgan('dev'));																// Logger for api
@@ -49,6 +50,7 @@ app.use((req, res, next) => {
 // any new file needs to be added in order for it to function.
 app.use('/users', userRoutes);
 app.use('/buddylist', buddyRoutes);
+app.use('/venue', venueRoutes);
 
 // App listens on specific port or 8000 by default
 app.listen(PORT, () => {
