@@ -5,17 +5,18 @@ import Col from "react-bootstrap/Col";
 import ProfilePage from "./ProfilePage";
 import FeedPage from "./FeedPage";
 import ConnectionPage from "./ConnectionPage";
-// import Babel from "../../node_modules/babel-preset-react-app/node_modules"
+import VenuePage from './VenuePage';
 
 export default class Container extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			sel: 'My Connections',
+			sel: 'Venue',
 			options: {
 				'My Profile': <ProfilePage/>,
 				'My Connections': <ConnectionPage/>,
-				'My Feed': <FeedPage/>
+				'My Feed': <FeedPage/>,
+				'Venue': <VenuePage/>
 			}
 		}
 
@@ -43,7 +44,7 @@ export default class Container extends Component {
 
 				{/* First column that holds the menu items */}
 				<Col xs={2} style={{ paddingRight: '0px' }}>
-					<ListGroup variant="flush" defaultActiveKey="#2">
+					<ListGroup variant="flush" defaultActiveKey="#4">
 						{listItems}
 						<ListGroup.Item action href="#link3" onClick={() => { console.log('We clicked a button! Lets go to the api...'); }}>
 							This one is a button

@@ -10,6 +10,7 @@ import Dashboard from "./Pages/Dashboard";
 import SplashPage from './Pages/SplashPage';
 import LoginPage from "./Pages/Login/LoginPage";
 import SignUpPage from "./Pages/SignUpPage";
+import VenuePage from "./components/VenuePage";
 
 
 class App extends Component {
@@ -25,6 +26,7 @@ class App extends Component {
           <Route path='/dashboard' component={Dashboard} />
           <Route path='/login' component={LoginPage} />
           <Route path='/sign-up' component={SignUpPage} />
+          <Route path='/venue-profile' component={VenuePage} />
         </Switch>
       </div>
     );
