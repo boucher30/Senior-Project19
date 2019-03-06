@@ -9,7 +9,8 @@ export default class FeaturedUserCard extends Component {
 
     render() { 
         return(
-            <Card style={{ width: '10rem' }}>
+            <Card 
+            style={{ width: '15rem', marginTop: '10px', marginBottom: '30px'}}>
             <Card.Img variant="top" src={this.props.img} />
             <Card.Body>
                 <Card.Title>{this.props.title}</Card.Title>
