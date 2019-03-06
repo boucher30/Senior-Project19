@@ -7,34 +7,32 @@ const con = require('../db');
 
 //grab all the buddies from DB
 router.get('/', (req, res) => {
-    var sql = "SELECT * FROM venue";
+    var sql = "SELECT * FROM connectid";
     con.query(sql, (err, results) => {
         if (err) throw err;
         res.status(200).json({
-            venue: results
+            connectid: results
         })
     })
 });
 
 //add buddy to BD
 router.post('/', (req, res) => {
-    const {venue_name, venue_state, venue_sport} = req.body;
+    const {user_id1, venue_id, event_date, sport, user_id2} = req.body;
 
     // Create insert query for new user
     // Added a comment
-    var sql = "INSERT INTO venue (venue_name, venue_state, venue_sport) VALUES "
-        + "('" + venue_name +"', '" +  venue_state + "', '" + venue_sport + "');";
-
+    var sql = "INSERT INTO connectid (user_id1, venue_id, event_date, sport, user_id2) VALUES "
+        + "('" + user_id1 +"', '" + venue_id + "', '"+ event_date + "', '" + sport + "', '" + user_id2 + "');";
 
     // Execute the query to insert into the database
     con.query(sql, (err) => {
         if (err) throw err;
         res.status(201).json({
-            msg: '1 record inserted into the venue table'
+            msg: '1 record inserted into the connectid table'
         })
     })
 
 });
-
 
 module.exports = router;

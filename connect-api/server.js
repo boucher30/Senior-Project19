@@ -25,6 +25,10 @@ con.connect(function(err) {
 const userRoutes = require('./routes/users');
 const buddyRoutes = require('./routes/buddylist');
 const venueRoutes = require('./routes/venue');
+const conRoutes = require('./routes/connectionlist');
+const ctRoutes = require('./routes/connectid');
+const carRoutes = require('./routes/carveid');
+const fvRoutes = require('./routes/follow_venue');
 
 // Set up app to handle requests and json etc...
 app.use(morgan('dev'));																// Logger for api
@@ -51,6 +55,10 @@ app.use((req, res, next) => {
 app.use('/users', userRoutes);
 app.use('/buddylist', buddyRoutes);
 app.use('/venue', venueRoutes);
+app.use('/connectionlist', conRoutes);
+app.use('/connectid', ctRoutes);
+app.use('/carveid', carRoutes);
+app.use('/follow_venue', fvRoutes);
 
 // App listens on specific port or 8000 by default
 app.listen(PORT, () => {
