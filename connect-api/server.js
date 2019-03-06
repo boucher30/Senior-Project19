@@ -1,5 +1,11 @@
+// to back end team. line 24, need to define an alias for a new route
+// roughly line 50+ needs to use that alias, for the endpoint to access the route
+// Sean 3/5
+
 require('dotenv').config();
 const express = require('express');
+
+
 const app = express();
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
@@ -14,8 +20,10 @@ con.connect(function(err) {
 });
 
 // Define routes ahead of time
+// any file/route being used needs to be defined here
+// so it can be called below
 const userRoutes = require('./routes/users');
-
+const buddyRoutes = require('./routes/buddylist');
 
 // Set up app to handle requests and json etc...
 app.use(morgan('dev'));																// Logger for api
@@ -38,7 +46,9 @@ app.use((req, res, next) => {
 
 
 // Tells the App specific routes to use using router in each file
+// any new file needs to be added in order for it to function.
 app.use('/users', userRoutes);
+app.use('/buddylist', buddyRoutes);
 
 // App listens on specific port or 8000 by default
 app.listen(PORT, () => {
