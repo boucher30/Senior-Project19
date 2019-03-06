@@ -33,14 +33,14 @@ class SplashPage extends Component {
                   <Container>
                     <Row style = {{marginBottom: '20px'}}>
                       <Col>
-                        <Button variant="dark" size="lg">
+                        <Button href={'/login'} eventKey="login" variant="dark" size="lg">
                           Login
                         </Button>
                       </Col>
                     </Row>
                     <Row>
                       <Col>
-                        <Button variant="info" size="lg">
+                        <Button href={'/sign-up'} eventKey="sign-up" variant="info" size="lg">
                           Sign Up
                         </Button>
                       </Col>
@@ -58,14 +58,14 @@ class SplashPage extends Component {
                 <Container>
                     <Row style = {{marginBottom: '20px'}}>
                       <Col>
-                        <Button variant="dark" size="lg">
+                        <Button href={'/login'} eventKey="login" variant="dark" size="lg">
                           Login
                         </Button>
                       </Col>
                     </Row>
                     <Row>
                       <Col>
-                        <Button variant="info" size="lg">
+                      <Button href={'/sign-up'} eventKey="sign-up" variant="info" size="lg">
                           Sign Up
                         </Button>
                       </Col>
@@ -83,14 +83,14 @@ class SplashPage extends Component {
                 <Container>
                     <Row style = {{marginBottom: '20px'}}>
                       <Col>
-                        <Button variant="dark" size="lg">
+                        <Button href={'/login'} eventKey="login" variant="dark" size="lg">
                           Login
                         </Button>
                       </Col>
                     </Row>
                     <Row>
                       <Col>
-                        <Button variant="info" size="lg">
+                      <Button href={'/sign-up'} eventKey="sign-up" variant="info" size="lg">
                           Sign Up
                         </Button>
                       </Col>
