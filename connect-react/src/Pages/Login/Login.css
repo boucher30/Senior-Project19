@@ -1,0 +1,34 @@
+@media all and (min-width: 480px) {
+    .Login {
+        position: absolute;
+        top: 50%;
+        height: 400px;
+        margin-top: -250px;
+        left: 50%;
+        width: 500px;
+        margin-left: -250px;
+        border-radius: 2px;
+        background-color: white;
+        padding: 10px;
+    }
+
+    .Login form {
+        margin: 5% auto;
+        max-width: 320px;
+    }
+
+
+    #password {
+        padding-top: 4%;
+    }
+
+    body {
+        background-color: #eaedf5;
+    }
+
+    .btn-primary {
+        background-color: #47525e;
+        border-color: #47525e;
+        color: white;
+    }
+}

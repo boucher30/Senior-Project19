@@ -6,7 +6,7 @@ import ProfilePage from "./ProfilePage";
 import FeedPage from "./FeedPage";
 import ConnectionPage from "./ConnectionPage";
 
-export default class Dashboard extends Component {
+export default class Container extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
