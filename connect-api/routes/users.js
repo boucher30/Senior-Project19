@@ -16,12 +16,12 @@ router.get('/', (req,res) => {
 
 // Creates a new user
 router.post('/', (req,res) => {
-	const { username, first_name, last_name } = req.body;
+	const {username, pwd, first_name, last_name, profile_type, sport} = req.body;
 
 	// Create insert query for new user
 	// Added a comment
-	var sql = "INSERT INTO user (username, first_name, last_name) VALUES "
-		+ "('" + username + "', '" + first_name + "', '" + last_name + "');";
+	var sql = "INSERT INTO user (username, pwd, first_name, last_name, profile_type, sport) VALUES "
+		+ "('" + username + "', '" + pwd + "', '" + first_name + "', '" + last_name + "', '" + profile_type + "', '" + sport + "');";
 
 
 	// Execute the query to insert into the database
