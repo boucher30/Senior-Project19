@@ -5,11 +5,11 @@ import Col from 'react-bootstrap/Col';
 import Figure from 'react-bootstrap/Figure';
 import Mount_Snow from '../images/mount_snow_bg.png'
 import SideMenu from './SideMenu';
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import Button from 'react-bootstrap/Button';
+import VenueButtonMenu from './VenueButtonMenu';
 
 
 export default class VenuePage extends Component {
+
     render() {
         return (
             <>
@@ -38,11 +38,8 @@ export default class VenuePage extends Component {
                     </Container>
                 </Row>
                 <Row className = 'justify-content-center'>
-                    <ButtonGroup aria-label="Venue button group">
-                        <Button variant="secondary">Information</Button>
-                        <Button variant="secondary">Carves</Button>
-                        <Button variant="secondary">Media</Button>
-                    </ButtonGroup>
+                    <VenueButtonMenu state = 'info'/>
+
                 </Row>
 
             </>

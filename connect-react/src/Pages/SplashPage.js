@@ -106,15 +106,15 @@ class SplashPage extends Component {
                   <h1 style = {{textAlign: 'left', marginTop: '30px'}}>Featured Users</h1>
                 </Col>
               </Row>
-              <Row >
+              <Row style = {{marginLeft: '75px', marginTop: '20px'}}>
                 <Col>
-                    <FeaturedUserCard title = "Featured User 1" img = {Dog} text = "Loser1"/>
+                    <FeaturedUserCard title = "Featured User 1" img = {Dog} text = "I love Carve Connect!"/>
                 </Col>
                 <Col>
-                    <FeaturedUserCard title = "Featured User 2" img = {Dog} text = "Loser2"/>
+                    <FeaturedUserCard title = "Featured User 2" img = {Dog} text = "Filming is an art and it's my passion."/>
                 </Col>
                 <Col>
-                    <FeaturedUserCard title = "Featured User 3" img = {Dog} text = "Loser3"/>
+                    <FeaturedUserCard title = "Featured User 3" img = {Dog} text = "Sports are cool."/>
                 </Col>
               </Row>
             </Container>
