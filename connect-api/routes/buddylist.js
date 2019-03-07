@@ -7,7 +7,7 @@ const con = require('../db');
 
 //grab all the buddies from DB
 router.get('/', (req,res) => {
-    var sql = "SELECT * FROM buddyList";
+    var sql = "SELECT * FROM buddylist";
     con.query(sql, (err, results, fields) => {
 		if (err) throw err;
 		res.status(200).json({
@@ -22,7 +22,7 @@ router.post('/', (req,res) => {
 
 	// Create insert query for new user
 	// Added a comment
-	var sql = "INSERT INTO buddyList (user_id, user_id2) VALUES "
+	var sql = "INSERT INTO buddylist (user_id, user_id2) VALUES "
 		+ "('" + user_id + "', '" + user_id2 + "');";
 
 
