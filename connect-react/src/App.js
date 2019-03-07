@@ -9,8 +9,8 @@ import TopNav from "./components/Navbar";
 import Dashboard from "./Pages/Dashboard";
 import SplashPage from './Pages/SplashPage';
 import LoginPage from "./Pages/Login/LoginPage";
-import SignUpPage from "./Pages/SignUpPage";
 import VenuePage from "./components/VenuePage";
+import SignUpPage from "./Pages/SignUp/SignUpPage";
 
 
 class App extends Component {

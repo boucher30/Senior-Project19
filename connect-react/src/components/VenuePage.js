@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
+import Figure from 'react-bootstrap/Figure';
 
 
 export default class VenuePage extends Component {
@@ -11,7 +12,7 @@ export default class VenuePage extends Component {
 
                 <Container>
                     <Row>
-
+                        
                     </Row>
                 </Container>
             </>

@@ -13,13 +13,8 @@
     }
 
     .Login form {
-        margin: 5% auto;
+        margin: 0 auto;
         max-width: 320px;
-    }
-
-
-    #password {
-        padding-top: 4%;
     }
 
     body {
