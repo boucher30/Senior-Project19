@@ -1,0 +1,540 @@
+POST http://localhost:8000/user
+Accept: */*
+Cache-Control: no-cache
+
+< C:/Users/frosty/Documents/GitHub/Senior-Project19/connect-api/userinfo1.json
+
+<> 2019-03-06T105148.409.json
+
+###
+
+POST http://localhost:8000/user
+Accept: */*
+Cache-Control: no-cache
+
+< C:/Users/frosty/Documents/GitHub/Senior-Project19/connect-api/userinfo1.json
+
+<> 2019-03-06T105144.201.json
+
+###
+
+POST http://localhost:8000/user
+Accept: */*
+Cache-Control: no-cache
+
+< C:/Users/frosty/Documents/GitHub/Senior-Project19/connect-api/userinfo1.json
+
+<> 2019-03-06T103931.409.json
+
+###
+
+POST http://localhost:8000/user
+Accept: */*
+Cache-Control: no-cache
+
+< C:/Users/frosty/Documents/GitHub/Senior-Project19/connect-api/userinfo1.json
+
+<> 2019-03-06T103929.201.json
+
+###
+
+POST http://localhost:8000/user
+Accept: */*
+Cache-Control: no-cache
+
+< C:/Users/frosty/Documents/GitHub/Senior-Project19/connect-api/userinfo1.json
+
+<> 2019-03-06T103846.409.json
+
+###
+
+POST http://localhost:8000/user
+Accept: */*
+Cache-Control: no-cache
+
+< C:/Users/frosty/Documents/GitHub/Senior-Project19/connect-api/userinfo1.json
+
+<> 2019-03-06T103843.409.json
+
+###
+
+POST http://localhost:8000/user
+Accept: */*
+Cache-Control: no-cache
+
+< C:/Users/frosty/Documents/GitHub/Senior-Project19/connect-api/userinfo1.json
+
+<> 2019-03-06T103836.201.json
+
+###
+
+POST http://localhost:8000/user
+Accept: */*
+Cache-Control: no-cache
+
+< C:/Users/frosty/Documents/GitHub/Senior-Project19/connect-api/userinfo1.json
+
+<> 2019-03-06T103545.409.json
+
+###
+
+POST http://localhost:8000/user
+Accept: */*
+Cache-Control: no-cache
+
+< C:/Users/frosty/Documents/GitHub/Senior-Project19/connect-api/userinfo1.json
+
+###
+
+POST http://localhost:8000/user
+Accept: */*
+Cache-Control: no-cache
+
+< C:/Users/frosty/Documents/GitHub/Senior-Project19/connect-api/userinfo1.json
+
+<> 2019-03-06T103219.409.json
+
+###
+
+POST http://localhost:8000/user
+Accept: */*
+Cache-Control: no-cache
+
+< C:/Users/frosty/Documents/GitHub/Senior-Project19/connect-api/userinfo1.json
+
+<> 2019-03-06T103050.409.json
+
+###
+
+POST http://localhost:8000/user
+Accept: */*
+Cache-Control: no-cache
+
+< C:/Users/frosty/Documents/GitHub/Senior-Project19/connect-api/userinfo1.json
+
+<> 2019-03-06T102930.409.json
+
+###
+
+POST http://localhost:8000/user
+Accept: */*
+Cache-Control: no-cache
+
+< C:/Users/frosty/Documents/GitHub/Senior-Project19/connect-api/userinfo1.json
+
+<> 2019-03-06T102816.409.json
+
+###
+
+POST http://localhost:8000/user
+Accept: */*
+Cache-Control: no-cache
+
+< C:/Users/frosty/Documents/GitHub/Senior-Project19/connect-api/userinfo1.json
+
+###
+
+POST http://localhost:8000/users
+Accept: */*
+Cache-Control: no-cache
+
+< C:/Users/frosty/Documents/GitHub/Senior-Project19/connect-api/userinfo1.json
+
+<> 2019-03-06T101945.404.html
+
+###
+
+POST http://localhost:8000/users
+Accept: */*
+Cache-Control: no-cache
+
+< C:/Users/frosty/Documents/GitHub/Senior-Project19/connect-api/userinfo1.json
+
+<> 2019-03-06T093427.409.json
+
+###
+
+POST http://localhost:8000/users
+Accept: */*
+Cache-Control: no-cache
+
+< C:/Users/frosty/Documents/GitHub/Senior-Project19/connect-api/userinfo1.json
+
+<> 2019-03-06T093341.201.json
+
+###
+
+POST http://localhost:8000/users
+Accept: */*
+Cache-Control: no-cache
+
+< C:/Users/frosty/Documents/GitHub/Senior-Project19/connect-api/userinfo1.json
+
+<> 2019-03-06T093144.201.json
+
+###
+
+POST http://localhost:8000/users
+Accept: */*
+Cache-Control: no-cache
+
+< C:/Users/frosty/Documents/GitHub/Senior-Project19/connect-api/userinfo1.json
+
+<> 2019-03-06T092713.409.json
+
+###
+
+POST http://localhost:8000/users
+Accept: */*
+Cache-Control: no-cache
+
+< C:/Users/frosty/Documents/GitHub/Senior-Project19/connect-api/userinfo1.json
+
+###
+
+POST http://localhost:8000/users
+Accept: */*
+Cache-Control: no-cache
+
+< C:/Users/frosty/Documents/GitHub/Senior-Project19/connect-api/userinfo1.json
+
+###
+
+POST http://localhost:8000/users
+Accept: */*
+Cache-Control: no-cache
+
+< C:/Users/frosty/Documents/GitHub/Senior-Project19/connect-api/userinfo1.json
+
+###
+
+POST http://localhost:8000/users
+Accept: */*
+Cache-Control: no-cache
+
+< C:/Users/frosty/Documents/GitHub/Senior-Project19/connect-api/userinfo1.json
+
+###
+
+POST http://localhost:8000/users
+Accept: */*
+Cache-Control: no-cache
+
+< C:/Users/frosty/Documents/GitHub/Senior-Project19/connect-api/userinfo1.json
+
+###
+
+POST http://localhost:8000/users
+Accept: */*
+Cache-Control: no-cache
+
+< C:/Users/frosty/Documents/GitHub/Senior-Project19/connect-api/userinfo1.json
+
+<> 2019-03-06T091458.201.json
+
+###
+
+POST http://localhost:8000/users?username="frosty"&pwd="abc"&first_name="Sean"&last_name="Klinglesmith"&profile_type="Athlete"&sport="Snowboard"
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-03-06T091429.201.json
+
+###
+
+POST http://localhost:8000/users?username="frosty"
+Accept: */*
+Cache-Control: no-cache
+
+--null
+
+
+< C:\Users\frosty\Documents\GitHub\Senior-Project19\connect-api\userinfo1.json
+--null--
+
+<> 2019-03-06T091310.201.json
+
+###
+
+POST http://localhost:8000/users?"username"="frosty"
+Accept: */*
+Cache-Control: no-cache
+
+--null
+
+
+< C:\Users\frosty\Documents\GitHub\Senior-Project19\connect-api\userinfo1.json
+--null--
+
+<> 2019-03-06T091237.201.json
+
+###
+
+POST http://localhost:8000/users
+Accept: */*
+Cache-Control: no-cache
+
+--null
+
+
+< C:\Users\frosty\Documents\GitHub\Senior-Project19\connect-api\userinfo1.json
+--null--
+
+<> 2019-03-06T091106.201.json
+
+###
+
+POST http://localhost:8000/users
+Accept: */*
+Cache-Control: no-cache
+
+< C:/Users/frosty/Documents/GitHub/Senior-Project19/connect-api/userinfo1.json
+
+<> 2019-03-06T090948.201.json
+
+###
+
+POST http://localhost:8000/users
+Accept: */*
+Cache-Control: no-cache
+
+--null
+
+
+< C:\Users\frosty\Documents\GitHub\Senior-Project19\connect-api\userinfo1.json
+--null--
+
+<> 2019-03-06T090835.201.json
+
+###
+
+POST http://localhost:8000/users
+
+body:username=frosty&pwd=abc&first_name=sean&last_name=klinglesmith
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-03-06T090208.201.json
+
+###
+
+POST http://localhost:8000/users
+
+body:{username=frosty&pwd=abc&first_name=sean&last_name=klinglesmith}
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-03-06T090142.201.json
+
+###
+
+POST http://localhost:8000/users?{username=frosty&pwd=abc&first_name=sean&last_name=klinglesmith}
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-03-06T090040.201.json
+
+###
+
+POST http://localhost:8000/users{username=frosty&pwd=abc&first_name=sean&last_name=klinglesmith}
+Accept: */*
+Cache-Control: no-cache
+
+###
+
+POST http://localhost:8000/users
+Accept: */*
+Cache-Control: no-cache
+
+--null
+
+
+< C:\Users\frosty\Documents\GitHub\Senior-Project19\connect-api\userinfo1.json
+--null--
+
+###
+
+POST http://localhost:8000/users
+Accept: */*
+Cache-Control: no-cache
+
+--null
+
+
+< C:\Users\frosty\Documents\GitHub\Senior-Project19\connect-api\userinfo1.json
+--null--
+
+<> 2019-03-06T085712.201.json
+
+###
+
+POST http://localhost:8000/users
+Accept: */*
+Cache-Control: no-cache
+
+--null
+
+
+< C:\Users\frosty\Documents\GitHub\Senior-Project19\connect-api\userinfo1.json
+--null--
+
+###
+
+POST http://localhost:8000/users
+Accept: */*
+Cache-Control: no-cache
+
+--null
+
+
+< C:\Users\frosty\Documents\GitHub\Senior-Project19\connect-api\userinfo1.json
+--null--
+
+<> 2019-03-06T085458.201.json
+
+###
+
+POST http://localhost:8000/users
+Accept: */*
+Cache-Control: no-cache
+
+--null
+
+
+< C:\Users\frosty\Documents\GitHub\Senior-Project19\connect-api\userinfo1.json
+--null--
+
+###
+
+POST http://localhost:8000/users
+Accept: */*
+Cache-Control: no-cache
+
+--null
+
+
+< C:\Users\frosty\Documents\GitHub\Senior-Project19\connect-api\userinfo1.json
+--null--
+
+<> 2019-03-06T085415.201.json
+
+###
+
+POST http://localhost:8000/users
+Accept: */*
+Cache-Control: no-cache
+
+--null
+
+
+< C:\Users\frosty\Documents\GitHub\Senior-Project19\connect-api\userinfo1.json
+--null--
+
+###
+
+POST http://localhost:8000/users
+Accept: */*
+Cache-Control: no-cache
+
+--null
+
+
+< C:\Users\frosty\Documents\GitHub\Senior-Project19\connect-api\userinfo1.json
+--null--
+
+<> 2019-03-06T085349.201.json
+
+###
+
+GET http://localhost:8000/users
+Accept: */*
+Cache-Control: no-cache
+
+--null
+
+
+< C:\Users\frosty\Documents\GitHub\Senior-Project19\connect-api\userinfo1.json
+--null--
+
+<> 2019-03-06T085344.200.json
+
+###
+
+POST http://localhost:8000/users
+Accept: */*
+Cache-Control: no-cache
+
+--null
+
+
+< C:\Users\frosty\Documents\GitHub\Senior-Project19\connect-api\userinfo1.json
+--null--
+
+###
+
+POST http://localhost:8000/users
+Accept: */*
+Cache-Control: no-cache
+
+--null
+
+
+< C:\Users\frosty\Documents\GitHub\Senior-Project19\connect-api\userinfo1.json
+--null--
+
+<> 2019-03-06T085326.201.json
+
+###
+
+POST http://localhost:8000/users
+Accept: */*
+Cache-Control: no-cache
+
+--null
+
+
+< C:\Users\frosty\Documents\GitHub\Senior-Project19\connect-api\userinfo1.json
+--null--
+
+###
+
+POST http://localhost:8000/users
+Accept: */*
+Cache-Control: no-cache
+
+--null
+
+
+< C:\Users\frosty\Documents\GitHub\Senior-Project19\connect-api\userinfo1.json
+--null--
+
+<> 2019-03-06T085224.201.json
+
+###
+
+POST http://localhost:8000/users
+Accept: */*
+Cache-Control: no-cache
+
+--null
+
+
+< C:\Users\frosty\Documents\GitHub\Senior-Project19\connect-api\userinfo1.json
+--null--
+
+###
+
+POST http://localhost:8000/users
+Accept: */*
+Cache-Control: no-cache
+
+--null
+
+
+< C:\Users\frosty\Documents\GitHub\Senior-Project19\connect-api\userinfo1.json
+--null--
+
+<> 2019-03-06T085221.201.json
+
+###
+
