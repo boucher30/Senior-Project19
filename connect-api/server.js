@@ -22,7 +22,7 @@ con.connect(function(err) {
 // Define routes ahead of time
 // any file/route being used needs to be defined here
 // so it can be called below
-const userRoutes = require('./routes/users');
+const userRoutes = require('./routes/user');
 const buddyRoutes = require('./routes/buddylist');
 const venueRoutes = require('./routes/venue');
 const conRoutes = require('./routes/connectionlist');
@@ -52,7 +52,7 @@ app.use((req, res, next) => {
 
 // Tells the App specific routes to use using router in each file
 // any new file needs to be added in order for it to function.
-app.use('/users', userRoutes);
+app.use('/user', userRoutes);
 app.use('/buddylist', buddyRoutes);
 app.use('/venue', venueRoutes);
 app.use('/connectionlist', conRoutes);
