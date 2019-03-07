@@ -18,7 +18,6 @@ router.get('/', (req,res) => {
 router.post('/', (req,res) => {
 	const {in_username, pwd, first_name, last_name, profile_type,sport} = req.body;
 
-	let chosenUsername = '3blah'; // This will come from your signup form
 
 	let sqlQuery = "SELECT * FROM user WHERE username = ? LIMIT 1";
 	con.query(sqlQuery, [chosenUsername], function(err, results){
