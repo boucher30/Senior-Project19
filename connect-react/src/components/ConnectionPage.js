@@ -69,8 +69,6 @@ export default class ConnectionPage extends Component {
 		let connections;
 		const users = this.state.users;
 
-		console.log('Inside render');
-
 		if(this.state.loading) {
 			connections = <div>Loading...</div>
 		} else {
