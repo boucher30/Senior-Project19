@@ -46,11 +46,7 @@ class VenueButtonMenu extends React.Component {
 
         return (
             <>
-                <ButtonGroup size = 'lg' aria-label="Venue button group">
-                    <Button variant="secondary" onClick = {this.handleInfo}>Information</Button>
-                    <Button variant="secondary" onClick = {this.handleCarves}>Carves</Button>
-                    <Button variant="secondary" onClick = {this.handleMedia}>Media</Button>
-                </ButtonGroup>
+
 
                 <div>
                     {component}

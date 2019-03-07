@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Form } from "react-bootstrap";
 import CustomFormGroup from "../../components/CustomFormGroup";
+import Redirect from "react-router/Redirect";
 
 export default class SignUpPage extends Component {
 	constructor(props) {
@@ -12,7 +13,8 @@ export default class SignUpPage extends Component {
 			sportType: -1,
 			firstName: 'Christian',
 			lastName: 'Marcy',
-			profileType: -1
+			profileType: -1,
+			redirect: false
 		}
 	}
 
@@ -37,9 +39,16 @@ export default class SignUpPage extends Component {
 	handleSubmit = e => {
 		e.preventDefault();
 		console.log('Submitted form:', this.state);
+		this.setState({ redirect: true });
 	}
 
 	render() {
+		console.log('State', this.state);
+		const { redirect } = this.state;
+		if(redirect) {
+			return <Redirect to={`/dashboard/profile/${localStorage.getItem('userId')}`}/>;
+		}
+
 		return (
 			<div className="Login" style={{ height: '80%', top: '42%' }}>
 				<h3 style={{ textAlign: 'center', marginTop: '5%' }}>Sign Up</h3>

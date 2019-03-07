@@ -4,7 +4,7 @@ import { Switch, Route } from 'react-router-dom';
 
 import ProfilePage from "./ProfilePage";
 import FeedPage from "./FeedPage";
-import ConnectionPage from "./ConnectionPage";
+import VenuePage from "./VenuePage";
 
 export default class Container extends Component {
 	constructor(props) {
@@ -22,7 +22,7 @@ export default class Container extends Component {
 					{/* Can be accessed by props.match.params.number in Profile Page.... */}
 					<Route path="/dashboard/profile/:number" component={ProfilePage} />
 					<Route path="/dashboard/feed" component={FeedPage} />
-					<Route path="/dashboard/connections" component={ConnectionPage} />
+					<Route path='/dashboard/venue-profile' component={VenuePage} />
 				</Switch>
 			</Col>
 		);

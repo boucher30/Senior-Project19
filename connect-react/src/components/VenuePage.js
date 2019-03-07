@@ -4,8 +4,9 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Figure from 'react-bootstrap/Figure';
 import Mount_Snow from '../images/mount_snow_bg.png'
-import SideMenu from './SideMenu';
-import VenueButtonMenu from './VenueButtonMenu';
+//import VenueButtonMenu from './VenueButtonMenu';
+import Button from 'react-bootstrap/Button';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
 
 
 export default class VenuePage extends Component {
@@ -14,7 +15,6 @@ export default class VenuePage extends Component {
         return (
             <>
                 <Row>
-                    <SideMenu />
                     <Container>
                         <Row>
                             <Col>
@@ -38,8 +38,11 @@ export default class VenuePage extends Component {
                     </Container>
                 </Row>
                 <Row className = 'justify-content-center'>
-                    <VenueButtonMenu state = 'info'/>
-
+                    <ButtonGroup size = 'lg' aria-label="Venue button group">
+                        <Button variant="secondary">Information</Button>
+                        <Button variant="secondary">Carves</Button>
+                        <Button variant="secondary">Media</Button>
+                    </ButtonGroup>
                 </Row>
 
             </>
