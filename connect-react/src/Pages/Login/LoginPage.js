@@ -43,13 +43,14 @@ export default class LoginPage extends Component {
 		// .then( do the rest here..... )
 
 		// Make sure we redirect after we get the correct login
+		localStorage.setItem('userId', 1);
 		this.setState({ redirect: true });
 	}
 
 	render() {
 		const { redirect } = this.state;
 		if(redirect) {
-			return <Redirect to='/dashboard'/>;
+			return <Redirect to={`/dashboard/profile/${localStorage.getItem('userId')}`}/>;
 		}
 
 		return (
