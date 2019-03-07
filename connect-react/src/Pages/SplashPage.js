@@ -16,13 +16,11 @@ import CarouselCaption from 'react-bootstrap/CarouselCaption';
 
 
 class SplashPage extends Component {
-
     render() {
         return (
           <>
-
             {/* Sliding carousel */}
-            <Carousel fade = {true} className = "carousel" pauseOnHover = {false}>
+            <Carousel fade className="carousel" pauseOnHover={false}>
               <Carousel.Item>
                 <img
                   className="d-block w-100"
@@ -33,14 +31,14 @@ class SplashPage extends Component {
                   <Container>
                     <Row style = {{marginBottom: '20px'}}>
                       <Col>
-                        <Button href={'/login'} eventKey="login" variant="dark" size="lg">
+                        <Button href='/login' variant="dark" size="lg">
                           Login
                         </Button>
                       </Col>
                     </Row>
                     <Row>
                       <Col>
-                        <Button href={'/sign-up'} eventKey="sign-up" variant="info" size="lg">
+                        <Button href='/sign-up' variant="info" size="lg">
                           Sign Up
                         </Button>
                       </Col>
@@ -58,14 +56,14 @@ class SplashPage extends Component {
                 <Container>
                     <Row style = {{marginBottom: '20px'}}>
                       <Col>
-                        <Button href={'/login'} eventKey="login" variant="dark" size="lg">
+                        <Button href='/login' variant="dark" size="lg">
                           Login
                         </Button>
                       </Col>
                     </Row>
                     <Row>
                       <Col>
-                      <Button href={'/sign-up'} eventKey="sign-up" variant="info" size="lg">
+                      <Button href='/sign-up' variant="info" size="lg">
                           Sign Up
                         </Button>
                       </Col>
@@ -83,14 +81,14 @@ class SplashPage extends Component {
                 <Container>
                     <Row style = {{marginBottom: '20px'}}>
                       <Col>
-                        <Button href={'/login'} eventKey="login" variant="dark" size="lg">
+                        <Button href='/login' variant="dark" size="lg">
                           Login
                         </Button>
                       </Col>
                     </Row>
                     <Row>
                       <Col>
-                      <Button href={'/sign-up'} eventKey="sign-up" variant="info" size="lg">
+                      <Button href='/sign-up' variant="info" size="lg">
                           Sign Up
                         </Button>
                       </Col>
@@ -149,15 +147,8 @@ class SplashPage extends Component {
             <Navbar bg="dark" variant="dark">
               <Nav className="mr-auto" style = {{height: '60px'}}>
               </Nav>
-          </Navbar>
-
+            </Navbar>
           </>
-
-
-
-
-
-
         );
     }
 }
