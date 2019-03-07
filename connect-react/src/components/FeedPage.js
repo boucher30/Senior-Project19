@@ -8,7 +8,7 @@ export default class FeedPage extends Component {
 			<div>
 				<h2>Feed Page</h2>
 				<h6>Posts Here....</h6>
-				<FeedCard ref = '/venue-profile' key = 'venue-profile' img = {Mount_Snow} text = '@Mount Snow'/>
+				<FeedCard key='venue-profile' img = {Mount_Snow} text = '@Mount Snow'/>
 			</div>
 		);
 	}
