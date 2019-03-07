@@ -18,6 +18,7 @@ router.get('/', (req,res) => {
 router.post('/', (req,res) => {
 	const {in_username, pwd, first_name, last_name, profile_type,sport} = req.body;
 
+	let chosenUsername = in_username;
 
 	let sqlQuery = "SELECT * FROM user WHERE username = ? LIMIT 1";
 	con.query(sqlQuery, [chosenUsername], function(err, results){
@@ -41,8 +42,7 @@ router.post('/', (req,res) => {
 		}else{
 			// The username wasn't found in the database
 			// Create insert query for new user
-			// Added a commentw
-			let in_username = chosenUsername;
+			// Added a comment
 			var sql = "INSERT INTO user (username, pwd, first_name, last_name,profile_type,sport) VALUES "
 				+ "('" + in_username + "', '" + pwd + "', '" + first_name + "', '" + last_name + "', '" + 'Athlete' + "', '" + 'Snowboard' + "');";
 
