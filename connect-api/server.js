@@ -52,7 +52,7 @@ app.use((req, res, next) => {
 
 // Tells the App specific routes to use using router in each file
 // any new file needs to be added in order for it to function.
-app.use('/user', userRoutes);
+app.use('/users', userRoutes);
 app.use('/buddylist', buddyRoutes);
 app.use('/venue', venueRoutes);
 app.use('/connectionlist', conRoutes);
