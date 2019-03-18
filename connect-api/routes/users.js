@@ -16,9 +16,24 @@ router.get('/', (req,res) => {
 
 // Creates a new user
 router.post('/', (req,res) => {
-	const {in_username, pwd, first_name, last_name, profile_type,sport} = req.body;
+	//const {us, em,pwd,fn,ln,ath,pho,snow,ska,su,mb,sk,fa} = req.body;
+	//ignore testing
+	us = "testusername";
+	em = "1234@abcd.com";
+	pwd = "abcd1234";
+	fn = "Danny";
+	ln = "Boy";
+	ath = 1;
+	pho = 0;
+	snow = 1;
+	ska = 1;
+	su = 0;
+	mb = 1;
+	sk = 1;
+	fa = 0;
 
-	let chosenUsername = in_username;
+
+	let chosenUsername = us;
 
 	let sqlQuery = "SELECT * FROM user WHERE username = ? LIMIT 1";
 	con.query(sqlQuery, [chosenUsername], function(err, results){
@@ -39,16 +54,14 @@ router.post('/', (req,res) => {
 			})
 
 
+
 		}else{
 			// The username wasn't found in the database
 			// Create insert query for new user
 			// Added a comment
-			var sql = "INSERT INTO user (username, pwd, first_name, last_name,profile_type,sport) VALUES "
-				+ "('" + in_username + "', '" + pwd + "', '" + first_name + "', '" + last_name + "', '" + 'Athlete' + "', '" + 'Snowboard' + "');";
-
 
 			// Execute the query to insert into the database
-			con.query(sql, (err, result) => {
+			con.query('CALL new_user(us,em,pwd,fn,ln,ath,pho,snow,ska,su,mb,sk,fa)', (err, result) => {
 				if (err) throw err;
 				res.status(201).json({
 					msg: '1 record inserted into the user table'

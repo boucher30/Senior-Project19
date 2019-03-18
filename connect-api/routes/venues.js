@@ -21,9 +21,6 @@ router.post('/', (req, res) => {
     const {venue_name, venue_state, venue_sport} = req.body;
 
     // Create insert query for new user
-    // Added a comment
-    var sql = "INSERT INTO venue (venue_name, venue_state, venue_sport) VALUES "
-        + "('" + venue_name +"', '" +  venue_state + "', '" + venue_sport + "');";
 
 
     // Execute the query to insert into the database
