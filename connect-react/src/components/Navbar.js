@@ -7,7 +7,7 @@ const TopNav = () => {
 		<Navbar bg="dark" variant="dark" sticky = 'top'>
 			<Navbar.Brand href="/">Carve Connect</Navbar.Brand>
 			<Nav className="mr-auto">
-				<Nav.Link href="#venues">Venues</Nav.Link>
+				<Nav.Link href="/dashboard/venues">Venues</Nav.Link>
 				<Nav.Link href="#sports">Sports</Nav.Link>
 			</Nav>
 			<Nav className="justify-content-end">
@@ -20,6 +20,6 @@ const TopNav = () => {
 			</Nav>
 		</Navbar>
 	);
-}
+};
 
 export default TopNav;

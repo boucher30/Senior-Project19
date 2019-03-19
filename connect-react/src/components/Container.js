@@ -5,11 +5,12 @@ import { Switch, Route } from 'react-router-dom';
 import ProfilePage from "./ProfilePage";
 import FeedPage from "./FeedPage";
 import VenuePage from "./VenuePage";
+import VenueListPage from "./VenueListPage";
 
 export default class Container extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {}
+		this.state = {};
 
 		this.changeSel = this.changeSel.bind(this);
 	}
@@ -22,7 +23,8 @@ export default class Container extends Component {
 					{/* Can be accessed by props.match.params.number in Profile Page.... */}
 					<Route path="/dashboard/profile/:number" component={ProfilePage} />
 					<Route path="/dashboard/feed" component={FeedPage} />
-					<Route path='/dashboard/venue-profile' component={VenuePage} />
+					<Route path="/dashboard/venues/:number" component={VenuePage} />
+					<Route path = "/dashboard/venues" component={VenueListPage} />
 				</Switch>
 			</Col>
 		);
