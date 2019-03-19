@@ -7,8 +7,8 @@ const con = require('../db');
 
 //grab all the buddies from DB
 router.get('/', (req,res) => {
-    var sql = "SELECT * FROM buddylist";
-    con.query(sql, (err, results, fields) => {
+    all_buddies = "CALL get_all_buddies()";
+    con.query(all_buddies, (err, results, fields) => {
 		if (err) throw err;
 		res.status(200).json({
 			buddylist: results
@@ -16,22 +16,17 @@ router.get('/', (req,res) => {
 	})
 });
 
-//add buddy to BD
-router.post('/', (req,res) => {
-	const { user_id, user_id2 } = req.body;
-
-	// Create insert query for new user
-
-
-
-	// Execute the query to insert into the database
-	con.query(sql, (err, result) => {
+router.get('/:userId', (req,res) => {
+	const userId = req.params.userId;
+	get_user_buddies = "CALL get_all_buddies(?)";
+	con.query(get_user_buddies, (err, results, fields) => {
 		if (err) throw err;
-		res.status(201).json({
-			msg: '1 record inserted into the buddyList table'
+		res.status(200).json({
+			buddylist: results
 		})
 	})
-
 });
+
+
 
 module.exports = router;

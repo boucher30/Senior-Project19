@@ -1,5 +1,5 @@
 var express = require('express');
-var router = express.Router();
+var router = express.Router({mergeParams: true});
 const con = require('../db');
 
 // Grabs all users from db
@@ -92,7 +92,7 @@ router.post('/', (req,res) => {
 });
 
 // Grab specific user by their id
-router.get('/:userId', (req,res) => {
+router.get('/?userid = userId', (req,res) => {
 	const userId = req.params.userId;
 
 	get_user  = "call get_user(?)";

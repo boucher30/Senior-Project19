@@ -164,6 +164,13 @@ select * from carve where User_user_id1 = id;
   
 END |
 
+DELIMITER |
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_messages`()
+BEGIN
+select * from message ;
+
+  
+END |
 
 DELIMITER |
 CREATE DEFINER=`root`@`localhost` PROCEDURE `get_outgoing_messages`(in id int)

@@ -29,7 +29,7 @@ const venueRoutes = require('./routes/venues');
 const carRoutes = require('./routes/carves');
 const vfRoutes = require('./routes/venfollows');
 const ufRoutes = require('./routes/userfollows');
-
+const msgRoutes = require('./routes/messages');
 // Set up app to handle requests and json etc...
 app.use(morgan('dev'));																// Logger for api
 app.use(bodyParser.urlencoded({extended: true}));			// Allows us to parse body of post request
@@ -49,15 +49,18 @@ app.use((req, res, next) => {
 	next();
 });
 
+userRoutes.use(buddyRoutes,msgRoutes,ufRoutes,vfRoutes);
+
 
 // Tells the App specific routes to use using router in each file
 // any new file needs to be added in order for it to function.
 app.use('/users', userRoutes);
-app.use('/buddies', buddyRoutes);
+app.use('/users/buddies', buddyRoutes);
 app.use('/venues', venueRoutes);
 app.use('/carves', carRoutes);
-app.use('/venfollows', vfRoutes);
-app.use('/userfollows', ufRoutes);
+app.use('/users/venfollows', vfRoutes);
+app.use('/users/userfollows', ufRoutes);
+app.use('/users/messages', msgRoutes);
 
 // App listens on specific port or 8000 by default
 app.listen(PORT, () => {

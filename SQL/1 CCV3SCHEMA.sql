@@ -12,7 +12,7 @@ drop schema if exists CCv3;
 -- -----------------------------------------------------
 -- Schema CCv3
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `CCv3` DEFAULT CHARACTER SET utf8 ;
+CREATE SCHEMA IF NOT EXISTS `CCv3` DEFAULT CHARACTER SET utf8MB4 ;
 USE `CCv3` ;
 
 -- -----------------------------------------------------
@@ -204,6 +204,7 @@ CREATE TABLE IF NOT EXISTS `CCv3`.`message` (
   `message_body` VARCHAR(500) NULL,
   `is_buddy_request` TINYINT NULL,
   `is_carveattend_request` TINYINT NULL,
+  `is_carveinvite_request` TINYINT NULL,
   `USER_user_id` INT NOT NULL,
   `USER_user_id1` INT NOT NULL,
   `reply_msg_id` INT NULL,

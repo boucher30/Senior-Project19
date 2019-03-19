@@ -7,8 +7,8 @@ const con = require('../db');
 
 //grab all the buddies from DB
 router.get('/', (req,res) => {
-    var sql = "SELECT * FROM follow_venue";
-    con.query(sql, (err, results, fields) => {
+	var sql = 'run';
+	con.query(sql, (err, results, fields) => {
 		if (err) throw err;
 		res.status(200).json({
 			follow_venue: results

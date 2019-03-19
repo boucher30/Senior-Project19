@@ -2,7 +2,7 @@
 // had running on his machine. *note database running on your machine needs a buddy list table with 2 user id entries
 
 var express = require('express');
-var router = express.Router();
+var router = express.Router({mergeParams: true});
 const con = require('../db');
 
 //grab all the buddies from DB
@@ -78,10 +78,10 @@ router.post('/', (req, res) => {
 
 // Grab specific user by their id
 router.get('/:venueId', (req,res) => {
-    const userId = req.params.userId;
+    const venueId = req.params.venueId;
 
-    get_user  = "call get_user(?)";
-    con.query(get_user, [userId],(err, results, fields) => {
+    get_venue  = "call get_venue(?)";
+    con.query(get_venue, [venueId],(err, results, fields) => {
         if (err) throw err;
         res.status(200).json({
             venue: results

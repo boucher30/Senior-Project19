@@ -2,7 +2,7 @@
 // had running on his machine. *note database running on your machine needs a buddy list table with 2 user id entries
 
 var express = require('express');
-var router = express.Router();
+var router = express.Router({mergeParams: true});
 const con = require('../db');
 
 //grab all the buddies from DB
