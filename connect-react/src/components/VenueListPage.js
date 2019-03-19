@@ -75,6 +75,7 @@ export default class VenueListPage extends Component {
                     </Col>
                     <Button variant="link">+Filters</Button>
                 </Row>
+                
                 <div style = {{marginTop: '20px', borderBottom: '1px solid lightgray'}}></div>
 
                 {/* Horizontal scrolling effect */}
