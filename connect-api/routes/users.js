@@ -16,7 +16,7 @@ router.get('/', (req,res) => {
 
 // Creates a new user
 router.post('/', (req,res) => {
-	const {us, em,pwd,fn,ln,ath,pho,snow,ska,su,mb,sk,fa} = req.body;
+	const {username, email,password,first,last,athlete,photo,snowboard,skateboard,surf,mountainbike,ski,fan} = req.body;
 
 
 	let chosenUsername = us;
@@ -47,7 +47,7 @@ router.post('/', (req,res) => {
 			// Added a comment
 			new_user = "CALL new_user(?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			// Execute the query to insert into the database
-			con.query(new_user,[us,em,pwd,fn,ln,ath,pho,snow,ska,su,mb,sk,fa], (err, result) => {
+			con.query(new_user,[username,email,password,first,last,athlete,photo,snowboard,skateboard,surf,mountainbike,ski,fan], (err, result) => {
 				if (err) throw err;
 				res.status(201).json({
 					msg: '1 record inserted into the user table'
