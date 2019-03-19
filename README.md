@@ -1,4 +1,5 @@
-# Senior-Project19
+# DEVELOPER BRANCH FOR CARVE CONNECT
+
 Action Sport/Film Social Platform.
 
 Authors:
@@ -16,14 +17,16 @@ Instructions on how to run project locally:
 React Proj (Front End)
 - 
 1) cd into *connect-react*
-    - (First time use only) 
-    - run *npm install* for first time to install necessary packages
 2) run *npm start*
 
 
 Node API (Back End)
--
+- use nodemon to run
 1) cd into *connect-api*
-    - (First time use only) 
-    - run *npm install* for first time to install necessary packages
-2) run *npm start*
+    - (if nodemon not used before) install -g nodemon
+2) run : nodemon server.js
+
+DATABASE
+  - SQL FOLDER
+    1) run files 1,2,3 in order
+    2) use file 4 to verify (run 1 command at a time)
