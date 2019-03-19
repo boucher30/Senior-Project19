@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
     con.query(sql, (err, results) => {
         if (err) throw err;
         res.status(200).json({
-            venue: results
+            venues: results
         })
     })
 });
@@ -30,6 +30,19 @@ router.post('/', (req, res) => {
             msg: '1 record inserted into the venue table'
         })
     })
+
+    // Grab specific user by their id
+router.get('/:venueId', (req,res) => {
+    const venueId = req.params.venueId;
+ 
+    var sql  = `SELECT * FROM venue WHERE venue_id = ${venueId}`;
+    con.query(sql, (err, results, fields) => {
+        if (err) throw err;
+        res.status(200).json({
+            venue: results
+        })
+    })
+ });
 
 });
 

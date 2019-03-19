@@ -17,7 +17,7 @@ const VenueFigure = (props) => {
             </a>
 
             <Figure.Caption style = {{textAlign: 'center'}}>
-                <a href='/dashboard/venue-profile'>{props.name}</a>
+                <a href= {props.href}>{props.name}</a>
             </Figure.Caption>
         </Figure>
     );

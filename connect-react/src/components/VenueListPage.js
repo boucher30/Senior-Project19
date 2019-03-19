@@ -25,8 +25,8 @@ export default class VenueListPage extends Component {
 			.then(res => {
 				console.log('Venues:', res.data);
 				this.setState({
-					venues: res.data.venue,
-					venuesLength: Object.keys(res.data.venue).length
+					venues: res.data.venues,
+					venuesLength: Object.keys(res.data.venues).length
 				});
 			})
     }
@@ -43,7 +43,7 @@ export default class VenueListPage extends Component {
             for(k = (flag ? (length/2)+1 : k); k < length; k++){
                 row.push(
                     <Col>
-                        <VenueFigure name = {venues[k].venue_name} img = {Mount_Snow_BG} href = '/dashboard/venue-profile'/>
+                        <VenueFigure name = {venues[k].venue_name} img = {Mount_Snow_BG} href = {'/dashboard/venues/' + venues[k].venue_id}/>
                     </Col>
                 );
                 if(k === length/2){
@@ -67,7 +67,6 @@ export default class VenueListPage extends Component {
             <Container>
                 <Row style = {{marginTop: '40px'}}>
                     <h1>Venues</h1>
-
                 </Row>
                 <Row style = {{marginTop: '45px'}}>
                     <Col md={{ span: 6, offset: 1 }}>
