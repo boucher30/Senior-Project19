@@ -8,6 +8,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- Schema CCv3
 -- -----------------------------------------------------
 
+drop schema if exists CCv3;
 -- -----------------------------------------------------
 -- Schema CCv3
 -- -----------------------------------------------------
@@ -202,13 +203,16 @@ CREATE TABLE IF NOT EXISTS `CCv3`.`message` (
   `subject` VARCHAR(50) NULL,
   `message_body` VARCHAR(500) NULL,
   `is_buddy_request` TINYINT NULL,
+  `is_carveattend_request` TINYINT NULL,
   `USER_user_id` INT NOT NULL,
   `USER_user_id1` INT NOT NULL,
   `reply_msg_id` INT NULL,
-  PRIMARY KEY (`message_id`, `USER_user_id`, `USER_user_id1`),
+  `CARVE_carve_id` INT NOT NULL default 0,
+  PRIMARY KEY (`message_id`, `USER_user_id`, `USER_user_id1`,`carve_carve_id`),
   UNIQUE INDEX `message_id_UNIQUE` (`message_id` ASC) VISIBLE,
   INDEX `fk_message_USER1_idx` (`USER_user_id` ASC) VISIBLE,
   INDEX `fk_message_USER2_idx` (`USER_user_id1` ASC) VISIBLE,
+  INDEX `fk_message_CARVE1_idx` (`carve_carve_id` ASC) VISIBLE,
   CONSTRAINT `fk_message_USER1`
     FOREIGN KEY (`USER_user_id`)
     REFERENCES `CCv3`.`USER` (`user_id`)
@@ -217,6 +221,11 @@ CREATE TABLE IF NOT EXISTS `CCv3`.`message` (
   CONSTRAINT `fk_message_USER2`
     FOREIGN KEY (`USER_user_id1`)
     REFERENCES `CCv3`.`USER` (`user_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+	CONSTRAINT `fk_message_carve1`
+    FOREIGN KEY (`carve_carve_id`)
+    REFERENCES `CCv3`.`carve` (`carve_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -231,20 +240,8 @@ CREATE TABLE IF NOT EXISTS `CCv3`.`buddy` (
 ENGINE = InnoDB;
 
 
--- -----------------------------------------------------
--- Table `CCv3`.`user`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `CCv3`.`user` (
-  `user_id` INT NOT NULL,
-  `buddy_buddy_id` INT NOT NULL,
-  PRIMARY KEY (`user_id`, `buddy_buddy_id`),
-  INDEX `fk_user_buddy1_idx` (`buddy_buddy_id` ASC) VISIBLE,
-  CONSTRAINT `fk_user_buddy1`
-    FOREIGN KEY (`buddy_buddy_id`)
-    REFERENCES `CCv3`.`buddy` (`buddy_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+
+
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
