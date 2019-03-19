@@ -14,7 +14,8 @@ const PORT = process.env.PORT || 8000;
 
 // Check connection for success
 const con = require('./db');
-con.connect(function(err) {
+
+con.connect( function(err) {
   if (err) throw err;
   console.log("Connected to MySQL database...");
 });
@@ -62,3 +63,4 @@ app.use('/userfollows', ufRoutes);
 app.listen(PORT, () => {
 	console.log("Connect API started on port "+ PORT + "!");
 });
+

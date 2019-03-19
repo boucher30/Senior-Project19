@@ -91,7 +91,7 @@ router.get('/:venueId', (req,res) => {
 
 
 // Grab specific user by their id
-router.get('/search/venuename/:venuename', (req,res) => {
+router.get('/?venuename=:venuename', (req,res) => {
 
     const venuename = req.params.venuename;
 
@@ -105,7 +105,7 @@ router.get('/search/venuename/:venuename', (req,res) => {
 });
 
 // Grab specific user by their id
-router.get('/search/venuest/:venuestate', (req,res) => {
+router.get('/?venuest=:venuestate', (req,res) => {
     venuestate= req.params.venuestate;
     get_venue_state = "call get_venue_state(?)";
     con.query(get_venue_state, [venuestate],(err, results, fields) => {
@@ -118,7 +118,7 @@ router.get('/search/venuest/:venuestate', (req,res) => {
 
 
 // Grab specific user by their id
-router.get('/search/venuecity/:venuecity', (req,res) => {
+router.get('/?venuecity=:venuecity', (req,res) => {
     venuecity = req.params.venuecity;
     get_venue_city  = "call get_venue_city(?)";
     con.query(get_venue_city, [venuecity],(err, results, fields) => {
@@ -130,7 +130,7 @@ router.get('/search/venuecity/:venuecity', (req,res) => {
 });
 
 // Grab specific user by their id
-router.get('/search/venuecity/:venuecity/venuestate/:venuestate', (req,res) => {
+router.get('/?venuecity=:venuecity&venuestate=:venuestate', (req,res) => {
     venuecity = req.params.venuecity;
     venuestate= req.params.venuestate;
     get_venue_location  = "call get_venue_location(?,?)";
@@ -138,6 +138,63 @@ router.get('/search/venuecity/:venuecity/venuestate/:venuestate', (req,res) => {
         if (err) throw err;
         res.status(200).json({
             venue: results
+        })
+    })
+});
+
+// Grab specific user by their id
+router.get('/?sport=snowboard', (req,res) => {
+
+    get_snowboard  = "call get_venue_snowboard()";
+    con.query(get_athletes,(err, results, fields) => {
+        if (err) throw err;
+        res.status(200).json({
+            users: results
+        })
+    })
+});
+
+// Grab specific user by their id
+router.get('/?sport=skateboard', (req,res) => {
+
+    get_skateboard  = "call get_venue_skateboard()";
+    con.query(get_skateboard,(err, results, fields) => {
+        if (err) throw err;
+        res.status(200).json({
+            users: results
+        })
+    })
+});
+// Grab specific user by their id
+router.get('/?sport=ski', (req,res) => {
+
+    get_ski = "call get_venue_ski()";
+    con.query(get_ski,(err, results, fields) => {
+        if (err) throw err;
+        res.status(200).json({
+            users: results
+        })
+    })
+});
+// Grab specific user by their id
+router.get('/?sport=surf', (req,res) => {
+
+    get_surf  = "call get_venue_surf()";
+    con.query(get_surf,(err, results, fields) => {
+        if (err) throw err;
+        res.status(200).json({
+            users: results
+        })
+    })
+});
+// Grab specific user by their id
+router.get('/?sport=mountain_bike', (req,res) => {
+
+    get_mountain_bike  = "call get_venue_mountain_bike()";
+    con.query(get_mountain_bike,(err, results, fields) => {
+        if (err) throw err;
+        res.status(200).json({
+            users: results
         })
     })
 });

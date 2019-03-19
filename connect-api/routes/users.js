@@ -24,8 +24,8 @@ router.get('/login', (req,res) => {
     //logging in twice does it because the second time gets the correct instance.
     con.query( " CALL login(?,?,@userid); ",[username,password] ,(err, results, fields) => {
         if (err) throw err;
-
-        if( results[0]) {
+        userid = fields;
+        if( userid > 0) {
             res.status(200).json({
                 users: results,
                 msg: 'login successful'
@@ -106,7 +106,7 @@ router.get('/:userId', (req,res) => {
 
 
 // Grab specific user by their id
-router.get('/search/username/:usern', (req,res) => {
+router.get('/?username=usern', (req,res) => {
 
     const usern = req.params.usern;
 
@@ -120,7 +120,7 @@ router.get('/search/username/:usern', (req,res) => {
 });
 
 // Grab specific user by their id
-router.get('/search/firstname/:firstname', (req,res) => {
+router.get('/?firstname=firstname', (req,res) => {
     firstname = req.params.firstname;
     get_user_firstname  = "call get_user_first(?)";
     con.query(get_user_firstname, [firstname],(err, results, fields) => {
@@ -133,7 +133,7 @@ router.get('/search/firstname/:firstname', (req,res) => {
 
 
 // Grab specific user by their id
-router.get('/search/lastname/:lastname', (req,res) => {
+router.get('/?lastname=lastname', (req,res) => {
     lastname = req.params.lastname;
     get_user_firstname  = "call get_user_first(?)";
     con.query(get_user_firstname, [lastname],(err, results, fields) => {
@@ -145,7 +145,7 @@ router.get('/search/lastname/:lastname', (req,res) => {
 });
 
 // Grab specific user by their id
-router.get('/search/first/:firstname/last/:lastname', (req,res) => {
+router.get('/?first=firstname&last=lastname', (req,res) => {
     firstname = req.params.firstname;
     lastname = req.params.lastname;
     get_user_full  = "call get_user_full(?,?)";
@@ -157,5 +157,40 @@ router.get('/search/first/:firstname/last/:lastname', (req,res) => {
     })
 });
 
+// Grab specific user by their id
+router.get('/?type=athletes', (req,res) => {
+
+    get_athletes  = "call get_user_athletes()";
+    con.query(get_athletes,(err, results, fields) => {
+        if (err) throw err;
+        res.status(200).json({
+            users: results
+        })
+    })
+});
+
+// Grab specific user by their id
+router.get('/?type=photographers', (req,res) => {
+
+    get_photographers  = "call get_user_photographers()";
+    con.query(get_photographers,(err, results, fields) => {
+        if (err) throw err;
+        res.status(200).json({
+            users: results
+        })
+    })
+});
+
+// Grab specific user by their id
+router.get('/?type=fans', (req,res) => {
+
+    get_fans  = "call get_user_fans()";
+    con.query(get_fans,(err, results, fields) => {
+        if (err) throw err;
+        res.status(200).json({
+            users: results
+        })
+    })
+});
 
 module.exports = router;
