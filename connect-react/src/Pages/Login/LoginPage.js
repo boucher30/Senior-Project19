@@ -29,7 +29,7 @@ export default class LoginPage extends Component {
 		this.setState({
 			[event.target.id]: event.target.value
 		});
-	}
+	};
 
 	// Responsible for checking api to see if user exists
 	// and then if they do, redirect them to dashboard
@@ -45,7 +45,7 @@ export default class LoginPage extends Component {
 		// Make sure we redirect after we get the correct login
 		localStorage.setItem('userId', 1);
 		this.setState({ redirect: true });
-	}
+	};
 
 	render() {
 		const { redirect } = this.state;

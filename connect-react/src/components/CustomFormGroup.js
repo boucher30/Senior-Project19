@@ -12,6 +12,6 @@ const CustomFormGroup = (props) => {
 			/>
 		</FormGroup>
 	);
-}
+};
 
 export default CustomFormGroup;

@@ -34,7 +34,7 @@ export default class ProfilePage extends Component {
 	render() {
 		if(this.state.userInfoLength > 0) {
 			const user = this.state.userInfo;
-			const profilePrefix = this.state.isUserLoggedIn ? 'My ' : `${this.state.userInfo.username}'s `
+			const profilePrefix = this.state.isUserLoggedIn ? 'My ' : `${this.state.userInfo.username}'s `;
 
 			return (
 				<>

@@ -7,8 +7,8 @@ const con = require('../db');
 
 //grab all the buddies from DB
 router.get('/', (req,res) => {
-    var sql = "SELECT * FROM follow_venue";
-    con.query(sql, (err, results, fields) => {
+	var sql = 'run';
+	con.query(sql, (err, results, fields) => {
 		if (err) throw err;
 		res.status(200).json({
 			follow_venue: results
@@ -21,9 +21,7 @@ router.post('/', (req,res) => {
 	const {init_user_id1, venue_id} = req.body;
 
 	// Create insert query for new user
-	// Added a comment
-	var sql = "INSERT INTO follow_venue (init_user_id1, venue_id) VALUES "
-		+ "('" + init_user_id1 + "', '" + venue_id + "');";
+
 
 
 	// Execute the query to insert into the database

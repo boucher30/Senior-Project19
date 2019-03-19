@@ -10,6 +10,6 @@ const Dashboard = () => {
 			<Container />
 		</Row>
 	);
-}
+};
 
 export default Dashboard;

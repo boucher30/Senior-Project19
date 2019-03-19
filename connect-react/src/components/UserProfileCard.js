@@ -28,6 +28,6 @@ const UserProfileCard = (props) => {
 			</Col>
 		</Row>
 	);
-}
+};
 
 export default UserProfileCard;

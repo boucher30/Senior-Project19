@@ -16,7 +16,7 @@ export default class Dashboard extends Component {
 				'My Connections': <ConnectionPage/>,
 				'My Feed': <FeedPage/>
 			}
-		}
+		};
 
 		this.changeSel = this.changeSel.bind(this);
 	}

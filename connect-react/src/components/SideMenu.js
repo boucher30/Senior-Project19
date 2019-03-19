@@ -7,7 +7,7 @@ const menuItems = {
 	'My Feed': {href: '/dashboard/feed'},
 	'Venues': {href: '/dashboard/venues'},
 	'Explore': {href: '/dashboard/explore'}
-}
+};
 
 const SideMenu = () => {
 	let listItems;
@@ -32,6 +32,6 @@ const SideMenu = () => {
 			</Col>
 		</>
 	);
-}
+};
 
 export default SideMenu;

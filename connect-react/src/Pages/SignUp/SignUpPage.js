@@ -34,13 +34,13 @@ export default class SignUpPage extends Component {
 		this.setState({
 			[event.target.id]: event.target.value
 		});
-	}
+	};
 
 	handleSubmit = e => {
 		e.preventDefault();
 		console.log('Submitted form:', this.state);
 		this.setState({ redirect: true });
-	}
+	};
 
 	render() {
 		console.log('State', this.state);

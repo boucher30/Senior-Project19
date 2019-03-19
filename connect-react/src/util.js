@@ -6,6 +6,6 @@ const helpers = {
 		}
 		return true;
 	}
-}
+};
 
 export default helpers;

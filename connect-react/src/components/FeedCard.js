@@ -13,6 +13,6 @@ const FeedCard = (props) => {
 					</Card.Body>
 				</Card>
     );
-}
+};
 
 export default FeedCard;

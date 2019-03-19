@@ -19,7 +19,7 @@ export default class ConnectionPage extends Component {
 				username: 'This'
 			},
 			show: false
-		}
+		};
 
 		this.handleShow = this.handleShow.bind(this);
 		this.handleClose = this.handleClose.bind(this);
@@ -37,7 +37,7 @@ export default class ConnectionPage extends Component {
 
 	// Creates a user in the database
 	createConnection() {
-		this.setState({ loading: true })
+		this.setState({ loading: true });
 		axios.post('http://localhost:8000/users', this.state.newUser)
 			.then(res => {
 				// After making a new user, lets go get the new list of users from the api

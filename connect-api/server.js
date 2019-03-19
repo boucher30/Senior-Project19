@@ -14,7 +14,8 @@ const PORT = process.env.PORT || 8000;
 
 // Check connection for success
 const con = require('./db');
-con.connect(function(err) {
+
+con.connect( function(err) {
   if (err) throw err;
   console.log("Connected to MySQL database...");
 });
@@ -22,14 +23,13 @@ con.connect(function(err) {
 // Define routes ahead of time
 // any file/route being used needs to be defined here
 // so it can be called below
-const userRoutes = require('./routes/user');
-const buddyRoutes = require('./routes/buddylist');
-const venueRoutes = require('./routes/venue');
-const conRoutes = require('./routes/connectionlist');
-const ctRoutes = require('./routes/connectid');
-const carRoutes = require('./routes/carveid');
-const fvRoutes = require('./routes/follow_venue');
-
+const userRoutes = require('./routes/users');
+const buddyRoutes = require('./routes/buddies');
+const venueRoutes = require('./routes/venues');
+const carRoutes = require('./routes/carves');
+const vfRoutes = require('./routes/venfollows');
+const ufRoutes = require('./routes/userfollows');
+const msgRoutes = require('./routes/messages');
 // Set up app to handle requests and json etc...
 app.use(morgan('dev'));																// Logger for api
 app.use(bodyParser.urlencoded({extended: true}));			// Allows us to parse body of post request
@@ -49,18 +49,21 @@ app.use((req, res, next) => {
 	next();
 });
 
+userRoutes.use(buddyRoutes,msgRoutes,ufRoutes,vfRoutes);
+
 
 // Tells the App specific routes to use using router in each file
 // any new file needs to be added in order for it to function.
-app.use('/user', userRoutes);
-app.use('/buddylist', buddyRoutes);
-app.use('/venue', venueRoutes);
-app.use('/connectionlist', conRoutes);
-app.use('/connectid', ctRoutes);
-app.use('/carveid', carRoutes);
-app.use('/follow_venue', fvRoutes);
+app.use('/users', userRoutes);
+app.use('/users/buddies', buddyRoutes);
+app.use('/venues', venueRoutes);
+app.use('/carves', carRoutes);
+app.use('/users/venfollows', vfRoutes);
+app.use('/users/userfollows', ufRoutes);
+app.use('/users/messages', msgRoutes);
 
 // App listens on specific port or 8000 by default
 app.listen(PORT, () => {
 	console.log("Connect API started on port "+ PORT + "!");
 });
+

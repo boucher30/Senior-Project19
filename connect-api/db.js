@@ -5,7 +5,8 @@ var con = mysql.createConnection({
   host: "localhost",
   user: "nodeuser",
   password: "nodeuser@1234",
-	database: "test"
+	database: "CCv3",
+    multipleStatements: true
 });
 
 // Export connection so we dont open more connections

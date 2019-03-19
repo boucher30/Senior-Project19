@@ -13,6 +13,6 @@ const FeaturedUserCard = (props) => {
           </Card.Body>
       </Card>
     );
-}
+};
 
 export default FeaturedUserCard;

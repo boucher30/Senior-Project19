@@ -7,6 +7,6 @@ const InfoButton = (props) => {
                 <h1>Information about this particular venue would appear here!</h1>
 			</div>
 		);
-}
+};
 
 export default InfoButton;
