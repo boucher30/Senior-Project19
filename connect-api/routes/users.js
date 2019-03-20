@@ -210,4 +210,23 @@ router.get('/?type=fans', (req,res) => {
     })
 });
 
+
+// Updates a specific user given their id from the request parameters
+router.put('/:userId', (req, res) => {
+	const userId = req.params.userId;
+	const { firstName, lastName, username, sport_type, profileType } = req.body;
+	let sql = 'UPDATE user ';
+	sql += `SET username='${username}', first_name='${firstName}', last_name='${lastName}', `;
+	sql += `sport='', profile_type='${profileType}' WHERE user_id='${userId}'`;
+
+	// Query the database and await a response
+	con.query(sql, (err, results, fields) => {
+		if (err) throw err;
+		res.status(200).json({
+			msg: 'Successfully updated user\'s information!'
+		});
+	})
+});
+
+
 module.exports = router;
