@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
     con.query(sql, (err, results) => {
         if (err) throw err;
         res.status(200).json({
-            venue: results
+            venues: results
         })
     })
 });

@@ -116,7 +116,7 @@ router.get('/:userId', (req,res) => {
 	con.query(get_user, [userId],(err, results, fields) => {
 		if (err) throw err;
 		res.status(200).json({
-			users: results
+			user: results
 		})
 	})
 });
