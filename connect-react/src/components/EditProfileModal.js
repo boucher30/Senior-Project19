@@ -3,7 +3,7 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import CustomFormGroup from './CustomFormGroup';
 import Form from "react-bootstrap/Form";
-// import axios from 'axios';
+import axios from 'axios';
 
 export default class EditProfileModal extends Component {
 	constructor(props) {
@@ -36,9 +36,17 @@ export default class EditProfileModal extends Component {
 	}
 
 	handleSubmit = e => {
-		// We go to endpoint here to update users info
+		// We go to endpoint here to update users info and send the new info that is stored in state
 		e.preventDefault();
-		this.props.handleClose();
+		axios.put(`http://localhost:8000/users/${localStorage.getItem('userId')}`, this.state)
+			.then(res => {
+				console.log('Resulting information from API:', res);
+				this.props.handleRefresh();
+				this.props.handleClose();
+			})
+			.catch(err => {
+				console.log('Error', err);
+			})
 	}
 
 	render() {

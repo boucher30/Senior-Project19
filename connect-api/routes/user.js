@@ -78,7 +78,10 @@ router.get('/:userId', (req,res) => {
 // Updates a specific user given their id from the request parameters
 router.put('/:userId', (req, res) => {
 	const userId = req.params.userId;
-	const sql = `UPDATE user SET username='${req.body.username}' WHERE user_id='${userId}'`;
+	const { firstName, lastName, username, sport_type, profileType } = req.body;
+	let sql = 'UPDATE user ';
+			sql += `SET username='${username}', first_name='${firstName}', last_name='${lastName}', `;
+			sql += `sport='', profile_type='${profileType}' WHERE user_id='${userId}'`;
 
 	// Query the database and await a response
 	con.query(sql, (err, results, fields) => {

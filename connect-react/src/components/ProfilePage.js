@@ -21,17 +21,12 @@ export default class ProfilePage extends Component {
 
 		this.handleShow = this.handleShow.bind(this);
 		this.handleClose = this.handleClose.bind(this);
+		this.getUserInfo = this.getUserInfo.bind(this);
 	}
 
+	// Retrieves info before component is mounted to the DOM
 	componentWillMount() {
-		// Getting the user id from the url param
-		axios.get(`http://localhost:8000/users/${this.state.userId}`)
-			.then(res => {
-				this.setState({
-					userInfo: res.data.user[0],
-					userInfoLength: Object.keys(res.data.user[0]).length
-				});
-			})
+		this.getUserInfo();
 	}
 
 	// We need to conditionally render things based on the user in relation to who is logged in
@@ -53,7 +48,7 @@ export default class ProfilePage extends Component {
 
 			return (
 				<>
-					<EditProfileModal user={userInfo} show={this.state.show} handleClose={this.handleClose} />
+					<EditProfileModal handleRefresh={this.getUserInfo} user={userInfo} show={this.state.show} handleClose={this.handleClose} />
 
 					<div style={{ display: 'flex', marginTop: '8px' }}>
 						<h2 style={{ width: isUserLoggedIn ? '90%' : '80%' }}>{profilePrefix} Profile</h2>
@@ -94,5 +89,16 @@ export default class ProfilePage extends Component {
 
 	handleShow() {
 		this.setState({ show: true });
+	}
+
+	getUserInfo() {
+		// Getting the user id from the url param
+		axios.get(`http://localhost:8000/users/${this.state.userId}`)
+			.then(res => {
+				this.setState({
+					userInfo: res.data.user[0],
+					userInfoLength: Object.keys(res.data.user[0]).length
+				});
+			})
 	}
 }
