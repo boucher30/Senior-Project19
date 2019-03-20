@@ -22,6 +22,23 @@ router.get('/login', (req,res) => {
 
 //for whatever stupid reason it updates the user id to the one before it instead of current...
     //logging in twice does it because the second time gets the correct instance.
+
+    con.query( " CALL login(?,?,@userid); ",[username,password] ,(err, results, fields) => {
+        if (err) throw err;
+        userid = fields;
+        if( userid > 0) {
+            res.status(200).json({
+
+            })
+        }
+
+        else {
+            res.status(200).json({
+
+            })
+        }
+
+    });
     con.query( " CALL login(?,?,@userid); ",[username,password] ,(err, results, fields) => {
         if (err) throw err;
         userid = fields;
@@ -92,7 +109,7 @@ router.post('/', (req,res) => {
 });
 
 // Grab specific user by their id
-router.get('/?userid = userId', (req,res) => {
+router.get('/:userId', (req,res) => {
 	const userId = req.params.userId;
 
 	get_user  = "call get_user(?)";

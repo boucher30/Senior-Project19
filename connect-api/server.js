@@ -55,12 +55,12 @@ userRoutes.use(buddyRoutes,msgRoutes,ufRoutes,vfRoutes);
 // Tells the App specific routes to use using router in each file
 // any new file needs to be added in order for it to function.
 app.use('/users', userRoutes);
-app.use('/users/buddies', buddyRoutes);
+app.use('/buddies', buddyRoutes);
 app.use('/venues', venueRoutes);
 app.use('/carves', carRoutes);
-app.use('/users/venfollows', vfRoutes);
-app.use('/users/userfollows', ufRoutes);
-app.use('/users/messages', msgRoutes);
+app.use('/venfollows', vfRoutes);
+app.use('/userfollows', ufRoutes);
+app.use('/messages', msgRoutes);
 
 // App listens on specific port or 8000 by default
 app.listen(PORT, () => {

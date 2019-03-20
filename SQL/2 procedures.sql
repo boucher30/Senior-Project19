@@ -222,6 +222,24 @@ END |
 
 DELIMITER |
 
+DELIMITER |
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_incoming_carveinvite_requests`(in id int)
+BEGIN
+select * from message where  User_user_id1 = id and is_carveinvite_request = 1;
+
+  
+END |
+
+DELIMITER |
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_outgoing_carveinvite_requests`(in id int)
+BEGIN
+select * from message where User_user_id = id  and is_carveinvite_request = 1;
+
+  
+END |
+
+DELIMITER |
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `send_message`(in id1 int, in id2 int,in sub VARCHAR(50),in message VARCHAR(500))
 BEGIN
 insert into message(subject,message_body,is_buddy_request,USER_user_id,USER_user_id1)
@@ -238,10 +256,18 @@ Values(subject,message,0,id1,id2,reply_msg);
   
 END |
 
-
+DELIMITER |
 CREATE DEFINER=`root`@`localhost` PROCEDURE `send_carveattend_request`(in id1 int, in id2 int, in carveid int, in subject VARCHAR(50),in message VARCHAR(500))
 BEGIN
 insert into message(subject,message_body,is_carveattend_request, carve_carve_id, USER_user_id,USER_user_id1)
+Values(subject,message,1,carveid, id1,id2);
+  
+END |
+
+DELIMITER |
+CREATE DEFINER=`root`@`localhost` PROCEDURE `send_carveinvite_request`(in id1 int, in id2 int, in carveid int, in subject VARCHAR(50),in message VARCHAR(500))
+BEGIN
+insert into message(subject,message_body,is_carveinvite_request, carve_carve_id, USER_user_id,USER_user_id1)
 Values(subject,message,1,carveid, id1,id2);
   
 END |
@@ -304,6 +330,14 @@ select * from follow_user where (User_user_id = id and isbuddy =1) or (User_user
 END |
 
 DELIMITER |
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_all_buddies`(in id int)
+BEGIN
+select * from follow_user where isbuddy = 1;
+
+  
+END |
+
+DELIMITER |
 CREATE DEFINER=`root`@`localhost` PROCEDURE `get_followed`(in id int)
 BEGIN
 select * from follow_user where User_user_id = id and isbuddy = 0;
@@ -314,6 +348,13 @@ DELIMITER |
 CREATE DEFINER=`root`@`localhost` PROCEDURE `get_followers`(in id int)
 BEGIN
 select * from follow_user where User_user_id1 = id ;
+  
+END |
+
+DELIMITER |
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_all_followers`(in id int)
+BEGIN
+select * from follow_user where isbuddy =0 ;
   
 END |
 
