@@ -41,6 +41,8 @@ call venues_followed(1);
 call venues_followed(2);
 call get_venue_followers(1);
 
+call get_messages();
+
 call get_incoming_messages(1);
 call get_outgoing_messages(2);
 

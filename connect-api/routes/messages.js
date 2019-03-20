@@ -122,7 +122,7 @@ router.get('/incomingCarveAttendRequest', (req,res) => {
     })
 });
 
-router.get('/sendMessage', (req,res) => {
+router.post('/sendMessage', (req,res) => {
     // Find all users from database
     const {senderId,recipeientId,subject,message} =req.body;
     user_send = "CALL send_message(?,?,?,?)";
@@ -134,10 +134,10 @@ router.get('/sendMessage', (req,res) => {
     })
 });
 
-router.get('/sendReplyMessage', (req,res) => {
+router.post('/sendReplyMessage', (req,res) => {
     // Find all users from database
     const {senderId,recipeientId,subject,message,replyingId} =req.body;
-    user_send = "CALL send_reply_message(?,?,?,?,?)";
+    user_sendreply = "CALL send_reply_message(?,?,?,?,?)";
     con.query(user_send, [senderId,recipeientId,subject,message,replyingId],(err, results, fields) => {
         if (err) throw err;
         res.status(200).json({
@@ -145,8 +145,45 @@ router.get('/sendReplyMessage', (req,res) => {
         })
     })
 });
-/* ignore here
-router.get('/sendBuddyRequest', (req,res) => {
+
+
+router.post('/sendBuddyRequest', (req,res) => {
+    // Find all users from database
+    const {senderId,recipeientId,subject,message} =req.body;
+    user_sendBR = "CALL send_buddy_request(?,?,?,?)";
+    con.query(user_send, [senderId,recipeientId,subject,message],(err, results, fields) => {
+        if (err) throw err;
+        res.status(200).json({
+            messages: results
+        })
+    })
+});
+
+router.post('/sendBuddyRequestAccept', (req,res) => {
+    // Find all users from database
+    const {senderId,recipeientId,subject,message,replyid} =req.body;
+    user_sendBRreply = "CALL send_buddy_request_reply(?,?,?,?,?)";
+    con.query(user_send, [senderId,recipeientId,subject,message,replyid],(err, results, fields) => {
+        if (err) throw err;
+        res.status(200).json({
+            messages: results
+        })
+    })
+});
+
+router.post('/sendBuddyRequestDeny', (req,res) => {
+    // Find all users from database
+    const {senderId,recipeientId,subject,message} =req.body;
+    user_send = "CALL send_buddy_request_reply(?,?,?,?)";
+    con.query(user_send, [senderId,recipeientId,subject,message],(err, results, fields) => {
+        if (err) throw err;
+        res.status(200).json({
+            messages: results
+        })
+    })
+});
+
+router.post('/sendCarveAttendRequest', (req,res) => {
     // Find all users from database
     const {senderId,recipeientId,subject,message} =req.body;
     user_send = "CALL send_message(?,?,?,?)";
@@ -156,6 +193,66 @@ router.get('/sendBuddyRequest', (req,res) => {
             messages: results
         })
     })
-});*/
+});
+
+router.post('/sendCarveAttendAccept', (req,res) => {
+    // Find all users from database
+    const {senderId,recipeientId,subject,message,replyid} =req.body;
+    user_send = "CALL send_carveattend_accept(?,?,?,?,?)";
+    con.query(user_send, [senderId,recipeientId,subject,message,replyid],(err, results, fields) => {
+        if (err) throw err;
+        res.status(200).json({
+            messages: results
+        })
+    })
+});
+
+router.post('/sendCarveAttendDeny', (req,res) => {
+    // Find all users from database
+    const {senderId,recipeientId,subject,message,replyid} =req.body;
+    user_send = "CALL send_carveattend_accept(?,?,?,?,?)";
+    con.query(user_send, [senderId,recipeientId,subject,message,replyid],(err, results, fields) => {
+        if (err) throw err;
+        res.status(200).json({
+            messages: results
+        })
+    })
+});
+
+router.post('/sendCarveInviteRequest', (req,res) => {
+    // Find all users from database
+    const {senderId,recipeientId,subject,message} =req.body;
+    user_send = "CALL send_carveinvite_request(?,?,?,?)";
+    con.query(user_send, [senderId,recipeientId,subject,message],(err, results, fields) => {
+        if (err) throw err;
+        res.status(200).json({
+            messages: results
+        })
+    })
+});
+
+router.post('/sendCarveInviteAccept', (req,res) => {
+    // Find all users from database
+    const {senderId,recipeientId,subject,message,replyid} =req.body;
+    user_send = "CALL send_carveinvite_accept(?,?,?,?,?)";
+    con.query(user_send, [senderId,recipeientId,subject,message,replyid],(err, results, fields) => {
+        if (err) throw err;
+        res.status(200).json({
+            messages: results
+        })
+    })
+});
+
+router.post('/sendCarveInviteDecline', (req,res) => {
+    // Find all users from database
+    const {senderId,recipeientId,subject,message,replyid} =req.body;
+    user_send = "CALL send_carveinvite_deny(?,?,?,?,?)";
+    con.query(user_send, [senderId,recipeientId,subject,message,replyid],(err, results, fields) => {
+        if (err) throw err;
+        res.status(200).json({
+            messages: results
+        })
+    })
+});
 
 module.exports = router;

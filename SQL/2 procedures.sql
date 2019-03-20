@@ -7,6 +7,7 @@ DROP PROCEDURE IF EXISTS get_user;
 DROP PROCEDURE IF EXISTS get_users;
 DROP PROCEDURE IF EXISTS get_venue;
 DROP PROCEDURE IF EXISTS get_venues;
+DROP PROCEDURE IF EXISTS create_empty_carve;
 DROP PROCEDURE IF EXISTS new_opencarve_venue_date;
 DROP PROCEDURE IF EXISTS new_opencarve_venue_nodate;
 DROP PROCEDURE IF EXISTS new_opencarve_novenue_date;
@@ -14,15 +15,19 @@ DROP PROCEDURE IF EXISTS new_opencarve_novenue_nodate;
 DROP PROCEDURE IF EXISTS new_buddy_carve;
 DROP PROCEDURE IF EXISTS new_venue;
 DROP PROCEDURE IF EXISTS new_venue1;
+DROP PROCEDURE IF EXISTS get_messages;
 DROP PROCEDURE IF EXISTS get_outgoing_messages;
 DROP PROCEDURE IF EXISTS get_incoming_messages;
 DROP PROCEDURE IF EXISTS get_outgoing_buddy_requests;
 DROP PROCEDURE IF EXISTS get_incoming_buddy_requests;
 DROP PROCEDURE IF EXISTS get_outgoing_carveattend_requests;
 DROP PROCEDURE IF EXISTS get_incoming_carveattend_requests;
+DROP PROCEDURE IF EXISTS get_outgoing_carveinvite_requests;
+DROP PROCEDURE IF EXISTS get_incoming_carveinvite_requests;
 DROP PROCEDURE IF EXISTS send_message;
 DROP PROCEDURE IF EXISTS send_reply_message;
 DROP PROCEDURE IF EXISTS send_carveattend_request;
+DROP PROCEDURE IF EXISTS send_carveinvite_request;
 DROP PROCEDURE IF EXISTS send_buddy_request;
 DROP PROCEDURE IF EXISTS accept_buddy_request;
 DROP PROCEDURE IF EXISTS decline_buddy_request;
@@ -31,7 +36,9 @@ DROP PROCEDURE IF EXISTS get_carves;
 DROP PROCEDURE IF EXISTS get_user_carves;
 DROP PROCEDURE IF EXISTS follow_venue;
 DROP PROCEDURE IF EXISTS add_buddy;
+DROP PROCEDURE IF EXISTS get_all_buddies;
 DROP PROCEDURE IF EXISTS get_buddies;
+DROP PROCEDURE IF EXISTS get_all_followers;
 DROP PROCEDURE IF EXISTS get_followed;
 DROP PROCEDURE IF EXISTS get_followers;
 DROP PROCEDURE IF EXISTS venues_followed;
@@ -55,14 +62,49 @@ DROP PROCEDURE IF EXISTS get_venue_ski;
 DROP PROCEDURE IF EXISTS get_venue_skateboard;
 DROP PROCEDURE IF EXISTS get_venue_surf;
 DROP PROCEDURE IF EXISTS get_venue_mountain_bike;
+DROP PROCEDURE IF EXISTS new_empty_user;
+DROP PROCEDURE IF EXISTS new_empty_venue;
+DROP PROCEDURE IF EXISTS new_empty_comment;
+DROP PROCEDURE IF EXISTS new_empty_embedd;
+DROP PROCEDURE IF EXISTS new_empty_carve;
 
 
 DELIMITER |
-CREATE DEFINER=`root`@`localhost` PROCEDURE `new_user`(in us VARCHAR(40), in em VARCHAR(40), in pwd VARCHAR(40), IN fn VARCHAR(40), IN ln VARCHAR(40), IN ath tinyint, In pho TINYINT, IN snow TINYINT, IN ska TINYINT, IN su TINYINT, IN mb TINYINT, IN sk TINYINT, IN fa TINYINT)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `new_empty_user`()
 BEGIN
-  insert into user(username, email,password,first_name,last_name,athlete,photographer,snowboard,skateboard, surf,mountain_bike,ski,fan)
-  Values(us, em,pwd,fn,ln,ath,pho,snow,ska,su,mb,sk,fa);
+  insert into user()
+  Values();
 END |
+
+DELIMITER |
+CREATE DEFINER=`root`@`localhost` PROCEDURE `new_empty_venue`()
+BEGIN
+  insert into venue()
+  Values();
+END |
+
+DELIMITER |
+CREATE DEFINER=`root`@`localhost` PROCEDURE `new_empty_comment`()
+BEGIN
+  insert into comment ()
+  Values();
+END |
+
+DELIMITER |
+CREATE DEFINER=`root`@`localhost` PROCEDURE `new_empty_embedd`()
+BEGIN
+  insert into embedd ()
+  Values();
+END |
+
+DELIMITER |
+CREATE DEFINER=`root`@`localhost` PROCEDURE `new_empty_carve`()
+BEGIN
+  insert into carve(carve_id,venue_venue_id)
+  Values(0,0);
+END |
+
+
 
 
 
@@ -73,6 +115,13 @@ BEGIN
 
 END |
 
+
+DELIMITER |
+CREATE DEFINER=`root`@`localhost` PROCEDURE `new_user`(in us VARCHAR(40), in em VARCHAR(40), in pwd VARCHAR(40), IN fn VARCHAR(40), IN ln VARCHAR(40), IN ath tinyint, In pho TINYINT, IN snow TINYINT, IN ska TINYINT, IN su TINYINT, IN mb TINYINT, IN sk TINYINT, IN fa TINYINT)
+BEGIN
+  insert into user(username, email,password,first_name,last_name,athlete,photographer,snowboard,skateboard, surf,mountain_bike,ski,fan)
+  Values(us, em,pwd,fn,ln,ath,pho,snow,ska,su,mb,sk,fa);
+END |
 
 
 DELIMITER |
@@ -89,12 +138,7 @@ BEGIN
   Values(na,st,ci,snow,ski,ska,su,mb);
 END |
 
-DELIMITER |
-CREATE DEFINER=`root`@`localhost` PROCEDURE `new_venue1`(in na VARCHAR(40), in st VARCHAR(40), in ci VARCHAR(40), IN snow TINYINT, IN ski TINYINT, IN ska TINYINT, IN su TINYINT, IN mb TINYINT)
-BEGIN
-  insert into venue(venue_id,venue_name, venue_state,venue_city,snowboard,ski,skateboard,surf,mountain_bike)
-  Values(0,na,st,ci,snow,ski,ska,su,mb);
-END |
+
 
 DELIMITER |
 CREATE DEFINER=`root`@`localhost` PROCEDURE `get_venue`(in id int)
@@ -145,9 +189,11 @@ END |
 DELIMITER |
 CREATE DEFINER=`root`@`localhost` PROCEDURE `new_buddy_carve`(in date date, IN snow TINYINT, IN ski TINYINT, IN ska TINYINT, IN su TINYINT, IN mb TINYINT, in athlete_slot int, in photo_slot int, in description varchar(200), in creator int, in venue int)
 BEGIN
-  insert into carve(date, snowboard,skateboard,open, athlete_slot,photographer_slot,upcoming,surf,ski,mountain_bike,description, User_user_id,venue_venue_id,User_user_id1,comment_comment_id,embedd_embedd_id)
-  Values(date,snow,ska,1,athlete_slot,photo_slot,0,su,ski,mb,description, creator, venue,0,0,0);
+  insert into carve(date, snowboard,skateboard,open, athlete_slot,photographer_slot,upcoming,surf,ski,mountain_bike,description, is_buddy_carve,User_user_id,venue_venue_id,User_user_id1,comment_comment_id,embedd_embedd_id)
+  Values(date,snow,ska,1,athlete_slot,photo_slot,0,su,ski,mb,description,1, creator, venue,0,0,0);
 END |
+
+
 
 DELIMITER |
 CREATE DEFINER=`root`@`localhost` PROCEDURE `get_carves`()
@@ -525,3 +571,5 @@ BEGIN
 select * from venue where mountain_bike = 1;
   
 END |
+
+
