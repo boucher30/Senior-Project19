@@ -144,7 +144,7 @@ router.post('/sendReplyMessage', (req,res) => {
     const senderId = req.params.userId;
     const {recipeientId,subject,message,replyingId} =req.body;
     user_sendreply = "CALL send_reply_message(?,?,?,?,?)";
-    con.query(user_send, [senderId,recipeientId,subject,message,replyingId],(err, results, fields) => {
+    con.query(user_sendreply, [senderId,recipeientId,subject,message,replyingId],(err, results, fields) => {
         if (err) throw err;
         res.status(200).json({
             messages: results
