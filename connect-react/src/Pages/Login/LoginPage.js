@@ -7,6 +7,7 @@ import React, { Component } from 'react'
 import { Button, Form, FormGroup, FormControl } from "react-bootstrap";
 import Redirect from "react-router/Redirect";
 import './Login.css';
+import axios from "axios";
 
 export default class LoginPage extends Component {
 	constructor(props) {
@@ -18,6 +19,7 @@ export default class LoginPage extends Component {
 			redirect: false
 		};
 	}
+
 
 	// Validates form for style purposes and so that we cannot send empty data to api
 	validateForm() {

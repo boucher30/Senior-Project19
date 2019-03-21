@@ -2,36 +2,21 @@
 // had running on his machine. *note database running on your machine needs a buddy list table with 2 user id entries
 
 var express = require('express');
-var router = express.Router();
+var router = express.Router({mergeParams: true});
 const con = require('../db');
 
-//grab all the buddies from DB
 router.get('/', (req,res) => {
-	var sql = 'run';
-	con.query(sql, (err, results, fields) => {
+
+	venueId = req.params.venueId;
+	get_venue_followers = "CALL get_venue_followers(?)";
+	con.query(get_venue_followers,[venueId], (err, results, fields) => {
 		if (err) throw err;
 		res.status(200).json({
-			follow_venue: results
+			userfollows: results
 		})
 	})
 });
 
-//add buddy to BD
-router.post('/', (req,res) => {
-	const {init_user_id1, venue_id} = req.body;
 
-	// Create insert query for new user
-
-
-
-	// Execute the query to insert into the database
-	con.query(sql, (err, result) => {
-		if (err) throw err;
-		res.status(201).json({
-			msg: '1 record inserted into the venuelist table'
-		})
-	})
-
-});
 
 module.exports = router;

@@ -1,3 +1,10 @@
+
+call new_empty_user();
+call new_empty_venue();
+call new_empty_comment();
+call new_empty_embedd();
+call new_empty_carve();
+
 call new_user("frosty","312@abc.com", "abc1234","Sean","Klinglesmith", 0, 1, 1,0,0,0,0,0);
 call new_user("cmarcy","def@123.com", "abc1234","Christian","Marcy", 1, 0, 1,0,0,0,0,0);
 call new_user("shred","456@abc.com", "abc1234","Fred","Budde", 1, 1, 1,0,0,0,0,0);
@@ -22,7 +29,7 @@ call new_user("Jman2","789@abc.com", "abc1234","RJ","Boucher", 1, 0, 0,1,0,0,0,0
 call new_user("moneyman2","467@abc.com", "abc1234","Dhruv","Patel", 1, 1, 0,0,1,1,0,0);
 call new_user("Andez2","789@abc.com", "abc1234","Dylan","Anderson", 1, 0, 0,1,1,0,0,0);
 call new_user("iceman2","223@abc.com", "abc1234","MD","Monir", 0, 1, 1,0,0,1,1,0);
-call new_venue1("", "","",0,0,0,1,0);
+
 call new_venue("mt snow", "VT","somecity",1,1,0,0,0);
 call new_venue("mt rock", "NY","somewhere",1,1,0,0,1);
 call new_venue("skatepark", "NJ","somewhere",0,0,1,0,0);
@@ -110,26 +117,39 @@ call follow_venue(3,5);
 call follow_venue(3,6);
 call follow_venue(3,7);
 
+
+
 call send_message(1,2, "Subject goes here", "Message body goes here blah blah");
 call send_message(1,3, "Subject goes here", "Message body goes here blah blah");
 call send_message(2,3, "Subject goes here", "Message body goes here blah blah");
+call send_message(2,1, "Subject goes here", "Message body goes here blah blah");
+
+call send_reply_message(2,1, "RE subject goes here", "i am getting back to you blah",1);
+call send_reply_message(3,1, "RE subject goes here", "i am getting back to you blah",2);
+
 
 call send_buddy_request(2,17, "Subject goes here", "be my buddy plz");
 call send_buddy_request(1,21, "Subject goes here", "be my buddy plz");
 call send_buddy_request(1,22, "Subject goes here", "be my buddy plz");
 
-#call new_buddy_carve("2019-03-19", 1, 1, 0, 0, 0, 6, 3, "carve of snowboard or ski with up to 6 athletes, and 3 photographers. on 3/19/2019", 1, 1);
-#call new_buddy_carve("2019-03-19", 10, 0, 1, 0, 0, 6, 3, "carve of snowboard or ski with up to 6 athletes, and 3 photographers. on 3/19/2019", 2, 1);
+call new_buddy_carve("2019-03-19", 1, 1, 0, 0, 0, 6, 3, "carve of snowboard or ski with up to 6 athletes, and 3 photographers. on 3/19/2019", 1, 1);
+call new_buddy_carve("2019-03-19", 10, 0, 1, 0, 0, 6, 3, "carve of snowboard or ski with up to 6 athletes, and 3 photographers. on 3/19/2019", 2, 1);
 
-#call new_opencarve_novenue_nodate(10, 0, 1, 0, 0, 6, 3, "carve of snowboard or ski with up to 6 athletes, and 3 photographers. on 3/19/2019",  1);
-#call new_opencarve_novenue_date("2019-03-19", 10, 0, 1, 0, 0, 6, 3, "carve of snowboard or ski with up to 6 athletes, and 3 photographers. on 3/19/2019", 1);
-#call new_opencarve_venue_nodate(10, 0, 1, 0, 0, 6, 3, "carve of snowboard or ski with up to 6 athletes, and 3 photographers. on 3/19/2019", 2, 1);
-#call new_opencarve_venue_date("2019-03-19", 10, 0, 1, 0, 0, 6, 3, "carve of snowboard or ski with up to 6 athletes, and 3 photographers. on 3/19/2019", 2, 1);
+call new_opencarve_novenue_nodate(10, 0, 1, 0, 0, 6, 3, "carve of snowboard or ski with up to 6 athletes, and 3 photographers. on 3/19/2019",  1);
+call new_opencarve_novenue_date("2019-03-19", 10, 0, 1, 0, 0, 6, 3, "carve of snowboard or ski with up to 6 athletes, and 3 photographers. on 3/19/2019", 1);
+call new_opencarve_venue_nodate(10, 0, 1, 0, 0, 6, 3, "carve of snowboard or ski with up to 6 athletes, and 3 photographers. on 3/19/2019", 2, 1);
+call new_opencarve_venue_date("2019-03-19", 10, 0, 1, 0, 0, 6, 3, "carve of snowboard or ski with up to 6 athletes, and 3 photographers. on 3/19/2019", 2, 1);
 
-call send_carveattend_request(1,2,1,"come carve with me","plz");
-call send_carveattend_request(1,2,3,"come carve with me","plz");
+call send_carveattend_request(1,2,1,"can i carve with you","plz");
+call send_carveattend_request(1,2,3,"can i carve with you","plz");
 
+call send_carveattend_accept(2,1,1,"yes","you may carve with me",10);
+call send_carveattend_decline(2,1,1,"no","f u brah",11);
 
+call send_carveinvite_request(1,2,1,"come carve with me","plz");
+call send_carveinvite_request(1,2,3,"come carve with me","plz");
 
+call send_carveinvite_accept(2,1,1,"yes","lets do it",10);
+call send_carveinvite_decline(2,1,1,"no","f u brah",11);
 
 
