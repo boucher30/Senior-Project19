@@ -79,6 +79,9 @@ DROP PROCEDURE IF EXISTS get_user_attended_carves;
 DROP PROCEDURE IF EXISTS get_all_carves;
 DROP PROCEDURE IF EXISTS get_venue_carves;
 DROP PROCEDURE IF EXISTS get_user_all_attend_carves;
+DROP PROCEDURE IF EXISTS get_listings;
+DROP PROCEDURE IF EXISTS delete_user;
+
 
 DELIMITER |
 CREATE DEFINER=`root`@`localhost` PROCEDURE `new_empty_user`()
@@ -676,5 +679,13 @@ DELIMITER |
 CREATE DEFINER=`root`@`localhost` PROCEDURE `get_listings`()
 BEGIN
 select * from carve where open = 1;
+  
+END |
+
+
+DELIMITER |
+CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_user`(in id int)
+BEGIN
+delete from user where user_id = id;
   
 END |

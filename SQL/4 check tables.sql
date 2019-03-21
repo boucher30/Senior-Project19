@@ -1,6 +1,8 @@
 call get_users;
 call get_venues;
 
+call delete_user(29);
+
 call get_user_athlete();
 call get_user_photographer();
 call get_user_fan();
