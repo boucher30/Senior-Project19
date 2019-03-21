@@ -96,8 +96,8 @@ export default class ProfilePage extends Component {
 		axios.get(`http://localhost:8000/users/${this.state.userId}`)
 			.then(res => {
 				this.setState({
-					userInfo: res.data.user[0],
-					userInfoLength: Object.keys(res.data.user[0]).length
+					userInfo: res.data.user[0][0],
+					userInfoLength: Object.keys(res.data.user[0][0]).length
 				});
 			})
 	}
