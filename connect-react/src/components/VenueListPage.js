@@ -23,10 +23,10 @@ export default class VenueListPage extends Component {
 		// Getting the user id from the url param
 		axios.get(`http://localhost:8000/venues`)
 			.then(res => {
-				console.log('Venues:', res.data);
+				console.log('Venues:', res.data.venues[0]);
 				this.setState({
-					venues: res.data.venues,
-					venuesLength: Object.keys(res.data.venues).length
+					venues: res.data.venues[0],
+					venuesLength: res.data.venues[0].length
 				});
 			})
     }
@@ -37,13 +37,15 @@ export default class VenueListPage extends Component {
 
         let flag = false;
         let div = [];
+
+        // Guessing j represents how many rows we want? Not sure
         for(let j = 0; j < 2; j++){
             let row = [];
             let k = 0;
             for(k = (flag ? (length/2)+1 : k); k < length; k++){
                 row.push(
                     <Col>
-                        <VenueFigure name = {venues[k].venue_name} img = {Mount_Snow_BG} href = {'/dashboard/venues/' + venues[k].venue_id}/>
+                        <VenueFigure name={venues[k].venue_name} img={Mount_Snow_BG} href={'/dashboard/venues/' + venues[k].venue_id}/>
                     </Col>
                 );
                 if(k === length/2){
@@ -62,28 +64,26 @@ export default class VenueListPage extends Component {
     
     render(){
         if(this.state.venuesLength > 0){
+            return (
+                <Container>
+                    <Row style = {{marginTop: '40px'}}>
+                        <h1>Venues</h1>
+                    </Row>
+                    <Row style = {{marginTop: '45px'}}>
+                        <Col md={{ span: 6, offset: 1 }}>
+                            <Form.Control type="text" placeholder="Search" />
+                        </Col>
+                        <Button variant="link">+Filters</Button>
+                    </Row>
 
-        return (
-            <Container>
-                <Row style = {{marginTop: '40px'}}>
-                    <h1>Venues</h1>
-                </Row>
-                <Row style = {{marginTop: '45px'}}>
-                    <Col md={{ span: 6, offset: 1 }}>
-                        <Form.Control type="text" placeholder="Search" />   
-                    </Col>
-                    <Button variant="link">+Filters</Button>
-                </Row>
-                
-                <div style = {{marginTop: '20px', borderBottom: '1px solid lightgray'}}></div>
+                    <div style = {{marginTop: '20px', borderBottom: '1px solid lightgray'}}></div>
 
-                {/* Horizontal scrolling effect */}
-                <div style = {{display: 'flex', flexWrap: 'wrap', overflowX: 'scroll'}}>
-                    {this.createDiv()}
-                </div>
-
-            </Container>
-        );
+                    {/* Horizontal scrolling effect */}
+                    <div style = {{display: 'flex', flexWrap: 'wrap', overflowX: 'scroll'}}>
+                        {this.createDiv()}
+                    </div>
+                </Container>
+            );
         }else{
             return (
                 <div>Error loading venues list</div>
