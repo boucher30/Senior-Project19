@@ -2,13 +2,14 @@
 // had running on his machine. *note database running on your machine needs a buddy list table with 2 user id entries
 
 var express = require('express');
-var router = express.Router();
+var router = express.Router({mergeParams: true});
 const con = require('../db');
 
-//grab all the buddies from DB
 router.get('/', (req,res) => {
-    all_buddies = "CALL get_all_buddies()";
-    con.query(all_buddies, (err, results, fields) => {
+	console.log(req.params);
+	userId = req.params.userId;
+	get_user_buddies = "CALL get_buddies(?)";
+	con.query(get_user_buddies,[userId], (err, results, fields) => {
 		if (err) throw err;
 		res.status(200).json({
 			buddylist: results
@@ -16,13 +17,20 @@ router.get('/', (req,res) => {
 	})
 });
 
-router.get('/:userId', (req,res) => {
+//BUDDY REQUEST WIP
+//CALL THIS NOW TO ADD BUDDY WITHOUT REQUEST
+
+router.post('/:userId1', (req,res) => {
+	// Find all users from database
 	const userId = req.params.userId;
-	get_user_buddies = "CALL get_all_buddies(?)";
-	con.query(get_user_buddies, (err, results, fields) => {
+	const userId1 = req.params.userId1;
+
+	add_buddy = "CALL add_buddy(?,?)";
+	con.query(add_buddy, [userId,userId1],(err, results, fields) => {
 		if (err) throw err;
 		res.status(200).json({
-			buddylist: results
+			userfollows: results,
+			msg: 'buddy added'
 		})
 	})
 });

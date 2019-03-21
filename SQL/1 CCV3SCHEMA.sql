@@ -209,7 +209,7 @@ CREATE TABLE IF NOT EXISTS `CCv3`.`message` (
   `USER_user_id` INT NOT NULL,
   `USER_user_id1` INT NOT NULL,
   `reply_msg_id` INT NULL,
-  `CARVE_carve_id` INT NOT NULL default 0,
+  `CARVE_carve_id` INT NOT NULL default 1,
   PRIMARY KEY (`message_id`, `USER_user_id`, `USER_user_id1`,`carve_carve_id`),
   UNIQUE INDEX `message_id_UNIQUE` (`message_id` ASC) VISIBLE,
   INDEX `fk_message_USER1_idx` (`USER_user_id` ASC) VISIBLE,

@@ -1,7 +1,7 @@
 use CCv3;
 
 
-
+DROP PROCEDURE IF EXISTS new_user_signup;
 DROP PROCEDURE IF EXISTS new_user;
 DROP PROCEDURE IF EXISTS get_user;
 DROP PROCEDURE IF EXISTS get_users;
@@ -67,7 +67,10 @@ DROP PROCEDURE IF EXISTS new_empty_venue;
 DROP PROCEDURE IF EXISTS new_empty_comment;
 DROP PROCEDURE IF EXISTS new_empty_embedd;
 DROP PROCEDURE IF EXISTS new_empty_carve;
-
+DROP PROCEDURE IF EXISTS send_carveattend_accept;
+DROP PROCEDURE IF EXISTS send_carveattend_decline;
+DROP PROCEDURE IF EXISTS send_carveinvite_accept;
+DROP PROCEDURE IF EXISTS send_carveinvite_decline;
 
 DELIMITER |
 CREATE DEFINER=`root`@`localhost` PROCEDURE `new_empty_user`()
@@ -121,8 +124,19 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `new_user`(in us VARCHAR(40), in em 
 BEGIN
   insert into user(username, email,password,first_name,last_name,athlete,photographer,snowboard,skateboard, surf,mountain_bike,ski,fan)
   Values(us, em,pwd,fn,ln,ath,pho,snow,ska,su,mb,sk,fa);
+
 END |
 
+DELIMITER |
+CREATE DEFINER=`root`@`localhost` PROCEDURE `new_user_signup`(in us VARCHAR(40), in em VARCHAR(40), in pwd VARCHAR(40), IN fn VARCHAR(40), IN ln VARCHAR(40), IN ath tinyint, In pho TINYINT, IN snow TINYINT, IN ska TINYINT, IN su TINYINT, IN mb TINYINT, IN sk TINYINT, IN fa TINYINT, out userId int)
+BEGIN
+
+  insert into user(username, email,password,first_name,last_name,athlete,photographer,snowboard,skateboard, surf,mountain_bike,ski,fan)
+  Values(us, em,pwd,fn,ln,ath,pho,snow,ska,su,mb,sk,fa);
+  
+  select user_id into userId from user where user.username = us;
+  select @userId;
+END |
 
 DELIMITER |
 CREATE DEFINER=`root`@`localhost` PROCEDURE `get_users`()
@@ -211,9 +225,9 @@ select * from carve where User_user_id1 = id;
 END |
 
 DELIMITER |
-CREATE DEFINER=`root`@`localhost` PROCEDURE `get_messages`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_messages`(in id int)
 BEGIN
-select * from message ;
+select * from message where User_user_id = id;
 
   
 END |
@@ -221,7 +235,7 @@ END |
 DELIMITER |
 CREATE DEFINER=`root`@`localhost` PROCEDURE `get_outgoing_messages`(in id int)
 BEGIN
-select * from message where User_user_id1 = id and is_buddy_request = 0;
+select * from message where User_user_id = id and is_buddy_request = 0;
 
   
 END |
@@ -288,58 +302,89 @@ DELIMITER |
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `send_message`(in id1 int, in id2 int,in sub VARCHAR(50),in message VARCHAR(500))
 BEGIN
-insert into message(subject,message_body,is_buddy_request,USER_user_id,USER_user_id1)
+insert into message (subject,message_body,is_buddy_request,USER_user_id,USER_user_id1)
 Values(sub,message,0,id1,id2);
   
 END |
 
 DELIMITER |
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `send_reply_message`(in id1 int, in id2 int,in subject VARCHAR(50),in message VARCHAR(500), in reply_msg int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `send_reply_message`(in id1 int, in id2 int,in sub VARCHAR(50),in message VARCHAR(500), in reply_msg int)
 BEGIN
 insert into message(subject,message_body,is_buddy_request,USER_user_id,USER_user_id1,reply_msg_id)
-Values(subject,message,0,id1,id2,reply_msg);
+Values(sub,message,0,id1,id2,reply_msg);
   
 END |
 
 DELIMITER |
-CREATE DEFINER=`root`@`localhost` PROCEDURE `send_carveattend_request`(in id1 int, in id2 int, in carveid int, in subject VARCHAR(50),in message VARCHAR(500))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `send_carveattend_request`(in id1 int, in id2 int, in carveid int, in sub VARCHAR(50),in message VARCHAR(500))
 BEGIN
 insert into message(subject,message_body,is_carveattend_request, carve_carve_id, USER_user_id,USER_user_id1)
-Values(subject,message,1,carveid, id1,id2);
+Values(sub,message,1,carveid, id1,id2);
   
 END |
 
 DELIMITER |
-CREATE DEFINER=`root`@`localhost` PROCEDURE `send_carveinvite_request`(in id1 int, in id2 int, in carveid int, in subject VARCHAR(50),in message VARCHAR(500))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `send_carveattend_accept`(in id1 int, in id2 int, in carveid int, in sub VARCHAR(50),in message VARCHAR(500),in replyid int)
+BEGIN
+insert into message(subject,message_body,is_carveattend_request, carve_carve_id, USER_user_id,USER_user_id1,reply_msg_id)
+Values(sub,message,1,carveid, id1,id2,replyid);
+END |
+
+DELIMITER |
+CREATE DEFINER=`root`@`localhost` PROCEDURE `send_carveattend_decline`(in id1 int, in id2 int, in carveid int, in sub VARCHAR(50),in message VARCHAR(500),in replyid int)
+BEGIN
+insert into message(subject,message_body,is_carveattend_request, carve_carve_id, USER_user_id,USER_user_id1,reply_msg_id)
+Values(sub,message,1,carveid, id1,id2,replyid);
+  
+END |
+
+DELIMITER |
+CREATE DEFINER=`root`@`localhost` PROCEDURE `send_carveinvite_request`(in id1 int, in id2 int, in carveid int, in sub VARCHAR(50),in message VARCHAR(500))
 BEGIN
 insert into message(subject,message_body,is_carveinvite_request, carve_carve_id, USER_user_id,USER_user_id1)
-Values(subject,message,1,carveid, id1,id2);
+Values(sub,message,1,carveid, id1,id2);
+  
+END |
+
+DELIMITER |
+CREATE DEFINER=`root`@`localhost` PROCEDURE `send_carveinvite_accept`(in id1 int, in id2 int, in carveid int, in sub VARCHAR(50),in message VARCHAR(500),in replyid int)
+BEGIN
+insert into message(subject,message_body,is_carveinvite_request, carve_carve_id, USER_user_id,USER_user_id1,reply_msg_id)
+Values(sub,message,1,carveid, id1,id2,replyid);
+  
+END |
+
+DELIMITER |
+CREATE DEFINER=`root`@`localhost` PROCEDURE `send_carveinvite_decline`(in id1 int, in id2 int, in carveid int, in sub VARCHAR(50),in message VARCHAR(500),in replyid int)
+BEGIN
+insert into message(subject,message_body,is_carveinvite_request, carve_carve_id, USER_user_id,USER_user_id1,reply_msg_id)
+Values(sub,message,1,carveid, id1,id2,replyid);
   
 END |
 
 DELIMITER |
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `send_buddy_request`(in id1 int, in id2 int,in subject VARCHAR(50),in message VARCHAR(500))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `send_buddy_request`(in id1 int, in id2 int,in sub VARCHAR(50),in message VARCHAR(500))
 BEGIN
 insert into message(subject,message_body,is_buddy_request,USER_user_id,USER_user_id1)
-Values(subject,message,1,id1,id2);
+Values(sub,message,1,id1,id2);
   
 END |
 
 DELIMITER |
-CREATE DEFINER=`root`@`localhost` PROCEDURE `accept_buddy_request`(in id1 int, in id2 int,in subject VARCHAR(50),in message VARCHAR(500), in reply_id int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `accept_buddy_request`(in id1 int, in id2 int,in sub VARCHAR(50),in message VARCHAR(500), in reply_id int)
 BEGIN
-insert into follow_user(subject,message_body,is_buddy_request,USER_user_id,USER_user_id1,reply_msg_id)
-Values(subject,message,1,id1,id2, reply_id);
-call add_buddy(id1,id2);  
+insert into message(subject, message_body,is_buddy_request,USER_user_id,USER_user_id1,reply_msg_id)
+Values(sub,message,1,id1,id2, reply_id);
+ 
 END |
 
 DELIMITER |
-CREATE DEFINER=`root`@`localhost` PROCEDURE `decline_buddy_request`(in id1 int, in id2 int,in subject VARCHAR(50),in message VARCHAR(500), in reply_id int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `decline_buddy_request`(in id1 int, in id2 int,in sub VARCHAR(50),in message VARCHAR(500), in reply_id int)
 BEGIN
-insert into follow_user(subject,message_body,is_buddy_request,USER_user_id,USER_user_id1,reply_msg_id)
-Values(subject,message,1,id1,id2, reply_id);
+insert into message(subject,message_body,is_buddy_request,USER_user_id,USER_user_id1,reply_msg_id)
+Values(sub,message,1,id1,id2, reply_id);
 
 END |
 
@@ -437,11 +482,8 @@ END |
 DELIMITER |
 CREATE DEFINER=`root`@`localhost` PROCEDURE `username_check`(in us varchar(40))
 BEGIN
-if EXISTS( select * from user where username = us) then
-		select 1;
-else
-	select 0;
-    end if;
+select * from user where username = us;
+
   
 END |
 

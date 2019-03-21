@@ -122,6 +122,11 @@ call follow_venue(3,7);
 call send_message(1,2, "Subject goes here", "Message body goes here blah blah");
 call send_message(1,3, "Subject goes here", "Message body goes here blah blah");
 call send_message(2,3, "Subject goes here", "Message body goes here blah blah");
+call send_message(2,1, "Subject goes here", "Message body goes here blah blah");
+
+call send_reply_message(2,1, "RE subject goes here", "i am getting back to you blah",1);
+call send_reply_message(3,1, "RE subject goes here", "i am getting back to you blah",2);
+
 
 call send_buddy_request(2,17, "Subject goes here", "be my buddy plz");
 call send_buddy_request(1,21, "Subject goes here", "be my buddy plz");
@@ -138,8 +143,13 @@ call new_opencarve_venue_date("2019-03-19", 10, 0, 1, 0, 0, 6, 3, "carve of snow
 call send_carveattend_request(1,2,1,"can i carve with you","plz");
 call send_carveattend_request(1,2,3,"can i carve with you","plz");
 
+call send_carveattend_accept(2,1,1,"yes","you may carve with me",10);
+call send_carveattend_decline(2,1,1,"no","f u brah",11);
 
+call send_carveinvite_request(1,2,1,"come carve with me","plz");
+call send_carveinvite_request(1,2,3,"come carve with me","plz");
 
-
+call send_carveinvite_accept(2,1,1,"yes","lets do it",10);
+call send_carveinvite_decline(2,1,1,"no","f u brah",11);
 
 

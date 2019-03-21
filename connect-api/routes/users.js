@@ -1,11 +1,31 @@
 var express = require('express');
 var router = express.Router({mergeParams: true});
 const con = require('../db');
+const messages = require('./messages').router;
+
 
 // Grabs all users from db
 router.get('/', (req,res) => {
 	// Find all users from database
 	user_list = "CALL get_users()";
+
+    /*
+      if(req.query.username)
+      {
+          username = req.username;
+
+          get_user_username  = "call get_user_username(?)";
+          con.query(get_user_username, [username],(err, results, fields) => {
+              if (err) throw err;
+              res.status(200).json({
+                  users: results
+              })
+          })
+      }
+    */
+
+	console.log(req.query);
+
 	con.query(user_list, (err, results, fields) => {
 		if (err) throw err;
 		res.status(200).json({
@@ -23,22 +43,7 @@ router.get('/login', (req,res) => {
 //for whatever stupid reason it updates the user id to the one before it instead of current...
     //logging in twice does it because the second time gets the correct instance.
 
-    con.query( " CALL login(?,?,@userid); ",[username,password] ,(err, results, fields) => {
-        if (err) throw err;
-        userid = fields;
-        if( userid > 0) {
-            res.status(200).json({
 
-            })
-        }
-
-        else {
-            res.status(200).json({
-
-            })
-        }
-
-    });
     con.query( " CALL login(?,?,@userid); ",[username,password] ,(err, results, fields) => {
         if (err) throw err;
         userid = fields;
@@ -65,26 +70,29 @@ router.get('/login', (req,res) => {
 
 // Creates a new user
 router.post('/', (req,res) => {
-	const {username, email,password,first,last,athlete,photo,snowboard,skateboard,surf,mountainbike,ski,fan} = req.body;
+	const {person, email,password,first,last,athlete,photo,snowboard,skateboard,surf,mountainbike,ski,fan} = req.body;
 
 
-	let sqlQuery = "username_check(?)";
-	con.query(sqlQuery, [username], function(err, results){
+	let sqlQuery = "call username_check(?)";
+	con.query(sqlQuery, [person],  function(err, results){
 		// There was an issue with the query
 		if(err){
 			throw err;
 
 		}
 
-		if(results.length){
+        data = JSON.parse(JSON.stringify(results))[0];
+
+
+		if(data.length > 0){
 
 			// Execute the query to insert into the database
-			con.query(sqlQuery, ( result) => {
+
 
 				res.status(409).json({
 					msg: 'cannot add, duplicate username'
 				})
-			})
+
 
 
 
@@ -92,9 +100,9 @@ router.post('/', (req,res) => {
 			// The username wasn't found in the database
 			// Create insert query for new user
 			// Added a comment
-			new_user = "CALL new_user(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			new_user = "CALL new_user_signup(?,?,?,?,?,?,?,?,?,?,?,?,?,@userid)";
 			// Execute the query to insert into the database
-			con.query(new_user,[username,email,password,first,last,athlete,photo,snowboard,skateboard,surf,mountainbike,ski,fan], (err, result) => {
+			con.query(new_user,[person,email,password,first,last,athlete,photo,snowboard,skateboard,surf,mountainbike,ski,fan], (err, result) => {
 				if (err) throw err;
 				res.status(201).json({
 					msg: '1 record inserted into the user table'
@@ -121,7 +129,7 @@ router.get('/:userId', (req,res) => {
 	})
 });
 
-
+/*
 // Grab specific user by their id
 router.get('/?username=usern', (req,res) => {
 
@@ -152,7 +160,7 @@ router.get('/?firstname=firstname', (req,res) => {
 // Grab specific user by their id
 router.get('/?lastname=lastname', (req,res) => {
     lastname = req.params.lastname;
-    get_user_firstname  = "call get_user_first(?)";
+    get_user_firstname  = "call get_user_last(?)";
     con.query(get_user_firstname, [lastname],(err, results, fields) => {
         if (err) throw err;
         res.status(200).json({
@@ -165,8 +173,12 @@ router.get('/?lastname=lastname', (req,res) => {
 router.get('/?first=firstname&last=lastname', (req,res) => {
     firstname = req.params.firstname;
     lastname = req.params.lastname;
+    console.log("request query: ", req.query);
     get_user_full  = "call get_user_full(?,?)";
     con.query(get_user_full, [firstname,lastname],(err, results, fields) => {
+
+        console.log(results);
+
         if (err) throw err;
         res.status(200).json({
             users: results
@@ -209,5 +221,7 @@ router.get('/?type=fans', (req,res) => {
         })
     })
 });
+
+*/
 
 module.exports = router;
