@@ -45,20 +45,6 @@ router.get('/venues', (req,res) => {
 	})
 });
 
-router.post('/', (req,res) => {
-	// Find all users from database
-	const senderId = req.params.userId;
-
-	const {recipeientId,subject,message} =req.body;
-	user_send = "CALL send_message(?,?,?,?)";
-	con.query(user_send, [senderId,recipeientId,subject,message],(err, results, fields) => {
-		if (err) throw err;
-		res.status(200).json({
-			messages: results
-		})
-	})
-});
-
 router.post('/venue/:venueId', (req,res) => {
 	// Find all users from database
 	const userId = req.params.userId;
