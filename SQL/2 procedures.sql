@@ -72,12 +72,13 @@ DROP PROCEDURE IF EXISTS send_carveattend_decline;
 DROP PROCEDURE IF EXISTS send_carveinvite_accept;
 DROP PROCEDURE IF EXISTS send_carveinvite_decline;
 DROP PROCEDURE IF EXISTS get_user_created_upcoming_carves;
-DROP PROCEDURE IF EXISTS sget_user_created_past_carves;
+DROP PROCEDURE IF EXISTS get_user_created_past_carves;
+DROP PROCEDURE IF EXISTS get_user_created_carves;
 DROP PROCEDURE IF EXISTS get_user_attending_carves;
 DROP PROCEDURE IF EXISTS get_user_attended_carves;
 DROP PROCEDURE IF EXISTS get_all_carves;
 DROP PROCEDURE IF EXISTS get_venue_carves;
-
+DROP PROCEDURE IF EXISTS get_user_all_attend_carves;
 
 DELIMITER |
 CREATE DEFINER=`root`@`localhost` PROCEDURE `new_empty_user`()
@@ -236,6 +237,13 @@ DELIMITER |
 CREATE DEFINER=`root`@`localhost` PROCEDURE `get_venue_carves`(in id int)
 BEGIN
  select * from carve where venue_venue_id = id;
+
+END |
+
+DELIMITER |
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_user_all_attend_carves`(in id int)
+BEGIN
+ select * from carve where User_user_id1 = id;
 
 END |
 
