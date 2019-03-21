@@ -71,6 +71,14 @@ DROP PROCEDURE IF EXISTS send_carveattend_accept;
 DROP PROCEDURE IF EXISTS send_carveattend_decline;
 DROP PROCEDURE IF EXISTS send_carveinvite_accept;
 DROP PROCEDURE IF EXISTS send_carveinvite_decline;
+DROP PROCEDURE IF EXISTS get_user_created_upcoming_carves;
+DROP PROCEDURE IF EXISTS get_user_created_past_carves;
+DROP PROCEDURE IF EXISTS get_user_created_carves;
+DROP PROCEDURE IF EXISTS get_user_attending_carves;
+DROP PROCEDURE IF EXISTS get_user_attended_carves;
+DROP PROCEDURE IF EXISTS get_all_carves;
+DROP PROCEDURE IF EXISTS get_venue_carves;
+DROP PROCEDURE IF EXISTS get_user_all_attend_carves;
 
 DELIMITER |
 CREATE DEFINER=`root`@`localhost` PROCEDURE `new_empty_user`()
@@ -103,8 +111,8 @@ END |
 DELIMITER |
 CREATE DEFINER=`root`@`localhost` PROCEDURE `new_empty_carve`()
 BEGIN
-  insert into carve(carve_id,venue_venue_id)
-  Values(0,0);
+  insert into carve()
+  Values();
 END |
 
 
@@ -175,36 +183,38 @@ END |
 DELIMITER |
 CREATE DEFINER=`root`@`localhost` PROCEDURE `new_opencarve_venue_date`(in date date, IN snow TINYINT, IN ski TINYINT, IN ska TINYINT, IN su TINYINT, IN mb TINYINT, in athlete_slot int, in photo_slot int, in description varchar(200), in creator int, in venue int)
 BEGIN
-  insert into carve(date, snowboard,skateboard,open, athlete_slot,photographer_slot,upcoming,surf,ski,mountain_bike,description, User_user_id,venue_venue_id,User_user_id1,comment_comment_id,embedd_embedd_id)
-  Values(date,snow,ska,1,athlete_slot,photo_slot,1,su,ski,mb,description, creator, venue,0,0,0);
+  insert into carve(date, snowboard,skateboard,open, athlete_slot,photographer_slot,surf,ski,mountain_bike,description, User_user_id,venue_venue_id)
+  Values(date,snow,ska,1,athlete_slot,photo_slot,su,ski,mb,description, creator, venue);
 END |
 
 DELIMITER |
 CREATE DEFINER=`root`@`localhost` PROCEDURE `new_opencarve_venue_nodate`( IN snow TINYINT, IN ski TINYINT, IN ska TINYINT, IN su TINYINT, IN mb TINYINT, in athlete_slot int, in photo_slot int, in description varchar(200), in creator int, in venue int)
 BEGIN
-  insert into carve( snowboard,skateboard,open, athlete_slot,photographer_slot,upcoming,surf,ski,mountain_bike,description, User_user_id,venue_venue_id,User_user_id1,comment_comment_id,embedd_embedd_id)
-  Values(snow,ska,1,athlete_slot,photo_slot,1,su,ski,mb,description, creator, venue,0,0,0);
+  insert into carve( snowboard,skateboard,open, athlete_slot,photographer_slot,surf,ski,mountain_bike,description, User_user_id,venue_venue_id)
+  Values(snow,ska,1,athlete_slot,photo_slot,su,ski,mb,description, creator, venue);
 END |
 
 DELIMITER |
 CREATE DEFINER=`root`@`localhost` PROCEDURE `new_opencarve_novenue_date`(in date date, IN snow TINYINT, IN ski TINYINT, IN ska TINYINT, IN su TINYINT, IN mb TINYINT, in athlete_slot int, in photo_slot int, in description varchar(200), in creator int)
 BEGIN
-  insert into carve(date, snowboard,skateboard,open, athlete_slot,photographer_slot,upcoming,surf,ski,mountain_bike,description, User_user_id,venue_venue_id,User_user_id1,comment_comment_id,embedd_embedd_id)
-  Values(date,snow,ska,1,athlete_slot,photo_slot,1,su,ski,mb,description, creator,0, 0,0,0);
+  insert into carve(date, snowboard,skateboard,open, athlete_slot,photographer_slot,surf,ski,mountain_bike,description, User_user_id)
+  Values(date,snow,ska,1,athlete_slot,photo_slot,su,ski,mb,description, creator);
 END |
 
 DELIMITER |
 CREATE DEFINER=`root`@`localhost` PROCEDURE `new_opencarve_novenue_nodate`( IN snow TINYINT, IN ski TINYINT, IN ska TINYINT, IN su TINYINT, IN mb TINYINT, in athlete_slot int, in photo_slot int, in description varchar(200), in creator int)
 BEGIN
-  insert into carve(snowboard,skateboard,open, athlete_slot,photographer_slot,upcoming,surf,ski,mountain_bike,description, User_user_id,venue_venue_id,User_user_id1,comment_comment_id,embedd_embedd_id)
-  Values(snow,ska,1,athlete_slot,photo_slot,1,su,ski,mb,description, creator,0,0,0,0);
+  insert into carve(snowboard,skateboard,open, athlete_slot,photographer_slot,surf,ski,mountain_bike,description, User_user_id)
+  Values(snow,ska,1,athlete_slot,photo_slot,su,ski,mb,description, creator);
 END |
 
 DELIMITER |
 CREATE DEFINER=`root`@`localhost` PROCEDURE `new_buddy_carve`(in date date, IN snow TINYINT, IN ski TINYINT, IN ska TINYINT, IN su TINYINT, IN mb TINYINT, in athlete_slot int, in photo_slot int, in description varchar(200), in creator int, in venue int)
 BEGIN
-  insert into carve(date, snowboard,skateboard,open, athlete_slot,photographer_slot,upcoming,surf,ski,mountain_bike,description, is_buddy_carve,User_user_id,venue_venue_id,User_user_id1,comment_comment_id,embedd_embedd_id)
-  Values(date,snow,ska,1,athlete_slot,photo_slot,0,su,ski,mb,description,1, creator, venue,0,0,0);
+  insert into carve(date, snowboard,skateboard,open, athlete_slot,photographer_slot,surf,ski,mountain_bike,description, is_buddy_carve,User_user_id,venue_venue_id)
+  Values(date,snow,ska,0,athlete_slot,photo_slot,su,ski,mb,description,1, creator, venue);
+ 
+  
 END |
 
 
@@ -217,10 +227,58 @@ BEGIN
 END |
 
 DELIMITER |
-CREATE DEFINER=`root`@`localhost` PROCEDURE `get_user_carves`(in id int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_all_carves`(in id int)
+BEGIN
+ select * from carve where User_user_id1 = id or User_user_id =  id;
+
+END |
+
+DELIMITER |
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_venue_carves`(in id int)
+BEGIN
+ select * from carve where venue_venue_id = id;
+
+END |
+
+DELIMITER |
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_user_all_attend_carves`(in id int)
+BEGIN
+ select * from carve where User_user_id1 = id;
+
+END |
+
+DELIMITER |
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_user_attended_carves`(in id int)
+BEGIN
+ select * from carve where User_user_id1 = id and past = 1;
+
+END |
+
+DELIMITER |
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_user_attending_carves`(in id int)
+BEGIN
+ select * from carve where User_user_id1 = id and upcoming = 1;
+
+END |
+
+DELIMITER |
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_user_created_carves`(in id int)
 BEGIN
 select * from carve where User_user_id = id;
-select * from carve where User_user_id1 = id;
+  
+END |
+
+DELIMITER |
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_user_created_past_carves`(in id int)
+BEGIN
+select * from carve where User_user_id = id and past = 1;
+  
+END |
+
+DELIMITER |
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_user_created_upcoming_carves`(in id int)
+BEGIN
+select * from carve where User_user_id = id and upcoming = 1;
   
 END |
 
@@ -614,4 +672,9 @@ select * from venue where mountain_bike = 1;
   
 END |
 
-
+DELIMITER |
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_listings`()
+BEGIN
+select * from carve where open = 1;
+  
+END |
