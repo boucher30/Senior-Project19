@@ -157,17 +157,69 @@ CREATE TABLE IF NOT EXISTS `CCv3`.`carve` (
   `dislikes` INT NULL default 0,
   `is_buddy_carve` INT NULL default 0,
   `USER_user_id` INT NOT NULL default 1,
-  `venue_venue_id` INT NOT NULL default 1,
-  `USER_user_id1` INT NOT NULL default 2,
-  `Comment_comment_id` INT NOT NULL default 1,
-  `embedd_embedd_id` INT NOT NULL default 1,
-  PRIMARY KEY (`carve_id`, `USER_user_id`, `venue_venue_id`, `USER_user_id1`, `Comment_comment_id`, `embedd_embedd_id`),
+  `venue_venue_id` INT NULL,
+  `USER_user_id1` INT NULL,
+  `USER_user_id2` INT NULL,
+  `USER_user_id3` INT NULL,
+  `USER_user_id4` INT NULL,
+  `USER_user_id5` INT NULL,
+  `USER_user_id6` INT NULL,
+  `USER_user_id7` INT NULL,
+  `USER_user_id8` INT NULL,
+  `USER_user_id9` INT NULL,
+  `Comment_comment_id` INT NULL,
+  `Comment_comment_id1` INT NULL,
+  `Comment_comment_id2` INT NULL,
+  `Comment_comment_id3` INT NULL,
+  `Comment_comment_id4` INT NULL,
+  `Comment_comment_id5` INT NULL,
+  `Comment_comment_id6` INT NULL,
+  `Comment_comment_id7` INT NULL,
+  `Comment_comment_id8` INT NULL,
+  `Comment_comment_id9` INT NULL,
+  `embedd_embedd_id` INT NULL,
+  `embedd_embedd_id1` INT NULL,
+  `embedd_embedd_id2` INT NULL,
+   `embedd_embedd_id3` INT NULL,
+   `embedd_embedd_id4` INT NULL,
+   `embedd_embedd_id5` INT NULL,
+   `embedd_embedd_id6` INT NULL,
+   `embedd_embedd_id7` INT NULL,
+   `embedd_embedd_id8` INT NULL,
+   `embedd_embedd_id9` INT NULL ,
+  PRIMARY KEY (`carve_id`,`user_user_id`),
   UNIQUE INDEX `carve_id_UNIQUE` (`carve_id` ASC) VISIBLE,
   INDEX `fk_carve_USER1_idx` (`USER_user_id` ASC) VISIBLE,
   INDEX `fk_carve_venue1_idx` (`venue_venue_id` ASC) VISIBLE,
   INDEX `fk_carve_USER2_idx` (`USER_user_id1` ASC) VISIBLE,
+  INDEX `fk_carve_USER3_idx` (`USER_user_id2` ASC) VISIBLE,
+  INDEX `fk_carve_USER4_idx` (`USER_user_id3` ASC) VISIBLE,
+  INDEX `fk_carve_USER5_idx` (`USER_user_id4` ASC) VISIBLE,
+  INDEX `fk_carve_USER6_idx` (`USER_user_id5` ASC) VISIBLE,
+  INDEX `fk_carve_USER7_idx` (`USER_user_id6` ASC) VISIBLE,
+  INDEX `fk_carve_USER8_idx` (`USER_user_id7` ASC) VISIBLE,
+  INDEX `fk_carve_USER9_idx` (`USER_user_id8` ASC) VISIBLE,
+  INDEX `fk_carve_USER10_idx` (`USER_user_id9` ASC) VISIBLE,
   INDEX `fk_carve_Comment1_idx` (`Comment_comment_id` ASC) VISIBLE,
+  INDEX `fk_carve_Comment2_idx` (`Comment_comment_id1` ASC) VISIBLE,
+  INDEX `fk_carve_Comment3_idx` (`Comment_comment_id2` ASC) VISIBLE,
+  INDEX `fk_carve_Comment4_idx` (`Comment_comment_id3` ASC) VISIBLE,
+  INDEX `fk_carve_Comment5_idx` (`Comment_comment_id4` ASC) VISIBLE,
+  INDEX `fk_carve_Comment6_idx` (`Comment_comment_id5` ASC) VISIBLE,
+  INDEX `fk_carve_Comment7_idx` (`Comment_comment_id6` ASC) VISIBLE,
+  INDEX `fk_carve_Comment8_idx` (`Comment_comment_id7` ASC) VISIBLE,
+  INDEX `fk_carve_Comment9_idx` (`Comment_comment_id8` ASC) VISIBLE,
+  INDEX `fk_carve_Comment10_idx` (`Comment_comment_id9` ASC) VISIBLE,
   INDEX `fk_carve_embedd1_idx` (`embedd_embedd_id` ASC) VISIBLE,
+  INDEX `fk_carve_embedd2_idx` (`embedd_embedd_id1` ASC) VISIBLE,
+  INDEX `fk_carve_embedd3_idx` (`embedd_embedd_id2` ASC) VISIBLE,
+  INDEX `fk_carve_embedd4_idx` (`embedd_embedd_id3` ASC) VISIBLE,
+  INDEX `fk_carve_embedd5_idx` (`embedd_embedd_id4` ASC) VISIBLE,
+  INDEX `fk_carve_embedd6_idx` (`embedd_embedd_id5` ASC) VISIBLE,
+  INDEX `fk_carve_embedd7_idx` (`embedd_embedd_id6` ASC) VISIBLE,
+  INDEX `fk_carve_embedd8_idx` (`embedd_embedd_id7` ASC) VISIBLE,
+  INDEX `fk_carve_embedd9_idx` (`embedd_embedd_id8` ASC) VISIBLE,
+  INDEX `fk_carve_embedd10_idx` (`embedd_embedd_id9` ASC) VISIBLE,
   CONSTRAINT `fk_carve_USER1`
     FOREIGN KEY (`USER_user_id`)
     REFERENCES `CCv3`.`USER` (`user_id`)
@@ -183,8 +235,93 @@ CREATE TABLE IF NOT EXISTS `CCv3`.`carve` (
     REFERENCES `CCv3`.`USER` (`user_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
+      CONSTRAINT `fk_carve_USER3`
+    FOREIGN KEY (`USER_user_id2`)
+    REFERENCES `CCv3`.`USER` (`user_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+      CONSTRAINT `fk_carve_USER4`
+    FOREIGN KEY (`USER_user_id3`)
+    REFERENCES `CCv3`.`USER` (`user_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+      CONSTRAINT `fk_carve_USER5`
+    FOREIGN KEY (`USER_user_id4`)
+    REFERENCES `CCv3`.`USER` (`user_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+      CONSTRAINT `fk_carve_USER6`
+    FOREIGN KEY (`USER_user_id5`)
+    REFERENCES `CCv3`.`USER` (`user_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+      CONSTRAINT `fk_carve_USER7`
+    FOREIGN KEY (`USER_user_id6`)
+    REFERENCES `CCv3`.`USER` (`user_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+      CONSTRAINT `fk_carve_USER8`
+    FOREIGN KEY (`USER_user_id7`)
+    REFERENCES `CCv3`.`USER` (`user_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+      CONSTRAINT `fk_carve_USER9`
+    FOREIGN KEY (`USER_user_id8`)
+    REFERENCES `CCv3`.`USER` (`user_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+      CONSTRAINT `fk_carve_USER10`
+    FOREIGN KEY (`USER_user_id9`)
+    REFERENCES `CCv3`.`USER` (`user_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
   CONSTRAINT `fk_carve_Comment1`
     FOREIGN KEY (`Comment_comment_id`)
+    REFERENCES `CCv3`.`Comment` (`comment_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+      CONSTRAINT `fk_carve_Comment2`
+    FOREIGN KEY (`Comment_comment_id1`)
+    REFERENCES `CCv3`.`Comment` (`comment_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+      CONSTRAINT `fk_carve_Comment3`
+    FOREIGN KEY (`Comment_comment_id2`)
+    REFERENCES `CCv3`.`Comment` (`comment_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+      CONSTRAINT `fk_carve_Comment4`
+    FOREIGN KEY (`Comment_comment_id3`)
+    REFERENCES `CCv3`.`Comment` (`comment_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+      CONSTRAINT `fk_carve_Comment5`
+    FOREIGN KEY (`Comment_comment_id4`)
+    REFERENCES `CCv3`.`Comment` (`comment_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+      CONSTRAINT `fk_carve_Comment6`
+    FOREIGN KEY (`Comment_comment_id5`)
+    REFERENCES `CCv3`.`Comment` (`comment_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+      CONSTRAINT `fk_carve_Comment7`
+    FOREIGN KEY (`Comment_comment_id6`)
+    REFERENCES `CCv3`.`Comment` (`comment_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+      CONSTRAINT `fk_carve_Comment8`
+    FOREIGN KEY (`Comment_comment_id7`)
+    REFERENCES `CCv3`.`Comment` (`comment_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+      CONSTRAINT `fk_carve_Comment9`
+    FOREIGN KEY (`Comment_comment_id8`)
+    REFERENCES `CCv3`.`Comment` (`comment_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+CONSTRAINT `fk_carve_Comment10`
+    FOREIGN KEY (`Comment_comment_id9`)
     REFERENCES `CCv3`.`Comment` (`comment_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
@@ -192,7 +329,55 @@ CREATE TABLE IF NOT EXISTS `CCv3`.`carve` (
     FOREIGN KEY (`embedd_embedd_id`)
     REFERENCES `CCv3`.`embedd` (`embedd_id`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON UPDATE NO ACTION,
+      CONSTRAINT `fk_carve_embedd2`
+    FOREIGN KEY (`embedd_embedd_id1`)
+    REFERENCES `CCv3`.`embedd` (`embedd_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+      CONSTRAINT `fk_carve_embedd3`
+    FOREIGN KEY (`embedd_embedd_id2`)
+    REFERENCES `CCv3`.`embedd` (`embedd_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+      CONSTRAINT `fk_carve_embedd4`
+    FOREIGN KEY (`embedd_embedd_id3`)
+    REFERENCES `CCv3`.`embedd` (`embedd_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+      CONSTRAINT `fk_carve_embedd5`
+    FOREIGN KEY (`embedd_embedd_id4`)
+    REFERENCES `CCv3`.`embedd` (`embedd_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+      CONSTRAINT `fk_carve_embedd6`
+    FOREIGN KEY (`embedd_embedd_id5`)
+    REFERENCES `CCv3`.`embedd` (`embedd_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+      CONSTRAINT `fk_carve_embedd7`
+    FOREIGN KEY (`embedd_embedd_id6`)
+    REFERENCES `CCv3`.`embedd` (`embedd_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+      CONSTRAINT `fk_carve_embedd8`
+    FOREIGN KEY (`embedd_embedd_id7`)
+    REFERENCES `CCv3`.`embedd` (`embedd_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+      CONSTRAINT `fk_carve_embedd9`
+    FOREIGN KEY (`embedd_embedd_id8`)
+    REFERENCES `CCv3`.`embedd` (`embedd_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+      CONSTRAINT `fk_carve_embedd10`
+    FOREIGN KEY (`embedd_embedd_id9`)
+    REFERENCES `CCv3`.`embedd` (`embedd_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+       
+    )
+    
 ENGINE = InnoDB;
 
 

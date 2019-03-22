@@ -35,6 +35,7 @@ router.get('/', (req,res) => {
 });
 
 
+
 router.get('/login', (req,res) => {
     // login
     // supposed to return userid token not working atm, neither is verification message
@@ -105,7 +106,8 @@ router.post('/', (req,res) => {
 			con.query(new_user,[person,email,password,first,last,athlete,photo,snowboard,skateboard,surf,mountainbike,ski,fan], (err, result) => {
 				if (err) throw err;
 				res.status(201).json({
-					msg: '1 record inserted into the user table'
+					msg: '1 record inserted into the user table',
+					users:results
 				})
 			})
 
