@@ -85,6 +85,7 @@ DROP PROCEDURE IF EXISTS complete_carve;
 DROP PROCEDURE IF EXISTS update_user;
 DROP PROCEDURE IF EXISTS attend_carve;
 DROP PROCEDURE IF EXISTS attend_carve_check;
+DROP PROCEDURE IF EXISTS new_open_carve;
 
 DELIMITER |
 CREATE DEFINER=`root`@`localhost` PROCEDURE `new_empty_user`()
@@ -241,6 +242,21 @@ insert into carve(snowboard,skateboard,open, athlete_slot, athlete_attend, photo
 END |
 
 DELIMITER |
+CREATE DEFINER=`root`@`localhost` PROCEDURE `new_open_carve`(in creator int, IN snow TINYINT, IN ski TINYINT, IN ska TINYINT, IN su TINYINT, IN mb TINYINT, in athlete_slot int, in photo_slot int, in description varchar(200),  in isPhoto tinyint, in date date, in venue int)
+BEGIN
+if (isPhoto = 1) then
+  insert into carve(date, snowboard,skateboard,open, athlete_slot,photographer_attend,photographer_slot,surf,ski,mountain_bike,description, is_buddy_carve,User_user_id,venue_venue_id)
+  Values(date,snow,ska,1,athlete_slot,1,photo_slot,su,ski,mb,description,1, creator, venue);
+  
+  else
+    insert into carve(date, snowboard,skateboard,open, athlete_slot,athlete_attend,photographer_slot,surf,ski,mountain_bike,description, is_buddy_carve,User_user_id,venue_venue_id)
+  Values(date,snow,ska,1,athlete_slot,1,photo_slot,su,ski,mb,description,1, creator, venue);
+  end if;
+ 
+  
+END |
+
+DELIMITER |
 CREATE DEFINER=`root`@`localhost` PROCEDURE `new_buddy_carve`(in date date, IN snow TINYINT, IN ski TINYINT, IN ska TINYINT, IN su TINYINT, IN mb TINYINT, in athlete_slot int, in photo_slot int, in description varchar(200), in creator int, in venue int, in isPhoto tinyint)
 BEGIN
 if (isPhoto = 1) then
@@ -250,6 +266,21 @@ if (isPhoto = 1) then
   else
     insert into carve(date, snowboard,skateboard,open, athlete_slot,athlete_attend,photographer_slot,surf,ski,mountain_bike,description, is_buddy_carve,User_user_id,venue_venue_id)
   Values(date,snow,ska,0,athlete_slot,1,photo_slot,su,ski,mb,description,1, creator, venue);
+  end if;
+ 
+  
+END |
+
+DELIMITER |
+CREATE DEFINER=`root`@`localhost` PROCEDURE `new_carve`(in creator int, in isBuddy tinyint, IN snow TINYINT, IN ski TINYINT, IN ska TINYINT, IN su TINYINT, IN mb TINYINT, in athlete_slot int, in photo_slot int, in description varchar(200),  in isPhoto tinyint, in date date, in venue int)
+BEGIN
+if (isPhoto = 1) then
+  insert into carve(date, snowboard,skateboard,open, athlete_slot,photographer_attend,photographer_slot,surf,ski,mountain_bike,description, is_buddy_carve,User_user_id,venue_venue_id)
+  Values(date,snow,ska,0,athlete_slot,1,photo_slot,su,ski,mb,description,isBuddy, creator, venue);
+  
+  else
+    insert into carve(date, snowboard,skateboard,open, athlete_slot,athlete_attend,photographer_slot,surf,ski,mountain_bike,description, is_buddy_carve,User_user_id,venue_venue_id)
+  Values(date,snow,ska,0,athlete_slot,1,photo_slot,su,ski,mb,description,isBuddy, creator, venue);
   end if;
  
   
@@ -266,6 +297,7 @@ END |
 DELIMITER |
 CREATE DEFINER=`root`@`localhost` PROCEDURE `attend_carve`(in carveId int, in photo tinyint, in userId int)
 BEGIN
+
   if(photo = 1) then
 		update carve set photographer_attend = photographer_attend+1 , user_user_id1 = userId where carve_id = carveId;
 

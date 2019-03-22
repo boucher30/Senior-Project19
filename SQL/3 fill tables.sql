@@ -155,4 +155,4 @@ call send_carveinvite_request(1,2,1,"come carve with me","plz");
 call send_carveinvite_accept(2,1,1,"yes","lets do it",10);
 call send_carveinvite_decline(2,1,1,"no","f u brah",11);
 
-
+call new_open_carve(1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);

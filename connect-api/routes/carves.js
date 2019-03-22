@@ -109,21 +109,6 @@ router.get('/attendingUpcoming', (req,res) => {
     })
 });
 
-/*
-//add buddy to BD
-router.post('/buddy', (req, res) => {
-    const {ser_id1, venue_id, event_date, sport, user_id2} = req.body;
 
-
-    userId = req.params.userId;
-    get_user_carves = "CALL get_carves(?)";
-    con.query(get_user_carves,[userId], (err, results, fields) => {
-    if (err) throw err;
-        res.status(201).json({
-            msg: '1 record inserted into the carveid table'
-        })
-    })
-
-});*/
 
 module.exports = router;
