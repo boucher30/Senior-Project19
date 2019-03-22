@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import Col from "react-bootstrap/Col";
 import { Switch, Route } from 'react-router-dom';
 
-import ProfilePage from "./ProfilePage";
-import FeedPage from "./FeedPage";
-import VenuePage from "./VenuePage";
-import VenueListPage from "./VenueListPage";
+import ProfilePage from "./SubPages/Profile/ProfilePage";
+import FeedPage from "./SubPages/Feed/FeedPage";
+import VenuePage from "./SubPages/Venues/VenuePage";
+import VenueListPage from "./SubPages/Venues/VenueListPage";
 
 export default class Container extends Component {
 	constructor(props) {

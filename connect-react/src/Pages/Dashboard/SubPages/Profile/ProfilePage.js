@@ -5,7 +5,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Container from "react-bootstrap/Container";
 import Image from 'react-bootstrap/Image';
-import SnowProfilePic from '../images/snowboard-profile-pic.jpg';
+import SnowProfilePic from '../../../../images/snowboard-profile-pic.jpg';
 import EditProfileModal from "./EditProfileModal";
 
 export default class ProfilePage extends Component {

@@ -6,7 +6,7 @@ import './App.css';
 
 // Pages and components
 import TopNav from "./components/Navbar";
-import Dashboard from "./Pages/Dashboard";
+import Dashboard from "./Pages/Dashboard/Dashboard";
 import SplashPage from './Pages/SplashPage';
 import LoginPage from "./Pages/Login/LoginPage";
 import SignUpPage from "./Pages/SignUp/SignUpPage";
