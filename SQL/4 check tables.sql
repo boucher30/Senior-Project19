@@ -1,7 +1,7 @@
 call get_users;
 call get_venues;
 
-call delete_user(29);
+call delete_user(26);
 
 call get_user_athlete();
 call get_user_photographer();
@@ -59,3 +59,6 @@ call get_outgoing_carveattend_requests(1);
 call get_carves();
 call get_user_created_upcoming_carves(2);
 call get_user_created_past_carves(2);
+call update_user("shred","312@abc.com", "abc1234","Sean","Klinglesmith", 0, 1, 1,0,0,0,0,1,13);
+
+call attend_carve_check(5,0,5);
