@@ -9,111 +9,77 @@ router.get('/', (req,res) => {
 	// Find all users from database
 	user_list = "CALL get_users()";
 
-    /*
-      if(req.query.username)
-      {
-          username = req.username;
-
-          get_user_username  = "call get_user_username(?)";
-          con.query(get_user_username, [username],(err, results, fields) => {
-              if (err) throw err;
-              res.status(200).json({
-                  users: results
-              })
-          })
-      }
-    */
 
 	console.log(req.query);
 
-	con.query(user_list, (err, results, fields) => {
+	con.query(user_list, (err, results) => {
 		if (err) throw err;
-		res.status(200).json({
-			users: results
-		})
+
+		res.status(200).jsonp({msg:'users list',results}).end;
+
 	})
-});
-
-
-
-router.get('/login', (req,res) => {
-    // login
-    // supposed to return userid token not working atm, neither is verification message
-    const {username,password} = req.body;
-
-//for whatever stupid reason it updates the user id to the one before it instead of current...
-    //logging in twice does it because the second time gets the correct instance.
-
-
-    con.query( " CALL login(?,?,@userid); ",[username,password] ,(err, results, fields) => {
-        if (err) throw err;
-        userid = fields;
-        if( userid > 0) {
-            res.status(200).json({
-                users: results,
-                msg: 'login successful'
-            })
-        }
-
-        else {
-            res.status(200).json({
-                users: results,
-                msg: 'login failed'
-
-            })
-        }
-
-    })
-
-
 });
 
 
 // Creates a new user
 router.post('/', (req,res) => {
-	const {person, email,password,first,last,athlete,photo,snowboard,skateboard,surf,mountainbike,ski,fan} = req.body;
+	const {username, email, password, first_name, last_name, description, type, snow_sports, water_sports, land_sports, air_sports} = req.body;
 
-
-	let sqlQuery = "call username_check(?)";
-	con.query(sqlQuery, [person],  function(err, results){
-		// There was an issue with the query
-		if(err){
-			throw err;
-
-		}
-
-        data = JSON.parse(JSON.stringify(results))[0];
-
-
-		if(data.length > 0){
-
-			// Execute the query to insert into the database
-
-
-				res.status(409).json({
-					msg: 'cannot add, duplicate username'
-				})
-
-
-
+	console.log(" new user entered with username: " + username);
+		if(false)
+		{
 
 		}else{
 			// The username wasn't found in the database
 			// Create insert query for new user
 			// Added a comment
-			new_user = "CALL new_user_signup(?,?,?,?,?,?,?,?,?,?,?,?,?,@userid)";
+			new_user = "CALL add_user(?,?,?,?,?,?,?,?,?,?,?)";
 			// Execute the query to insert into the database
-			con.query(new_user,[person,email,password,first,last,athlete,photo,snowboard,skateboard,surf,mountainbike,ski,fan], (err, result) => {
+			con.query(new_user,[username, email, password, first_name, last_name, description, type[0], snow_sports[0], water_sports[0], land_sports[0], air_sports[0]], (err, results) => {
 				if (err) throw err;
-				res.status(201).json({
-					msg: '1 record inserted into the user table',
-					users:results
-				})
+                res.status(201).jsonp({msg:'user added',results}).end;
 			})
 
 		}
 	});
 
+// updates all users
+router.put('/', (req,res) => {
+
+    // The username wasn't found in the database
+    // Create insert query for new user
+    // Added a comment
+    new_user = "CALL update_users()";
+    // Execute the query to insert into the database
+    con.query(new_user,(err, results) => {
+        if (err) throw err;
+        res.status(201).jsonp({msg:'users updated',results}).end;
+    })
+});
+
+// updates all users
+router.patch('/', (req,res) => {
+
+    // The username wasn't found in the database
+    // Create insert query for new user
+    // Added a comment
+    new_user = "CALL update_users()";
+    // Execute the query to insert into the database
+    con.query(new_user,(err, results) => {
+        if (err) throw err;
+        res.status(201).jsonp({msg:'users updated',results}).end;
+    })
+
+
+});
+
+// deletes all users
+router.delete('/', (req,res) => {
+    delete_users = "CALL delete_users()";
+    con.query(delete_users, (err, results) => {
+        if (err) throw err;
+        res.status(201).jsonp({msg:'all users deleted',results}).end;
+    })
 
 
 });
@@ -123,107 +89,50 @@ router.get('/:userId', (req,res) => {
 	const userId = req.params.userId;
 
 	get_user  = "call get_user(?)";
-	con.query(get_user, [userId],(err, results, fields) => {
+	con.query(get_user, [userId],(err, results) => {
 		if (err) throw err;
-		res.status(200).json({
-			user: results
-		})
+        res.status(200).jsonp({msg:'user info:',results}).end;
 	})
 });
 
-/*
-// Grab specific user by their id
-router.get('/?username=usern', (req,res) => {
+// updates user
+router.put('/:userId', (req,res) => {
+    const userId = req.params.userId;
+    const {username, email, password, first_name, last_name, description, type, snow_sports, water_sports, land_sports, air_sports} = req.body;
+    console.log(" new user updated with username: " + username);
+    update_user = "CALL update_user(?,?,?,?,?,?,?,?,?,?,?,?)";
 
-    const usern = req.params.usern;
-
-    get_user_username  = "call get_user_username(?)";
-    con.query(get_user_username, [usern],(err, results, fields) => {
+    con.query(update_user,[userId,username, email, password, first_name, last_name, description, type[0], snow_sports[0], water_sports[0], land_sports[0], air_sports[0]],(err, results) => {
         if (err) throw err;
-        res.status(200).json({
-            users: results
-        })
+        res.status(201).jsonp({msg:'user updated via put',results}).end;
     })
 });
 
-// Grab specific user by their id
-router.get('/?firstname=firstname', (req,res) => {
-    firstname = req.params.firstname;
-    get_user_firstname  = "call get_user_first(?)";
-    con.query(get_user_firstname, [firstname],(err, results, fields) => {
+// updates all users
+router.patch('/:userId', (req,res) => {
+    const userId = req.params.userId;
+    const {username, email, password, first_name, last_name, description, type, snow_sports, water_sports, land_sports, air_sports} = req.body;
+    console.log(" new user updated with username: " + username);
+    update_user = "CALL update_user(?,?,?,?,?,?,?,?,?,?,?,?)";
+
+    con.query(update_user,[userId,username, email, password, first_name, last_name, description, type[0], snow_sports[0], water_sports[0], land_sports[0], air_sports[0]],(err, results) => {
         if (err) throw err;
-        res.status(200).json({
-            users: results
-        })
+        res.status(201).jsonp({msg:'user updated via patch',results}).end;
     })
 });
 
-
-// Grab specific user by their id
-router.get('/?lastname=lastname', (req,res) => {
-    lastname = req.params.lastname;
-    get_user_firstname  = "call get_user_last(?)";
-    con.query(get_user_firstname, [lastname],(err, results, fields) => {
+// deletes user
+router.delete('/:userId', (req,res) => {
+    const userId = req.params.userId;
+    console.log(" deleting user with user id: " + userId);
+    delete_users = "CALL delete_user(?)";
+    con.query(delete_users, [userId],(err, results) => {
         if (err) throw err;
-        res.status(200).json({
-            users: results
-        })
+        res.status(201).jsonp({msg:'user deleted'}).end;
     })
+
+
 });
-
-// Grab specific user by their id
-router.get('/?first=firstname&last=lastname', (req,res) => {
-    firstname = req.params.firstname;
-    lastname = req.params.lastname;
-    console.log("request query: ", req.query);
-    get_user_full  = "call get_user_full(?,?)";
-    con.query(get_user_full, [firstname,lastname],(err, results, fields) => {
-
-        console.log(results);
-
-        if (err) throw err;
-        res.status(200).json({
-            users: results
-        })
-    })
-});
-
-// Grab specific user by their id
-router.get('/?type=athletes', (req,res) => {
-
-    get_athletes  = "call get_user_athletes()";
-    con.query(get_athletes,(err, results, fields) => {
-        if (err) throw err;
-        res.status(200).json({
-            users: results
-        })
-    })
-});
-
-// Grab specific user by their id
-router.get('/?type=photographers', (req,res) => {
-
-    get_photographers  = "call get_user_photographers()";
-    con.query(get_photographers,(err, results, fields) => {
-        if (err) throw err;
-        res.status(200).json({
-            users: results
-        })
-    })
-});
-
-// Grab specific user by their id
-router.get('/?type=fans', (req,res) => {
-
-    get_fans  = "call get_user_fans()";
-    con.query(get_fans,(err, results, fields) => {
-        if (err) throw err;
-        res.status(200).json({
-            users: results
-        })
-    })
-});
-*/
 
 
 module.exports = router;
