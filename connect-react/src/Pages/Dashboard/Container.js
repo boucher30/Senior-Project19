@@ -6,6 +6,7 @@ import ProfilePage from "./SubPages/Profile/ProfilePage";
 import FeedPage from "./SubPages/Feed/FeedPage";
 import VenuePage from "./SubPages/Venues/VenuePage";
 import VenueListPage from "./SubPages/Venues/VenueListPage";
+import ListingPage from "./SubPages/ListingPage/ListingPage";
 
 export default class Container extends Component {
 	constructor(props) {
@@ -25,6 +26,7 @@ export default class Container extends Component {
 					<Route path="/dashboard/feed" component={FeedPage} />
 					<Route path="/dashboard/venues/:number" component={VenuePage} />
 					<Route path = "/dashboard/venues" component={VenueListPage} />
+					<Route path = "/dashboard/listings" component={ListingPage} />
 				</Switch>
 			</Col>
 		);

@@ -6,7 +6,8 @@ const menuItems = {
 	'My Profile': {href: `/dashboard/profile/${localStorage.getItem('userId')}`},
 	'My Feed': {href: '/dashboard/feed'},
 	'Venues': {href: '/dashboard/venues'},
-	'Explore': {href: '/dashboard/explore'}
+	'Explore': {href: '/dashboard/explore'},
+	'Listings': {href: '/dashboard/listings'}
 };
 
 const SideMenu = () => {
