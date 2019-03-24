@@ -1,76 +1,138 @@
-// Sean updated on 3/5. changed to be buddylist: results, and formatting.
-// had running on his machine. *note database running on your machine needs a buddy list table with 2 user id entries
-// users route based info
-// follow user, follow venue found here
-
-
 var express = require('express');
 var router = express.Router({mergeParams: true});
 const con = require('../db');
 
+
+
+// Grabs all follows from db
 router.get('/', (req,res) => {
+	// Find all follows from database
+	follow_list = "CALL get_follows()";
 
-	userId = req.params.userId;
-	get_user_buddies = "CALL get_followed(?)";
-	con.query(get_user_buddies,[userId], (err, results, fields) => {
+
+	console.log(req.query);
+
+	con.query(follow_list, (err, results) => {
 		if (err) throw err;
-		res.status(200).json({
-			userfollows: results
-		})
-	})
-});
 
-router.get('/followers', (req,res) => {
+		res.status(200).jsonp({msg:'follows list',results}).end;
 
-	userId = req.params.userId;
-	get_user_followers = "CALL get_followers(?)";
-	con.query(get_user_followers,[userId], (err, results, fields) => {
-		if (err) throw err;
-		res.status(200).json({
-			userfollows: results
-		})
 	})
 });
 
 
-router.get('/venues', (req,res) => {
+// Creates a new follow
+router.post('/', (req,res) => {
+	const {user1, user2, ven, ty} = req.body;
 
-	userId = req.params.userId;
-	get_venues_followed = "CALL venues_followed(?)";
-	con.query(get_venues_followed,[userId], (err, results, fields) => {
-		if (err) throw err;
-		res.status(200).json({
-			userfollows: results
+	console.log("user " + user1 + " now following user:" + user2 + "or venue :" + ven);
+	if(false)
+	{
+
+	}else{
+		// The followname wasn't found in the database
+		// Create insert query for new follow
+		// Added a comment
+		new_follow = "CALL add_follow(?,?,?,?)";
+		// Execute the query to insert into the database
+		con.query(new_follow,[user1, user2, ven, ty[0]], (err, results) => {
+			if (err) throw err;
+			res.status(201).jsonp({msg:'follow added',results}).end;
 		})
+
+	}
+});
+
+// updates all follows
+router.put('/', (req,res) => {
+
+	// The followname wasn't found in the database
+	// Create insert query for new follow
+	// Added a comment
+	new_follow = "CALL update_follows()";
+	// Execute the query to insert into the database
+	con.query(new_follow,(err, results) => {
+		if (err) throw err;
+		res.status(201).jsonp({msg:'follows updated',results}).end;
 	})
 });
 
-router.post('/venue/:venueId', (req,res) => {
-	// Find all users from database
-	const userId = req.params.userId;
-	const venueId = req.params.venueId;
+// updates all follows
+router.patch('/', (req,res) => {
 
-	follow_venue = "CALL follow_venue(?,?)";
-	con.query(follow_venue, [userId,venueId],(err, results, fields) => {
+	// The followname wasn't found in the database
+	// Create insert query for new follow
+	// Added a comment
+	new_follow = "CALL update_follows()";
+	// Execute the query to insert into the database
+	con.query(new_follow,(err, results) => {
 		if (err) throw err;
-		res.status(200).json({
-			userfollows: results
-		})
+		res.status(201).jsonp({msg:'follows updated',results}).end;
+	})
+
+
+});
+
+// deletes all follows
+router.delete('/', (req,res) => {
+	delete_follows = "CALL delete_follows()";
+	con.query(delete_follows, (err, results) => {
+		if (err) throw err;
+		res.status(201).jsonp({msg:'all follows deleted',results}).end;
+	})
+
+
+});
+
+// Grab specific follow by their id
+router.get('/:followId', (req,res) => {
+	const followId = req.params.followId;
+
+	get_follow  = "call get_follow(?)";
+	con.query(get_follow, [followId],(err, results) => {
+		if (err) throw err;
+		res.status(200).jsonp({msg:'follow info:',results}).end;
 	})
 });
 
-router.post('/:userId1', (req,res) => {
-	// Find all users from database
-	const userId = req.params.userId;
-	const userId1 = req.params.userId1;
+// updates follow
+router.put('/:followId', (req,res) => {
+	const followId = req.params.followId;
+	const {user1, user2, ven, ty} = req.body;
+	console.log("via put follow updated with id: " + followId);
+	update_follow = "CALL update_follow(?,?,?,?,?)";
 
-	follow_user = "CALL follow_user(?,?)";
-	con.query(follow_user, [userId,userId1],(err, results, fields) => {
+	con.query(update_follow,[followId,user1, user2, ven, ty[0]],(err, results) => {
 		if (err) throw err;
-		res.status(200).json({
-			userfollows: results
-		})
+		res.status(201).jsonp({msg:'follow updated via put',results}).end;
 	})
 });
+
+// updates all follows
+router.patch('/:followId', (req,res) => {
+	const followId = req.params.followId;
+	const {user1, user2, ven, ty} = req.body;
+	console.log(" via patch follow updated with id: " + followId);
+	update_follow = "CALL update_follow(?,?,?,?,?)";
+
+	con.query(update_follow,[followId,user1, user2, ven, ty[0]],(err, results) => {
+		if (err) throw err;
+		res.status(201).jsonp({msg:'follow updated via patch',results}).end;
+	})
+});
+
+// deletes follow
+router.delete('/:followId', (req,res) => {
+	const followId = req.params.followId;
+	console.log(" deleting follow with follow id: " + followId);
+	delete_follows = "CALL delete_follow(?)";
+	con.query(delete_follows, [followId],(err, results) => {
+		if (err) throw err;
+		res.status(201).jsonp({msg:'follow deleted'}).end;
+	})
+
+
+});
+
 
 module.exports = router;

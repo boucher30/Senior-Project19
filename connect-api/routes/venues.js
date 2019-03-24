@@ -99,7 +99,7 @@ router.get('/:venueId', (req,res) => {
 router.put('/:venueId', (req,res) => {
     const venueId = req.params.venueId;
     const {vname,cityNear,st,snowSports,waterSports,landSports,airSports,description} = req.body;
-    console.log(" new venue updated with venuename: " + vname);
+    console.log(" venue updated via put with venuename: " + vname);
     update_venue = "CALL update_venue(?,?,?,?,?,?,?,?,?)";
 
     con.query(update_venue,[venueId,vname,cityNear,st,snowSports[0],waterSports[0],landSports[0],airSports[0],description],(err, results) => {
@@ -112,7 +112,7 @@ router.put('/:venueId', (req,res) => {
 router.patch('/:venueId', (req,res) => {
     const venueId = req.params.venueId;
     const {vname,cityNear,st,snowSports,waterSports,landSports,airSports,description} = req.body;
-    console.log(" new venue updated with venuename: " + vname);
+    console.log(" venue updated via patch with venuename: " + vname);
     update_venue = "CALL update_venue(?,?,?,?,?,?,?,?,?)";
 
     con.query(update_venue,[venueId,vname,cityNear,st,snowSports[0],waterSports[0],landSports[0],airSports[0],description],(err, results) => {

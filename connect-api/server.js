@@ -2,13 +2,13 @@
 
 require('dotenv').config();
 const express = require('express');
-
-
 const app = express();
+const server = require('http').Server(app);
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-
+const pass = require('passport');
+const socket = require('socket.io');
 const PORT = process.env.PORT || 8000;
 
 // Check connection for success
@@ -23,13 +23,14 @@ con.connect( function(err) {
 // any file/route being used needs to be defined here
 // so it can be called below
 const userRoutes = require('./routes/users');
-const buddyRoutes = require('./routes/buddies');
 const venueRoutes = require('./routes/venues');
 const carRoutes = require('./routes/carves');
-const vfRoutes = require('./routes/venfollows');
 const ufRoutes = require('./routes/follows');
 const msgRoutes = require('./routes/messages');
-const listRoutes = require('./routes/listings');
+const comRoutes = require('./routes/comments');
+const likRoutes = require('./routes/likes');
+const medRoutes = require('./routes/media');
+const carAtRoutes = require('./routes/carveAttendees');
 
 var domain = require('domain');
 var d = domain.create();
@@ -68,14 +69,14 @@ d.run(function(err,data)
 // Tells the App specific routes to use using router in each file
 // any new file needs to be added in order for it to function.
 app.use('/users', userRoutes);
-app.use('/users/:userId/buddies', buddyRoutes);
 app.use('/venues', venueRoutes);
-app.use('/users/:userId/carves', carRoutes);
-app.use('/venues/:venueId/follows', vfRoutes);
-app.use('/users/:userId/follows', ufRoutes);
-app.use('/users/:userId/messages', msgRoutes);
-app.use('/listings', listRoutes);
-
+app.use('/carves', carRoutes);
+app.use('/follows', ufRoutes);
+app.use('/messages', msgRoutes);
+app.use('/comments', comRoutes);
+app.use('/media', medRoutes);
+app.use('/likes', likRoutes);
+app.use('/carveAt', carAtRoutes);
 
 // App listens on specific port or 8000 by default
 app.listen(PORT, () => {

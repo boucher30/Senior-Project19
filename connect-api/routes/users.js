@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router({mergeParams: true});
 const con = require('../db');
-const messages = require('./messages').router;
+
 
 
 // Grabs all users from db
@@ -99,7 +99,7 @@ router.get('/:userId', (req,res) => {
 router.put('/:userId', (req,res) => {
     const userId = req.params.userId;
     const {username, email, password, first_name, last_name, description, type, snow_sports, water_sports, land_sports, air_sports} = req.body;
-    console.log(" new user updated with username: " + username);
+    console.log(" user updated via put with username: " + username);
     update_user = "CALL update_user(?,?,?,?,?,?,?,?,?,?,?,?)";
 
     con.query(update_user,[userId,username, email, password, first_name, last_name, description, type[0], snow_sports[0], water_sports[0], land_sports[0], air_sports[0]],(err, results) => {
@@ -112,7 +112,7 @@ router.put('/:userId', (req,res) => {
 router.patch('/:userId', (req,res) => {
     const userId = req.params.userId;
     const {username, email, password, first_name, last_name, description, type, snow_sports, water_sports, land_sports, air_sports} = req.body;
-    console.log(" new user updated with username: " + username);
+    console.log("  user updated via patch with username: " + username);
     update_user = "CALL update_user(?,?,?,?,?,?,?,?,?,?,?,?)";
 
     con.query(update_user,[userId,username, email, password, first_name, last_name, description, type[0], snow_sports[0], water_sports[0], land_sports[0], air_sports[0]],(err, results) => {

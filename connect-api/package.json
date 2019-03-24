@@ -14,9 +14,12 @@
     "dotenv": "^6.2.0",
     "env": "0.0.2",
     "express": "^4.16.4",
+    "http": "0.0.0",
     "mysql": "^2.16.0",
     "nodemon": "^1.18.10",
-    "npm": "^6.8.0"
+    "npm": "^6.8.0",
+    "passport": "^0.4.0",
+    "socket.io": "^2.2.0"
   },
   "devDependencies": {
     "morgan": "^1.9.1"
