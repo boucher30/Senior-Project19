@@ -2,7 +2,7 @@
 
 require('dotenv').config();
 const express = require('express');
-const app = express();
+const app = express({mergeParams: true});
 const server = require('http').Server(app);
 const morgan = require('morgan');
 const bodyParser = require('body-parser');

@@ -9,12 +9,12 @@ router.get('/', (req,res) => {
     // Find all carves from database
     console.log(req.params);
     venueId = req.params.venueId;
-    carve_list = "CALL get_carves()";
+    carve_list = "CALL get_venue_carve(?)";
     // "CALL get_venue_carves(?)"   [venueId]
 
     console.log(req.query);
 
-    con.query(carve_list, (err, results) => {
+    con.query(carve_list,[venueId], (err, results) => {
         if (err) throw err;
 
         res.status(200).jsonp({msg:'carves list',results}).end;

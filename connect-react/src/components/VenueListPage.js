@@ -23,6 +23,7 @@ export default class VenueListPage extends Component {
 		// Getting the user id from the url param
 		axios.get(`http://localhost:8000/venues`)
 			.then(res => {
+			    alert(JSON.stringify(res.data.venues[0]));
 				console.log('Venues:', res.data.venues[0]);
 				this.setState({
 					venues: res.data.venues[0],

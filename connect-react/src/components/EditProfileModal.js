@@ -33,7 +33,7 @@ export default class EditProfileModal extends Component {
 		this.setState({
 			[event.target.id]: event.target.value
 		});
-	}
+	};
 
 	handleSubmit = e => {
 		// We go to endpoint here to update users info and send the new info that is stored in state
@@ -47,7 +47,7 @@ export default class EditProfileModal extends Component {
 			.catch(err => {
 				console.log('Error', err);
 			})
-	}
+	};
 
 	render() {
 		const { firstName, lastName, username, sport, profile_type } = this.state;
