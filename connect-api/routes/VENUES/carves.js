@@ -89,7 +89,6 @@ router.delete('/', (req,res) => {
 // Grab specific carve by their id
 router.get('/:carveId', (req,res) => {
     const carveId = req.params.carveId;
-
     get_carve  = "call get_carve(?)";
     con.query(get_carve, [carveId],(err, results) => {
         if (err) throw err;
@@ -97,10 +96,11 @@ router.get('/:carveId', (req,res) => {
     })
 });
 
-// updates carve
+// update carve by carve ID for given venue
 router.put('/:carveId', (req,res) => {
     const carveId = req.params.carveId;
-    const {carveName,creatorId,venueId,carveType,athlete,photo,date,completed, snow_sports, water_sports, land_sports, air_sports} = req.body;
+    venueId = req.params.venueId;
+    const {carveName,creatorId,carveType,athlete,photo,date,completed, snow_sports, water_sports, land_sports, air_sports} = req.body;
     console.log(" new carve updated with carvename: " + carveName);
     update_carve = "CALL update_carve(?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
@@ -110,10 +110,11 @@ router.put('/:carveId', (req,res) => {
     })
 });
 
-// updates all carves
+// update carve by carve ID for given venue
 router.patch('/:carveId', (req,res) => {
     const carveId = req.params.carveId;
-    const {carveName,creatorId,venueId,carveType,athlete,photo,date,completed, snow_sports, water_sports, land_sports, air_sports} = req.body;
+    venueId = req.params.venueId;
+    const {carveName,creatorId,carveType,athlete,photo,date,completed, snow_sports, water_sports, land_sports, air_sports} = req.body;
     console.log(" new carve updated with carvename: " + carveName);
     update_carve = "CALL update_carve(?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
