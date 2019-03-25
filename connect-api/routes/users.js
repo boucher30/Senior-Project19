@@ -37,7 +37,7 @@ router.post('/', (req,res) => {
 			// Execute the query to insert into the database
 			con.query(new_user,[username, email, password, first_name, last_name, description, type[0], snow_sports[0], water_sports[0], land_sports[0], air_sports[0]], (err, results) => {
 				if (err) throw err;
-                res.status(201).jsonp({msg:'user added',results}).end;
+                res.status(201).jsonp({results}).end;
 			})
 
 		}
@@ -53,7 +53,7 @@ router.put('/', (req,res) => {
     // Execute the query to insert into the database
     con.query(new_user,(err, results) => {
         if (err) throw err;
-        res.status(201).jsonp({msg:'users updated',results}).end;
+        res.status(201).jsonp({results}).end;
     })
 });
 
@@ -67,7 +67,7 @@ router.patch('/', (req,res) => {
     // Execute the query to insert into the database
     con.query(new_user,(err, results) => {
         if (err) throw err;
-        res.status(201).jsonp({msg:'users updated',results}).end;
+        res.status(201).jsonp({results}).end;
     })
 
 
@@ -78,7 +78,7 @@ router.delete('/', (req,res) => {
     delete_users = "CALL delete_users()";
     con.query(delete_users, (err, results) => {
         if (err) throw err;
-        res.status(201).jsonp({msg:'all users deleted',results}).end;
+        res.status(201).jsonp({results}).end;
     })
 
 
@@ -105,7 +105,7 @@ router.put('/:userId', (req,res) => {
 
     con.query(update_user,[userId,username, email, password, first_name, last_name, description, type[0], snow_sports[0], water_sports[0], land_sports[0], air_sports[0]],(err, results) => {
         if (err) throw err;
-        res.status(201).jsonp({msg:'user updated via put',results}).end;
+        res.status(201).jsonp({results}).end;
     })
 });
 
@@ -118,7 +118,7 @@ router.patch('/:userId', (req,res) => {
 
     con.query(update_user,[userId,username, email, password, first_name, last_name, description, type[0], snow_sports[0], water_sports[0], land_sports[0], air_sports[0]],(err, results) => {
         if (err) throw err;
-        res.status(201).jsonp({msg:'user updated via patch',results}).end;
+        res.status(201).jsonp({results}).end;
     })
 });
 

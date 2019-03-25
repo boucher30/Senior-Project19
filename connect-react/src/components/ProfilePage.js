@@ -93,13 +93,27 @@ export default class ProfilePage extends Component {
 
 	getUserInfo() {
 		// Getting the user id from the url param
-
+		if(this.state.userId >0)
 		axios.get(`http://localhost:8000/users/${this.state.userId}`)
 			.then(res => {
 				this.setState({
 					userInfo: res.data.users[0][0],
 					userInfoLength: Object.keys(res.data.users[0][0]).length
 				});
-			})
+			});
+
+		else {
+
+			axios.get(`http://localhost:8000/users/${0}`)
+				.then(res => {
+					this.setState({
+						userInfo: res.data.users[0][0],
+						userInfoLength: Object.keys(res.data.users[0][0]).length
+					});
+				})
+			//window.location.reload();
+		}
 	}
+	else
+
 }

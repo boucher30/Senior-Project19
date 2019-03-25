@@ -34,7 +34,7 @@ router.post('/', (req, res) => {
                 {
 
                     console.log("check"+ results[0][0]);
-                    const use = JSON.stringify(results1[0][0].user_Id);
+                    const use = results1[0][0].user_Id;
                     res.status(202).jsonp({use}).end;
                 }
 
