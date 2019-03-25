@@ -10,6 +10,11 @@ const cookieParser = require('cookie-parser');
 const pass = require('passport');
 const socket = require('socket.io');
 const PORT = process.env.PORT || 8000;
+const LocalStrategy = require('passport-local');
+
+
+
+
 
 // Check connection for success
 const con = require('./db');
@@ -30,7 +35,14 @@ const msgRoutes = require('./routes/messages');
 const comRoutes = require('./routes/comments');
 const likRoutes = require('./routes/likes');
 const medRoutes = require('./routes/media');
+const usrCarRoutes = require('./routes/users/carves');
+const usrUfRoutes = require('./routes/users/follows');
 const carAtRoutes = require('./routes/carveAttendees');
+const usrMsgRoutes = require('./routes/users/messages');
+const usrComRoutes = require('./routes/users/comments');
+const usrLikRoutes = require('./routes/users/likes');
+const usrMedRoutes = require('./routes/users/media');
+const usrCarAtRoutes = require('./routes/users/carveAttendees');
 
 var domain = require('domain');
 var d = domain.create();
@@ -77,6 +89,13 @@ app.use('/comments', comRoutes);
 app.use('/media', medRoutes);
 app.use('/likes', likRoutes);
 app.use('/carveAt', carAtRoutes);
+app.use('/users/:userId/carves', usrCarRoutes);
+app.use('/users/:userId/follows', usrUfRoutes);
+app.use('/users/:userId/messages', usrMsgRoutes);
+app.use('/users/:userId/comments', usrComRoutes);
+app.use('/users/:userId/media', usrMedRoutes);
+app.use('/users/:userId/likes', usrLikRoutes);
+app.use('/users/:userId/carveAt',usrCarAtRoutes);
 
 // App listens on specific port or 8000 by default
 app.listen(PORT, () => {
