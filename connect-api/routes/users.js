@@ -15,7 +15,7 @@ router.get('/', (req,res) => {
 	con.query(user_list, (err, results) => {
 		if (err) throw err;
 
-		res.status(200).jsonp({msg:'users list',results}).end;
+		res.status(200).jsonp({users: results}).end;
 
 	})
 });
@@ -91,7 +91,8 @@ router.get('/:userId', (req,res) => {
 	get_user  = "call get_user(?)";
 	con.query(get_user, [userId],(err, results) => {
 		if (err) throw err;
-        res.status(200).jsonp({msg:'user info:',results}).end;
+		console.log(results[0][0]);
+        res.status(200).jsonp({users: results}).end;
 	})
 });
 

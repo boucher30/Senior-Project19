@@ -34,6 +34,7 @@ const ufRoutes = require('./routes/follows');
 const msgRoutes = require('./routes/messages');
 const comRoutes = require('./routes/comments');
 const likRoutes = require('./routes/likes');
+const logRoutes = require('./routes/login');
 const medRoutes = require('./routes/media');
 const usrCarRoutes = require('./routes/users/carves');
 const usrUfRoutes = require('./routes/users/follows');
@@ -68,8 +69,8 @@ app.use((req, res, next) => {
 
 //ignore for now
 /*
-d.on('error',function(err){
-	console.error(err);
+d.on('errorPage',function(err){
+	console.errorPage(err);
 });
 
 d.run(function(err,data)
@@ -88,6 +89,7 @@ app.use('/messages', msgRoutes);
 app.use('/comments', comRoutes);
 app.use('/media', medRoutes);
 app.use('/likes', likRoutes);
+app.use('/login', logRoutes);
 app.use('/carveAt', carAtRoutes);
 app.use('/users/:userId/carves', usrCarRoutes);
 app.use('/users/:userId/follows', usrUfRoutes);

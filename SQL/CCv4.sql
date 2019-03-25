@@ -362,6 +362,11 @@ CREATE TABLE IF NOT EXISTS `CCv4`.`all_follows` (`follow_id` INT, `user_id1` INT
 CREATE TABLE IF NOT EXISTS `CCv4`.`all_comments` (`id` INT);
 
 -- -----------------------------------------------------
+-- Placeholder table for view `CCv4`.`view1`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `CCv4`.`view1` (`type` INT);
+
+-- -----------------------------------------------------
 -- procedure add_user
 -- -----------------------------------------------------
 
@@ -405,11 +410,11 @@ DROP procedure IF EXISTS `CCv4`.`add_carve`;
 
 DELIMITER $$
 USE `CCv4`$$
-CREATE PROCEDURE `add_carve` (in carveName varchar(40), in creatorId int, in venueId int, in carveType set ('open','buddy'), in athlete int, in photo int, in date date, in completed tinyint, 
+CREATE PROCEDURE `add_carve` (in carveName varchar(40), in creatorId int, in venueId int, in carveType set ('open','buddy'), in athlete int, in photo int, in date date, 
 in winterSports set ('snowboard','ski','snowmobile'), in waterSports set ('surf','waterSki'),in landSports set ('skateboard','BMX'), in airSports set ('skydive','hangGlide'))
 BEGIN
 insert into carves(name, creator, venue, type, max_athletes, max_photo, date, completed, snow_sports, water_sports, land_sports, air_sports)
-values(carveName,creatorId,venueId,carveType,athlete,photo,date,completed,winterSports,waterSports,landSports,airSports);
+values(carveName,creatorId,venueId,carveType,athlete,photo,date,0,winterSports,waterSports,landSports,airSports);
 END$$
 
 DELIMITER ;
@@ -1553,6 +1558,48 @@ END$$
 DELIMITER ;
 
 -- -----------------------------------------------------
+-- procedure username_check
+-- -----------------------------------------------------
+
+USE `CCv4`;
+DROP procedure IF EXISTS `CCv4`.`username_check`;
+
+DELIMITER $$
+USE `CCv4`$$
+CREATE PROCEDURE `username_check` (in usr varchar(40))
+BEGIN
+if exists(select * from users where username = usr)
+		then 
+        select user_Id from users where username = usr;
+        
+else
+	select 0;
+end if;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure password_check
+-- -----------------------------------------------------
+
+USE `CCv4`;
+DROP procedure IF EXISTS `CCv4`.`password_check`;
+
+DELIMITER $$
+USE `CCv4`$$
+CREATE PROCEDURE `password_check` (in usr VARCHAR(40), in pass VARCHAR(40), out userId int)
+BEGIN
+if exists(select password from users where username = usr and password = pass)
+then select user_Id from users where username = usr;
+else
+select 0;
+end if;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
 -- View `CCv4`.`all_users`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `CCv4`.`all_users`;
@@ -1632,6 +1679,15 @@ DROP VIEW IF EXISTS `CCv4`.`all_comments` ;
 USE `CCv4`;
 CREATE  OR REPLACE VIEW `all_comments` AS
 select * from comments;
+
+-- -----------------------------------------------------
+-- View `CCv4`.`view1`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `CCv4`.`view1`;
+DROP VIEW IF EXISTS `CCv4`.`view1` ;
+USE `CCv4`;
+CREATE  OR REPLACE VIEW `view1` AS
+select type from likes;
 SET SQL_MODE = '';
 DROP USER IF EXISTS nodeuser;
 SET SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';

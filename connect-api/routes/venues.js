@@ -15,7 +15,7 @@ router.get('/', (req,res) => {
     con.query(venue_list, (err, results) => {
         if (err) throw err;
 
-        res.status(200).jsonp({msg:'venues list',results}).end;
+        res.status(200).jsonp({venues: results}).end;
 
     })
 });
@@ -91,7 +91,7 @@ router.get('/:venueId', (req,res) => {
     get_venue  = "call get_venue(?)";
     con.query(get_venue, [venueId],(err, results) => {
         if (err) throw err;
-        res.status(200).jsonp({msg:'venue info:',results}).end;
+        res.status(200).jsonp({venues:results}).end;
     })
 });
 

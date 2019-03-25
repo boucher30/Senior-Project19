@@ -17,7 +17,7 @@ export default class ProfilePage extends Component {
 			userInfoLength: 0,
 			isUserLoggedIn: props.match.params.number === localStorage.getItem('userId'),
 			show: false
-		}
+		};
 
 		this.handleShow = this.handleShow.bind(this);
 		this.handleClose = this.handleClose.bind(this);
@@ -93,11 +93,12 @@ export default class ProfilePage extends Component {
 
 	getUserInfo() {
 		// Getting the user id from the url param
+
 		axios.get(`http://localhost:8000/users/${this.state.userId}`)
 			.then(res => {
 				this.setState({
-					userInfo: res.data.user[0][0],
-					userInfoLength: Object.keys(res.data.user[0][0]).length
+					userInfo: res.data.users[0][0],
+					userInfoLength: Object.keys(res.data.users[0][0]).length
 				});
 			})
 	}
