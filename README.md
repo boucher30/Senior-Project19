@@ -1,6 +1,5 @@
 # Development BRANCH FOR CARVE CONNECT
-# Sean's rework of the back end of the project. 
-# WIP
+
 CARVE CONNECT
 Action Sport/Film Social Platform.
 
