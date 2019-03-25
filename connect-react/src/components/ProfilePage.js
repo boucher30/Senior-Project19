@@ -59,6 +59,7 @@ export default class ProfilePage extends Component {
 					<Row>
 						<Col xs={7}>
 							<Container style={{ padding: '15px' }}>
+								if(userInfo.type.equals{'athlete'}
 								<Image src={SnowProfilePic} fluid />
 							</Container>
 						</Col>
@@ -67,7 +68,14 @@ export default class ProfilePage extends Component {
 								<p>Username: {userInfo.username}</p>
 								<p>First Name: {userInfo.first_name}</p>
 								<p>Last Name: {userInfo.last_name}</p>
-								<p>Buddy Count: {Math.round((Math.random() * (50)))}</p>
+								<p>Profile Type: {userInfo.type}</p>
+								<p>Buddy Count: {1}</p>
+								<p> Follower Count: [0] </p>
+								<p> Description: {userInfo.description}</p>
+								<p> Winter Sports: {userInfo.snow_sports}</p>
+								<p> Water Sports: {userInfo.water_sports}</p>
+								<p> Land Sports: {userInfo.land_sports}</p>
+								<p>Airborne Sports: {userInfo.air_sports}</p>
 							</Container>
 						</Col>
 					</Row>
@@ -100,6 +108,8 @@ export default class ProfilePage extends Component {
 					userInfo: res.data.users[0][0],
 					userInfoLength: Object.keys(res.data.users[0][0]).length
 				});
+
+				alert(JSON.stringify(res.data.users[0][0]))
 			});
 
 		else {

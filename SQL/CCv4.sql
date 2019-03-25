@@ -1600,6 +1600,22 @@ END$$
 DELIMITER ;
 
 -- -----------------------------------------------------
+-- procedure get_venue_carve
+-- -----------------------------------------------------
+
+USE `CCv4`;
+DROP procedure IF EXISTS `CCv4`.`get_venue_carve`;
+
+DELIMITER $$
+USE `CCv4`$$
+CREATE PROCEDURE `get_venue_carve` (in id int)
+BEGIN
+select * from all_carves where venue =id;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
 -- View `CCv4`.`all_users`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `CCv4`.`all_users`;

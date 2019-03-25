@@ -44,6 +44,10 @@ const usrComRoutes = require('./routes/users/comments');
 const usrLikRoutes = require('./routes/users/likes');
 const usrMedRoutes = require('./routes/users/media');
 const usrCarAtRoutes = require('./routes/users/carveAttendees');
+const venCarRoutes = require('./routes/venues/carves');
+const venUfRoutes = require('./routes/venues/follows');
+const venComRoutes = require('./routes/venues/comments');
+const venMedRoutes = require('./routes/venues/media');
 
 var domain = require('domain');
 var d = domain.create();
@@ -98,6 +102,10 @@ app.use('/users/:userId/comments', usrComRoutes);
 app.use('/users/:userId/media', usrMedRoutes);
 app.use('/users/:userId/likes', usrLikRoutes);
 app.use('/users/:userId/carveAt',usrCarAtRoutes);
+app.use('/venues/:venueId/media', venMedRoutes);
+app.use('/venues/:venueId/comments', venComRoutes);
+app.use('/venues/:venueId/carves', venCarRoutes);
+app.use('/venues/:venueId/follows', venUfRoutes);
 
 // App listens on specific port or 8000 by default
 app.listen(PORT, () => {
