@@ -8,19 +8,21 @@ export default class SignUpPage extends Component {
 		super(props);
 
 		this.state = {
-			username: 'cmarcy',
-			password: 'abc',
-			sportType: -1,
-			firstName: 'Christian',
-			lastName: 'Marcy',
-			profileType: -1,
+			username: '',
+			email: '',
+			password: '',
+			firstName: '',
+			lastName: '',
+			descriptio: '',
+			profileType: ('',''),
+			snowSports: ('','',''),
 			redirect: false
 		}
 	}
 
 	// Validates form for style purposes and so that we cannot send empty data to api
 	validateForm() {
-		const { username, password, sportType, firstName, lastName, profileType } = this.state;
+		const { username, email, password,firstName, lastName, profileType } = this.state;
 		return username.length > 0 &&
 			password.length > 0 &&
 			firstName.length > 0 &&
