@@ -5,6 +5,7 @@ import ListGroup from 'react-bootstrap/ListGroup'
 const menuItems = {
 	'My Profile': {href: `/dashboard/profile/${localStorage.getItem('userId')}`},
 	'My Feed': {href: '/dashboard/feed'},
+	'My Messages': {href: '/dashboard/messages'},
 	'Venues': {href: '/dashboard/venues'},
 	'Explore': {href: '/dashboard/explore'}
 };

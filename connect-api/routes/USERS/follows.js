@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router({mergeParams: true});
-const con = require('../db');
+const con = require('../../db');
 
 
 
@@ -132,6 +132,25 @@ router.delete('/:followId', (req,res) => {
 	})
 
 
+});
+// get /buddies/  returns buddy list for user procedure call => buddy_list(?) [userId]
+//get /followers
+//get /followed
+//put /follow ?venueId & userId
+
+router.post('/buddies/:userId1', (req,res) => {
+	// Find all users from database
+	const userId = req.params.userId;
+	const userId1 = req.params.userId1;
+
+	add_buddy = "CALL add_buddy(?,?)";
+	con.query(add_buddy, [userId,userId1],(err, results, fields) => {
+		if (err) throw err;
+		res.status(200).json({
+			userfollows: results,
+			msg: 'buddy added'
+		})
+	})
 });
 
 

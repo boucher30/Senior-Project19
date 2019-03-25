@@ -1,0 +1,33 @@
+venue_name,city,state,snow_sports,water_sports,land_sports,air_sports
+mountain1,some mountaint town,UT,"snowboard,ski,snowmobile",,mountainBiking,
+mountain2,some mountaint town,NY,"snowboard,ski,snowmobile",,,hangGlide
+mountain3,some mountaint town,CA,snowmobile,,,hangGlide
+mountain4,some mountaint town,CO,ski,,,
+mountain5,some mountaint town,UT,"snowboard,ski,snowmobile",,mountainBiking,
+mountain6,some mountaint town,MT,"snowboard,ski,snowmobile",,,
+mountain7,some mountaint town,NH,snowboard ,,,hangGlide
+mountain8,some mountaint town,VT,,,,
+mountain9,some mountaint town,AK,"snowboard,ski,snowmobile",,mountainBiking,
+mountain10,some mountaint town,VT,"snowboard,ski,snowmobile",,,
+beach1,some ocean town,NJ,,surf,,
+beach2,some ocean town,CA,,surf,,
+beach3,some ocean town,HI,,surf,,
+beach4,some ocean town,NC,,"surf,waterski",,
+beach5,some ocean town,FL,,"surf,waterski",,
+lake1,some lake town,MT,,waterski,,
+lake2,some lake town,NY,,waterski,,
+skatepark1,some skatepark town,NJ,,,skateboard,
+skatepark2,some skatepark town,NY,,,skateboard,
+skatepark3,some skatepark town,PA,,,skateboard,
+skatepark4,some skatepark town,CA,,,skateboard,
+skatepark5,some skatepark town,WA,,,skateboard,
+bmxcourse1,some bmxcourse town,NJ,,,BMX,
+bmxcourse2,some bmxcourse town,NY,,,BMX,
+bmxcourse3,some bmxcourse town,PA,,,BMX,
+bmxcourse4,some bmxcourse town,CA,,,BMX,
+bmxcourse5,some bmxcourse town,WA,,,BMX,
+airfield1,some airfield town,NJ,,,,skydive
+airfield2,some airfield town,NY,,,,skydive
+airfield3,some airfield town,PA,,,,skydive
+airfield4,some airfield town,CA,,,,skydive
+airfield5,some airfield town,WA,,,,skydive

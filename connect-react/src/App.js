@@ -6,10 +6,12 @@ import './App.css';
 
 // Pages and components
 import TopNav from "./components/Navbar";
-import Dashboard from "./Pages/Dashboard";
-import SplashPage from './Pages/SplashPage';
+import Dashboard from "./Pages/Dashboard/Dashboard";
+import SplashPage from './Pages/SplashPage/SplashPage';
 import LoginPage from "./Pages/Login/LoginPage";
 import SignUpPage from "./Pages/SignUp/SignUpPage";
+import LogoutPage from "./Pages/Logout/LogoutPage";
+import ErrorPage from "./Pages/error/ErrorPage";
 
 
 class App extends Component {
@@ -24,7 +26,9 @@ class App extends Component {
           <Route exact path='/' component={SplashPage} />
           <Route path='/dashboard' component={Dashboard} />
           <Route path='/login' component={LoginPage} />
+          <Route path='/logout' component={LogoutPage} />
           <Route path='/sign-up' component={SignUpPage} />
+          <Route path='/error' component={ErrorPage} />
         </Switch>
       </div>
     );

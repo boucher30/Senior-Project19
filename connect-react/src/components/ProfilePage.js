@@ -17,7 +17,7 @@ export default class ProfilePage extends Component {
 			userInfoLength: 0,
 			isUserLoggedIn: props.match.params.number === localStorage.getItem('userId'),
 			show: false
-		}
+		};
 
 		this.handleShow = this.handleShow.bind(this);
 		this.handleClose = this.handleClose.bind(this);
@@ -59,6 +59,7 @@ export default class ProfilePage extends Component {
 					<Row>
 						<Col xs={7}>
 							<Container style={{ padding: '15px' }}>
+								if(userInfo.type.equals{'athlete'}
 								<Image src={SnowProfilePic} fluid />
 							</Container>
 						</Col>
@@ -67,7 +68,14 @@ export default class ProfilePage extends Component {
 								<p>Username: {userInfo.username}</p>
 								<p>First Name: {userInfo.first_name}</p>
 								<p>Last Name: {userInfo.last_name}</p>
-								<p>Buddy Count: {Math.round((Math.random() * (50)))}</p>
+								<p>Profile Type: {userInfo.type}</p>
+								<p>Buddy Count: {1}</p>
+								<p> Follower Count: [0] </p>
+								<p> Description: {userInfo.description}</p>
+								<p> Winter Sports: {userInfo.snow_sports}</p>
+								<p> Water Sports: {userInfo.water_sports}</p>
+								<p> Land Sports: {userInfo.land_sports}</p>
+								<p>Airborne Sports: {userInfo.air_sports}</p>
 							</Container>
 						</Col>
 					</Row>
@@ -93,12 +101,29 @@ export default class ProfilePage extends Component {
 
 	getUserInfo() {
 		// Getting the user id from the url param
+		if(this.state.userId >0)
 		axios.get(`http://localhost:8000/users/${this.state.userId}`)
 			.then(res => {
 				this.setState({
-					userInfo: res.data.user[0][0],
-					userInfoLength: Object.keys(res.data.user[0][0]).length
+					userInfo: res.data.users[0][0],
+					userInfoLength: Object.keys(res.data.users[0][0]).length
 				});
-			})
+
+				alert(JSON.stringify(res.data.users[0][0]))
+			});
+
+		else {
+
+			axios.get(`http://localhost:8000/users/${0}`)
+				.then(res => {
+					this.setState({
+						userInfo: res.data.users[0][0],
+						userInfoLength: Object.keys(res.data.users[0][0]).length
+					});
+				})
+			//window.location.reload();
+		}
 	}
+	else
+
 }

@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router({mergeParams: true});
-const con = require('../db');
+const con = require('../../db');
 
 
 
@@ -22,6 +22,7 @@ router.get('/', (req,res) => {
 
 
 // Creates a new follow
+// For venue pass in the venue_id instead of the user2 ID
 router.post('/', (req,res) => {
 	const {user1, user2, ven, ty} = req.body;
 
@@ -97,12 +98,13 @@ router.get('/:followId', (req,res) => {
 
 // updates follow
 router.put('/:followId', (req,res) => {
-	const followId = req.params.followId;
-	const {user1, user2, ven, ty} = req.body;
+	const followId = req.params.followId; //followId is the ID of the user
+	ven = req.params.venueId;
+	const {user1, ty} = req.body;
 	console.log("via put follow updated with id: " + followId);
-	update_follow = "CALL update_follow(?,?,?,?,?)";
+	update_follow = "CALL update_follow_venue(?,?,?,?)";
 
-	con.query(update_follow,[followId,user1, user2, ven, ty[0]],(err, results) => {
+	con.query(update_follow_venue,[followId, ven, ty[0]],(err, results) => {
 		if (err) throw err;
 		res.status(201).jsonp({msg:'follow updated via put',results}).end;
 	})
@@ -111,11 +113,12 @@ router.put('/:followId', (req,res) => {
 // updates all follows
 router.patch('/:followId', (req,res) => {
 	const followId = req.params.followId;
-	const {user1, user2, ven, ty} = req.body;
+	ven = req.params.venueId;
+	const {user1, ty} = req.body;
 	console.log(" via patch follow updated with id: " + followId);
-	update_follow = "CALL update_follow(?,?,?,?,?)";
+	update_follow = "CALL update_follow_venue(?,?,?,?)";
 
-	con.query(update_follow,[followId,user1, user2, ven, ty[0]],(err, results) => {
+	con.query(update_follow_venue,[followId, user1, ven, ty[0]],(err, results) => {
 		if (err) throw err;
 		res.status(201).jsonp({msg:'follow updated via patch',results}).end;
 	})

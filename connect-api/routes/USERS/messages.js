@@ -1,18 +1,18 @@
 var express = require('express');
 var router = express.Router({mergeParams: true});
-const con = require('../db');
+const con = require('../../db');
 
 
 
 // Grabs all messages from db
 router.get('/', (req,res) => {
     // Find all messages from database
-    message_list = "CALL get_messages()";
+    message_list = "CALL get_user_messages(?)";
+    userId = req.params.userId;
 
+    console.log(req.params);
 
-    console.log(req.query);
-
-    con.query(message_list, (err, results) => {
+    con.query(message_list, [userId], (err, results) => {
         if (err) throw err;
 
         res.status(200).jsonp({msg:'messages list',results}).end;

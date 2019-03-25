@@ -1,5 +1,7 @@
 # Development BRANCH FOR CARVE CONNECT
-
+# Sean's rework of the back end of the project. 
+# WIP
+CARVE CONNECT
 Action Sport/Film Social Platform.
 
 Authors:
@@ -22,11 +24,9 @@ React Proj (Front End)
 
 Node API (Back End)
 - use nodemon to run
-1) cd into *connect-api*
-    - (if nodemon not used before) install -g nodemon
-2) run : nodemon server.js
+1) run : nodemon server.js
 
 DATABASE
   - SQL FOLDER
-    1) run files 1,2,3 in order
-    2) use file 4 to verify (run 1 command at a time)
+    1) run ccv4
+    2) use workbench to fill tables. (ONLY USERS AND VENUES RIGHT NOW)
