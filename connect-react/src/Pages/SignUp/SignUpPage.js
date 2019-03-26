@@ -27,6 +27,7 @@ export default class SignUpPage extends Component {
 			password.length > 0 &&
 			firstName.length > 0 &&
 			lastName.length > 0 &&
+			typeof email == 'string' &&
 			typeof profileType == 'string' &&
 			typeof sportType == 'string';
 	}
