@@ -54,6 +54,7 @@ export default class SignUpPage extends Component {
 	handleSubmit = e => {
 		e.preventDefault();
 		console.log('Submitted form:', this.state);
+		alert(this.state.profileType + this.state.snow_sports +'this.state.profileType');
 		axios.post('http://localhost:8000/users', {
 			username: this.state.username,
 			password: this.state.password,
@@ -61,10 +62,10 @@ export default class SignUpPage extends Component {
 			first_name: this.state.firstName,
 			last_name: this.state.lastName,
 			description: this.state.description,
-			type: [this.state.profileType],
-			snow_sports: [this.state.snowSports],
+			type: ['athlete'],
+			snow_sports: ['snowboard'],
 			water_sports: [''],
-			land_sports: [this.state.landSports],
+			land_sports: [''],
 			air_sports: ['']
 
 
