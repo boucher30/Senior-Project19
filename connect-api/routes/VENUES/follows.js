@@ -24,19 +24,19 @@ router.get('/', (req,res) => {
 // Creates a new follow
 // For venue pass in the venue_id instead of the user2 ID
 router.post('/', (req,res) => {
-	const {user1, user2, ven, ty} = req.body;
+	const {usr, ven, ty[0]} = req.body;
 
-	console.log("user " + user1 + " now following user:" + user2 + "or venue :" + ven);
+	console.log("user " + user1 + " now following venue :" + ven);
 	if(false)
 	{
 
 	}else{
-		// The followname wasn't found in the database
+		// The follow name wasn't found in the database
 		// Create insert query for new follow
 		// Added a comment
-		new_follow = "CALL add_follow(?,?,?,?)";
+		new_follow = "CALL follow_venue(?,?)";
 		// Execute the query to insert into the database
-		con.query(new_follow,[user1, user2, ven, ty[0]], (err, results) => {
+		con.query(new_follow,[usr, ven, ty[0]], (err, results) => {
 			if (err) throw err;
 			res.status(201).jsonp({msg:'follow added',results}).end;
 		})
@@ -47,7 +47,7 @@ router.post('/', (req,res) => {
 // updates all follows
 router.put('/', (req,res) => {
 
-	// The followname wasn't found in the database
+	// The follow name wasn't found in the database
 	// Create insert query for new follow
 	// Added a comment
 	new_follow = "CALL update_follows()";
@@ -61,7 +61,7 @@ router.put('/', (req,res) => {
 // updates all follows
 router.patch('/', (req,res) => {
 
-	// The followname wasn't found in the database
+	// The follow name wasn't found in the database
 	// Create insert query for new follow
 	// Added a comment
 	new_follow = "CALL update_follows()";
@@ -98,27 +98,27 @@ router.get('/:followId', (req,res) => {
 
 // updates follow
 router.put('/:followId', (req,res) => {
-	const followId = req.params.followId; //followId is the ID of the user
-	ven = req.params.venueId;
-	const {user1, ty} = req.body;
-	console.log("via put follow updated with id: " + followId);
-	update_follow = "CALL update_follow_venue(?,?,?,?)";
+    const followId = req.params.followId; //followId is the ID of the user
+    ven = req.params.venueId;
+    const {usr} = req.body;
+    console.log("via put follow updated with id: " + followId);
+    update_follow = "CALL update_follow_venue(?,?,?)";
 
-	con.query(update_follow_venue,[followId, ven, ty[0]],(err, results) => {
-		if (err) throw err;
-		res.status(201).jsonp({msg:'follow updated via put',results}).end;
-	})
+    con.query(update_follow_venue,[followId, ven, usr],(err, results) => {
+        if (err) throw err;
+        res.status(201).jsonp({msg:'follow updated via put',results}).end;
+    })
 });
 
 // updates all follows
 router.patch('/:followId', (req,res) => {
 	const followId = req.params.followId;
 	ven = req.params.venueId;
-	const {user1, ty} = req.body;
+	const {usr} = req.body;
 	console.log(" via patch follow updated with id: " + followId);
-	update_follow = "CALL update_follow_venue(?,?,?,?)";
+	update_follow = "CALL update_follow_venue(?,?,?)";
 
-	con.query(update_follow_venue,[followId, user1, ven, ty[0]],(err, results) => {
+	con.query(update_follow_venue,[followId, usr, ven],(err, results) => {
 		if (err) throw err;
 		res.status(201).jsonp({msg:'follow updated via patch',results}).end;
 	})
@@ -133,8 +133,6 @@ router.delete('/:followId', (req,res) => {
 		if (err) throw err;
 		res.status(201).jsonp({msg:'follow deleted'}).end;
 	})
-
-
 });
 
 
