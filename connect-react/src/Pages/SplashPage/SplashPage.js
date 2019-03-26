@@ -3,15 +3,18 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Carousel from 'react-bootstrap/Carousel';
 import Button from 'react-bootstrap/Button';
-import Snow from '../../images/snow1.jpg';
+import Snow from '../../images/winter.jpeg';
 import Skate from '../../images/skater1.jpeg';
 import Surf from '../../images/surf1.jpg';
+import dirt from '../../images/mountain bike1.jpeg';
+import drone from '../../images/drone guy1.jpeg';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Dog from '../../images/dog.jpg';
+import dogskate from '../../images/dogskate.jpeg';
+import dogphoto from '../../images/dogphoto.jpeg';
+import dogsurf from '../../images/dogsurf.jpeg';
 import FeaturedUserCard from '../../components/FeaturedUserCard';
-import Video_Placeholder from '../../images/video-placeholder.png';
 import CarouselCaption from 'react-bootstrap/CarouselCaption';
 
 
@@ -75,7 +78,7 @@ class SplashPage extends Component {
                 <img
                   className="d-block w-100"
                   src= {Surf}
-                  alt="Third slide"
+                  alt="fourth slide"
                 />
                 <CarouselCaption>
                 <Container>
@@ -96,6 +99,56 @@ class SplashPage extends Component {
                   </Container>
                 </CarouselCaption>
               </Carousel.Item>
+                <Carousel.Item>
+                    <img
+                        className="d-block w-100"
+                        src= {dirt}
+                        alt="fifth slide"
+                    />
+                    <CarouselCaption>
+                        <Container>
+                            <Row style = {{marginBottom: '20px'}}>
+                                <Col>
+                                    <Button href='/login' variant="dark" size="lg">
+                                        Login
+                                    </Button>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col>
+                                    <Button href='/sign-up' variant="info" size="lg">
+                                        Sign Up
+                                    </Button>
+                                </Col>
+                            </Row>
+                        </Container>
+                    </CarouselCaption>
+                </Carousel.Item>
+                <Carousel.Item>
+                    <img
+                        className="d-block w-100"
+                        src= {drone}
+                        alt="sixth slide"
+                    />
+                    <CarouselCaption>
+                        <Container>
+                            <Row style = {{marginBottom: '20px'}}>
+                                <Col>
+                                    <Button href='/login' variant="dark" size="lg">
+                                        Login
+                                    </Button>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col>
+                                    <Button href='/sign-up' variant="info" size="lg">
+                                        Sign Up
+                                    </Button>
+                                </Col>
+                            </Row>
+                        </Container>
+                    </CarouselCaption>
+                </Carousel.Item>
             </Carousel>
 
             
@@ -108,13 +161,13 @@ class SplashPage extends Component {
               </Row>
               <Row style = {{marginLeft: '75px', marginTop: '20px'}}>
                 <Col>
-                    <FeaturedUserCard title = "Featured User 1" img = {Dog} text = "I love Carve Connect!"/>
+                    <FeaturedUserCard title = "Featured User 1" img = {dogskate} text = "I love Carve Connect!"/>
                 </Col>
                 <Col>
-                    <FeaturedUserCard title = "Featured User 2" img = {Dog} text = "Filming is an art and it's my passion."/>
+                    <FeaturedUserCard title = "Featured User 2" img = {dogphoto} text = "Filming is an art and it's my passion."/>
                 </Col>
                 <Col>
-                    <FeaturedUserCard title = "Featured User 3" img = {Dog} text = "Sports are cool."/>
+                    <FeaturedUserCard title = "Featured User 3" img = {dogsurf} text = "Sports are cool."/>
                 </Col>
               </Row>
             </Container>
@@ -129,13 +182,21 @@ class SplashPage extends Component {
                       athletes, those who film them, and fans to connect. The video below will take you on a tour.
                       Thanks for stopping by."
                   </p>
+
                 </Col>
               </Row>
+                <Row>
+
+                </Row>
               <Row style = {{marginBottom: '50px'}}>
                 <Col style = {{textAlign: 'left'}}>
+
                   <h1>Tour</h1>
                   <div className = "text-center" >
-                    <img height = '400px' width = '750px' src = {Video_Placeholder} alt = "Placeholder Video"/>
+                      <div className="embed-responsive embed-responsive-16by9">
+                          <iframe className="embed-responsive-item"
+                                  src="https://www.youtube.com/embed/WvGopsM1G9g" allowFullScreen></iframe>
+                      </div>
                   </div>
                 </Col>
               </Row>
@@ -152,3 +213,4 @@ class SplashPage extends Component {
 }
 
 export default SplashPage;
+

@@ -4,16 +4,21 @@ import Nav from 'react-bootstrap/Nav'
 
 const TopNav = () => {
 	return (
-		<Navbar bg="dark" variant="dark" sticky = 'top'>
-			<Navbar.Brand href="/">Carve Connect</Navbar.Brand>
+		<nav className="navbar navbar-dark bg-dark">
+			<a className="navbar-brand" href="/">Carve Connect</a>
+			<Nav>
 
+				<span>
+				<ul className="nav justify-content-end">
+					<li className="nav-item">
+						<a className="nav-link active" href={'/logout'}>Logout</a>
+					</li>
 
-			<Nav className="justify-content-end">
-				<Nav.Item>
-					<Nav.Link href={'/logout'} eventKey="logout">logout</Nav.Link>
-				</Nav.Item>
+				</ul>
+				</span>
 			</Nav>
-		</Navbar>
+
+		</nav>
 	);
 };
 
