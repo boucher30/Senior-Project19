@@ -1155,7 +1155,7 @@ USE `CCv4`$$
 CREATE PROCEDURE `follow_venue` (in follower int, in ven int)
 BEGIN
 insert into follows(user_id1,venue_id, type)
-values(follower,venue,'follow');
+values(follower,ven,'follow');
 END$$
 
 DELIMITER ;
@@ -1611,6 +1611,43 @@ USE `CCv4`$$
 CREATE PROCEDURE `get_venue_carve` (in id int)
 BEGIN
 select * from all_carves where venue =id;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure update_follow_venue
+-- -----------------------------------------------------
+
+USE `CCv4`;
+DROP procedure IF EXISTS `CCv4`.`update_follow_venue`;
+
+DELIMITER $$
+USE `CCv4`$$
+CREATE PROCEDURE `update_follow_venue` (in id int, in ven int, in usr int)
+BEGIN
+update follows
+set 
+user_id1 = usr, 
+venue_id = ven, type = 'follow'
+where follow_id = id;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure add_venue_follow
+-- -----------------------------------------------------
+
+USE `CCv4`;
+DROP procedure IF EXISTS `CCv4`.`add_venue_follow`;
+
+DELIMITER $$
+USE `CCv4`$$
+CREATE PROCEDURE `add_venue_follow` (in ven int, in usr int)
+BEGIN
+
 END$$
 
 DELIMITER ;

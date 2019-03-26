@@ -195,7 +195,7 @@ class SplashPage extends Component {
                   <div className = "text-center" >
                       <div className="embed-responsive embed-responsive-16by9">
                           <iframe className="embed-responsive-item"
-                                  src="https://www.youtube.com/embed/WvGopsM1G9g" allowFullScreen></iframe>
+                                  src="https://www.youtube.com/embed/wmALu6zdaTg" allowFullScreen></iframe>
                       </div>
                   </div>
                 </Col>

@@ -36,7 +36,7 @@ export default class VenuePage extends Component {
     render() {
         if(this.state.venueInfoLength > 0){
             const venueInfo = this.state.venueInfo;
-            alert(JSON.stringify(this.state.venueInfo));
+            //alert(JSON.stringify(this.state.venueInfo));
             return (
                 <>
 

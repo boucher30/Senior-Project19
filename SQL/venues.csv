@@ -1,33 +1,33 @@
-venue_name,city,state,snow_sports,water_sports,land_sports,air_sports
-mountain1,some mountaint town,UT,"snowboard,ski,snowmobile",,mountainBiking,
-mountain2,some mountaint town,NY,"snowboard,ski,snowmobile",,,hangGlide
-mountain3,some mountaint town,CA,snowmobile,,,hangGlide
-mountain4,some mountaint town,CO,ski,,,
-mountain5,some mountaint town,UT,"snowboard,ski,snowmobile",,mountainBiking,
-mountain6,some mountaint town,MT,"snowboard,ski,snowmobile",,,
-mountain7,some mountaint town,NH,snowboard ,,,hangGlide
-mountain8,some mountaint town,VT,,,,
-mountain9,some mountaint town,AK,"snowboard,ski,snowmobile",,mountainBiking,
-mountain10,some mountaint town,VT,"snowboard,ski,snowmobile",,,
-beach1,some ocean town,NJ,,surf,,
-beach2,some ocean town,CA,,surf,,
-beach3,some ocean town,HI,,surf,,
-beach4,some ocean town,NC,,"surf,waterski",,
-beach5,some ocean town,FL,,"surf,waterski",,
-lake1,some lake town,MT,,waterski,,
-lake2,some lake town,NY,,waterski,,
-skatepark1,some skatepark town,NJ,,,skateboard,
-skatepark2,some skatepark town,NY,,,skateboard,
-skatepark3,some skatepark town,PA,,,skateboard,
-skatepark4,some skatepark town,CA,,,skateboard,
-skatepark5,some skatepark town,WA,,,skateboard,
-bmxcourse1,some bmxcourse town,NJ,,,BMX,
-bmxcourse2,some bmxcourse town,NY,,,BMX,
-bmxcourse3,some bmxcourse town,PA,,,BMX,
-bmxcourse4,some bmxcourse town,CA,,,BMX,
-bmxcourse5,some bmxcourse town,WA,,,BMX,
-airfield1,some airfield town,NJ,,,,skydive
-airfield2,some airfield town,NY,,,,skydive
-airfield3,some airfield town,PA,,,,skydive
-airfield4,some airfield town,CA,,,,skydive
-airfield5,some airfield town,WA,,,,skydive
+venue_name,city,state,snow_sports,water_sports,land_sports,air_sports,about 
+mountain1,some mountaint town,UT,"snowboard,ski,snowmobile",,mountainBiking,,some description
+mountain2,some mountaint town,NY,"snowboard,ski,snowmobile",,,hangGlide,something witty
+mountain3,some mountaint town,CA,snowmobile,,,hangGlide,some description
+mountain4,some mountaint town,CO,ski,,,,something witty
+mountain5,some mountaint town,UT,"snowboard,ski,snowmobile",,mountainBiking,,some description
+mountain6,some mountaint town,MT,"snowboard,ski,snowmobile",,,,something witty
+mountain7,some mountaint town,NH,snowboard ,,,hangGlide,some description
+mountain8,some mountaint town,VT,,,,,something witty
+mountain9,some mountaint town,AK,"snowboard,ski,snowmobile",,mountainBiking,,some description
+mountain10,some mountaint town,VT,"snowboard,ski,snowmobile",,,,something witty
+beach1,some ocean town,NJ,,surf,,,some description
+beach2,some ocean town,CA,,surf,,,something witty
+beach3,some ocean town,HI,,surf,,,some description
+beach4,some ocean town,NC,,"surf,waterski",,,something witty
+beach5,some ocean town,FL,,"surf,waterski",,,some description
+lake1,some lake town,MT,,waterski,,,something witty
+lake2,some lake town,NY,,waterski,,,some description
+skatepark1,some skatepark town,NJ,,,skateboard,,something witty
+skatepark2,some skatepark town,NY,,,skateboard,,some description
+skatepark3,some skatepark town,PA,,,skateboard,,something witty
+skatepark4,some skatepark town,CA,,,skateboard,,some description
+skatepark5,some skatepark town,WA,,,skateboard,,something witty
+bmxcourse1,some bmxcourse town,NJ,,,BMX,,some description
+bmxcourse2,some bmxcourse town,NY,,,BMX,,something witty
+bmxcourse3,some bmxcourse town,PA,,,BMX,,some description
+bmxcourse4,some bmxcourse town,CA,,,BMX,,something witty
+bmxcourse5,some bmxcourse town,WA,,,BMX,,some description
+airfield1,some airfield town,NJ,,,,skydive,something witty
+airfield2,some airfield town,NY,,,,skydive,some description
+airfield3,some airfield town,PA,,,,skydive,something witty
+airfield4,some airfield town,CA,,,,skydive,some description
+airfield5,some airfield town,WA,,,,skydive,something witty

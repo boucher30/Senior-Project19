@@ -117,7 +117,7 @@ export default class ProfilePage extends Component {
 					userInfoLength: Object.keys(res.data.users[0][0]).length
 				});
 
-				alert(JSON.stringify(res.data.users[0][0]))
+				//alert(JSON.stringify(res.data.users[0][0]))
 			});
 
 		else {
