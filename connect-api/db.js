@@ -2,10 +2,10 @@ const mysql = require('mysql');
 
 // Connect to MySQL
 var con = mysql.createConnection({
-  host: process.env.DB_HOST,
-  user: process.env.DB_user,
-  password: process.env.DB_PASSWORD,
-	database: process.env.DB_NAME,
+  host: process.env.host,
+  user: process.env.host,
+  password: process.env.password,
+	database: "CCv4",
     multipleStatements: true
 });
 
