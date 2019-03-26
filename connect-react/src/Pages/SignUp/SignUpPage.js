@@ -41,6 +41,33 @@ export default class SignUpPage extends Component {
 		});
 	};
 
+	// Handles state change for each input in the state object
+	handleChange1 = event => {
+		this.setState({
+			snowSports: event.target.value
+		});
+		alert(this.state.snowSports);
+	};
+
+	// Handles state change for each input in the state object
+	handleChange2 = event => {
+		this.setState({
+			landSports : event.target.value
+		});
+
+	};
+
+
+	// Handles state change for each input in the state object
+	handleChange3 = event => {
+		this.setState({
+			profileType: event.target.value
+
+		});
+
+	};
+
+
 	handleUserChange = event => {
 
 
@@ -62,10 +89,10 @@ export default class SignUpPage extends Component {
 			first_name: this.state.firstName,
 			last_name: this.state.lastName,
 			description: this.state.description,
-			type: ['athlete'],
-			snow_sports: ['snowboard'],
+			type: [this.state.profileType],
+			snow_sports: [this.state.snowSports],
 			water_sports: [''],
-			land_sports: [''],
+			land_sports: [this.state.landSports],
 			air_sports: ['']
 
 
@@ -95,7 +122,9 @@ export default class SignUpPage extends Component {
 		if(redirect) {
 			return <Redirect to={`/dashboard/profile/${localStorage.getItem('userId')}`}/>;
 		}
-
+		const { valueSnow } = this.state;
+		const { valueLand } = this.state;
+		const { valueType } = this.state;
 		return (
 			<div className="Login" style={{ height: '80%', top: '42%' }}>
 				<h3 style={{ textAlign: 'center', marginTop: '5%' }}>Sign Up</h3>
@@ -120,32 +149,33 @@ export default class SignUpPage extends Component {
 									 type="text"	onChange={this.handleChange} />
 
 					<Form.Group controlId="winter sport type">
+
 						<Form.Label>Sport Type</Form.Label>
-						<Form.Control value={this.state.snowSports} placeholder="Select a Sport" onChange={this.handleChange} as="select">
+						<Form.Control value={valueSnow} placeholder="Select a Sport" onChange={this.handleChange1} as="select">
 							<option disabled value={-1}>Select an option...</option>
 							<option> </option>
-							<option>Snowboarding</option>
-							<option>Ski</option>
-							<option>Snowmobile</option>
+							<option value ='snowboard'>Snowboard</option>
+							<option value = 'ski'>Ski</option>
+							<option value = 'snowmobile'>Snowmobile</option>
 						</Form.Control>
 					</Form.Group>
 
 					<Form.Group controlId="land sport type">
 						<Form.Label>Sport Type</Form.Label>
-						<Form.Control value={this.state.landSports} placeholder="Select a Sport" onChange={this.handleChange} as="select">
+						<Form.Control value={valueLand} placeholder="Select a Sport" onChange={this.handleChange2} as="select">
 							<option disabled value={-1}>Select an option...</option>
 							<option> </option>
-							<option>Skateboard</option>
-							<option>BMX</option>
+							<option value = 'skateboard'>Skateboard</option>
+							<option value = 'BMX'>BMX</option>
 						</Form.Control>
 					</Form.Group>
 
 					<Form.Group controlId="profileType">
 						<Form.Label>Profile Type</Form.Label>
-						<Form.Control value={this.state.profileType} placeholder="Select type of profile..." onChange={this.handleChange} as="select">
+						<Form.Control value={valueType} defaultValue = 'athlete' placeholder="Select type of profile..." onChange={this.handleChange3} as="select">
 							<option disabled value={-1}>Select an option...</option>
-							<option>Athlete</option>
-							<option>Photographer</option>
+							<option value = 'athlete'>Athlete</option>
+							<option value = 'photographer'>Photographer</option>
 						</Form.Control>
 					</Form.Group>
 

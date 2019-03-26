@@ -1,4 +1,4 @@
-sender_Id,rec_Id,subject,body,type
+sender_Id,rec_Id,message_subject,message_body,type
 1,2,normal,hello there,normal
 1,3,buddyRequest,be my buddy ,buddyRequest
 1,4,attendRequest,can I attend your carve?,attendRequest
