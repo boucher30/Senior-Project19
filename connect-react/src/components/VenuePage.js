@@ -53,9 +53,9 @@ export default class VenuePage extends Component {
                                             src={Mount_Snow}
                                         />
                                         <h4>
-                                            {venueInfo.about};
+                                            {venueInfo.about}
                                         </h4>
-                                        <h5>Sports: {venueInfo.snow_sports},{venueInfo.land_sports},{venueInfo.air_sports}</h5>
+                                        <h5>Sports: {venueInfo.snow_sports} {venueInfo.land_sports} {venueInfo.air_sports}</h5>
                                     </Figure>
                                 </Col>
                             </Row>
