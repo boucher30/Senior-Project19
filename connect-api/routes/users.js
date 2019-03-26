@@ -25,22 +25,43 @@ router.get('/', (req,res) => {
 router.post('/', (req,res) => {
 	const {username, email, password, first_name, last_name, description, type, snow_sports, water_sports, land_sports, air_sports} = req.body;
 
-	console.log(" new user entered with username: " + username);
-		if(false)
-		{
 
-		}else{
-			// The username wasn't found in the database
-			// Create insert query for new user
-			// Added a comment
-			new_user = "CALL add_user(?,?,?,?,?,?,?,?,?,?,?)";
-			// Execute the query to insert into the database
-			con.query(new_user,[username, email, password, first_name, last_name, description, type[0], snow_sports[0], water_sports[0], land_sports[0], air_sports[0]], (err, results) => {
-				if (err) throw err;
-                res.status(201).jsonp({results}).end;
-			})
+	usrCheck = "Call username_check(?)";
 
-		}
+
+    con.query(usrCheck,[username], (err,results)=> {
+        if (results[0][0][0] != 0)
+        {
+            check = 0;
+            res.status(202).jsonp({check}).end;
+            console.log('duplicate username cant add ');
+        }
+        else {
+
+                   // The username wasn't found in the database
+                    // Create insert query for new user
+                    // Added a comment
+                    console.log("adding user now with username: " + username);
+                    new_user = "CALL add_user(?,?,?,?,?,?,?,?,?,?,?)";
+                    // Execute the query to insert into the database
+                    con.query(new_user,[username, email, password, first_name, last_name, description, type[0], snow_sports[0], water_sports[0], land_sports[0], air_sports[0]], (err, results1) => {
+                        if (err) throw err;
+                        con.query(usrCheck,[username], (err,results3)=> {
+                            if (err) throw err;
+                            check = results3[0][0].user_Id;
+                            res.status(201).jsonp({check}).end;
+                            console.log(check);
+                        })
+
+                    })
+                }
+
+            })
+
+
+
+
+
 	});
 
 // updates all users
@@ -83,6 +104,7 @@ router.delete('/', (req,res) => {
 
 
 });
+
 
 // Grab specific user by their id
 router.get('/:userId', (req,res) => {

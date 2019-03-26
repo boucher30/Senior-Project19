@@ -109,7 +109,7 @@ router.put('/:carveId', (req,res) => {
     })
 });
 
-// updates all carves
+// updates all carves complete
 router.patch('/:carveId', (req,res) => {
     const carveId = req.params.carveId;
     const {carveName,creatorId,venueId,carveType,athlete,photo,date,completed, snow_sports, water_sports, land_sports, air_sports} = req.body;

@@ -6,6 +6,7 @@ import Col from 'react-bootstrap/Col';
 import Container from "react-bootstrap/Container";
 import Image from 'react-bootstrap/Image';
 import SnowProfilePic from '../images/snowboard-profile-pic.jpg';
+import SnowProfilePic1 from '../images/snow1.jpg';
 import EditProfileModal from "./EditProfileModal";
 
 export default class ProfilePage extends Component {
@@ -16,6 +17,8 @@ export default class ProfilePage extends Component {
 			userInfo: {},
 			userInfoLength: 0,
 			isUserLoggedIn: props.match.params.number === localStorage.getItem('userId'),
+			pic : SnowProfilePic,
+			check: true,
 			show: false
 		};
 
@@ -44,6 +47,11 @@ export default class ProfilePage extends Component {
 					<Button style={{margin:'5px'}} variant="info">Follow</Button>
 					<Button style={{margin:'5px'}} variant="info">Add Buddy</Button>
 				</div>;
+
+
+				this.state.check = userInfo.type === 'athlete';
+				if(this.state.check)
+					this.state.pic = SnowProfilePic1;
 			}
 
 			return (
@@ -59,8 +67,8 @@ export default class ProfilePage extends Component {
 					<Row>
 						<Col xs={7}>
 							<Container style={{ padding: '15px' }}>
-								if(userInfo.type.equals{'athlete'}
-								<Image src={SnowProfilePic} fluid />
+
+								<Image src={this.state.pic} fluid />
 							</Container>
 						</Col>
 						<Col xs={5}>
