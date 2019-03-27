@@ -103,7 +103,7 @@ app.use('/users/:userId/messages', usrMsgRoutes);
 app.use('/users/:userId/comments', usrComRoutes);
 app.use('/users/:userId/media', usrMedRoutes);
 app.use('/users/:userId/likes', usrLikRoutes);
-app.use('/users/:userId/carveAt',usrCarAtRoutes);
+app.use('/users/:userId/carveAttendees',usrCarAtRoutes);
 app.use('/venues/:venueId/media', venMedRoutes);
 app.use('/venues/:venueId/comments', venComRoutes);
 app.use('/venues/:venueId/carves', venCarRoutes);

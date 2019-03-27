@@ -7,8 +7,9 @@ const con = require('../../db');
 // Grabs all carves from db
 router.get('/', (req,res) => {
     // Find all carves from database
-    userId = req.params.userId;
-    carve_list = "CALL get_users_carves_attendee(?)";
+    console.log(req.params);
+    userId = req.params.userId1;
+    carve_list = "CALL get_users_created_carves(?)";
 
 
     console.log(req.query);
