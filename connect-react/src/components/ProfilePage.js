@@ -8,6 +8,8 @@ import Image from 'react-bootstrap/Image';
 import SnowProfilePic from '../images/snowboard-profile-pic.jpg';
 import SnowProfilePic1 from '../images/snow1.jpg';
 import EditProfileModal from "./EditProfileModal";
+import TopNav from "./Navbar";
+import { Redirect } from 'react-router';
 
 export default class ProfilePage extends Component {
 	constructor(props) {
@@ -76,7 +78,7 @@ export default class ProfilePage extends Component {
 								<p>Username: {userInfo.username}</p>
 								<p>First Name: {userInfo.first_name}</p>
 								<p>Last Name: {userInfo.last_name}</p>
-								<p>Profile Type: {userInfo.type}</p>
+								<p>Profile Type: {userInfo.type} <div><i className="fa fa-video-camera"></i></div></p>
 								<p>Buddy Count: {1}</p>
 								<p> Follower Count: [0] </p>
 								<p> Description: {userInfo.description}</p>
@@ -94,7 +96,10 @@ export default class ProfilePage extends Component {
 			);
 		} else {
 			return (
-				<div>Loading! this is what we see</div>
+				<div>
+					<h1 className="fa fa-spinner fa-spin" style={{position: 'absolute', left: '50%', top: '50%'}}>Loading! </h1>
+				</div>
+
 			);
 		}
 	}
@@ -132,6 +137,6 @@ export default class ProfilePage extends Component {
 			//window.location.reload();
 		}
 	}
-	else
+
 
 }

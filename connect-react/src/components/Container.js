@@ -6,6 +6,8 @@ import ProfilePage from "./ProfilePage";
 import FeedPage from "./FeedPage";
 import VenuePage from "./VenuePage";
 import VenueListPage from "./VenueListPage";
+import MessagesPage from "./MessagesPage";
+import UsersPage from "./UsersPage";
 
 export default class Container extends Component {
 	constructor(props) {
@@ -25,6 +27,8 @@ export default class Container extends Component {
 					<Route path="/dashboard/feed" component={FeedPage} />
 					<Route path="/dashboard/venues/:number" component={VenuePage} />
 					<Route path = "/dashboard/venues" component={VenueListPage} />
+					<Route path = "/dashboard/messages" component={MessagesPage} />
+					<Route path = "/dashboard/users" component={UsersPage} />
 				</Switch>
 			</Col>
 		);
