@@ -84,6 +84,14 @@ router.delete('/', (req,res) => {
 
 });
 
+router.get('/', (req, res) => {
+	get_buddies = "CALL get_buddies(?)"
+	con.query(get_buddies,(err, results) => {
+		if (err) throw err;
+		res.status(201).jsonp({users: results}).end;
+	})
+});
+
 // Grab specific follow by their id
 router.get('/:followId', (req,res) => {
 	const followId = req.params.followId;
@@ -131,14 +139,5 @@ router.delete('/:followId', (req,res) => {
 		res.status(201).jsonp({msg:'follow deleted'}).end;
 	})
 });
-
-router.get('/', (req, res) => {
-	get_buddies = "CALL get_buddies(?)"
-	con.query(get_buddies,(err, results) => {
-		if (err) throw err;
-		res.status(201).jsonp({users: results}).end;
-	})
-});
-
 
 module.exports = router;
