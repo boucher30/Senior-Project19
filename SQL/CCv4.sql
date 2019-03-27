@@ -53,12 +53,12 @@ CREATE TABLE IF NOT EXISTS `CCv4`.`VENUES` (
   `venue_name` VARCHAR(45) NOT NULL,
   `city` VARCHAR(45) NULL,
   `state` VARCHAR(2) NULL,
+  `about` VARCHAR(200) NULL,
   `snow_sports` SET('snowboard', 'ski', 'snowmobile') NULL,
   `water_sports` SET('surf', 'waterski') NULL,
   `land_sports` SET('skateboard', 'BMX', 'mountainBiking') NULL,
   `air_sports` SET('skyDive', 'hangGlide') NULL,
   `create_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-  `about` VARCHAR(200) NULL,
   PRIMARY KEY (`venue_id`),
   UNIQUE INDEX `venue_id_UNIQUE` (`venue_id` ASC) VISIBLE,
   UNIQUE INDEX `venue_name_UNIQUE` (`venue_name` ASC) VISIBLE)
@@ -202,12 +202,13 @@ DROP TABLE IF EXISTS `CCv4`.`MEDIA` ;
 
 CREATE TABLE IF NOT EXISTS `CCv4`.`MEDIA` (
   `media_id` INT NOT NULL AUTO_INCREMENT,
-  `carve` INT NULL,
   `poster` INT NOT NULL,
+  `carve` INT NULL,
+  `profile` INT NULL,
   `venue` INT NULL,
   `url` VARCHAR(50) NULL,
   `description` VARCHAR(100) NULL,
-  `profile` INT NULL,
+  `time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
   INDEX `venue_idx` (`venue` ASC) VISIBLE,
   PRIMARY KEY (`media_id`),
   UNIQUE INDEX `media_id_UNIQUE` (`media_id` ASC) VISIBLE,
@@ -283,11 +284,12 @@ DROP TABLE IF EXISTS `CCv4`.`LIKES` ;
 
 CREATE TABLE IF NOT EXISTS `CCv4`.`LIKES` (
   `like_id` INT NOT NULL AUTO_INCREMENT,
+  `poster` INT NOT NULL,
+  `type` SET('like', 'dislike') NOT NULL,
   `carve` INT NULL,
   `comment` INT NULL,
   `media` INT NULL,
-  `poster` INT NOT NULL,
-  `type` SET('like', 'dislike') NOT NULL,
+  `timestamp` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
   INDEX `comment_idx` (`comment` ASC) VISIBLE,
   INDEX `media_idx` (`media` ASC) VISIBLE,
   PRIMARY KEY (`like_id`),
@@ -334,7 +336,7 @@ CREATE TABLE IF NOT EXISTS `CCv4`.`all_carves` (`id` INT);
 -- -----------------------------------------------------
 -- Placeholder table for view `CCv4`.`all_media`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `CCv4`.`all_media` (`media_id` INT, `carve` INT, `poster` INT, `venue` INT, `url` INT, `description` INT, `profile` INT);
+CREATE TABLE IF NOT EXISTS `CCv4`.`all_media` (`media_id` INT, `poster` INT, `carve` INT, `profile` INT, `venue` INT, `url` INT, `description` INT, `time` INT);
 
 -- -----------------------------------------------------
 -- Placeholder table for view `CCv4`.`all_messages`
@@ -1648,6 +1650,150 @@ USE `CCv4`$$
 CREATE PROCEDURE `add_venue_follow` (in ven int, in usr int)
 BEGIN
 
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure get_venue_followers
+-- -----------------------------------------------------
+
+USE `CCv4`;
+DROP procedure IF EXISTS `CCv4`.`get_venue_followers`;
+
+DELIMITER $$
+USE `CCv4`$$
+CREATE PROCEDURE `get_venue_followers` (in ven int)
+BEGIN
+select * from follows where venue_id = ven;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure get_buddies
+-- -----------------------------------------------------
+
+USE `CCv4`;
+DROP procedure IF EXISTS `CCv4`.`get_buddies`;
+
+DELIMITER $$
+USE `CCv4`$$
+CREATE PROCEDURE `get_buddies` (in usr int)
+BEGIN
+select user_Id2 from follows where user_Id1 = usr and type ='buddy';
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure get_user_followed
+-- -----------------------------------------------------
+
+USE `CCv4`;
+DROP procedure IF EXISTS `CCv4`.`get_user_followed`;
+
+DELIMITER $$
+USE `CCv4`$$
+CREATE PROCEDURE `get_user_followed` (in id int)
+BEGIN
+select user_Id2 from follows where user_Id1 = id and type ='follow';
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure get_user_followers
+-- -----------------------------------------------------
+
+USE `CCv4`;
+DROP procedure IF EXISTS `CCv4`.`get_user_followers`;
+
+DELIMITER $$
+USE `CCv4`$$
+CREATE PROCEDURE `get_user_followers` (in id int )
+BEGIN
+select user_Id1 from follows where user_Id2 = id and type ='follow';
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure get_venues_followed
+-- -----------------------------------------------------
+
+USE `CCv4`;
+DROP procedure IF EXISTS `CCv4`.`get_venues_followed`;
+
+DELIMITER $$
+USE `CCv4`$$
+CREATE PROCEDURE `get_venues_followed` (in id int)
+BEGIN
+select venue_Id from follows where user_Id1 = 1 and venue_Id > 0;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure get_users_messages
+-- -----------------------------------------------------
+
+USE `CCv4`;
+DROP procedure IF EXISTS `CCv4`.`get_users_messages`;
+
+DELIMITER $$
+USE `CCv4`$$
+CREATE PROCEDURE `get_users_messages` (in id int)
+BEGIN
+select * from all_messages where sender_id = id or rec_id = id;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure get_users_inbox
+-- -----------------------------------------------------
+
+USE `CCv4`;
+DROP procedure IF EXISTS `CCv4`.`get_users_inbox`;
+
+DELIMITER $$
+USE `CCv4`$$
+CREATE PROCEDURE `get_users_inbox` (in id int)
+BEGIN
+select * from all_messages where rec_id = id;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure get_users_sent
+-- -----------------------------------------------------
+
+USE `CCv4`;
+DROP procedure IF EXISTS `CCv4`.`get_users_sent`;
+
+DELIMITER $$
+USE `CCv4`$$
+CREATE PROCEDURE `get_users_sent` (in id int)
+BEGIN
+select * from all_messages where sender_id = id;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure get_users_created_carves
+-- -----------------------------------------------------
+
+USE `CCv4`;
+DROP procedure IF EXISTS `CCv4`.`get_users_created_carves`;
+
+DELIMITER $$
+USE `CCv4`$$
+CREATE PROCEDURE `get_users_created_carves` (in id int)
+BEGIN
+select * from carves where creator = id;
 END$$
 
 DELIMITER ;

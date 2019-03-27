@@ -16,12 +16,15 @@ import dogphoto from '../../images/dogphoto.jpeg';
 import dogsurf from '../../images/dogsurf.jpeg';
 import FeaturedUserCard from '../../components/FeaturedUserCard';
 import CarouselCaption from 'react-bootstrap/CarouselCaption';
+import TopNav1 from "../../components/Navbarsplash";
 
 
 class SplashPage extends Component {
     render() {
         return (
+
           <>
+              <TopNav1/>
             {/* Sliding carousel */}
             <Carousel fade className="carousel" pauseOnHover={false}>
               <Carousel.Item>
@@ -194,7 +197,7 @@ class SplashPage extends Component {
                   <h1>Tour</h1>
                   <div className = "text-center" >
                       <div className="embed-responsive embed-responsive-16by9">
-                          <iframe className="embed-responsive-item"
+                          <iframe Title="Tour Video" className="embed-responsive-item"
                                   src="https://www.youtube.com/embed/wmALu6zdaTg" allowFullScreen></iframe>
                       </div>
                   </div>

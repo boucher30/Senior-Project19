@@ -1,17 +1,13 @@
 import React, { Component } from 'react';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
+
 import Carousel from 'react-bootstrap/Carousel';
 import Button from 'react-bootstrap/Button';
 import Snow from '../../images/snow1.jpg';
-import Skate from '../../images/skater1.jpeg';
-import Surf from '../../images/surf1.jpg';
+
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Dog from '../../images/dog.jpg';
-import FeaturedUserCard from '../../components/FeaturedUserCard';
-import Video_Placeholder from '../../images/video-placeholder.png';
+
 import CarouselCaption from 'react-bootstrap/CarouselCaption';
 
 
