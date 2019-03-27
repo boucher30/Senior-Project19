@@ -9,6 +9,7 @@ const menuItems = {
 	'Venues': {href: '/dashboard/venues'},
 	'Users': {href: '/dashboard/users'},
 	'Explore': {href: '/dashboard/explore'}
+	'Listings': {href: '/dashboard/listings'}
 };
 
 const SideMenu = () => {

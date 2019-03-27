@@ -2,12 +2,14 @@ import React, { Component } from 'react'
 import Col from "react-bootstrap/Col";
 import { Switch, Route } from 'react-router-dom';
 
-import ProfilePage from "./ProfilePage";
-import FeedPage from "./FeedPage";
-import VenuePage from "./VenuePage";
-import VenueListPage from "./VenueListPage";
-import MessagesPage from "./MessagesPage";
-import UsersPage from "./UsersPage";
+
+import MessagesPage from "./SubPages/Messages/MessagesPage";
+import UsersPage from "./SubPages/UsersPage";
+import ProfilePage from "./SubPages/Profile/ProfilePage";
+import FeedPage from "./SubPages/Feed/FeedPage";
+import VenuePage from "./SubPages/Venues/VenuePage";
+import VenueListPage from "./SubPages/Venues/VenueListPage";
+import ListingPage from "./SubPages/ListingPage/ListingPage";
 
 export default class Container extends Component {
 	constructor(props) {
@@ -29,6 +31,7 @@ export default class Container extends Component {
 					<Route path = "/dashboard/venues" component={VenueListPage} />
 					<Route path = "/dashboard/messages" component={MessagesPage} />
 					<Route path = "/dashboard/users" component={UsersPage} />
+					<Route path = "/dashboard/listings" component={ListingPage} />
 				</Switch>
 			</Col>
 		);
