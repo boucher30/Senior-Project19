@@ -6,8 +6,7 @@ const con = require('../db');
 
 // Grabs all carves from db
 router.get('/', (req,res) => {
-    // Find all carves from database
-    const {carveName,creatorId,venueId,carveType,athlete,photo,date, snow_sports, water_sports, land_sports, air_sports}= req.body;
+   
     carve_list = "CALL get_carves()";
 
 
@@ -16,7 +15,7 @@ router.get('/', (req,res) => {
     con.query(carve_list, (err, results) => {
         if (err) throw err;
 
-        res.status(200).jsonp({msg:'carves list',results}).end;
+        res.status(200).jsonp({results}).end;
 
     })
 });
