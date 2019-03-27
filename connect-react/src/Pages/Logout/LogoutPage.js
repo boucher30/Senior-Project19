@@ -14,10 +14,11 @@ import CarouselCaption from 'react-bootstrap/CarouselCaption';
 class LogoutPage extends Component {
     constructor(props){
         super(props);
-        localStorage.clear();
+
     }
 
     render() {
+        localStorage.clear();
         return (
 
             <>
