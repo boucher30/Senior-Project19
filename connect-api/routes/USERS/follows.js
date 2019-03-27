@@ -4,15 +4,17 @@ const con = require('../../db');
 
 
 
-// Grabs all follows from db
+// Grabs all follows from db; needs get_all_user_follows procedure
 router.get('/', (req,res) => {
 	// Find all follows from database
-	follow_list = "CALL get_follows()";
+	console.log(req.params);
+	userId = req.params.userId;
+	follow_list = "CALL get_user_followers(?)";
 
 
 	console.log(req.query);
 
-	con.query(follow_list, (err, results) => {
+	con.query(follow_list, [userId], (err, results) => {
 		if (err) throw err;
 
 		res.status(200).jsonp({msg:'follows list',results}).end;
@@ -134,8 +136,43 @@ router.delete('/:followId', (req,res) => {
 
 });
 // get /buddies/  returns buddy list for user procedure call => buddy_list(?) [userId]
+
 //get /followers
+router.get('/?', (req,res) => {
+	// Find all follows from database
+	console.log(req.params);
+	userId = req.params.userId;
+	follow_list = "CALL get_user_followers(?)";
+
+
+	console.log(req.query);
+
+	con.query(follow_list, [userId], (err, results) => {
+		if (err) throw err;
+
+		res.status(200).jsonp({msg:'follows list',results}).end;
+
+	})
+});
+
 //get /followed
+router.get('/?', (req,res) => {
+	// Find all follows from database
+	console.log(req.params);
+	userId = req.params.userId;
+	follow_list = "CALL get_user_followed(?)";
+
+
+	console.log(req.query);
+
+	con.query(follow_list, [userId], (err, results) => {
+		if (err) throw err;
+
+		res.status(200).jsonp({msg:'follows list',results}).end;
+
+	})
+});
+
 //put /follow ?venueId & userId
 
 router.post('/buddies/:userId1', (req,res) => {
