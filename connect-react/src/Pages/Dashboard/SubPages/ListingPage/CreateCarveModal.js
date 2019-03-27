@@ -11,11 +11,11 @@ export default class CreateCarveModal extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			name: '',
+			name: 'Carver\'s Carve',
 			sport: -1,
-			location: '',
+			location: 'Dublin, Ireland',
 			startDate: new Date(),
-			description: ''
+			description: 'Helllllloooooooo'
 		}
 
 		this.createCarve = this.createCarve.bind(this);
@@ -34,7 +34,9 @@ export default class CreateCarveModal extends Component {
 		e.preventDefault();
 
 		// Need to format date for db in YYYY-MM-DD
-		console.log('Submitted', this.state);
+		const { startDate } = this.state;
+		const date = `${startDate.getFullYear()}-${startDate.getMonth()}-${startDate.getDate()}`;
+		console.log('Date:', date);
 	}
 
 	// Used for changing the date on the date picker
@@ -71,9 +73,9 @@ export default class CreateCarveModal extends Component {
 					<Container>
 
 						{/* Name of Carve */}
-						<Form.Group onChange={this.handleChange} controlId="name">
+						<Form.Group controlId="name">
 							<Form.Label>Name</Form.Label>
-							<Form.Control type="text" placeholder="Enter Name of Carve..." />
+							<Form.Control value={this.state.name} onChange={this.handleChange} type="text" placeholder="Enter Name of Carve..." />
 							<Form.Text className="text-muted">
 								This is the name of your group carve.
 							</Form.Text>
@@ -91,9 +93,9 @@ export default class CreateCarveModal extends Component {
 						</Form.Group>
 
 						{/* Location */}
-						<Form.Group onChange={this.handleChange} controlId="location">
+						<Form.Group controlId="location">
 							<Form.Label>Location</Form.Label>
-							<Form.Control type="text" placeholder="Enter Location..." />
+							<Form.Control value={this.state.location} onChange={this.handleChange} type="text" placeholder="Enter Location..." />
 							<Form.Text className="text-muted">
 								Don't worry if you don't know where you want to go.
 							</Form.Text>
@@ -109,9 +111,9 @@ export default class CreateCarveModal extends Component {
 						</Form.Group>
 
 						{/* Description */}
-						<Form.Group onChange={this.handleChange} controlId="description">
+						<Form.Group controlId="description">
 							<Form.Label>Description</Form.Label>
-							<Form.Control as="textarea" rows="2" placeholder="Enter description here..." />
+							<Form.Control value={this.state.description} onChange={this.handleChange} as="textarea" rows="2" placeholder="Enter description here..." />
 						</Form.Group>
 
 						{/* Horizontal rule */}
