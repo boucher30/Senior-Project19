@@ -130,8 +130,14 @@ router.delete('/:followId', (req,res) => {
 		if (err) throw err;
 		res.status(201).jsonp({msg:'follow deleted'}).end;
 	})
+});
 
-
+router.get('/', (req, res) => {
+	get_buddies = "CALL get_buddies(?)"
+	con.query(get_buddies,(err, results) => {
+		if (err) throw err;
+		res.status(201).jsonp({users: results}).end;
+	})
 });
 
 
