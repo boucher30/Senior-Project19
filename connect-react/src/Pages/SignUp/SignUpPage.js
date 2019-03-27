@@ -3,6 +3,8 @@ import { Button, Form } from "react-bootstrap";
 import CustomFormGroup from "../../components/CustomFormGroup";
 import Redirect from "react-router/Redirect";
 import axios from "axios";
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 export default class SignUpPage extends Component {
 	constructor(props) {
@@ -18,6 +20,8 @@ export default class SignUpPage extends Component {
 			profileType: ('',''),
 			snowSports: ('','',''),
 			landSports: ('','',''),
+            waterSports: ('','',''),
+            airSports: ('','',''),
 			redirect: false
 		}
 	}
@@ -27,11 +31,8 @@ export default class SignUpPage extends Component {
 		const { username, email, password,firstName, lastName, profileType, snowSports } = this.state;
 
 		return username.length > 0 &&
-//			email.length > 0 &&
-			password.length > 0 &&
-//			firstName.length > 0 &&
-//			lastName.length > 0 &&
-			typeof profileType == 'string';
+
+			password.length > 0;
 	}
 
 	// Handles state change for each input in the state object
@@ -46,7 +47,7 @@ export default class SignUpPage extends Component {
 		this.setState({
 			snowSports: event.target.value
 		});
-		alert(this.state.snowSports);
+
 	};
 
 	// Handles state change for each input in the state object
@@ -67,6 +68,21 @@ export default class SignUpPage extends Component {
 
 	};
 
+    handleChange4 = event => {
+        this.setState({
+            waterSports: event.target.value
+        });
+
+    };
+
+    // Handles state change for each input in the state object
+    handleChange5 = event => {
+        this.setState({
+            airSports : event.target.value
+        });
+
+    };
+
 
 	handleUserChange = event => {
 
@@ -81,7 +97,7 @@ export default class SignUpPage extends Component {
 	handleSubmit = e => {
 		e.preventDefault();
 		console.log('Submitted form:', this.state);
-		alert(this.state.profileType + this.state.snow_sports +'this.state.profileType');
+
 		axios.post('http://localhost:8000/users', {
 			username: this.state.username,
 			password: this.state.password,
@@ -91,9 +107,9 @@ export default class SignUpPage extends Component {
 			description: this.state.description,
 			type: [this.state.profileType],
 			snow_sports: [this.state.snowSports],
-			water_sports: [''],
+			water_sports: [this.state.waterSports],
 			land_sports: [this.state.landSports],
-			air_sports: ['']
+			air_sports: [this.state.airSports]
 
 
 		})
@@ -125,8 +141,11 @@ export default class SignUpPage extends Component {
 		const { valueSnow } = this.state;
 		const { valueLand } = this.state;
 		const { valueType } = this.state;
+        const { valueWater } = this.state;
+        const { valueAir } = this.state;
 		return (
-			<div className="Login" style={{ height: '80%', top: '42%' }}>
+
+			<div className="Login" style={{ height: '100%', top: '42%' }}>
 				<h3 style={{ textAlign: 'center', marginTop: '5%' }}>Sign Up</h3>
 				<form onSubmit={this.handleSubmit}>
 
@@ -150,7 +169,7 @@ export default class SignUpPage extends Component {
 
 					<Form.Group controlId="winter sport type">
 
-						<Form.Label>Sport Type</Form.Label>
+						<Form.Label>Winter Sport Type</Form.Label>
 						<Form.Control value={valueSnow} placeholder="Select a Sport" onChange={this.handleChange1} as="select">
 							<option disabled value={-1}>Select an option...</option>
 							<option> </option>
@@ -161,7 +180,7 @@ export default class SignUpPage extends Component {
 					</Form.Group>
 
 					<Form.Group controlId="land sport type">
-						<Form.Label>Sport Type</Form.Label>
+						<Form.Label>Land Sport Type</Form.Label>
 						<Form.Control value={valueLand} placeholder="Select a Sport" onChange={this.handleChange2} as="select">
 							<option disabled value={-1}>Select an option...</option>
 							<option> </option>
@@ -169,17 +188,37 @@ export default class SignUpPage extends Component {
 							<option value = 'BMX'>BMX</option>
 						</Form.Control>
 					</Form.Group>
+                    <Form.Group controlId="water sport type">
+
+                        <Form.Label>Water Sport Type</Form.Label>
+                        <Form.Control value={valueWater} placeholder="Select a Sport" onChange={this.handleChange4} as="select">
+                            <option disabled value={-1}>Select an option...</option>
+                            <option> </option>
+                            <option value ='surf'>Surf</option>
+                            <option value = 'waterski'>water Ski</option>
+                        </Form.Control>
+                    </Form.Group>
+
+                    <Form.Group controlId="air sport type">
+                        <Form.Label>Air Sport Type</Form.Label>
+                        <Form.Control value={valueAir} placeholder="Select a Sport" onChange={this.handleChange5} as="select">
+                            <option disabled value={-1}>Select an option...</option>
+                            <option> </option>
+                            <option value = 'skydive'>Sky Dive</option>
+                            <option value = 'hangglide'>Hang Glide</option>
+                        </Form.Control>
+                    </Form.Group>
 
 					<Form.Group controlId="profileType">
-						<Form.Label>Profile Type</Form.Label>
-						<Form.Control value={valueType} defaultValue = 'athlete' placeholder="Select type of profile..." onChange={this.handleChange3} as="select">
+						<Form.Label>Profile Type (required)</Form.Label>
+						<Form.Control value={valueType} placeholder="Select type of profile..." onChange={this.handleChange3} as="select">
 							<option disabled value={-1}>Select an option...</option>
 							<option value = 'athlete'>Athlete</option>
 							<option value = 'photographer'>Photographer</option>
 						</Form.Control>
 					</Form.Group>
 
-					<Button style={{ marginTop: '20px' }}	block disabled={!this.validateForm()} type="submit">Sign In</Button>
+					<Button style={{ marginTop: '20px' }}	block disabled={!this.validateForm()} type="submit">Create Account!</Button>
 				</form>
 			</div>
 		);

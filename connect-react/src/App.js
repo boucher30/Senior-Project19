@@ -5,7 +5,6 @@ import { Switch, Route } from 'react-router-dom';
 import './App.css';
 
 // Pages and components
-import TopNav from "./components/Navbar";
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import SplashPage from './Pages/SplashPage/SplashPage';
 import LoginPage from "./Pages/Login/LoginPage";
@@ -19,7 +18,7 @@ class App extends Component {
     return (
       <div className="App">
         {/* We keep the same navbar up top and we can change options based on where we are in sequence for user */}
-        <TopNav/>
+
 
         {/* Main routing methods can be found here */}
         <Switch>
