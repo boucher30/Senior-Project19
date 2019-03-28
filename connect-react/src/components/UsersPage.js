@@ -6,7 +6,7 @@ class UsersPage extends Component {
 
     render() {
         return (
-            <base>
+            <a>
                 <div>
                 <h3>Users Page</h3>
                 <div><i className="fa fa-spinner fa-spin"> </i></div>
@@ -43,7 +43,7 @@ class UsersPage extends Component {
                         </tbody>
                     </table>
                 </div>
-            </base>
+            </a>
         );
     }
 }
