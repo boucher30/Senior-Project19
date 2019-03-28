@@ -12,17 +12,10 @@ import CarouselCaption from 'react-bootstrap/CarouselCaption';
 
 
 class LogoutPage extends Component {
-    constructor(props){
-        super(props);
-
-    }
-
     render() {
         localStorage.clear();
         return (
-
             <>
-
                 {/* Sliding carousel */}
                 <Carousel fade className="carousel" pauseOnHover={false}>
                     <Carousel.Item>

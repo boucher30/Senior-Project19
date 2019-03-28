@@ -5,11 +5,11 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Container from "react-bootstrap/Container";
 import Image from 'react-bootstrap/Image';
-import SnowProfilePic from '../images/snowboard-profile-pic.jpg';
-import SnowProfilePic1 from '../images/snow1.jpg';
+import SnowProfilePic from '../../../../images/snowboard-profile-pic.jpg';
+import SnowProfilePic1 from '../../../../images/snow1.jpg';
 import EditProfileModal from "./EditProfileModal";
-import TopNav from "./Navbar";
-import { Redirect } from 'react-router';
+// import TopNav from "../../../../components/Navbar";
+// import { Redirect } from 'react-router';
 
 export default class ProfilePage extends Component {
 	constructor(props) {

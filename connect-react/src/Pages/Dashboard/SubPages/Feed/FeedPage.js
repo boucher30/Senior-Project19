@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Mount_Snow from '../images/mount_snow.png';
+import Mount_Snow from '../../../../images/mount_snow.png';
 import FeedCard from './FeedCard';
 
 export default class FeedPage extends Component {

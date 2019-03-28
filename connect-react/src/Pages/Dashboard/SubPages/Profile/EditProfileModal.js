@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-import CustomFormGroup from './CustomFormGroup';
+import CustomFormGroup from '../../../../components/CustomFormGroup';
 import Form from "react-bootstrap/Form";
 import axios from 'axios';
 
