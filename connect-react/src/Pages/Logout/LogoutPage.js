@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
 import Carousel from 'react-bootstrap/Carousel';
 import Button from 'react-bootstrap/Button';
@@ -12,10 +12,7 @@ import CarouselCaption from 'react-bootstrap/CarouselCaption';
 
 
 class LogoutPage extends Component {
-    constructor(props){
-        super(props);
 
-    }
 
     render() {
         localStorage.clear();

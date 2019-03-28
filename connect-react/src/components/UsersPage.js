@@ -1,14 +1,15 @@
 import React, {Component} from 'react';
-import axios from 'axios'
-import FontAwesomeIcon from 'font-awesome/css/font-awesome.min.css';
+
+//import axios from 'axios'
+
 class UsersPage extends Component {
 
     render() {
         return (
-            <a>
+            <base>
                 <div>
                 <h3>Users Page</h3>
-                <div><i className="fa fa-spinner fa-spin"></i></div>
+                <div><i className="fa fa-spinner fa-spin"> </i></div>
             </div>
                 <div>
                     <table className="table table-dark">
@@ -42,7 +43,7 @@ class UsersPage extends Component {
                         </tbody>
                     </table>
                 </div>
-            </a>
+            </base>
         );
     }
 }

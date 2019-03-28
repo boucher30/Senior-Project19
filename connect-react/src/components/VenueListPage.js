@@ -15,6 +15,7 @@ export default class VenueListPage extends Component {
         super(props);
         this.state = {
             venues: {},
+            isUserLoggedIn: props.match.params.number === localStorage.getItem('userId'),
             venuesLength: 0
         }
     }
@@ -36,30 +37,26 @@ export default class VenueListPage extends Component {
         const venues = this.state.venues;
         const length = this.state.venuesLength;
 
-        let flag = false;
+        //let flag = false;
         let div = [];
 
         // Guessing j represents how many rows we want? Not sure
-        for(let j = 0; j < 2; j++){
+
             let row = [];
-            let k = 0;
-            for(k = (flag ? (length/2)+1 : k); k < length; k++){
+
+            for(let k =0 ; k < length; k++){
                 row.push(
                     <Col>
                         <VenueFigure name={venues[k].venue_name} img={Mount_Snow_BG} href={'/dashboard/venues/' + venues[k].venue_id}/>
                     </Col>
                 );
-                if(k === length/2){
-                    flag = true;
-                    break;
-                }
             }
             div.push(
                 <Row style = {{flex: '0 0 auto'}}>
                     {row}
                 </Row>
             );
-        }
+
         return div;
     };
     
@@ -77,10 +74,10 @@ export default class VenueListPage extends Component {
                         <Button variant="link">+Filters</Button>
                     </Row>
 
-                    <div style = {{marginTop: '20px', borderBottom: '1px solid lightgray'}}></div>
+                    <div style = {{marginTop: '20px', borderBottom: '1px solid lightgray'}}> </div>
 
                     {/* Horizontal scrolling effect */}
-                    <div style = {{display: 'flex', flexWrap: 'wrap', overflowX: 'scroll'}}>
+                    <div style = {{}}>
                         {this.createDiv()}
                     </div>
                 </Container>

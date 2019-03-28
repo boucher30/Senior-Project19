@@ -21,6 +21,7 @@ router.get('/', (req,res) => {
 });
 
 
+
 // Creates a new user
 router.post('/', (req,res) => {
 	const {username, email, password, first_name, last_name, description, type, snow_sports, water_sports, land_sports, air_sports} = req.body;
@@ -156,6 +157,7 @@ router.delete('/:userId', (req,res) => {
 
 
 });
+
 
 
 module.exports = router;
