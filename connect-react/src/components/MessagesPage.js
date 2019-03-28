@@ -45,7 +45,7 @@ class MessagesPage extends Component {
                                     <td>{this.state.messages.type}</td>
                                     <td>{this.state.messages.message_body}</td>*/
         return (
-            <base style = {{backgroundColor: "skyblue"}}>
+            <a style = {{backgroundColor: "skyblue"}}>
                 <Row className="justify-content-md-center" style={{ paddingLeft: '0px',backgroundColor: "white", height: "100%"}}>
 
                 <MessagesSidebar  style = {{paddingRight: '0px'}} />
@@ -131,7 +131,7 @@ class MessagesPage extends Component {
                 </div>
                     </Col>
                 </Row>
-            </base>
+            </a>
         );
     }
 }
