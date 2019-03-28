@@ -1,5 +1,3 @@
-# noinspection SyntaxErrorForFile
-
 -- MySQL Workbench Forward Engineering
 
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
@@ -414,11 +412,11 @@ DROP procedure IF EXISTS `CCv4`.`add_carve`;
 
 DELIMITER $$
 USE `CCv4`$$
-CREATE PROCEDURE `add_carve` (in carveName varchar(40), in creatorId int, in venueId int, in carveType set ('open','buddy'), in athlete int, in photo int, in dat date, 
+CREATE PROCEDURE `add_carve` (in carveName varchar(40), in creatorId int, in venueId int, in carveType set ('open','buddy'), in athlete int, in photo int, in date date, 
 in winterSports set ('snowboard','ski','snowmobile'), in waterSports set ('surf','waterSki'),in landSports set ('skateboard','BMX'), in airSports set ('skydive','hangGlide'))
 BEGIN
 insert into carves(name, creator, venue, type, max_athletes, max_photo, date, completed, snow_sports, water_sports, land_sports, air_sports)
-values(carveName,creatorId,venueId,carveType,athlete,photo,dat,0,winterSports,waterSports,landSports,airSports);
+values(carveName,creatorId,venueId,carveType,athlete,photo,date,0,winterSports,waterSports,landSports,airSports);
 END$$
 
 DELIMITER ;
@@ -614,7 +612,8 @@ DELIMITER $$
 USE `CCv4`$$
 CREATE PROCEDURE `update_venues` (in id int, in vname VARCHAR(40),in cityNear VARCHAR(45), in st VARCHAR(2),in snowSports set ('snowboard','ski','snowmobile'), in waterSports set ('surf','waterSki'),in landSports set ('skateboard','BMX'), in airSports set ('skydive','hangGlide'))
 BEGIN
-
+insert into venues( venue_name,city,state,snow_sports,water_sports,land_sports,air_sports)
+VALUES( vname,cityNear,st,snowSports,waterSports,landSports,airSports);
 END$$
 
 DELIMITER ;
@@ -1698,7 +1697,7 @@ DELIMITER $$
 USE `CCv4`$$
 CREATE PROCEDURE `get_user_followed` (in id int)
 BEGIN
-select user_Id2 from follows where user_Id1 = id and type ='follow';
+select user_Id2 from follows where user_Id1 = id and type ='follow' and user_Id2 > 0  ;
 END$$
 
 DELIMITER ;
@@ -1714,7 +1713,7 @@ DELIMITER $$
 USE `CCv4`$$
 CREATE PROCEDURE `get_user_followers` (in id int )
 BEGIN
-select user_Id1 from follows where user_Id2 = id and type ='follow';
+select user_Id1 from follows where user_Id2 = id and type ='follow' and user_Id1 > 0;
 END$$
 
 DELIMITER ;
@@ -1915,7 +1914,5 @@ SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- begin attached script 'script'
-# noinspection SyntaxError
-
 ALTER USER 'nodeuser'@'localhost' IDENTIFIED WITH mysql_native_password BY 'nodeuser@1234';
 -- end attached script 'script'
