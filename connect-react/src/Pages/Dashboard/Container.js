@@ -6,11 +6,10 @@ import { Switch, Route } from 'react-router-dom';
 import MessagesPage from "./SubPages/Messages/MessagesPage";
 import UsersPage from "./SubPages/UsersPage";
 import ProfilePage from "./SubPages/Profile/ProfilePage";
+import FeedPage from "./SubPages/Feed/FeedPage";
 import VenuePage from "./SubPages/Venues/VenuePage";
 import VenueListPage from "./SubPages/Venues/VenueListPage";
 import ListingPage from "./SubPages/ListingPage/ListingPage";
-import FeedPage from "./SubPages/Feed/FeedPage";
-
 
 export default class Container extends Component {
 	constructor(props) {

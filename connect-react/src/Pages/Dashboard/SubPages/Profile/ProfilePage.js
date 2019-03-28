@@ -8,8 +8,7 @@ import Image from 'react-bootstrap/Image';
 import SnowProfilePic from '../../../../images/snowboard-profile-pic.jpg';
 import SnowProfilePic1 from '../../../../images/snow1.jpg';
 import EditProfileModal from "./EditProfileModal";
-// import TopNav from "../../../../components/Navbar";
-// import { Redirect } from 'react-router';
+
 
 export default class ProfilePage extends Component {
 	constructor(props) {
