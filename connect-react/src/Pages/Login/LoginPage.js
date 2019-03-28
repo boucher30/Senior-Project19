@@ -3,8 +3,8 @@
  *  - Take out css file and make a js file with styles and fill them in as necessary
  *  */
 
-import React, { Component } from 'react'
-import { Button, Form, FormGroup, FormControl } from "react-bootstrap";
+import React, {Component} from 'react'
+import {Button, Form, FormControl, FormGroup} from "react-bootstrap";
 import Redirect from "react-router/Redirect";
 import './Login.css';
 import axios from "axios";
@@ -51,7 +51,7 @@ export default class LoginPage extends Component {
 
 				})
 			.then(results => {
-				this.state.userId = results.data.use;
+				this.setState( {userId : results.data.use});
 				if(results.data.use > 0) {
 
 					alert("logging in succesful userId: " + this.state.userId);

@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import { Button, Form } from "react-bootstrap";
+import React, {Component} from 'react';
+import {Button, Form} from "react-bootstrap";
 import CustomFormGroup from "../../components/CustomFormGroup";
 import Redirect from "react-router/Redirect";
 import axios from "axios";
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+//import Row from 'react-bootstrap/Row';
+//import Col from 'react-bootstrap/Col';
 
 export default class SignUpPage extends Component {
 	constructor(props) {
@@ -28,7 +28,7 @@ export default class SignUpPage extends Component {
 
 	// Validates form for style purposes and so that we cannot send empty data to api
 	validateForm() {
-		const { username, email, password,firstName, lastName, profileType, snowSports } = this.state;
+		const { username, password} = this.state;
 
 		return username.length > 0 &&
 
@@ -114,8 +114,7 @@ export default class SignUpPage extends Component {
 
 		})
 			.then(results => {
-
-				this.state.userId= results.data.check;
+				this.setState( {userId : results.data.check })	;
 
 				if(this.state.userId > 0) {
 					alert("created profile userId: " + this.state.userId);

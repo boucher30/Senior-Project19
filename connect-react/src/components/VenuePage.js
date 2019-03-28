@@ -9,7 +9,6 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import axios from 'axios';
 
 
-
 export default class VenuePage extends Component {
     constructor(props){
         super(props);
@@ -67,7 +66,19 @@ export default class VenuePage extends Component {
                             <Button variant="secondary">Media</Button>
                         </ButtonGroup>
                     </Row>
+                    <Col style={{paddingLeft: "10%", border: '2px solid darkgrey'}}>
+                        <h2 style = {{border:"2px solid slategrey"}}>Content</h2>
 
+                        <container className="embed-responsive embed-responsive-16by9" style = {{justify: "center", width: "100%", paddingBottom: "40px", border: '2px solid slategrey'}}>
+                            <iframe title="Tour Video" className="embed-responsive-item"
+                                    src="https://www.youtube.com/embed/7a0hbT0QtSw" allowFullScreen > </iframe>
+
+                        </container>
+                        <container className="embed-responsive embed-responsive-16by9" style = {{justify: "center", width: "100%", paddingTop: "20%", border: '2px solid slategrey'}}>
+                            <iframe title="Prof vid2" className="embed-responsive-item"
+                                    src="https://www.youtube.com/embed/m8aM2XVffaE" allowFullScreen > </iframe>
+
+                        </container></Col>
                 </>
             );
         }else{
