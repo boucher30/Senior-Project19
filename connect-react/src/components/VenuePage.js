@@ -4,7 +4,6 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Figure from 'react-bootstrap/Figure';
 import Mount_Snow from '../images/mount_snow_bg.png'
-//import VenueButtonMenu from './VenueButtonMenu';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import axios from 'axios';
@@ -26,36 +25,35 @@ export default class VenuePage extends Component {
 			.then(res => {
 				console.log('Venue:', res.data);
 				this.setState({
-					venueInfo: res.data.venue[0],
-					venueInfoLength: Object.keys(res.data.venue[0]).length
+					venueInfo: res.data.venues[0][0],
+					venueInfoLength: Object.keys(res.data.venues[0]).length
 				});
 			})
 	}
 
     render() {
         if(this.state.venueInfoLength > 0){
-            const venue = this.state.venueInfo;
-
+            const venueInfo = this.state.venueInfo;
+            //alert(JSON.stringify(this.state.venueInfo));
             return (
                 <>
+
                     <Row>
                         <Container>
                             <Row>
                                 <Col>
                                     <Figure>
-                                        <h1>{venue.venue_name}</h1>
-                                        <h4><em>{venue.venue_city}, {venue.venue_state}</em></h4>
+                                        <h1>{venueInfo.venue_name}</h1>
+                                        <h4><em>{venueInfo.city}, {venueInfo.state}</em></h4>
                                         <Figure.Image
                                             rounded
+
                                             src={Mount_Snow}
                                         />
-                                        <Figure.Caption style = {{color: 'black'}}>
-                                            Mount Snow is home to the East Coast's first All Park Mountain Face, Carinthia at Mount Snow, 
-                                            which debuted in the 2008-2009 season. Carinthia is home to nine parks, with both natural and 
-                                            man-made features and a half-pipe. Mount Snow was co-host of the first Extreme Games in 1995 
-                                            and host of the Winter X-Games in 2000 and 2001. Carinthia at Mount Snow claimed home to the 
-                                            second stop of the first annual Winter Dew Tour as well as many other events including the Freeski Open.
-                                        </Figure.Caption>
+                                        <h4>
+                                            {venueInfo.about}
+                                        </h4>
+                                        <h5>Sports: {venueInfo.snow_sports} {venueInfo.land_sports} {venueInfo.air_sports}</h5>
                                     </Figure>
                                 </Col>
                             </Row>
@@ -68,7 +66,19 @@ export default class VenuePage extends Component {
                             <Button variant="secondary">Media</Button>
                         </ButtonGroup>
                     </Row>
+                    <Col style={{paddingLeft: "10%", border: '2px solid darkgrey'}}>
+                        <h2 style = {{border:"2px solid slategrey"}}>Content</h2>
 
+                        <container className="embed-responsive embed-responsive-16by9" style = {{justify: "center", width: "100%", paddingBottom: "40px", border: '2px solid slategrey'}}>
+                            <iframe title="Tour Video" className="embed-responsive-item"
+                                    src="https://www.youtube.com/embed/7a0hbT0QtSw" allowFullScreen > </iframe>
+
+                        </container>
+                        <container className="embed-responsive embed-responsive-16by9" style = {{justify: "center", width: "100%", paddingTop: "20%", border: '2px solid slategrey'}}>
+                            <iframe title="Prof vid2" className="embed-responsive-item"
+                                    src="https://www.youtube.com/embed/m8aM2XVffaE" allowFullScreen > </iframe>
+
+                        </container></Col>
                 </>
             );
         }else{

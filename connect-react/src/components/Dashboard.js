@@ -5,7 +5,7 @@ import Col from "react-bootstrap/Col";
 import ProfilePage from "./ProfilePage";
 import FeedPage from "./FeedPage";
 import ConnectionPage from "./ConnectionPage";
-
+import MessagesPage from "./MessagesPage"
 export default class Dashboard extends Component {
 	constructor(props) {
 		super(props);
@@ -14,7 +14,8 @@ export default class Dashboard extends Component {
 			options: {
 				'My Profile': <ProfilePage/>,
 				'My Connections': <ConnectionPage/>,
-				'My Feed': <FeedPage/>
+				'My Feed': <FeedPage/>,
+				'My Messages': <MessagesPage/>
 			}
 		};
 
