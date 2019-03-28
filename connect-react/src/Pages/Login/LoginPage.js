@@ -59,13 +59,18 @@ export default class LoginPage extends Component {
 					this.setState({redirect: true});
 
 				}
-				else if(this.state.userId < 0){
+				else if(this.state.userId === -1){
 					alert("username is not valid");
 
 					this.setState({redirect: false});
 				}
+				else if(this.state.userId === -2){
+					alert("user is already logged in");
+
+					this.setState({redirect: false});
+				}
 				else {
-					alert("password is not valid");
+					alert("password is not valid or user is already logged in");
 
 					this.setState({redirect: false});
 				}

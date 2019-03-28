@@ -36,6 +36,7 @@ CREATE TABLE IF NOT EXISTS `CCv4`.`USERS` (
   `water_sports` SET('surf', 'waterski') NULL,
   `land_sports` SET('skateboard', 'BMX', 'mountainBiking') NULL,
   `air_sports` SET('skyDive', 'hangGlide') NULL,
+  `logged_in` TINYINT NULL DEFAULT 0,
   `create_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`user_id`),
   UNIQUE INDEX `user_id_UNIQUE` (`user_id` ASC) VISIBLE,
@@ -114,6 +115,7 @@ CREATE TABLE IF NOT EXISTS `CCv4`.`MESSAGES` (
   `rec_Id` INT NOT NULL,
   `type` SET('normal', 'buddyRequest', 'buddyAccept', 'buddyDecline', 'attendRequest', 'attendAccept', 'attendDeny', 'invite', 'inviteAccept', 'inviteDeny', 'reply') NULL,
   `reply` INT NULL,
+  `read` TINYINT NULL DEFAULT 0,
   `create_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`message_id`),
   UNIQUE INDEX `message_id_UNIQUE` (`message_id` ASC) VISIBLE,
@@ -1592,11 +1594,15 @@ DELIMITER $$
 USE `CCv4`$$
 CREATE PROCEDURE `password_check` (in usr VARCHAR(40), in pass VARCHAR(40), out userId int)
 BEGIN
-if exists(select password from users where username = usr and password = pass)
-then select user_Id from users where username = usr;
+if exists(select password from users where username = usr and password = pass and logged_in = 0) then
+update users set logged_in = 1 where username = usr;
+ select user_Id from users where username = usr;
+elseif exists(select password from users where username = usr and password = pass and logged_in = 1) then
+select -2;
 else
 select 0;
 end if;
+
 END$$
 
 DELIMITER ;
@@ -1810,6 +1816,22 @@ USE `CCv4`$$
 CREATE PROCEDURE `get_user_messages` (in id int)
 BEGIN
 select * from messages where rec_Id = id;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure logout
+-- -----------------------------------------------------
+
+USE `CCv4`;
+DROP procedure IF EXISTS `CCv4`.`logout`;
+
+DELIMITER $$
+USE `CCv4`$$
+CREATE PROCEDURE `logout` (in usr int)
+BEGIN
+update users set logged_in = 0 where user_id  = usr;
 END$$
 
 DELIMITER ;

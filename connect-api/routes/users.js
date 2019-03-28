@@ -119,6 +119,17 @@ router.get('/:userId', (req,res) => {
 	})
 });
 
+// Grab specific user by their id
+router.get('/:userId/logout', (req,res) => {
+    const userId = req.params.userId;
+    console.log("user logged out: " +userId);
+    get_user  = "call logout(?)";
+    con.query(get_user, [userId],(err, results) => {
+        if (err) throw err;
+        res.status(200).jsonp({users: results}).end;
+    })
+});
+
 // updates user
 router.put('/:userId', (req,res) => {
     const userId = req.params.userId;
