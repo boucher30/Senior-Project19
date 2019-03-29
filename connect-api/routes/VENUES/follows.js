@@ -15,7 +15,7 @@ router.get('/', (req,res) => {
 	con.query(follow_list, (err, results) => {
 		if (err) throw err;
 
-		res.status(200).jsonp({msg:'follows list',results}).end;
+		res.status(200).jsonp({results}).end;
 
 	})
 });
@@ -38,7 +38,7 @@ router.post('/', (req,res) => {
 		// Execute the query to insert into the database
 		con.query(new_follow,[usr, ven, ty[0]], (err, results) => {
 			if (err) throw err;
-			res.status(201).jsonp({msg:'follow added',results}).end;
+			res.status(201).jsonp({results}).end;
 		})
 
 	}
@@ -54,7 +54,7 @@ router.put('/', (req,res) => {
 	// Execute the query to insert into the database
 	con.query(new_follow,(err, results) => {
 		if (err) throw err;
-		res.status(201).jsonp({msg:'follows updated',results}).end;
+		res.status(201).jsonp({results}).end;
 	})
 });
 
@@ -68,7 +68,7 @@ router.patch('/', (req,res) => {
 	// Execute the query to insert into the database
 	con.query(new_follow,(err, results) => {
 		if (err) throw err;
-		res.status(201).jsonp({msg:'follows updated',results}).end;
+		res.status(201).jsonp({results}).end;
 	})
 
 
@@ -79,7 +79,7 @@ router.delete('/', (req,res) => {
 	delete_follows = "CALL delete_follows()";
 	con.query(delete_follows, (err, results) => {
 		if (err) throw err;
-		res.status(201).jsonp({msg:'all follows deleted',results}).end;
+		res.status(201).jsonp({results}).end;
 	})
 
 
@@ -92,7 +92,7 @@ router.get('/:followId', (req,res) => {
 	get_follow  = "call get_follow(?)";
 	con.query(get_follow, [followId],(err, results) => {
 		if (err) throw err;
-		res.status(200).jsonp({msg:'follow info:',results}).end;
+		res.status(200).jsonp({results}).end;
 	})
 });
 
@@ -106,7 +106,7 @@ router.put('/:followId', (req,res) => {
 
     con.query(update_follow_venue,[followId, ven, usr],(err, results) => {
         if (err) throw err;
-        res.status(201).jsonp({msg:'follow updated via put',results}).end;
+        res.status(201).jsonp({results}).end;
     })
 });
 
@@ -120,7 +120,7 @@ router.patch('/:followId', (req,res) => {
 
 	con.query(update_follow_venue,[followId, usr, ven],(err, results) => {
 		if (err) throw err;
-		res.status(201).jsonp({msg:'follow updated via patch',results}).end;
+		res.status(201).jsonp({results}).end;
 	})
 });
 
