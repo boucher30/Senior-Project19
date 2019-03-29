@@ -3,18 +3,18 @@
 require('dotenv').config();
 const express = require('express');
 const app = express({mergeParams: true});
-const server = require('http').Server(app);
+const server = require('http').createServer(app);
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const pass = require('passport');
-const socket = require('socket.io');
 const PORT = process.env.PORT || 8000;
+const PORT2 = 8001;
 const LocalStrategy = require('passport-local');
 
+const io = require('socket.io')();
+const getApiAndEmit = "todo";
 
-
-
+//const server = http.createServer(app);
 
 // Check connection for success
 const con = require('./db');
@@ -114,3 +114,41 @@ app.listen(PORT, () => {
 	console.log("Connect API started on port "+ PORT + "!");
 });
 
+let
+	sequenceNumberByClient = new Map();
+let clients = 0;
+io.on('connection', (client) => {
+	console.info(`Client connected [id=${client.id}]`);
+	// initialize this client's sequence number
+	sequenceNumberByClient.set(client, 1);
+	clients++;
+	client.emit('newclientconnect',{ description: 'Hey, welcome!'});
+	client.broadcast.emit('newclientconnect',{ description: clients + ' clients connected!'});
+
+
+	// here you can start emitting events to the client
+	client.on('subscribeToTimer', (interval) => {
+
+		console.log('Hello from the server. client is subscribing to timer with interval ', interval);
+
+		setInterval(() => {
+
+			client.emit('timer', new Date());
+
+		}, interval);
+
+	});
+
+	client.on('disconnect', () => {
+		sequenceNumberByClient.delete(client);
+		clients--;
+		console.info(`Client gone [id=${client.id}]`);
+	client.broadcast.emit('newclientconnect',{ description: clients + ' clients connected!'});
+	});
+});
+
+
+
+io.listen(PORT2);
+
+console.log('socket io listening on port ', PORT2);

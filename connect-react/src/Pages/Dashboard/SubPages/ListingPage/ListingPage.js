@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import Button from "react-bootstrap/Button";
 import CreateCarveModal from "../../../../components/CreateCarveModal";
 
@@ -12,7 +12,7 @@ export default class ListingPage extends Component {
 
 	handleClick = () => {
 		this.setState({ show: !this.state.show });
-	}
+	};
 
 	render() {
 		return (

@@ -5,13 +5,8 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Container from "react-bootstrap/Container";
 import Image from 'react-bootstrap/Image';
-
-import SnowProfilePic2 from '../../../../images/helmet reflect phot.jpeg';
-import SnowProfilePic3 from '../../../../images/drone guy.jpeg';
-import EditProfileModal from "./EditProfileModal";
 import SnowProfilePic from '../../../../images/snowboard-profile-pic.jpg';
-import SnowProfilePic1 from '../../../../images/snow1.jpg';
-
+import EditProfileModal from "./EditProfileModal";
 
 export default class ProfilePage extends Component {
 	constructor(props) {
@@ -52,15 +47,6 @@ export default class ProfilePage extends Component {
 					<Button style={{margin:'5px'}} variant="info">Add Buddy</Button>
 				</div>;
 
-				var randomnumber = Math.floor(Math.random() * (4 - 1 + 1)) + 1;
-
-
-					if(randomnumber === 1 )
-					this.setState({pic : SnowProfilePic1});
-					if(randomnumber === 2 )
-					this.setState({pic : SnowProfilePic2});
-					else if(randomnumber === 3)
-						this.setState({pic : SnowProfilePic3});
 
 			}
 
@@ -68,7 +54,7 @@ export default class ProfilePage extends Component {
 				<>
 					<EditProfileModal handleRefresh={this.getUserInfo} user={userInfo} show={this.state.show} handleClose={this.handleClose} />
 
-					<div style={{ display: 'flex', marginTop: '8px', border: "2px solid slategrey" }}>
+					<div style={{ display: 'flex', marginTop: '8px', border: "0px solid slategrey" }}>
 						<h2 style={{ width: isUserLoggedIn ? '90%' : '80%' }}>{profilePrefix} Profile</h2>
 						{options}
 
@@ -78,21 +64,21 @@ export default class ProfilePage extends Component {
 					<Row>
 
 						<Col xs={4}>
-							<Container style={{  border: "5px solid black" }}>
+							<Container style={{  border: "0px solid black" }}>
 
 								<Image src={this.state.pic} fluid />
 							</Container>
 						</Col>
 						<Col xs={4}>
-							<Container style={{ backgroundColor: "darkgrey", height: "100%", width:"100%",border: "2px double black"}} bordered>
+							<Container style={{ backgroundColor: "darkgrey", height: "100%", width:"100%",border: "0px double black"}} bordered>
 								<h1> {userInfo.username}</h1>
 								<h4> {userInfo.first_name} {userInfo.last_name}</h4>
 								<p style={{flexDirection:'row'}} > <i className="fa fa-video-camera"> </i> {userInfo.type} </p>
-
+								<p style = {{paddingLeft: "10%",}}> About me: {userInfo.description}</p>
 							</Container>
 						</Col>
 						<Col xs={4}>
-						<Container style={{ border: " 2px solid black", backgroundColor:'slategrey', width:"100%%", height: "100%" }}>
+						<Container style={{ border: " 0px solid black", backgroundColor:'slategrey', width:"100%%", height: "100%" }}>
 							<h3>Profile Info</h3>
 							<p>Buddy Count: {1}</p>
 							<p> Follower Count: [0] </p>
@@ -105,13 +91,10 @@ export default class ProfilePage extends Component {
 
 					</Row>
 
-					<Row style={{ border: "2px solid black", backgroundColor: "darkgrey", width: "200%",paddingLeft: "5px"}}>
-						<p style = {{paddingLeft: "10%",}}> About me: {userInfo.description}</p>
 
-					</Row>
 					{/* Row will hold all of the media and such that we grab from the api */}
-					<Col style={{paddingLeft: "10%", border: '2px solid darkgrey'}}>
-						<h2 style = {{border:"2px solid slategrey"}}>Content</h2>
+					<Col style={{paddingLeft: "10%", border: '0px solid darkgrey'}}>
+						<h2 style = {{border:"0px solid slategrey"}}>Content</h2>
 
 						<container className="embed-responsive embed-responsive-16by9" style = {{justify: "center", width: "100%", paddingBottom: "40px", border: '2px solid slategrey'}}>
 							<iframe title="Tour Video" className="embed-responsive-item"

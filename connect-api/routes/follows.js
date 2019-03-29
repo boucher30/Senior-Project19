@@ -84,6 +84,29 @@ router.delete('/', (req,res) => {
 
 });
 
+
+// Creates a new follow
+router.post('/buddies', (req,res) => {
+	const {user1, user2} = req.body;
+
+	console.log("user " + user1 + " now buddies with:" + user2 );
+	if(false)
+	{
+
+	}else{
+		// The followname wasn't found in the database
+		// Create insert query for new follow
+		// Added a comment
+		new_buddy = "CALL add_buddy(?,?)";
+		// Execute the query to insert into the database
+		con.query(new_buddy,[user1, user2], (err, results) => {
+			if (err) throw err;
+			res.status(201).jsonp({msg:'follow added',results}).end;
+		})
+
+	}
+});
+
 // Grab specific follow by their id
 router.get('/:followId', (req,res) => {
 	const followId = req.params.followId;
