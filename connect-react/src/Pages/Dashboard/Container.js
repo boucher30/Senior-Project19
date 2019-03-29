@@ -24,7 +24,7 @@ export default class Container extends Component {
 	render() {
 		return (
 			<Col xs={10} style={{ textAlign: 'left', bordered: '0.5px solid rgba(0, 0, 0, 0.5)' }}>
-				<Switch>
+				<Switch >
 					{/* Remember to parse integer because the number is returned a string */}
 					{/* Can be accessed by props.match.params.number in Profile Page.... */}
 					<Route path="/dashboard/profile/:number" component={ProfilePage} />

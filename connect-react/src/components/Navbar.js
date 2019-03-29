@@ -3,18 +3,6 @@ import Nav from 'react-bootstrap/Nav'
 import NavDropdown from 'react-bootstrap/NavDropdown'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
-// import React,{Component} from 'react'
-// // import navbar from 'react-bootstrap/Navbar'
-// import Nav from 'react-bootstrap/Nav'
-// import NavDropdown from 'react-bootstrap/NavDropdown'
-// import Form from 'react-bootstrap/Form'
-// // import FormControl from 'react-bootstrap/FormControl'
-// import Button from 'react-bootstrap/Button'
-// // import row from 'react-bootstrap/Row'
-// // import components from 'react'
-// // import Redirect from "../Pages/Login/LoginPage";
-// // import axios from "axios";
-
 import {link} from 'react-router'
 
 import CustomFormGroup from "./CustomFormGroup";
@@ -23,9 +11,8 @@ class TopNav extends Component {
 	constructor(props)
 	{
 			super(props);
-			this.handleClick = this.handleClick.bind(this);
 
-			this.state = {userId: 1, search: "", redirect: false}
+			this.state = {userId: 1, search: "", redirect: false, show: false, show1: false}
 
 	}
 
@@ -34,6 +21,10 @@ class TopNav extends Component {
 		this.setState({userId : this.value}) ;
 
 	}
+
+	handleClick1= () => {
+		this.setState({ show1: !this.state.show1 });
+	};
 
 	// Handles state change for each input in the state object
 	handleChange = event => {
@@ -67,12 +58,14 @@ class TopNav extends Component {
 
 		let redirect = this.state.redirect;
 		if(redirect) {
-			return <link  to={`/dashboard/profile/${this.state.userId}`}/>;
+			return <link to ={`/dashboard/profile/${this.state.userId}`}/>;
 		}
 
 	return (
+<>
 
 		<Nav className="navbar navbar-dark bg-dark nav-fill" >
+
 			<a className="navbar-brand" href="/" style = {{color:'lightskyblue',
 				textShadowColor: 'black',
 				fontWeight:'bold',
@@ -81,12 +74,15 @@ class TopNav extends Component {
 			<li>
 			<div style={{justify:"left"}}>
 				<Form inline style ={{justify:"left"}} >
-					<CustomFormGroup value = {this.state.search} type="integer" placeholder="User Search" className=" mr-sm-2" controlId ="search" onChange={this.handleChange} />
+					<CustomFormGroup value = {this.state.search} type="integer" placeholder="User Search" className=" mr-sm-2" controlId ="search" onChange={this.handleChange}  />
 					<Button type="submit" block disabled={!this.validateForm()} href = {'/dashboard/profile/'+ parseInt(this.state.search)} style = {{width: 50, color: "white"}} rounded>Find</Button>
 
 				</Form>
 
 			</div>
+				<div>
+
+				</div>
 			</li>
 			<li >
 
@@ -98,7 +94,7 @@ class TopNav extends Component {
 							<NavDropdown.Item href="/dashboard/messages/Inbox">Inbox</NavDropdown.Item>
 							<NavDropdown.Item href="/dashboard/messages">Sent</NavDropdown.Item>
 							<NavDropdown.Divider />
-							<NavDropdown.Item href="/dashboard/messages">Send Message</NavDropdown.Item>
+							<NavDropdown.Item onClick={this.handleClick1}>Send Message</NavDropdown.Item>
 						</NavDropdown>
 
 						<NavDropdown className ="fa fa-bell text-danger"  id="collasible-nav-dropdown" >
@@ -127,6 +123,7 @@ class TopNav extends Component {
 			</li>
 
 		</Nav>
+	</>
 )}
 
 

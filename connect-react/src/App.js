@@ -1,6 +1,5 @@
-import React, { Component } from 'react';
-import { Switch, Route } from 'react-router-dom';
-
+import React, {Component} from 'react';
+import {Route, Switch} from 'react-router-dom';
 // Styles at app level
 import './App.css';
 // Pages and components
@@ -10,14 +9,26 @@ import LoginPage from "./Pages/Login/LoginPage";
 import SignUpPage from "./Pages/SignUp/SignUpPage";
 import LogoutPage from "./Pages/Logout/LogoutPage";
 import ErrorPage from "./Pages/error/ErrorPage";
+import {subscribe} from './api';
 
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    subscribe((err, timestamp) => this.setState({
+      timestamp
+    }));
+  }
+
+  state = {
+    timestamp: 'no timestamp yet'
+  };
+
   render() {
+      let data ="";
     return (
       <div className="App">
         {/* We keep the same navbar up top and we can change options based on where we are in sequence for user */}
-
 
         {/* Main routing methods can be found here */}
         <Switch>
@@ -29,6 +40,7 @@ class App extends Component {
           <Route path='/error' component={ErrorPage} />
         </Switch>
       </div>
+
     );
   }
 }

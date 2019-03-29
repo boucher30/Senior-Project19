@@ -4,6 +4,7 @@ import MessagesSidebar from "./MessagesSidebar";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
+
 class MessagesPage extends Component {
     constructor(props) {
         super(props);
@@ -17,7 +18,7 @@ class MessagesPage extends Component {
             rec_Id: 0,
             type: "",
             timestamp: "",
-            messages: "",
+            messages: [],
             check: true,
             show: false
         };
@@ -27,9 +28,9 @@ class MessagesPage extends Component {
     {
         axios.get(`http://localhost:8000/users/${localStorage.getItem('userId')}/messages`)
             .then(res => {
-
+                console.log("results: ", res.data.results[0]);
                 this.setState({
-                    //messages: res.data.results[0][0]
+                    messages: res.data.results[0]
                 });
 
                 //alert(JSON.stringify(res.data.users[0][0]))
@@ -37,16 +38,31 @@ class MessagesPage extends Component {
 
     }
     render() {
-        /* import code needs null check
+        let messageRows;
 
-                                    <th scope="row">{this.state.messages.message_subject}</th>
-                                    <td>{this.state.messages.sender_id}</td>
-                                    <td>{this.state.messages.timestamp}</td>
-                                    <td>{this.state.messages.type}</td>
-                                    <td>{this.state.messages.message_body}</td>*/
+        if(this.state.messages.length > 0){
+            messageRows = this.state.messages.map((message, index) => {
+                return (
+                    <tr>
+                        <th>{message.message_subject}</th>
+                        <td>{message.sender_id}</td>
+                        <td>{message.timestamp}</td>
+                        <td>{message.type}</td>
+                        <td>{message.message_body}</td>
+                        <td><i className ="fa fa-thumbs-o-up text-success" /></td>
+                        <td><i className ="fa fa-thumbs-o-down text-danger" /></td>
+                        <td><i className ="fa fa-inbox text-white" /></td>
+                        <td><i className ="fa fa-trash-o text-white" /></td>
+                    </tr>
+                )
+            });
+        }
+
         return (
-            <a style = {{backgroundColor: "skyblue"}}>
-                <Row className="justify-content-md-center" style={{ paddingLeft: '0px',backgroundColor: "white", height: "100%"}}>
+
+            <a >
+
+                <Row className="justify-content-md-center" style={{ paddingLeft: '0px',backgroundColor: "lightgray", height: "100%"}}>
 
                 <MessagesSidebar  style = {{paddingRight: '0px'}} />
 
@@ -56,7 +72,7 @@ class MessagesPage extends Component {
                     borderBottomWidth: 5, width: '150%' }}>Messages</h3>
 
                 <div>
-                    <table className="table table-dark" style = {{color: "skyblue", paddingTop: "5px",width:"150%", bordered: '0.5px solid rgba(0, 0, 0, 0.5)'}}>
+                    <table className="table table-dark" style = {{color: "skyblue", paddingTop: "5px",width:"101%", bordered: '0.5px solid rgba(0, 0, 0, 0.5)'}}>
                         <thead>
                         <tr>
                             <th scope="col" style={{width:"6%"}}>Subject</th>
@@ -64,68 +80,15 @@ class MessagesPage extends Component {
                             <th scope="col" style={{width:"4%"}}>Timestamp</th>
                             <th scope="col" style={{width:"4%"}}>Type</th>
                             <th scope="col">Body</th>
-
+                            <th scope="col" style={{width:"1%"}}>Approve</th>
+                            <th scope="col" style={{width:"1%"}}>Deny</th>
+                            <th scope="col" style={{width:"1%"}}>Reply</th>
+                            <th scope="col" style={{width:"1%"}}>Delete</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                        </tr>
-                        <tr>
-                            <th scope="row">HelloWorld</th>
-                            <td>user2</td>
-                            <td>3-19-19(19:00)</td>
-                            <td>normal</td>
-                            <td>Message Text Here</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">HelloWorld</th>
-                            <td>user2</td>
-                            <td>3-19-19(19:00)</td>
-                            <td>normal</td>
-                            <td>Message Text Here</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">HelloWorld</th>
-                            <td>user2</td>
-                            <td>3-19-19(19:00)</td>
-                            <td>normal</td>
-                            <td>Message Text Here</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">HelloWorld</th>
-                            <td>user2</td>
-                            <td>3-19-19(19:00)</td>
-                            <td>normal</td>
-                            <td>Message Text Here</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">HelloWorld</th>
-                            <td>user2</td>
-                            <td>3-19-19(19:00)</td>
-                            <td>normal</td>
-                            <td>Message Text Here</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">HelloWorld</th>
-                            <td>user2</td>
-                            <td>3-19-19(19:00)</td>
-                            <td>normal</td>
-                            <td>Message Text Here</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">HelloWorld</th>
-                            <td>user2</td>
-                            <td>3-19-19(19:00)</td>
-                            <td>normal</td>
-                            <td>Message Text Here</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">HelloWorld</th>
-                            <td>user2</td>
-                            <td>3-19-19(19:00)</td>
-                            <td>normal</td>
-                            <td>Message Text Here</td>
-                        </tr>
+                        {messageRows}
+
                         </tbody>
                     </table>
                 </div>

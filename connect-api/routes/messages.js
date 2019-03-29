@@ -25,7 +25,7 @@ router.get('/', (req,res) => {
 router.post('/', (req,res) => {
     const {sender,reciever,subject,body, msgType} = req.body;
 
-    console.log(" new message sent from: " + sender + "to: "+reciever);
+    console.log(" new message sent from: " + sender + "to: "+reciever +" of type: "+msgType);
     if(false)
     {
 
@@ -35,7 +35,7 @@ router.post('/', (req,res) => {
         // Added a comment
         new_message = "CALL add_message(?,?,?,?,?)";
         // Execute the query to insert into the database
-        con.query(new_message,[sender,reciever,subject,body, msgType[0]], (err, results) => {
+        con.query(new_message,[sender,reciever,subject,body, msgType], (err, results) => {
             if (err) throw err;
             res.status(201).jsonp({msg:'message added',results}).end;
         })
