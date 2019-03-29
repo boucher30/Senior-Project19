@@ -30,9 +30,7 @@ class LogoutPage extends Component {
     render() {
         localStorage.clear();
         return (
-
             <>
-
                 {/* Sliding carousel */}
                 <Carousel fade className="carousel" pauseOnHover={false}>
                     <Carousel.Item>

@@ -17,10 +17,7 @@ const TopNav1 = () => {
 				fontFamily: 'monospace'}}>Carve Connect
 			</a>
 
-
 				<div><i className="fa fa-map text-white"> </i></div>
-
-
 		</nav>
 	);
 };

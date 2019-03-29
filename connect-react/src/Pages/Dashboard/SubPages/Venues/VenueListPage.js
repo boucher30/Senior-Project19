@@ -4,7 +4,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import VenueFigure from './VenueFigure';
-import Mount_Snow_BG from '../images/mount_snow_bg.png';
+import Mount_Snow_BG from '../../../../images/mount_snow_bg.png';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 

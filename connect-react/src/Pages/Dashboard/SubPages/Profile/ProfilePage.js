@@ -5,11 +5,13 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Container from "react-bootstrap/Container";
 import Image from 'react-bootstrap/Image';
-import SnowProfilePic from '../images/snowboard-profile-pic.jpg';
-import SnowProfilePic1 from '../images/snow1.jpg';
-import SnowProfilePic2 from '../images/helmet reflect phot.jpeg';
-import SnowProfilePic3 from '../images/drone guy.jpeg';
+
+import SnowProfilePic2 from '../../../../images/helmet reflect phot.jpeg';
+import SnowProfilePic3 from '../../../../images/drone guy.jpeg';
 import EditProfileModal from "./EditProfileModal";
+import SnowProfilePic from '../../../../images/snowboard-profile-pic.jpg';
+import SnowProfilePic1 from '../../../../images/snow1.jpg';
+
 
 export default class ProfilePage extends Component {
 	constructor(props) {

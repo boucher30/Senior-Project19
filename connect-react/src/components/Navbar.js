@@ -3,6 +3,18 @@ import Nav from 'react-bootstrap/Nav'
 import NavDropdown from 'react-bootstrap/NavDropdown'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+// import React,{Component} from 'react'
+// // import navbar from 'react-bootstrap/Navbar'
+// import Nav from 'react-bootstrap/Nav'
+// import NavDropdown from 'react-bootstrap/NavDropdown'
+// import Form from 'react-bootstrap/Form'
+// // import FormControl from 'react-bootstrap/FormControl'
+// import Button from 'react-bootstrap/Button'
+// // import row from 'react-bootstrap/Row'
+// // import components from 'react'
+// // import Redirect from "../Pages/Login/LoginPage";
+// // import axios from "axios";
+
 import {link} from 'react-router'
 
 import CustomFormGroup from "./CustomFormGroup";

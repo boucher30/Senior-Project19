@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Button from "react-bootstrap/Button";
-import CreateCarveModal from "./CreateCarveModal";
+import CreateCarveModal from "../../../../components/CreateCarveModal";
 
 export default class ListingPage extends Component {
 	constructor(props) {
