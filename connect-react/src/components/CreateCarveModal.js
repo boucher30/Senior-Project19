@@ -3,7 +3,7 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Container from "react-bootstrap/Container";
-import DatePicker from "react-datepicker";
+import DatePicker from "react-datepicker/es";
 
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -35,7 +35,7 @@ export default class CreateCarveModal extends Component {
 
 		// Need to format date for db in YYYY-MM-DD
 		const { startDate } = this.state;
-		const date = `${startDate.getFullYear()}-${startDate.getMonth()}-${startDate.getDate()}`;
+		const date = `${startDate.getFullYear()}-${startDate.getMonth() + 1}-${startDate.getDate()}`;
 		console.log('Date:', date);
 	}
 

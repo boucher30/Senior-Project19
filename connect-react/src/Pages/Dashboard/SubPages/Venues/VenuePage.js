@@ -4,10 +4,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Figure from 'react-bootstrap/Figure';
 import Mount_Snow from '../../../../images/mount_snow_bg.png'
-<<<<<<< HEAD:connect-react/src/Pages/Dashboard/SubPages/Venues/VenuePage.js
-=======
 //import VenueButtonMenu from './VenueButtonMenu';
->>>>>>> 6ecce61c422338ab8e080293f94fa0ea9c886b62:connect-react/src/Pages/Dashboard/SubPages/Venues/VenuePage.js
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import axios from 'axios';

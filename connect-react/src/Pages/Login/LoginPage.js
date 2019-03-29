@@ -7,7 +7,7 @@ import React, { Component } from 'react'
 import { Button, Form, FormGroup, FormControl } from "react-bootstrap";
 import Redirect from "react-router/Redirect";
 import './Login.css';
-// import axios from "axios";
+import axios from "axios";
 
 export default class LoginPage extends Component {
 	constructor(props) {
