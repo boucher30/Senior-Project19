@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Carousel from 'react-bootstrap/Carousel';
@@ -160,6 +160,8 @@ class SplashPage extends Component {
               <Row>
                 <Col>
                   <h1 style = {{textAlign: 'left', marginTop: '30px'}}>Featured Users</h1>
+                    <h1 className = 'border-bottom' style = {{ borderBottomColor: 'black',
+                        borderBottomWidth: "10px", width: '150%', borderThickness:"5px" }}> </h1>
                 </Col>
               </Row>
               <Row style = {{marginLeft: '75px', marginTop: '20px'}}>
@@ -180,6 +182,8 @@ class SplashPage extends Component {
               <Row> 
                 <Col style = {{textAlign: 'left'}}>
                   <h1>About</h1>
+                    <h3 className = 'border-bottom' style = {{ borderBottomColor: 'black',
+                        borderBottomWidth: "10px", width: '150%', borderThickness:"5px" }}> </h3>
                   <p>
                   "Hello and welcome to carve connect. Carve Connect is a social media platform for extreme sports
                       athletes, those who film them, and fans to connect. The video below will take you on a tour.
@@ -193,12 +197,13 @@ class SplashPage extends Component {
                 </Row>
               <Row style = {{marginBottom: '50px'}}>
                 <Col style = {{textAlign: 'left'}}>
-
+                    <h3 className = 'border-bottom' style = {{ borderBottomColor: 'black',
+                        borderBottomWidth: "10px", width: '150%', borderThickness:"5px" }}> </h3>
                   <h1>Tour</h1>
                   <div className = "text-center" >
                       <div className="embed-responsive embed-responsive-16by9">
                           <iframe Title="Tour Video" className="embed-responsive-item"
-                                  src="https://www.youtube.com/embed/wmALu6zdaTg" allowFullScreen></iframe>
+                                  src="https://www.youtube.com/embed/wmALu6zdaTg" allowFullScreen> </iframe>
                       </div>
                   </div>
                 </Col>

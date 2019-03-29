@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
 import Carousel from 'react-bootstrap/Carousel';
 import Button from 'react-bootstrap/Button';
@@ -9,11 +9,21 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 import CarouselCaption from 'react-bootstrap/CarouselCaption';
+import axios from "axios";
 
 
 class LogoutPage extends Component {
-    constructor(props){
-        super(props);
+    componentWillMount()
+    {
+        axios.get(`http://localhost:8000/users/${localStorage.getItem('userId')}/logout`)
+            .then(res => {
+
+                this.setState({
+                    //messages: res.data.results[0][0]
+                });
+
+                //alert(JSON.stringify(res.data.users[0][0]))
+            });
 
     }
 

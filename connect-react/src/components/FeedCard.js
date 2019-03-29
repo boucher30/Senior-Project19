@@ -8,7 +8,7 @@ const FeedCard = (props) => {
 					<Card.Img variant="top" src={props.img} />
     				<Card.Body>
       					<Card.Text>  
-						  <a href='/dashboard/venue-profile'>{props.text}</a>
+						  <a href ={"/dashboard/venuePage"}>{props.text}</a>
 						</Card.Text>
 					</Card.Body>
 				</Card>

@@ -9,7 +9,7 @@ router.get('/', (req,res) => {
 	// Find all follows from database
 	console.log(req.params);
 	userId = req.params.userId;
-	follow_list = "CALL get_user_followers(?)";
+	follow_list = "CALL get_user_followed(?)";
 
 
 	console.log(req.query);
@@ -86,6 +86,61 @@ router.delete('/', (req,res) => {
 
 });
 
+
+//get /followed
+router.get('/buddies', (req,res) => {
+	// Find all follows from database
+	console.log(req.params);
+	userId = req.params.userId;
+	follow_list = "CALL get_user_followed(?)";
+
+
+	console.log(req.query);
+
+	con.query(follow_list, [userId], (err, results) => {
+		if (err) throw err;
+
+		res.status(200).jsonp({msg:'follows list',results}).end;
+
+	})
+});
+
+//get /followed
+router.get('/venues', (req,res) => {
+	// Find all follows from database
+	console.log(req.params);
+	userId = req.params.userId;
+	follow_list = "CALL get_venues_followed(?)";
+
+
+	console.log(req.query);
+
+	con.query(follow_list, [userId], (err, results) => {
+		if (err) throw err;
+
+		res.status(200).jsonp({msg:'follows list',results}).end;
+
+	})
+});
+
+// Grabs all follows from db; needs get_all_user_follows procedure
+router.get('/followers', (req,res) => {
+	// Find all follows from database
+	console.log(req.params);
+	userId = req.params.userId;
+	follow_list = "CALL get_user_followers(?)";
+
+
+	console.log(req.query);
+
+	con.query(follow_list, [userId], (err, results) => {
+		if (err) throw err;
+
+		res.status(200).jsonp({msg:'follows list',results}).end;
+
+	})
+});
+
 // Grab specific follow by their id
 router.get('/:followId', (req,res) => {
 	const followId = req.params.followId;
@@ -93,7 +148,7 @@ router.get('/:followId', (req,res) => {
 	get_follow  = "call get_follow(?)";
 	con.query(get_follow, [followId],(err, results) => {
 		if (err) throw err;
-		res.status(200).jsonp({msg:'follow info:',results}).end;
+		res.status(200).jsonp({results}).end;
 	})
 });
 
@@ -106,7 +161,7 @@ router.put('/:followId', (req,res) => {
 
 	con.query(update_follow,[followId,user1, user2, ven, ty[0]],(err, results) => {
 		if (err) throw err;
-		res.status(201).jsonp({msg:'follow updated via put',results}).end;
+		res.status(201).jsonp({results}).end;
 	})
 });
 
@@ -155,23 +210,6 @@ router.get('/?', (req,res) => {
 	})
 });
 
-//get /followed
-router.get('/?', (req,res) => {
-	// Find all follows from database
-	console.log(req.params);
-	userId = req.params.userId;
-	follow_list = "CALL get_user_followed(?)";
-
-
-	console.log(req.query);
-
-	con.query(follow_list, [userId], (err, results) => {
-		if (err) throw err;
-
-		res.status(200).jsonp({msg:'follows list',results}).end;
-
-	})
-});
 
 //put /follow ?venueId & userId
 

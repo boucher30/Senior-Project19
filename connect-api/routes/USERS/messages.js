@@ -15,7 +15,7 @@ router.get('/', (req,res) => {
     con.query(message_list, [userId], (err, results) => {
         if (err) throw err;
 
-        res.status(200).jsonp({msg:'messages list',results}).end;
+        res.status(200).jsonp({results}).end;
 
     })
 });

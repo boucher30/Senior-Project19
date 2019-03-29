@@ -8,7 +8,7 @@ const Dashboard = () => {
 	return (
 		<>
 		<Navbar />
-		<Row style={{ height: '100%' }}>
+		<Row style={{ height: '100%', width:'100%' }}>
 
 			<SideMenu />
 			<Container />

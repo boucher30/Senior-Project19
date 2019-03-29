@@ -21,6 +21,7 @@ router.get('/', (req,res) => {
 });
 
 
+
 // Creates a new user
 router.post('/', (req,res) => {
 	const {username, email, password, first_name, last_name, description, type, snow_sports, water_sports, land_sports, air_sports} = req.body;
@@ -118,6 +119,17 @@ router.get('/:userId', (req,res) => {
 	})
 });
 
+// Grab specific user by their id
+router.get('/:userId/logout', (req,res) => {
+    const userId = req.params.userId;
+    console.log("user logged out: " +userId);
+    get_user  = "call logout(?)";
+    con.query(get_user, [userId],(err, results) => {
+        if (err) throw err;
+        res.status(200).jsonp({users: results}).end;
+    })
+});
+
 // updates user
 router.put('/:userId', (req,res) => {
     const userId = req.params.userId;
@@ -156,6 +168,7 @@ router.delete('/:userId', (req,res) => {
 
 
 });
+
 
 
 module.exports = router;

@@ -30,6 +30,14 @@ router.post('/', (req, res) => {
                     console.log("passwordfail"+ use);
 
                 }
+                else if(results1[0][0][0] < 0)
+                {
+                    const use = -2;
+
+                    res.status(202).jsonp({use}).end;
+                    console.log("user already logged in"+ use);
+
+                }
                 else
                 {
 
