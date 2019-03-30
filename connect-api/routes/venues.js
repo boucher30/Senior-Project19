@@ -37,7 +37,7 @@ router.post('/', (req,res) => {
         // Execute the query to insert into the database
         con.query(new_venue,[vname,cityNear,st,snowSports[0],waterSports[0],landSports[0],airSports[0],description], (err, results) => {
             if (err) throw err;
-            res.status(201).jsonp({msg:'venue added',results}).end;
+            res.status(201).jsonp({results}).end;
         })
 
     }
@@ -53,7 +53,7 @@ router.put('/', (req,res) => {
     // Execute the query to insert into the database
     con.query(new_venue,(err, results) => {
         if (err) throw err;
-        res.status(201).jsonp({msg:'venues updated',results}).end;
+        res.status(201).jsonp({results}).end;
     })
 });
 
@@ -67,7 +67,7 @@ router.patch('/', (req,res) => {
     // Execute the query to insert into the database
     con.query(new_venue,(err, results) => {
         if (err) throw err;
-        res.status(201).jsonp({msg:'venues updated',results}).end;
+        res.status(201).jsonp({results}).end;
     })
 
 
@@ -78,7 +78,7 @@ router.delete('/', (req,res) => {
     delete_venues = "CALL delete_venues()";
     con.query(delete_venues, (err, results) => {
         if (err) throw err;
-        res.status(201).jsonp({msg:'all venues deleted',results}).end;
+        res.status(201).jsonp({results}).end;
     })
 
 
@@ -104,7 +104,7 @@ router.put('/:venueId', (req,res) => {
 
     con.query(update_venue,[venueId,vname,cityNear,st,snowSports[0],waterSports[0],landSports[0],airSports[0],description],(err, results) => {
         if (err) throw err;
-        res.status(201).jsonp({msg:'venue updated via put',results}).end;
+        res.status(201).jsonp({results}).end;
     })
 });
 
@@ -117,7 +117,7 @@ router.patch('/:venueId', (req,res) => {
 
     con.query(update_venue,[venueId,vname,cityNear,st,snowSports[0],waterSports[0],landSports[0],airSports[0],description],(err, results) => {
         if (err) throw err;
-        res.status(201).jsonp({msg:'venue updated via patch',results}).end;
+        res.status(201).jsonp({results}).end;
     })
 });
 

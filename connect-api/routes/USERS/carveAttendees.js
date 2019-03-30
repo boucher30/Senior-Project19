@@ -17,7 +17,7 @@ router.get('/', (req,res) => {
     con.query(carve_attendees_list, [userId], (err, results) => {
         if (err) throw err;
 
-        res.status(200).jsonp({msg:'carve_attendees list',results}).end;
+        res.status(200).jsonp({results}).end;
 
     })
 });
@@ -39,7 +39,7 @@ router.post('/', (req,res) => {
         // Execute the query to insert into the database
         con.query(new_carve_attendees,[carve,user,userType[0]], (err, results) => {
             if (err) throw err;
-            res.status(201).jsonp({msg:'carve_attendees added',results}).end;
+            res.status(201).jsonp({results}).end;
         })
 
     }
@@ -55,7 +55,7 @@ router.put('/', (req,res) => {
     // Execute the query to insert into the database
     con.query(new_carve_attendees,(err, results) => {
         if (err) throw err;
-        res.status(201).jsonp({msg:'carve_attendeess updated',results}).end;
+        res.status(201).jsonp({results}).end;
     })
 });
 
@@ -69,7 +69,7 @@ router.patch('/', (req,res) => {
     // Execute the query to insert into the database
     con.query(new_carve_attendees,(err, results) => {
         if (err) throw err;
-        res.status(201).jsonp({msg:'carve_attendeess updated',results}).end;
+        res.status(201).jsonp({results}).end;
     })
 
 
@@ -80,7 +80,7 @@ router.delete('/', (req,res) => {
     delete_carve_attendeess = "CALL delete_carve_attendees()";
     con.query(delete_carve_attendeess, (err, results) => {
         if (err) throw err;
-        res.status(201).jsonp({msg:'all carve_attendeess deleted',results}).end;
+        res.status(201).jsonp({results}).end;
     })
 
 
@@ -93,7 +93,7 @@ router.get('/:carve_attendeesId', (req,res) => {
     get_carve_attendees  = "call get_carve_attendee(?)";
     con.query(get_carve_attendees, [carve_attendeesId],(err, results) => {
         if (err) throw err;
-        res.status(200).jsonp({msg:'carve_attendees info:',results}).end;
+        res.status(200).jsonp({results}).end;
     })
 });
 
@@ -106,7 +106,7 @@ router.put('/:carve_attendeesId', (req,res) => {
 
     con.query(update_carve_attendees,[carve_attendeesId,carve,user,userType[0]],(err, results) => {
         if (err) throw err;
-        res.status(201).jsonp({msg:'carve_attendees updated via put',results}).end;
+        res.status(201).jsonp({results}).end;
     })
 });
 
@@ -119,7 +119,7 @@ router.patch('/:carve_attendeesId', (req,res) => {
 
     con.query(update_carve_attendees,[carve_attendeesId,carve,user,userType[0]],(err, results) => {
         if (err) throw err;
-        res.status(201).jsonp({msg:'carve_attendees updated via patch',results}).end;
+        res.status(201).jsonp({results}).end;
     })
 });
 

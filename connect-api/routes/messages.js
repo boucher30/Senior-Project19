@@ -15,7 +15,7 @@ router.get('/', (req,res) => {
     con.query(message_list, (err, results) => {
         if (err) throw err;
 
-        res.status(200).jsonp({msg:'messages list',results}).end;
+        res.status(200).jsonp({results}).end;
 
     })
 });
@@ -37,7 +37,7 @@ router.post('/', (req,res) => {
         // Execute the query to insert into the database
         con.query(new_message,[sender,reciever,subject,body, msgType], (err, results) => {
             if (err) throw err;
-            res.status(201).jsonp({msg:'message added',results}).end;
+            res.status(201).jsonp({results}).end;
         })
 
     }
@@ -53,7 +53,7 @@ router.put('/', (req,res) => {
     // Execute the query to insert into the database
     con.query(new_message,(err, results) => {
         if (err) throw err;
-        res.status(201).jsonp({msg:'messages updated',results}).end;
+        res.status(201).jsonp({results}).end;
     })
 });
 
@@ -67,7 +67,7 @@ router.patch('/', (req,res) => {
     // Execute the query to insert into the database
     con.query(new_message,(err, results) => {
         if (err) throw err;
-        res.status(201).jsonp({msg:'messages updated',results}).end;
+        res.status(201).jsonp({results}).end;
     })
 
 
@@ -78,7 +78,7 @@ router.delete('/', (req,res) => {
     delete_messages = "CALL delete_messages()";
     con.query(delete_messages, (err, results) => {
         if (err) throw err;
-        res.status(201).jsonp({msg:'all messages deleted',results}).end;
+        res.status(201).jsonp({results}).end;
     })
 
 
@@ -91,7 +91,7 @@ router.get('/:messageId', (req,res) => {
     get_message  = "call get_message(?)";
     con.query(get_message, [messageId],(err, results) => {
         if (err) throw err;
-        res.status(200).jsonp({msg:'message info:',results}).end;
+        res.status(200).jsonp({results}).end;
     })
 });
 
@@ -104,7 +104,7 @@ router.put('/:messageId', (req,res) => {
 
     con.query(update_message,[messageId,sender,reciever,subject,body, msgType[0]],(err, results) => {
         if (err) throw err;
-        res.status(201).jsonp({msg:'message updated via put',results}).end;
+        res.status(201).jsonp({results}).end;
     })
 });
 
@@ -117,7 +117,7 @@ router.patch('/:messageId', (req,res) => {
 
     con.query(update_message,[messageId,sender,reciever,subject,body, msgType[0]],(err, results) => {
         if (err) throw err;
-        res.status(201).jsonp({msg:'message updated via patch',results}).end;
+        res.status(201).jsonp({results}).end;
     })
 });
 
