@@ -4,7 +4,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import axios from 'axios';
 import ListGroup from 'react-bootstrap/ListGroup';
-import Button from "./CarveCard";
+import Button from 'react-bootstrap/Button';
 
 
 export default class CarveCardUserAttend extends Component {
@@ -86,7 +86,7 @@ export default class CarveCardUserAttend extends Component {
         let color = "grey";
         let act = "secondary";
         let no = "not";
-        let att = <div></div>;
+        let at = <div></div>;
         if (this.state.carveInfo.length > 0) {
             carveList = this.state.carveInfo.map((carve, index) => {
 
@@ -137,17 +137,18 @@ export default class CarveCardUserAttend extends Component {
                     });
                 }
 
+
                 if(carve.completed >0) {
                     color = "seagreen";
                     act = "Carve Completed";
                     no = "Completed";
-                    att = <div></div>;
+                    at = <div></div>;
                 }
                 else {
-                    color = "grey";
+                    color = "lightskyblue";
                     act = "Request to Attend";
                     no = "Upcoming";
-                    att =<Button variant="info"  >{act}</Button>;
+                    at =<Button variant="info" style = {{ paddingTop:"10px"}}  >{act}</Button>;
                 }
                 return (
 
@@ -156,7 +157,7 @@ export default class CarveCardUserAttend extends Component {
                         fontFamily: 'monospace', paddingRight: '0px', width: "100%"
                     }}>
 
-                        <Card style = {{width: '60%', backgroundColor: [color]}}>
+                        <Card style = {{width: '100%', backgroundColor: [color]}}>
                             <Card.Header style = {{color:"navy"}}>Carve is {no}
                                 <Row style = {{justify: 'space-between'}}>
                                     <Col style = {{position: 'left',margin: '15px', marginBottom: '-15px'}} >
@@ -188,21 +189,28 @@ export default class CarveCardUserAttend extends Component {
                                             <Row>
                                                 Max Film: {carve.max_photo}
                                             </Row>
+                                            <Row>
+
+                                            </Row>
+                                            <Row>
+
+                                            </Row>
 
                                         </Card.Text>
                                     </Col>
                                     <Col>
                                         <h3>Attendees:</h3>
                                         {carveAttendList}</Col></Row>
-                                <Row>
+                                <Row style = {{paddingTop:"5%",bordered:"5px solid black"}}>
                                     <Col>
+                                        {at}
 
                                     </Col>
-
-
+                                    <Col><box style = {{color:"red", paddingTop:"10px"}}><i className ="fa fa-thumbs-o-down text-danger" /> Dislikes: 10</box></Col>
+                                    <Col><box style = {{color:"blue", paddingTop:"10px"}}><i className ="fa fa-hand-rock-o " style = {{color:"blue"}}/> Likes: 10</box></Col>
                                 </Row>
                             </Card.Body>
-                            <Card.Footer className="text-primary text-info">Carve Card 1.0
+                            <Card.Footer className="text-primary text-info">
                                 <Row>
                                     <Col>{carveComments}</Col>
                                     <Col>{carveMedia}</Col>
@@ -239,4 +247,3 @@ export default class CarveCardUserAttend extends Component {
         )
     };
 }
-

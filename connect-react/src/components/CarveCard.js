@@ -24,6 +24,8 @@ export default class CarveCard extends Component {
             carveAtten: {},
             carveComm: {},
             carveMed: {},
+            carveLik: {},
+            carveDlik: {},
             completed: 0,
             sports: "",
             create_time: ""
@@ -75,6 +77,32 @@ export default class CarveCard extends Component {
                 });
 
             });
+
+
+        //currently only gets attendees for carve1. not dynamic per carve
+        axios.get(`http://localhost:8000/carves/${1}/likes`)
+            .then(res => {
+                //alert("carve:" + JSON.stringify(res.data.results));
+                console.log("results: ", res.data.results[0]);
+                //alert(JSON.stringify(res.data.results[0]));
+                this.setState({
+                    carveLik: res.data.results[0]
+                });
+
+            });
+
+
+        //currently only gets attendees for carve1. not dynamic per carve
+        axios.get(`http://localhost:8000/carves/${1}/likes/dislike`)
+            .then(res => {
+                //alert("carve:" + JSON.stringify(res.data.results));
+                console.log("results: ", res.data.results[0]);
+                //alert(JSON.stringify(res.data.results[0]));
+                this.setState({
+                    carveDlik: res.data.results[0]
+                });
+
+            });
     }
 
     render() {
@@ -82,6 +110,8 @@ export default class CarveCard extends Component {
         let carveAttendList;
         let carveComments;
         let carveMedia;
+        let lik;
+        let dlik;
         let color = "grey";
         let act = "secondary";
         let no = "not";
@@ -90,7 +120,8 @@ export default class CarveCard extends Component {
             carveList = this.state.carveInfo.map((carve, index) => {
 
 
-
+                lik = this.state.carveLik.length;
+                dlik = this.state.carveDlik.length;
                 if (this.state.carveAtten.length > 0) {
                 carveAttendList = this.state.carveAtten.map((attender, index) => {
                     return (
@@ -143,10 +174,10 @@ export default class CarveCard extends Component {
                     att = <div></div>;
                 }
                 else {
-                    color = "grey";
+                    color = "lightskyblue";
                     act = "Request to Attend";
                     no = "Upcoming";
-                    att =<Button variant="info"  >{act}</Button>;
+                    att =<Button variant="info" style = {{ paddingTop:"10px"}}  >{act}</Button>;
                 }
                 return (
 
@@ -155,7 +186,7 @@ export default class CarveCard extends Component {
                         fontFamily: 'monospace', paddingRight: '0px', width: "100%"
                     }}>
 
-                        <Card style = {{width: '60%', backgroundColor: [color]}}>
+                        <Card style = {{width: '100%', backgroundColor: [color]}}>
                             <Card.Header style = {{color:"navy"}}>Carve is {no}
                                 <Row style = {{justify: 'space-between'}}>
                                     <Col style = {{position: 'left',margin: '15px', marginBottom: '-15px'}} >
@@ -187,22 +218,28 @@ export default class CarveCard extends Component {
                                     <Row>
                                         Max Film: {carve.max_photo}
                                     </Row>
+                                    <Row>
+
+                                    </Row>
+                                    <Row>
+
+                                    </Row>
 
                                 </Card.Text>
                                 </Col>
                                     <Col>
                                         <h3>Attendees:</h3>
                                         {carveAttendList}</Col></Row>
-                                <Row>
+                                <Row style = {{paddingTop:"5%",bordered:"5px solid black"}}>
                                     <Col>
                                         {att}
 
                                     </Col>
-
-
+                                    <Col><box style = {{color:"red", paddingTop:"10px"}}><i className ="fa fa-thumbs-o-down text-danger" /> Dislikes: {dlik}</box></Col>
+                                    <Col><box style = {{color:"blue", paddingTop:"10px"}}><i className ="fa fa-hand-rock-o " style = {{color:"blue"}}/> Likes: {lik}</box></Col>
                                 </Row>
                             </Card.Body>
-                            <Card.Footer className="text-primary text-info">Carve Card 1.0
+                            <Card.Footer className="text-primary text-info">
                             <Row>
                                 <Col>{carveComments}</Col>
                                 <Col>{carveMedia}</Col>

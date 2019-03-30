@@ -124,7 +124,7 @@ export default class ProfilePage extends Component {
 						</div>
 
 					</Col>
-					<Col style = {{width: "200%"}}>
+					<Col style = {{width: "100%"}}>
 						<Row>
 							<h2>Carves created by user</h2></Row>
 						<Row style = {{width:"200%"}}>
