@@ -259,6 +259,11 @@ INSERT INTO carve_attendees(carve,user,type) VALUES (10,3,'athlete');
 INSERT INTO carve_attendees(carve,user,type) VALUES (10,4,'athlete');
 INSERT INTO carve_attendees(carve,user,type) VALUES (10,5,'athlete');
 INSERT INTO carve_attendees(carve,user,type) VALUES (10,6,'athlete');
+INSERT INTO carve_attendees(carve,user,type) VALUES (6,1,'athlete');
+INSERT INTO carve_attendees(carve,user,type) VALUES (7,1,'athlete');
+INSERT INTO carve_attendees(carve,user,type) VALUES (8,1,'athlete');
+INSERT INTO carve_attendees(carve,user,type) VALUES (9,1,'athlete');
+INSERT INTO carve_attendees(carve,user,type) VALUES (10,1,'athlete');
 
 INSERT INTO media(poster,url,description,carve) VALUES (1,'https://www.youtube.com/embed/7a0hbT0QtSw','cool video',1);
 INSERT INTO media(poster,url,description,carve) VALUES (1,'www.youtube.com','cool video',2);

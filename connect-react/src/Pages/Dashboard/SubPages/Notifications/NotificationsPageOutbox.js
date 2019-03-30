@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import axios from 'axios'
-import MessagesSidebar from "./MessagesSidebar";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import NotificationsSidebar from "./NotificationsSidebar";
 
 
-class MessagesPageOutbox extends Component {
+class NotificationsPageOutbox extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -26,7 +26,7 @@ class MessagesPageOutbox extends Component {
     }
     componentWillMount()
     {
-        axios.get(`http://localhost:8000/users/${localStorage.getItem('userId')}/messages/sent`)
+        axios.get(`http://localhost:8000/users/${localStorage.getItem('userId')}/messages/notifications/sent`)
             .then(res => {
                 console.log("results: ", res.data.results[0]);
                 this.setState({
@@ -49,6 +49,8 @@ class MessagesPageOutbox extends Component {
                         <td>{message.timestamp}</td>
                         <td>{message.type}</td>
                         <td>{message.message_body}</td>
+                        <td><i className ="fa fa-thumbs-o-up text-success" /></td>
+                        <td><i className ="fa fa-thumbs-o-down text-danger" /></td>
                         <td><i className ="fa fa-trash-o text-white" /></td>
                     </tr>
                 )
@@ -61,7 +63,7 @@ class MessagesPageOutbox extends Component {
 
                 <Row className="justify-content-md-center" style={{ paddingLeft: '0px',backgroundColor: "lightgray", height: "100%"}}>
 
-                    <MessagesSidebar  style = {{paddingRight: '0px'}} />
+                    <NotificationsSidebar  style = {{paddingRight: '0px'}} />
 
                     <Col style={{ paddingLeft: '0px'}}>
 
@@ -77,6 +79,8 @@ class MessagesPageOutbox extends Component {
                                     <th scope="col" style={{width:"4%"}}>Timestamp</th>
                                     <th scope="col" style={{width:"4%"}}>Type</th>
                                     <th scope="col">Body</th>
+                                    <th scope="col" style={{width:"1%"}}>Approve</th>
+                                    <th scope="col" style={{width:"1%"}}>Deny</th>
                                     <th scope="col" style={{width:"1%"}}>Delete</th>
                                 </tr>
                                 </thead>
@@ -94,6 +98,6 @@ class MessagesPageOutbox extends Component {
 }
 
 
-export default MessagesPageOutbox;
+export default NotificationsPageOutbox;
 
 

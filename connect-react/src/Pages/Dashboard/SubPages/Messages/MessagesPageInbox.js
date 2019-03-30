@@ -49,8 +49,6 @@ class MessagesPageInbox extends Component {
                         <td>{message.timestamp}</td>
                         <td>{message.type}</td>
                         <td>{message.message_body}</td>
-                        <td><i className ="fa fa-thumbs-o-up text-success" /></td>
-                        <td><i className ="fa fa-thumbs-o-down text-danger" /></td>
                         <td><i className ="fa fa-inbox text-white" /></td>
                         <td><i className ="fa fa-trash-o text-white" /></td>
                     </tr>
@@ -80,8 +78,6 @@ class MessagesPageInbox extends Component {
                                     <th scope="col" style={{width:"4%"}}>Timestamp</th>
                                     <th scope="col" style={{width:"4%"}}>Type</th>
                                     <th scope="col">Body</th>
-                                    <th scope="col" style={{width:"1%"}}>Approve</th>
-                                    <th scope="col" style={{width:"1%"}}>Deny</th>
                                     <th scope="col" style={{width:"1%"}}>Reply</th>
                                     <th scope="col" style={{width:"1%"}}>Delete</th>
                                 </tr>

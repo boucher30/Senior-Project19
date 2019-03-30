@@ -1763,7 +1763,7 @@ DELIMITER $$
 USE `CCv4`$$
 CREATE PROCEDURE `get_users_inbox` (in id int)
 BEGIN
-select * from all_messages where rec_id = id;
+select * from all_messages where rec_id = id and type = 'normal' or type = 'reply';
 END$$
 
 DELIMITER ;
@@ -1779,7 +1779,7 @@ DELIMITER $$
 USE `CCv4`$$
 CREATE PROCEDURE `get_users_sent` (in id int)
 BEGIN
-select * from all_messages where sender_id = id;
+select * from all_messages where sender_id = id and type = 'normal' or type = 'reply';
 END$$
 
 DELIMITER ;
@@ -1811,7 +1811,7 @@ DELIMITER $$
 USE `CCv4`$$
 CREATE PROCEDURE `get_user_messages` (in id int)
 BEGIN
-select * from messages where rec_Id = id;
+select * from messages where rec_Id = id ;
 END$$
 
 DELIMITER ;
@@ -1844,6 +1844,54 @@ USE `CCv4`$$
 CREATE PROCEDURE `logout_all` ()
 BEGIN
 update users set logged_in = 0;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure get_open_carves
+-- -----------------------------------------------------
+
+USE `CCv4`;
+DROP procedure IF EXISTS `CCv4`.`get_open_carves`;
+
+DELIMITER $$
+USE `CCv4`$$
+CREATE PROCEDURE `get_open_carves` ()
+BEGIN
+select * from all_carves where type = 'open';
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure get_user_notifications
+-- -----------------------------------------------------
+
+USE `CCv4`;
+DROP procedure IF EXISTS `CCv4`.`get_user_notifications`;
+
+DELIMITER $$
+USE `CCv4`$$
+CREATE PROCEDURE `get_user_notifications` (in id int)
+BEGIN
+select * from messages where rec_id = id and type != 'normal' and type !='reply';
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure get_user_sent_notifications
+-- -----------------------------------------------------
+
+USE `CCv4`;
+DROP procedure IF EXISTS `CCv4`.`get_user_sent_notifications`;
+
+DELIMITER $$
+USE `CCv4`$$
+CREATE PROCEDURE `get_user_sent_notifications` (in id int)
+BEGIN
+select * from messages where sender_id = id and type != 'normal' and type !='reply';
 END$$
 
 DELIMITER ;

@@ -89,23 +89,22 @@ class TopNav extends Component {
 				<ul className="navbar justify-content-end">
 					<div>
 
-						<NavDropdown className ="fa fa-envelope text-white"  id="collasible-nav-dropdown">
+						<NavDropdown className ="fa fa-envelope text-white"  id="collapsible-nav-dropdown">
 							<NavDropdown.Item href="/dashboard/messages">Messages</NavDropdown.Item>
-							<NavDropdown.Item href="/dashboard/messages/Inbox">Inbox</NavDropdown.Item>
-							<NavDropdown.Item href="/dashboard/messages">Sent</NavDropdown.Item>
+							<NavDropdown.Item href="/dashboard/messages/inbox">Inbox</NavDropdown.Item>
+							<NavDropdown.Item href="/dashboard/messages/outbox">Sent</NavDropdown.Item>
 							<NavDropdown.Divider />
 							<NavDropdown.Item onClick={this.handleClick1}>Send Message</NavDropdown.Item>
 						</NavDropdown>
 
-						<NavDropdown className ="fa fa-bell text-danger"  id="collasible-nav-dropdown" >
-							<NavDropdown.Item href="#">Notifications</NavDropdown.Item>
-							<NavDropdown.Item href="#">Buddy Requests</NavDropdown.Item>
-							<NavDropdown.Item href="#">Carves</NavDropdown.Item>
+						<NavDropdown className ="fa fa-bell text-danger"  id="collapsible-nav-dropdown" >
+							<NavDropdown.Item href="/dashboard/notinbox">Notifications</NavDropdown.Item>
+							<NavDropdown.Item href="/dashboard/notoutbox">Notif Sent</NavDropdown.Item>
 							<NavDropdown.Divider />
-							<NavDropdown.Item href="#">Create Carve</NavDropdown.Item>
+
 						</NavDropdown>
 
-						<NavDropdown className="fa fa-cogs text-secondary"  id="collasible-nav-dropdown" >
+						<NavDropdown className="fa fa-cogs text-secondary"  id="collapsible-nav-dropdown" >
 							<NavDropdown.Item href="#">Settings</NavDropdown.Item>
 							<NavDropdown.Item href="#">Privacy</NavDropdown.Item>
 							<NavDropdown.Item href="#">Help</NavDropdown.Item>
