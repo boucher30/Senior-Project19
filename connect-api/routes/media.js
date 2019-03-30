@@ -15,7 +15,7 @@ router.get('/', (req,res) => {
     con.query(media_list, (err, results) => {
         if (err) throw err;
 
-        res.status(200).jsonp({msg:'medias list',results}).end;
+        res.status(200).jsonp({results}).end;
 
     })
 });
@@ -37,7 +37,7 @@ router.post('/', (req,res) => {
         // Execute the query to insert into the database
         con.query(new_media,[poster,url,description,carve,venue,profile], (err, results) => {
             if (err) throw err;
-            res.status(201).jsonp({msg:'media added',results}).end;
+            res.status(201).jsonp({results}).end;
         })
 
     }
@@ -53,7 +53,7 @@ router.put('/', (req,res) => {
     // Execute the query to insert into the database
     con.query(new_media,(err, results) => {
         if (err) throw err;
-        res.status(201).jsonp({msg:'medias updated',results}).end;
+        res.status(201).jsonp({results}).end;
     })
 });
 
@@ -67,7 +67,7 @@ router.patch('/', (req,res) => {
     // Execute the query to insert into the database
     con.query(new_media,(err, results) => {
         if (err) throw err;
-        res.status(201).jsonp({msg:'medias updated',results}).end;
+        res.status(201).jsonp({results}).end;
     })
 
 
@@ -78,7 +78,7 @@ router.delete('/', (req,res) => {
     delete_medias = "CALL delete_media()";
     con.query(delete_medias, (err, results) => {
         if (err) throw err;
-        res.status(201).jsonp({msg:'all medias deleted',results}).end;
+        res.status(201).jsonp({results}).end;
     })
 
 
@@ -91,7 +91,7 @@ router.get('/:mediaId', (req,res) => {
     get_media  = "call get_medi(?)";
     con.query(get_media, [mediaId],(err, results) => {
         if (err) throw err;
-        res.status(200).jsonp({msg:'media info:',results}).end;
+        res.status(200).jsonp({results}).end;
     })
 });
 
@@ -104,7 +104,7 @@ router.put('/:mediaId', (req,res) => {
 
     con.query(update_media,[mediaId,poster,url,description,carve,venue,profile],(err, results) => {
         if (err) throw err;
-        res.status(201).jsonp({msg:'media updated via put',results}).end;
+        res.status(201).jsonp({results}).end;
     })
 });
 
@@ -117,7 +117,7 @@ router.patch('/:mediaId', (req,res) => {
 
     con.query(update_media,[mediaId,poster,url,description,carve,venue,profile],(err, results) => {
         if (err) throw err;
-        res.status(201).jsonp({msg:'media updated via patch',results}).end;
+        res.status(201).jsonp({results}).end;
     })
 });
 

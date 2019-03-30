@@ -15,7 +15,7 @@ router.get('/', (req,res) => {
     con.query(like_list, (err, results) => {
         if (err) throw err;
 
-        res.status(200).jsonp({msg:'likes list',results}).end;
+        res.status(200).jsonp({results}).end;
 
     })
 });
@@ -37,7 +37,7 @@ router.post('/', (req,res) => {
         // Execute the query to insert into the database
         con.query(new_like,[poster,likeordislike[0],carve,media,comment], (err, results) => {
             if (err) throw err;
-            res.status(201).jsonp({msg:'like added',results}).end;
+            res.status(201).jsonp({results}).end;
         })
 
     }
@@ -53,7 +53,7 @@ router.put('/', (req,res) => {
     // Execute the query to insert into the database
     con.query(new_like,(err, results) => {
         if (err) throw err;
-        res.status(201).jsonp({msg:'likes updated',results}).end;
+        res.status(201).jsonp({results}).end;
     })
 });
 
@@ -67,7 +67,7 @@ router.patch('/', (req,res) => {
     // Execute the query to insert into the database
     con.query(new_like,(err, results) => {
         if (err) throw err;
-        res.status(201).jsonp({msg:'likes updated',results}).end;
+        res.status(201).jsonp({results}).end;
     })
 
 
@@ -78,7 +78,7 @@ router.delete('/', (req,res) => {
     delete_likes = "CALL delete_likes()";
     con.query(delete_likes, (err, results) => {
         if (err) throw err;
-        res.status(201).jsonp({msg:'all likes deleted',results}).end;
+        res.status(201).jsonp({results}).end;
     })
 
 
@@ -91,7 +91,7 @@ router.get('/:likeId', (req,res) => {
     get_like  = "call get_like(?)";
     con.query(get_like, [likeId],(err, results) => {
         if (err) throw err;
-        res.status(200).jsonp({msg:'like info:',results}).end;
+        res.status(200).jsonp({results}).end;
     })
 });
 
@@ -104,7 +104,7 @@ router.put('/:likeId', (req,res) => {
 
     con.query(update_like,[likeId,poster,likeordislike[0],carve,media,comment],(err, results) => {
         if (err) throw err;
-        res.status(201).jsonp({msg:'like updated via put',results}).end;
+        res.status(201).jsonp({results}).end;
     })
 });
 
@@ -117,7 +117,7 @@ router.patch('/:likeId', (req,res) => {
 
     con.query(update_like,[likeId,poster,likeordislike[0],carve,media,comment],(err, results) => {
         if (err) throw err;
-        res.status(201).jsonp({msg:'like updated via patch',results}).end;
+        res.status(201).jsonp({results}).end;
     })
 });
 
