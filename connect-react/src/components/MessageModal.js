@@ -50,6 +50,7 @@ export default class MessageModal extends Component {
 
 
         })
+
     }
 
 
@@ -60,7 +61,8 @@ export default class MessageModal extends Component {
             subject.length > 0 &&
             to.length > 0 &&
             to.length < 39 &&
-            body.length > 0
+            body.length > 0 &&
+                type.length >0
         );
     }
 
