@@ -8,6 +8,7 @@ import Image from 'react-bootstrap/Image';
 import SnowProfilePic from '../../../../images/snowboard-profile-pic.jpg';
 import EditProfileModal from "./EditProfileModal";
 import CarveCardUserCreate from "../../../../components/CarveCardUserCreate";
+import CreateCarveModal from "../../../../components/CreateCarveModal";
 
 export default class ProfilePage extends Component {
 	constructor(props) {
@@ -19,7 +20,8 @@ export default class ProfilePage extends Component {
 			isUserLoggedIn: props.match.params.number === localStorage.getItem('userId'),
 			pic : SnowProfilePic,
 			check: true,
-			show: false
+			show: false,
+			show1: false
 		};
 
 		this.handleShow = this.handleShow.bind(this);
@@ -32,6 +34,10 @@ export default class ProfilePage extends Component {
 		this.getUserInfo();
 	}
 
+	handleClick = () => {
+		this.setState({ show1: !this.state.show1 });
+	};
+
 	// We need to conditionally render things based on the user in relation to who is logged in
 	render() {
 		if(this.state.userInfoLength > 0) {
@@ -41,7 +47,11 @@ export default class ProfilePage extends Component {
 			// Make button options for top right corner
 			let options;
 			if(isUserLoggedIn) {
-				options = <Button variant="warning" onClick={this.handleShow}>Edit</Button>;
+				options =
+					<div>
+						<Button variant="warning" onClick={this.handleShow}>Edit</Button>
+				<Button onClick={this.handleClick} style={{ margin: '5px' }}>Create Carve</Button>
+				</div>
 			} else {
 				options = <div style={{display:'flex'}}>
 					<Button style={{margin:'5px'}} variant="info">Follow</Button>
@@ -53,6 +63,7 @@ export default class ProfilePage extends Component {
 
 			return (
 				<>
+					<CreateCarveModal handleClose={this.handleClick} show={this.state.show}/>
 					<EditProfileModal handleRefresh={this.getUserInfo} user={userInfo} show={this.state.show} handleClose={this.handleClose} />
 
 					<div style={{ display: 'flex', marginTop: '8px', border: "0px solid slategrey" }}>
@@ -113,9 +124,11 @@ export default class ProfilePage extends Component {
 						</div>
 
 					</Col>
-					<Col style = {{width: "100%"}}>
-						<h2>Carves created by user</h2>
-						<CarveCardUserCreate/></Col></Row>
+					<Col style = {{width: "200%"}}>
+						<Row>
+							<h2>Carves created by user</h2></Row>
+						<Row style = {{width:"200%"}}>
+							<CarveCardUserCreate style = {{width:"100%"}}/></Row></Col></Row>
 				</>
 			);
 		} else {

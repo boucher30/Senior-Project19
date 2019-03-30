@@ -21,6 +21,9 @@ export default class CarveCard extends Component {
             description: null,
             date: "",
             carveInfo: {},
+            carveAtten: {},
+            carveComm: {},
+            carveMed: {},
             completed: 0,
             sports: "",
             create_time: ""
@@ -37,29 +40,113 @@ export default class CarveCard extends Component {
                 });
 
             });
+        //currently only gets attendees for carve1. not dynamic per carve
+        axios.get(`http://localhost:8000/carves/${1}/comments`)
+            .then(res => {
+                //alert("carve:" + JSON.stringify(res.data.results));
+                console.log("results: ", res.data.results[0]);
+                //alert(JSON.stringify(res.data.results[0]));
+                this.setState({
+                    carveComm: res.data.results[0]
+                });
 
+            });
 
+        //currently only gets attendees for carve1. not dynamic per carve
+        axios.get(`http://localhost:8000/carves/${1}/media`)
+            .then(res => {
+                //alert("carve:" + JSON.stringify(res.data.results));
+                console.log("results: ", res.data.results[0]);
+                //alert(JSON.stringify(res.data.results[0]));
+                this.setState({
+                    carveMed: res.data.results[0]
+                });
+
+            });
+
+        //currently only gets attendees for carve1. not dynamic per carve
+        axios.get(`http://localhost:8000/carves/${1}/carveAttendees`)
+            .then(res => {
+                //alert("carve:" + JSON.stringify(res.data.results));
+                console.log("results: ", res.data.results[0]);
+                //alert(JSON.stringify(res.data.results[0]));
+                this.setState({
+                    carveAtten: res.data.results[0]
+                });
+
+            });
     }
 
     render() {
         let carveList;
+        let carveAttendList;
+        let carveComments;
+        let carveMedia;
         let color = "grey";
         let act = "secondary";
         let no = "not";
-        let attend = <div></div>;
+        let att = <div></div>;
         if (this.state.carveInfo.length > 0) {
             carveList = this.state.carveInfo.map((carve, index) => {
+
+
+
+                if (this.state.carveAtten.length > 0) {
+                carveAttendList = this.state.carveAtten.map((attender, index) => {
+                    return (
+
+                        <ListGroup.Item key={index} style={{
+
+                            fontFamily: 'monospace', paddingRight: '0px', width: "100%"
+                        }}>
+                            Carve Attendee: {attender.user} userId
+
+                        </ListGroup.Item>
+                    );
+                });
+                }
+
+                if (this.state.carveComm.length > 0) {
+                    carveComments = this.state.carveComm.map((com, index) => {
+                        return (
+
+                            <ListGroup.Item key={index} style={{
+
+                                fontFamily: 'monospace', paddingRight: '0px', width: "100%"
+                            }}>
+                                Carve Comment: {com.comment} userId
+
+                            </ListGroup.Item>
+                        );
+                    });
+                }
+                if (this.state.carveMed.length > 0) {
+                    carveMedia = this.state.carveMed.map((med, index) => {
+                        return (
+
+                            <ListGroup.Item key={index} style={{
+
+                                fontFamily: 'monospace', paddingRight: '0px', width: "100%"
+                            }}>
+                                Carve Media: 							<iframe title="Prof vid2" className="embed-responsive-item"
+                                                                                src={med.url} allowFullScreen > </iframe>
+
+                            </ListGroup.Item>
+                        );
+                    });
+                }
+
                 if(carve.completed >0) {
                     color = "seagreen";
                     act = "Carve Completed";
                      no = "Completed";
-                    attend = <div></div>;
+                    att = <div></div>;
                 }
                 else {
                     color = "grey";
                     act = "Request to Attend";
                     no = "Upcoming";
-                    attend =<Button variant="info"  >{act}</Button>;
+                    att =<Button variant="info"  >{act}</Button>;
                 }
                 return (
 
@@ -81,6 +168,8 @@ export default class CarveCard extends Component {
                                 </Row>
                             </Card.Header>
                             <Card.Body>
+                                <Row>
+                                <Col>
                                 <Card.Title>Name: {carve.name}</Card.Title>
                                 <Card.Text style = {{marginLeft: '30px'}}>
                                     <Row>
@@ -100,16 +189,28 @@ export default class CarveCard extends Component {
                                     </Row>
 
                                 </Card.Text>
+                                </Col>
+                                    <Col>
+                                        <h3>Attendees:</h3>
+                                        {carveAttendList}</Col></Row>
                                 <Row>
                                     <Col>
-                                        {attend}
+                                        {att}
 
                                     </Col>
 
 
                                 </Row>
                             </Card.Body>
-                            <Card.Footer className="text-muted text-center">Created: {carve.create_time}</Card.Footer>
+                            <Card.Footer className="text-primary text-info">Carve Card 1.0
+                            <Row>
+                                <Col>{carveComments}</Col>
+                                <Col>{carveMedia}</Col>
+
+
+                            </Row>
+
+                            </Card.Footer>
                         </Card>
 
 

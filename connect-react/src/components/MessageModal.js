@@ -49,8 +49,10 @@ export default class MessageModal extends Component {
             msgType: this.state.type
 
 
-        })
-
+        });
+        return(
+            this.props.handleClose
+        )
     }
 
 

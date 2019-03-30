@@ -3,16 +3,16 @@
 require('dotenv').config();
 const express = require('express');
 const app = express({mergeParams: true});
-const server = require('http').createServer(app);
+//const server = require('http').createServer(app);
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
-const cookieparser = require('cookie-parser');
+//const cookieparser = require('cookie-parser');
 const PORT = process.env.PORT || 8000;
 const PORT2 = 8001;
-const LocalStrategy = require('passport-local');
+//const LocalStrategy = require('passport-local');
 
-const io = require('socket.io')();
-const getApiAndEmit = "todo";
+//const io = require('socket.io')();
+//const getApiAndEmit = "todo";
 
 //const server = http.createServer(app);
 
@@ -36,8 +36,11 @@ const comRoutes = require('./routes/comments');
 const likRoutes = require('./routes/likes');
 const logRoutes = require('./routes/login');
 const medRoutes = require('./routes/media');
+const cCRoutes = require('./routes/carves/comments');
+const cMdRoutes = require('./routes/carves/media');
 const usrCarRoutes = require('./routes/users/carves');
 const carUsrRoutes = require('./routes/carves/users');
+const cAtRoutes = require('./routes/carves/carveAttendees');
 const usrUfRoutes = require('./routes/users/follows');
 const carAtRoutes = require('./routes/carveAttendees');
 const usrMsgRoutes = require('./routes/users/messages');
@@ -89,6 +92,9 @@ app.use('/likes', likRoutes);
 app.use('/login', logRoutes);
 app.use('/carveAt', carAtRoutes);
 app.use('/carves/:carveId/users', carUsrRoutes);
+app.use('/carves/:carveId/carveAttendees', cAtRoutes);
+app.use('/carves/:carveId/comments', cCRoutes);
+app.use('/carves/:carveId/media', cMdRoutes);
 app.use('/users/:userId/carves', usrCarRoutes);
 app.use('/users/:userId/follows', usrUfRoutes);
 app.use('/users/:userId/messages', usrMsgRoutes);
@@ -106,57 +112,6 @@ app.listen(PORT, () => {
 	console.log("Connect API started on port "+ PORT + "!");
 });
 
-const session = require("express-session")({
-	secret: "my-secret",
-	resave: true,
-	saveUninitialized: true
-});
-const sharedsession = require("express-socket.io-session");
 
-
-app.use(session);
-io.use(sharedsession(session, {
-	autoSave:true
-}));
-
-let
-	sequenceNumberByClient = new Map();
-let clients = 0;
-
-io.use(handshake(session));
-
-io.on('connection', (socket) => {
-	console.info(`Client connected [id=${socket.id}]`);
-	// initialize this client's sequence number
-	sequenceNumberByClient.set(socket, 1);
-	clients++;
-	socket.emit('newclientconnect',{ description: 'Hey, welcome!'});
-	socket.broadcast.emit('newclientconnect',{ description: socket + ' clients connected!'});
-	socket.handshake.session.data = socket;
-	socket.handshake.session.save();
-
-	// here you can start emitting events to the client
-	socket.on('subscribeToTimer', (interval) => {
-
-		console.log('Hello from the server. client is subscribing to timer with interval ', interval);
-
-		setInterval(() => {
-
-			socket.emit('timer', new Date());
-
-		}, interval);
-
-	});
-
-	client.on('disconnect', (client) => {
-		sequenceNumberByClient.delete(client);
-		clients--;
-		console.info(`Client disconnected [id=${socket.id}]`);
-	});
-});
-
-
-
-io.listen(PORT2);
 
 console.log('socket io listening on port ', PORT2);

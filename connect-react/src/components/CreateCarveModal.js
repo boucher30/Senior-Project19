@@ -13,9 +13,9 @@ export default class CreateCarveModal extends Component {
 		super(props);
 		this.state = {
 			name: 'Carver\'s Carve',
-			sport: (''),
-			type: (''),
-			venue: 0,
+			sport: {},
+			type: {},
+			venue: {},
 			startDate: new Date(),
 			description: 'Helllllloooooooo'
 		};
@@ -49,8 +49,11 @@ export default class CreateCarveModal extends Component {
 			photo: 5,
 			sports: [this.state.sport]
 
-		})
+		});
+return(this.props.handleClose)
 	}
+
+
 
 	// Used for changing the date on the date picker
 	handleDateChange(date) {
@@ -61,12 +64,10 @@ export default class CreateCarveModal extends Component {
 
 	// Make sure that all fields are filled in
 	validateForm() {
-		const { name, venue, sport, description } = this.state;
+		const { name, description,venueId } = this.state;
 		return (
 				name.length > 0 &&
-				venue.length > 0 &&
-				description.length > 0 &&
-				typeof sport != "number"
+				description.length > 0
 		);
 	}
 
@@ -76,7 +77,8 @@ export default class CreateCarveModal extends Component {
 						 aria-labelledby="contained-modal-title-vcenter"
 						 centered
 						 show={this.props.show}
-						 onHide={this.props.handleClose}>
+						 onHide={this.props.handleClose}
+						onSubmit = {this.props.handleClose}>
 				<Modal.Header closeButton>
 					<Modal.Title id="contained-modal-title-vcenter">New Carve</Modal.Title>
 				</Modal.Header>
@@ -95,10 +97,11 @@ export default class CreateCarveModal extends Component {
 						</Form.Group>
 
 						{/* Type of Carve */}
-						<Form.Group controlId="sport">
+						<Form.Group controlId="type">
 							<Form.Label>Carve Type</Form.Label>
 							<Form.Control value={this.state.type} placeholder="Select a Sport" onChange={this.handleChange} as="select">
 								<option disabled value={-1}>Select an option...</option>
+								<option> </option>
 								<option value = 'buddy'>Buddy Carve</option>
 								<option value = 'open'>Open Carve</option>
 							</Form.Control>
@@ -127,6 +130,7 @@ export default class CreateCarveModal extends Component {
 							<Form.Label>Venue</Form.Label>
 							<Form.Control value={this.state.venue} placeholder="Select Location..."  onChange={this.handleChange} as="select" >
 								<option disabled value={-1}>Select an option...</option>
+								<option value = '0'> </option>
 							<option value = '1'>Mountain 1</option>
 							<option value = '11'>Beach 1</option>
 							<option value = '16'>Lake 1</option>
@@ -174,7 +178,7 @@ export default class CreateCarveModal extends Component {
 					<Button variant="secondary" onClick={this.props.handleClose}>
 						Close
 					</Button>
-					<Button variant="primary" disabled={!this.validateForm()} onClick={this.createCarve}>
+					<Button type = "submit" variant="primary" disabled={!this.validateForm()} onClick={this.createCarve}>
 						Create
 					</Button>
 				</Modal.Footer>

@@ -1897,6 +1897,70 @@ END$$
 DELIMITER ;
 
 -- -----------------------------------------------------
+-- procedure get_carve_comments
+-- -----------------------------------------------------
+
+USE `CCv4`;
+DROP procedure IF EXISTS `CCv4`.`get_carve_comments`;
+
+DELIMITER $$
+USE `CCv4`$$
+CREATE PROCEDURE `get_carve_comments` (in id int)
+BEGIN
+select * from all_comments where carve = id;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure get_carve_media
+-- -----------------------------------------------------
+
+USE `CCv4`;
+DROP procedure IF EXISTS `CCv4`.`get_carve_media`;
+
+DELIMITER $$
+USE `CCv4`$$
+CREATE PROCEDURE `get_carve_media` (in id int)
+BEGIN
+select * from all_media where carve = id;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure get_carve1
+-- -----------------------------------------------------
+
+USE `CCv4`;
+DROP procedure IF EXISTS `CCv4`.`get_carve1`;
+
+DELIMITER $$
+USE `CCv4`$$
+CREATE PROCEDURE `get_carve1` (in id int)
+BEGIN
+select * from carves where carve_id = id;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure get_user_attended
+-- -----------------------------------------------------
+
+USE `CCv4`;
+DROP procedure IF EXISTS `CCv4`.`get_user_attended`;
+
+DELIMITER $$
+USE `CCv4`$$
+CREATE PROCEDURE `get_user_attended` (in id int)
+BEGIN
+select * from carves where carve_id  in (select carve from carve_attendees where user = 1);
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
 -- View `CCv4`.`all_users`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `CCv4`.`all_users`;
