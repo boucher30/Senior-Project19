@@ -8,7 +8,7 @@ const con = require('../../db');
 router.get('/', (req,res) => {
     // Find all carves from database
     console.log(req.params);
-    userId = req.params.userId1;
+    userId = req.params.userId;
     carve_list = "CALL get_users_created_carves(?)";
 
 
@@ -17,7 +17,7 @@ router.get('/', (req,res) => {
     con.query(carve_list, [userId], (err, results) => {
         if (err) throw err;
 
-        res.status(200).jsonp({msg:'carves list',results}).end;
+        res.status(200).jsonp({results}).end;
 
     })
 });
@@ -27,7 +27,7 @@ router.get('/', (req,res) => {
 router.post('/', (req,res) => {
     creatorId= req.params.userId;
     console.log(req.params);
-    const {carveName,venueId,carveType,athlete,photo,date, snow_sports, water_sports, land_sports, air_sports} = req.body;
+    const {carveName,venueId,carveType,athlete,photo,date, sports} = req.body;
 
     console.log(" new carve entered with carvename: " + carveName);
     if(false)
@@ -39,9 +39,9 @@ router.post('/', (req,res) => {
         // Added a comment
         new_carve = "CALL add_carve(?,?,?,?,?,?,?,?,?,?,?,?)";
         // Execute the query to insert into the database
-        con.query(new_carve,[carveName,creatorId,venueId,carveType[0],athlete,photo,date, snow_sports[0], water_sports[0], land_sports[0], air_sports[0]], (err, results) => {
+        con.query(new_carve,[carveName,creatorId,venueId,carveType[0],athlete,photo,date, sports[0]], (err, results) => {
             if (err) throw err;
-            res.status(201).jsonp({msg:'carve added',results}).end;
+            res.status(201).jsonp({results}).end;
         })
 
     }
@@ -57,7 +57,7 @@ router.put('/', (req,res) => {
     // Execute the query to insert into the database
     con.query(new_carve,(err, results) => {
         if (err) throw err;
-        res.status(201).jsonp({msg:'carves updated',results}).end;
+        res.status(201).jsonp({results}).end;
     })
 });
 
@@ -71,7 +71,7 @@ router.patch('/', (req,res) => {
     // Execute the query to insert into the database
     con.query(new_carve,(err, results) => {
         if (err) throw err;
-        res.status(201).jsonp({msg:'carves updated',results}).end;
+        res.status(201).jsonp({results}).end;
     })
 
 
@@ -82,7 +82,7 @@ router.delete('/', (req,res) => {
     delete_carves = "CALL delete_carves()";
     con.query(delete_carves, (err, results) => {
         if (err) throw err;
-        res.status(201).jsonp({msg:'all carves deleted',results}).end;
+        res.status(201).jsonp({results}).end;
     })
 
 
@@ -95,33 +95,33 @@ router.get('/:carveId', (req,res) => {
     get_carve  = "call get_carve(?)";
     con.query(get_carve, [carveId],(err, results) => {
         if (err) throw err;
-        res.status(200).jsonp({msg:'carve info:',results}).end;
+        res.status(200).jsonp({results}).end;
     })
 });
 
 // updates carve
 router.put('/:carveId', (req,res) => {
     const carveId = req.params.carveId;
-    const {carveName,creatorId,venueId,carveType,athlete,photo,date,completed, snow_sports, water_sports, land_sports, air_sports} = req.body;
+    const {carveName,creatorId,venueId,carveType,athlete,photo,date,completed, sports} = req.body;
     console.log(" new carve updated with carvename: " + carveName);
     update_carve = "CALL update_carve(?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
-    con.query(update_carve,[carveId,carveName,creatorId,venueId,carveType[0],athlete,photo,date,completed, snow_sports[0], water_sports[0], land_sports[0], air_sports[0]],(err, results) => {
+    con.query(update_carve,[carveId,carveName,creatorId,venueId,carveType[0],athlete,photo,date,completed, sports[0]],(err, results) => {
         if (err) throw err;
-        res.status(201).jsonp({msg:'carve updated via put',results}).end;
+        res.status(201).jsonp({results}).end;
     })
 });
 
 // updates all carves
 router.patch('/:carveId', (req,res) => {
     const carveId = req.params.carveId;
-    const {carveName,creatorId,venueId,carveType,athlete,photo,date,completed, snow_sports, water_sports, land_sports, air_sports} = req.body;
+    const {carveName,creatorId,venueId,carveType,athlete,photo,date,completed, sports} = req.body;
     console.log(" new carve updated with carvename: " + carveName);
     update_carve = "CALL update_carve(?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
-    con.query(update_carve,[carveId,carveName,creatorId,venueId,carveType[0],athlete,photo,date,completed, snow_sports[0], water_sports[0], land_sports[0], air_sports[0]],(err, results) => {
+    con.query(update_carve,[carveId,carveName,creatorId,venueId,carveType[0],athlete,photo,date,completed, sports[0]],(err, results) => {
         if (err) throw err;
-        res.status(201).jsonp({msg:'carve updated via patch',results}).end;
+        res.status(201).jsonp({results}).end;
     })
 });
 

@@ -16,7 +16,7 @@ router.get('/', (req,res) => {
 	con.query(carve_list,[carveId], (err, results) => {
 		if (err) throw err;
 
-		res.status(200).jsonp({users: results}).end;
+		res.status(200).jsonp({results}).end;
 
 	})
 });
@@ -93,7 +93,7 @@ router.get('/:userId', (req,res) => {
 	con.query(get_user, [userId],(err, results) => {
 		if (err) throw err;
 		console.log(results[0][0]);
-        res.status(200).jsonp({users: results}).end;
+        res.status(200).jsonp({results}).end;
 	})
 });
 

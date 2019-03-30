@@ -51,11 +51,14 @@ export default class LoginPage extends Component {
 
 				})
 			.then(results => {
-				this.setState( {userId : results.data.use});
+				this.setState({
+					userId: results.data.use
+				});
+
 				if(results.data.use > 0) {
 
 					alert("logging in succesful userId: " + this.state.userId);
-					localStorage.setItem('userId', this.state.userId);
+					localStorage.setItem('userId', results.data.use);
 					this.setState({redirect: true});
 
 				}

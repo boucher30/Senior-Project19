@@ -28,4 +28,6 @@ Node API (Back End)
 DATABASE
   - SQL FOLDER
     1) run ccv4
-    2) run runmetofill.sql
+
+    2) run RUNMETOFILL.sql 
+

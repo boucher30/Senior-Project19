@@ -20,7 +20,16 @@ router.get('/', (req,res) => {
 	})
 });
 
+// Grab specific user by their id
+router.get('/logout', (req,res) => {
 
+    console.log(" all users logged out " );
+    get_user  = "call logout_all()";
+    con.query(get_user,(err, results) => {
+        if (err) throw err;
+        res.status(200).jsonp({users: results}).end;
+    })
+});
 
 // Creates a new user
 router.post('/', (req,res) => {

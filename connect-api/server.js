@@ -3,18 +3,18 @@
 require('dotenv').config();
 const express = require('express');
 const app = express({mergeParams: true});
-const server = require('http').Server(app);
+//const server = require('http').createServer(app);
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
-const cookieParser = require('cookie-parser');
-const pass = require('passport');
-const socket = require('socket.io');
+//const cookieparser = require('cookie-parser');
 const PORT = process.env.PORT || 8000;
-const LocalStrategy = require('passport-local');
+const PORT2 = 8001;
+//const LocalStrategy = require('passport-local');
 
+//const io = require('socket.io')();
+//const getApiAndEmit = "todo";
 
-
-
+//const server = http.createServer(app);
 
 // Check connection for success
 const con = require('./db');
@@ -36,8 +36,12 @@ const comRoutes = require('./routes/comments');
 const likRoutes = require('./routes/likes');
 const logRoutes = require('./routes/login');
 const medRoutes = require('./routes/media');
+const cCRoutes = require('./routes/carves/comments');
+const cMdRoutes = require('./routes/carves/media');
+const cLkRoutes = require('./routes/carves/likes');
 const usrCarRoutes = require('./routes/users/carves');
 const carUsrRoutes = require('./routes/carves/users');
+const cAtRoutes = require('./routes/carves/carveAttendees');
 const usrUfRoutes = require('./routes/users/follows');
 const carAtRoutes = require('./routes/carveAttendees');
 const usrMsgRoutes = require('./routes/users/messages');
@@ -49,6 +53,8 @@ const venCarRoutes = require('./routes/venues/carves');
 const venUfRoutes = require('./routes/venues/follows');
 const venComRoutes = require('./routes/venues/comments');
 const venMedRoutes = require('./routes/venues/media');
+const handshake = require('socket.io-handshake');
+
 
 var domain = require('domain');
 var d = domain.create();
@@ -72,17 +78,7 @@ app.use((req, res, next) => {
 	next();
 });
 
-//ignore for now
-/*
-d.on('errorPage',function(err){
-	console.errorPage(err);
-});
 
-d.run(function(err,data)
-	{
-		console.log(data);
-	}
-);*/
 
 // Tells the App specific routes to use using router in each file
 // any new file needs to be added in order for it to function.
@@ -97,6 +93,10 @@ app.use('/likes', likRoutes);
 app.use('/login', logRoutes);
 app.use('/carveAt', carAtRoutes);
 app.use('/carves/:carveId/users', carUsrRoutes);
+app.use('/carves/:carveId/carveAttendees', cAtRoutes);
+app.use('/carves/:carveId/comments', cCRoutes);
+app.use('/carves/:carveId/media', cMdRoutes);
+app.use('/carves/:carveId/likes', cLkRoutes);
 app.use('/users/:userId/carves', usrCarRoutes);
 app.use('/users/:userId/follows', usrUfRoutes);
 app.use('/users/:userId/messages', usrMsgRoutes);
@@ -114,3 +114,6 @@ app.listen(PORT, () => {
 	console.log("Connect API started on port "+ PORT + "!");
 });
 
+
+
+console.log('socket io listening on port ', PORT2);
