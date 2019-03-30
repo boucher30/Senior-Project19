@@ -5,7 +5,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
 
-class MessagesPageInbox extends Component {
+class MessagesPageOutbox extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -26,7 +26,7 @@ class MessagesPageInbox extends Component {
     }
     componentWillMount()
     {
-        axios.get(`http://localhost:8000/users/${localStorage.getItem('userId')}/messages`)
+        axios.get(`http://localhost:8000/users/${localStorage.getItem('userId')}/messages/sent`)
             .then(res => {
                 console.log("results: ", res.data.results[0]);
                 this.setState({
@@ -69,7 +69,7 @@ class MessagesPageInbox extends Component {
                     <Col style={{ paddingLeft: '0px'}}>
 
                         <h3 className = 'border-bottom' style = {{  borderBottomColor: 'black',
-                            borderBottomWidth: 5, width: '150%' }}>Inbox:</h3>
+                            borderBottomWidth: 5, width: '150%' }}>Sent</h3>
 
                         <div>
                             <table className="table table-dark" style = {{color: "skyblue", paddingTop: "5px",width:"101%", bordered: '0.5px solid rgba(0, 0, 0, 0.5)'}}>
@@ -100,6 +100,6 @@ class MessagesPageInbox extends Component {
 }
 
 
-export default MessagesPageInbox;
+export default MessagesPageOutbox;
 
 

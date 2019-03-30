@@ -71,7 +71,7 @@ export default class MessageModal extends Component {
                    centered
                    show={this.props.show}
                    onHide={this.props.handleClose}
-                    style = {{color: "lightgrey",backgroundColor:"darkgrey"}}>
+                    style = {{}}>
                 <Modal.Header closeButton style = {{color: "lightgrey",backgroundColor:"darkslategrey"}}>
                     <Modal.Title id="contained-modal-title-vcenter">New Message</Modal.Title>
                 </Modal.Header>

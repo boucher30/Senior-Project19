@@ -6,7 +6,7 @@ const app = express({mergeParams: true});
 const server = require('http').createServer(app);
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
-const cookieParser = require('cookie-parser');
+const cookieparser = require('cookie-parser');
 const PORT = process.env.PORT || 8000;
 const PORT2 = 8001;
 const LocalStrategy = require('passport-local');
@@ -49,6 +49,8 @@ const venCarRoutes = require('./routes/venues/carves');
 const venUfRoutes = require('./routes/venues/follows');
 const venComRoutes = require('./routes/venues/comments');
 const venMedRoutes = require('./routes/venues/media');
+const handshake = require('socket.io-handshake');
+
 
 var domain = require('domain');
 var d = domain.create();
@@ -72,17 +74,7 @@ app.use((req, res, next) => {
 	next();
 });
 
-//ignore for now
-/*
-d.on('errorPage',function(err){
-	console.errorPage(err);
-});
 
-d.run(function(err,data)
-	{
-		console.log(data);
-	}
-);*/
 
 // Tells the App specific routes to use using router in each file
 // any new file needs to be added in order for it to function.
@@ -114,36 +106,52 @@ app.listen(PORT, () => {
 	console.log("Connect API started on port "+ PORT + "!");
 });
 
+const session = require("express-session")({
+	secret: "my-secret",
+	resave: true,
+	saveUninitialized: true
+});
+const sharedsession = require("express-socket.io-session");
+
+
+app.use(session);
+io.use(sharedsession(session, {
+	autoSave:true
+}));
+
 let
 	sequenceNumberByClient = new Map();
 let clients = 0;
-io.on('connection', (client) => {
-	console.info(`Client connected [id=${client.id}]`);
-	// initialize this client's sequence number
-	sequenceNumberByClient.set(client, 1);
-	clients++;
-	client.emit('newclientconnect',{ description: 'Hey, welcome!'});
-	client.broadcast.emit('newclientconnect',{ description: clients + ' clients connected!'});
 
+io.use(handshake(session));
+
+io.on('connection', (socket) => {
+	console.info(`Client connected [id=${socket.id}]`);
+	// initialize this client's sequence number
+	sequenceNumberByClient.set(socket, 1);
+	clients++;
+	socket.emit('newclientconnect',{ description: 'Hey, welcome!'});
+	socket.broadcast.emit('newclientconnect',{ description: socket + ' clients connected!'});
+	socket.handshake.session.data = socket;
+	socket.handshake.session.save();
 
 	// here you can start emitting events to the client
-	client.on('subscribeToTimer', (interval) => {
+	socket.on('subscribeToTimer', (interval) => {
 
 		console.log('Hello from the server. client is subscribing to timer with interval ', interval);
 
 		setInterval(() => {
 
-			client.emit('timer', new Date());
+			socket.emit('timer', new Date());
 
 		}, interval);
 
 	});
 
-	client.on('disconnect', () => {
+	client.on('disconnect', (client) => {
 		sequenceNumberByClient.delete(client);
 		clients--;
-		console.info(`Client gone [id=${client.id}]`);
-	client.broadcast.emit('newclientconnect',{ description: clients + ' clients connected!'});
+		console.info(`Client disconnected [id=${socket.id}]`);
 	});
 });
 

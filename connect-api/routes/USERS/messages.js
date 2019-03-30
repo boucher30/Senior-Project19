@@ -20,6 +20,21 @@ router.get('/', (req,res) => {
     })
 });
 
+// Grabs all messages from db
+router.get('/sent', (req,res) => {
+    // Find all messages from database
+    message_list = "CALL get_users_sent(?)";
+    userId = req.params.userId;
+
+    console.log(req.params);
+
+    con.query(message_list, [userId], (err, results) => {
+        if (err) throw err;
+
+        res.status(200).jsonp({results}).end;
+
+    })
+});
 
 // Creates a new message
 router.post('/', (req,res) => {

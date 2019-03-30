@@ -82,10 +82,7 @@ CREATE TABLE IF NOT EXISTS `CCv4`.`CARVES` (
   `description` VARCHAR(200) NULL,
   `date` DATE NULL,
   `completed` TINYINT NULL,
-  `snow_sports` SET('snowboard', 'ski', 'snowmobile') NULL,
-  `water_sports` SET('surf', 'waterski') NULL,
-  `land_sports` SET('skateboard', 'BMX', 'mountainBiking') NULL,
-  `air_sports` SET('skyDive', 'hangGlide') NULL,
+  `sports` SET('snowboard', 'ski', 'snowmobile', 'surf', 'waterski', 'skyDive', 'hangGlide', 'skateboard', 'BMX', 'mountainBike') NULL,
   `create_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
   UNIQUE INDEX `carve_id_UNIQUE` (`carve_id` ASC) VISIBLE,
   PRIMARY KEY (`carve_id`),
@@ -415,10 +412,10 @@ DROP procedure IF EXISTS `CCv4`.`add_carve`;
 DELIMITER $$
 USE `CCv4`$$
 CREATE PROCEDURE `add_carve` (in carveName varchar(40), in creatorId int, in venueId int, in carveType set ('open','buddy'), in athlete int, in photo int, in date date, 
-in winterSports set ('snowboard','ski','snowmobile'), in waterSports set ('surf','waterSki'),in landSports set ('skateboard','BMX'), in airSports set ('skydive','hangGlide'))
+in sportsAdd set ('snowboard','ski','snowmobile','surf','waterSki','skateboard','BMX','skydive','hangGlide'))
 BEGIN
-insert into carves(name, creator, venue, type, max_athletes, max_photo, date, completed, snow_sports, water_sports, land_sports, air_sports)
-values(carveName,creatorId,venueId,carveType,athlete,photo,date,0,winterSports,waterSports,landSports,airSports);
+insert into carves(name, creator, venue, type, max_athletes, max_photo, date, completed, sports)
+values(carveName,creatorId,venueId,carveType,athlete,photo,date,0,sportsAdd);
 END$$
 
 DELIMITER ;
@@ -1213,14 +1210,13 @@ DROP procedure IF EXISTS `CCv4`.`update_carve`;
 DELIMITER $$
 USE `CCv4`$$
 CREATE PROCEDURE `update_carve` (in id int, in carveName varchar(40), in creatorId int, in venueId int, in carveType set ('open','buddy'), in athlete int, in photo int, in dat date, in com tinyint, 
-in winterSports set ('snowboard','ski','snowmobile'), in waterSports set ('surf','waterSki'),in landSports set ('skateboard','BMX'), in airSports set ('skydive','hangGlide'))
+in sportsAdd set ('snowboard','ski','snowmobile','surf','waterSki','skateboard','BMX','skydive','hangGlide'))
 BEGIN
 update carves
 set 
 name = carveName, creator = creatorId, venue = venueId,
 type = carveType, max_athletes = athlete, max_photo = photo,
-date = dat, completed = com, snow_sports = winterSports, water_sports = waterSports,
-land_sports = landSports, air_sports = airSports
+date = dat, completed = com, sports = sportsAdd
 where carve_id = id;
 
 END$$
@@ -1832,6 +1828,22 @@ USE `CCv4`$$
 CREATE PROCEDURE `logout` (in usr int)
 BEGIN
 update users set logged_in = 0 where user_id  = usr;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure logout_all
+-- -----------------------------------------------------
+
+USE `CCv4`;
+DROP procedure IF EXISTS `CCv4`.`logout_all`;
+
+DELIMITER $$
+USE `CCv4`$$
+CREATE PROCEDURE `logout_all` ()
+BEGIN
+update users set logged_in = 0;
 END$$
 
 DELIMITER ;
