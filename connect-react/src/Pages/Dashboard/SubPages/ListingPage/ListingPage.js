@@ -18,7 +18,7 @@ export default class ListingPage extends Component {
 	render() {
 		return (
 			<div>
-				<CreateCarveModal handleClose={this.handleClick} show={this.state.show} />
+				<CreateCarveModal handleClose={this.handleClick} show={this.state.show}/>
 				<div style={{ display: 'flex', marginTop: '8px' }}>
 					<h2 style={{ width: '80%' }}>Listing Page</h2>
 					<Button onClick={this.handleClick} style={{ margin: '5px' }}>Create Carve</Button>

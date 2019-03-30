@@ -1763,7 +1763,7 @@ DELIMITER $$
 USE `CCv4`$$
 CREATE PROCEDURE `get_users_inbox` (in id int)
 BEGIN
-select * from all_messages where rec_id = id and type = 'normal' or type = 'reply';
+select * from all_messages where rec_id = id and (type = 'normal' or type = 'reply');
 END$$
 
 DELIMITER ;
@@ -1779,7 +1779,7 @@ DELIMITER $$
 USE `CCv4`$$
 CREATE PROCEDURE `get_users_sent` (in id int)
 BEGIN
-select * from all_messages where sender_id = id and type = 'normal' or type = 'reply';
+select * from all_messages where sender_id = id and (type = 'normal' or type = 'reply');
 END$$
 
 DELIMITER ;
@@ -1875,7 +1875,7 @@ DELIMITER $$
 USE `CCv4`$$
 CREATE PROCEDURE `get_user_notifications` (in id int)
 BEGIN
-select * from messages where rec_id = id and type != 'normal' and type !='reply';
+select * from messages where rec_id = id and (type != 'normal' and type !='reply');
 END$$
 
 DELIMITER ;
@@ -1891,7 +1891,71 @@ DELIMITER $$
 USE `CCv4`$$
 CREATE PROCEDURE `get_user_sent_notifications` (in id int)
 BEGIN
-select * from messages where sender_id = id and type != 'normal' and type !='reply';
+select * from messages where sender_id = id and (type != 'normal' and type !='reply');
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure get_carve_comments
+-- -----------------------------------------------------
+
+USE `CCv4`;
+DROP procedure IF EXISTS `CCv4`.`get_carve_comments`;
+
+DELIMITER $$
+USE `CCv4`$$
+CREATE PROCEDURE `get_carve_comments` (in id int)
+BEGIN
+select * from all_comments where carve = id;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure get_carve_media
+-- -----------------------------------------------------
+
+USE `CCv4`;
+DROP procedure IF EXISTS `CCv4`.`get_carve_media`;
+
+DELIMITER $$
+USE `CCv4`$$
+CREATE PROCEDURE `get_carve_media` (in id int)
+BEGIN
+select * from all_media where carve = id;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure get_carve1
+-- -----------------------------------------------------
+
+USE `CCv4`;
+DROP procedure IF EXISTS `CCv4`.`get_carve1`;
+
+DELIMITER $$
+USE `CCv4`$$
+CREATE PROCEDURE `get_carve1` (in id int)
+BEGIN
+select * from carves where carve_id = id;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure get_user_attended
+-- -----------------------------------------------------
+
+USE `CCv4`;
+DROP procedure IF EXISTS `CCv4`.`get_user_attended`;
+
+DELIMITER $$
+USE `CCv4`$$
+CREATE PROCEDURE `get_user_attended` (in id int)
+BEGIN
+select * from carves where carve_id  in (select carve from carve_attendees where user = 1);
 END$$
 
 DELIMITER ;

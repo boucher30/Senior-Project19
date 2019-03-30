@@ -14,10 +14,10 @@ class NotificationsPageOutbox extends Component {
             message_id: "",
             message_subject: "",
             message_body: "",
-            sender_id: 0,
+            sender_Id: 0,
             rec_Id: 0,
             type: "",
-            timestamp: "",
+            create_time: "",
             messages: [],
             check: true,
             show: false
@@ -45,8 +45,8 @@ class NotificationsPageOutbox extends Component {
                 return (
                     <tr>
                         <th>{message.message_subject}</th>
-                        <td>{message.sender_id}</td>
-                        <td>{message.timestamp}</td>
+                        <td>{message.rec_Id}</td>
+                        <td>{message.create_time}</td>
                         <td>{message.type}</td>
                         <td>{message.message_body}</td>
                         <td><i className ="fa fa-thumbs-o-up text-success" /></td>
@@ -75,7 +75,7 @@ class NotificationsPageOutbox extends Component {
                                 <thead>
                                 <tr>
                                     <th scope="col" style={{width:"6%"}}>Subject</th>
-                                    <th scope="col" style={{width:"6%"}}>Sender</th>
+                                    <th scope="col" style={{width:"6%"}}>To</th>
                                     <th scope="col" style={{width:"4%"}}>Timestamp</th>
                                     <th scope="col" style={{width:"4%"}}>Type</th>
                                     <th scope="col">Body</th>

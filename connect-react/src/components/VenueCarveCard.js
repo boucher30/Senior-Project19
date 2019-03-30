@@ -7,7 +7,7 @@ import axios from 'axios';
 import ListGroup from 'react-bootstrap/ListGroup';
 
 
-export default class CarveCardUserCreate extends Component {
+export default class VenueCarveCard extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -31,7 +31,7 @@ export default class CarveCardUserCreate extends Component {
     }
 
     componentWillMount() {
-        axios.get(`http://localhost:8000/users/${localStorage.getItem('userId')}/carves/`)
+        axios.get(`http://localhost:8000/venues/1/carves`)
             .then(res => {
                 console.log("results: ", res.data.results[0]);
                 //alert(JSON.stringify(res.data.results[0]));
@@ -196,7 +196,6 @@ export default class CarveCardUserCreate extends Component {
                                         {carveAttendList}</Col></Row>
                                 <Row>
                                     <Col>
-                                        {att}
 
                                     </Col>
 
@@ -240,4 +239,3 @@ export default class CarveCardUserCreate extends Component {
         )
     };
 }
-

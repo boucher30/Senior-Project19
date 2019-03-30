@@ -4,6 +4,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import axios from 'axios';
 import ListGroup from 'react-bootstrap/ListGroup';
+import Button from "./CarveCard";
 
 
 export default class CarveCardUserAttend extends Component {
@@ -20,6 +21,9 @@ export default class CarveCardUserAttend extends Component {
             description: null,
             date: "",
             carveInfo: {},
+            carveAtten: {},
+            carveComm: {},
+            carveMed: {},
             completed: 0,
             sports: "",
             create_time: ""
@@ -29,6 +33,7 @@ export default class CarveCardUserAttend extends Component {
     componentWillMount() {
         axios.get(`http://localhost:8000/users/${localStorage.getItem('userId')}/carveAttendees`)
             .then(res => {
+                //alert(JSON.stringify(res.data.results[0]));
                 console.log("results: ", res.data.results[0]);
                 //alert(JSON.stringify(res.data.results[0]));
                 this.setState({
@@ -36,28 +41,113 @@ export default class CarveCardUserAttend extends Component {
                 });
 
             });
+        //currently only gets attendees for carve1. not dynamic per carve
+        axios.get(`http://localhost:8000/carves/${1}/comments`)
+            .then(res => {
+                //alert("carve:" + JSON.stringify(res.data.results));
+                console.log("results: ", res.data.results[0]);
+                //alert(JSON.stringify(res.data.results[0]));
+                this.setState({
+                    carveComm: res.data.results[0]
+                });
 
+            });
+
+        //currently only gets attendees for carve1. not dynamic per carve
+        axios.get(`http://localhost:8000/carves/${1}/media`)
+            .then(res => {
+                //alert("carve:" + JSON.stringify(res.data.results));
+                console.log("results: ", res.data.results[0]);
+                //alert(JSON.stringify(res.data.results[0]));
+                this.setState({
+                    carveMed: res.data.results[0]
+                });
+
+            });
+
+        //currently only gets attendees for carve1. not dynamic per carve
+        axios.get(`http://localhost:8000/carves/${1}/carveAttendees`)
+            .then(res => {
+                //alert("carve:" + JSON.stringify(res.data.results));
+                console.log("results: ", res.data.results[0]);
+                //alert(JSON.stringify(res.data.results[0]));
+                this.setState({
+                    carveAtten: res.data.results[0]
+                });
+
+            });
     }
 
     render() {
         let carveList;
+        let carveAttendList;
+        let carveComments;
+        let carveMedia;
         let color = "grey";
         let act = "secondary";
         let no = "not";
-        let attend = <div></div>;
+        let att = <div></div>;
         if (this.state.carveInfo.length > 0) {
             carveList = this.state.carveInfo.map((carve, index) => {
+
+
+
+                if (this.state.carveAtten.length > 0) {
+                    carveAttendList = this.state.carveAtten.map((attender, index) => {
+                        return (
+
+                            <ListGroup.Item key={index} style={{
+
+                                fontFamily: 'monospace', paddingRight: '0px', width: "100%"
+                            }}>
+                                Carve Attendee: {attender.user} userId
+
+                            </ListGroup.Item>
+                        );
+                    });
+                }
+
+                if (this.state.carveComm.length > 0) {
+                    carveComments = this.state.carveComm.map((com, index) => {
+                        return (
+
+                            <ListGroup.Item key={index} style={{
+
+                                fontFamily: 'monospace', paddingRight: '0px', width: "100%"
+                            }}>
+                                Carve Comment: {com.comment} userId
+
+                            </ListGroup.Item>
+                        );
+                    });
+                }
+                if (this.state.carveMed.length > 0) {
+                    carveMedia = this.state.carveMed.map((med, index) => {
+                        return (
+
+                            <ListGroup.Item key={index} style={{
+
+                                fontFamily: 'monospace', paddingRight: '0px', width: "100%"
+                            }}>
+                                Carve Media: 							<iframe title="Prof vid2" className="embed-responsive-item"
+                                                                                src={med.url} allowFullScreen > </iframe>
+
+                            </ListGroup.Item>
+                        );
+                    });
+                }
+
                 if(carve.completed >0) {
                     color = "seagreen";
                     act = "Carve Completed";
                     no = "Completed";
-                    attend = <div></div>;
+                    att = <div></div>;
                 }
                 else {
                     color = "grey";
                     act = "Request to Attend";
                     no = "Upcoming";
-                    //attend =<Button variant="info"  >{act}</Button>;
+                    att =<Button variant="info"  >{act}</Button>;
                 }
                 return (
 
@@ -79,35 +169,48 @@ export default class CarveCardUserAttend extends Component {
                                 </Row>
                             </Card.Header>
                             <Card.Body>
-                                <Card.Title>Name: {carve.name}</Card.Title>
-                                <Card.Text style = {{marginLeft: '30px'}}>
-                                    <Row>
-                                        Description: {carve.description} All carves created with null description for now....
-                                    </Row>
-                                    <Row>
-                                        Date: {carve.date}
-                                    </Row>
-                                    <Row>
-                                        Sports: {carve.sports} {/*can't do sports by itself */}
-                                    </Row>
-                                    <Row>
-                                        Max Athletes: {carve.max_athletes}
-                                    </Row>
-                                    <Row>
-                                        Max Film: {carve.max_photo}
-                                    </Row>
-
-                                </Card.Text>
                                 <Row>
                                     <Col>
-                                        {attend}
+                                        <Card.Title>Name: {carve.name}</Card.Title>
+                                        <Card.Text style = {{marginLeft: '30px'}}>
+                                            <Row>
+                                                Description: {carve.description} All carves created with null description for now....
+                                            </Row>
+                                            <Row>
+                                                Date: {carve.date}
+                                            </Row>
+                                            <Row>
+                                                Sports: {carve.sports} {/*can't do sports by itself */}
+                                            </Row>
+                                            <Row>
+                                                Max Athletes: {carve.max_athletes}
+                                            </Row>
+                                            <Row>
+                                                Max Film: {carve.max_photo}
+                                            </Row>
+
+                                        </Card.Text>
+                                    </Col>
+                                    <Col>
+                                        <h3>Attendees:</h3>
+                                        {carveAttendList}</Col></Row>
+                                <Row>
+                                    <Col>
 
                                     </Col>
 
 
                                 </Row>
                             </Card.Body>
-                            <Card.Footer className="text-muted text-center">Created: {carve.create_time}</Card.Footer>
+                            <Card.Footer className="text-primary text-info">Carve Card 1.0
+                                <Row>
+                                    <Col>{carveComments}</Col>
+                                    <Col>{carveMedia}</Col>
+
+
+                                </Row>
+
+                            </Card.Footer>
                         </Card>
 
 

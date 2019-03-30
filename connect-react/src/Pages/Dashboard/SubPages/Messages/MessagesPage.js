@@ -3,6 +3,7 @@ import axios from 'axios'
 import MessagesSidebar from "./MessagesSidebar";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import MessageModal from "../../../../components/MessageModal";
 
 
 class MessagesPage extends Component {
@@ -14,13 +15,15 @@ class MessagesPage extends Component {
             message_id: "",
             message_subject: "",
             message_body: "",
-            sender_id: 0,
+            sender_Id: 0,
             rec_Id: 0,
             type: "",
-            timestamp: "",
+            create_time: "",
             messages: [],
             check: true,
-            show: false
+            show: false,
+            show1: false,
+            currentID: 0
         };
 
     }
@@ -37,6 +40,23 @@ class MessagesPage extends Component {
             });
 
     }
+//onClick={this.onClick(message.message_id)}
+    onClick = (e) =>{
+        axios.delete(`http://localhost:8000/messages/${e}`)
+            .then(res => {
+
+                this.setState({
+
+                });
+
+                //alert(JSON.stringify(res.data.users[0][0]))
+            });
+    };
+//show: false
+    onClick1 =() => {
+        this.setState({ show: !this.state.show1 });
+    };
+
     render() {
         let messageRows;
 
@@ -44,23 +64,23 @@ class MessagesPage extends Component {
             messageRows = this.state.messages.map((message, index) => {
 
                 return (
-                    <tr>
+                        <tr>
                         <th>{message.message_subject}</th>
-                        <td>{message.sender_id}</td>
-                        <td>{message.timestamp}</td>
+                        <td>{message.sender_Id}</td>
+                        <td>{message.create_time}</td>
                         <td>{message.type}</td>
                         <td>{message.message_body}</td>
-                        <td><i className ="fa fa-inbox text-white" /></td>
-                        <td><i className ="fa fa-trash-o text-white" /></td>
-                    </tr>
+                            <td> </td>
+                            <td > </td>
+                        </tr>
                 )
             });
         }
 
         return (
 
-            <a >
-
+            <>
+                <MessageModal handleClose={this.onClick1} show={this.state.show1} />
                 <Row className="justify-content-md-center" style={{ paddingLeft: '0px',backgroundColor: "lightgray", height: "100%"}}>
 
                 <MessagesSidebar  style = {{paddingRight: '0px'}} />
@@ -84,14 +104,16 @@ class MessagesPage extends Component {
                         </tr>
                         </thead>
                         <tbody>
+
                         {messageRows}
 
                         </tbody>
                     </table>
                 </div>
                     </Col>
+
                 </Row>
-            </a>
+            </>
         );
     }
 }
