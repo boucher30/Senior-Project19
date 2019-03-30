@@ -24,7 +24,7 @@ router.get('/', (req,res) => {
 // Creates a new follow
 // For venue pass in the venue_id instead of the user2 ID
 router.post('/', (req,res) => {
-	const {usr, ven, ty[0]} = req.body;
+	const {usr, ven, ty} = req.body;
 
 	console.log("user " + user1 + " now following venue :" + ven);
 	if(false)

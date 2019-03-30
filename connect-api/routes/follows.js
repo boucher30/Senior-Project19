@@ -84,11 +84,78 @@ router.delete('/', (req,res) => {
 
 });
 
-router.get('/', (req, res) => {
-	get_buddies = "CALL get_buddies(?)"
-	con.query(get_buddies,(err, results) => {
+// Grab specific follow by their id
+router.get('/:venueId', (req,res) => {
+	const venueId = req.params.venueId;
+
+	get_venue  = "call get_venue(?)";
+	con.query(get_venue, [venueId],(err, results) => {
 		if (err) throw err;
-		res.status(201).jsonp({users: results}).end;
+		res.status(200).jsonp({msg:'follow info:',results}).end;
+	})
+});
+
+// Grab specific follow by their id
+router.get('/:userId', (req,res) => {
+	const userId = req.params.userId;
+
+	get_user  = "call get_user(?)";
+	con.query(get_user, [userId],(err, results) => {
+		if (err) throw err;
+		res.status(200).jsonp({msg:'follow info:',results}).end;
+	})
+});
+
+// Grab specific follow by their id
+router.get('/:userId', (req,res) => {
+	const userId = req.params.userId;
+
+	get_buddy  = "call get_buddy(?)";
+	con.query(get_buddy, [userId],(err, results) => {
+		if (err) throw err;
+		res.status(200).jsonp({msg:'follow info:',results}).end;
+	})
+});
+
+// updates all users
+router.put('/', (req,res) => {
+
+	// The username wasn't found in the database
+	// Create insert query for new user
+	// Added a comment
+	new_followerUser = "CALL update_followersUser()";
+	// Execute the query to insert into the database
+	con.query(new_follower,(err, results) => {
+		if (err) throw err;
+		res.status(201).jsonp({results}).end;
+	})
+});
+
+// updates all users
+router.put('/', (req,res) => {
+
+	// The username wasn't found in the database
+	// Create insert query for new user
+	// Added a comment
+	new_followerVenue = "CALL update_followersVenue()";
+	// Execute the query to insert into the database
+	con.query(new_follower,(err, results) => {
+		if (err) throw err;
+		res.status(201).jsonp({results}).end;
+	})
+});
+
+// updates all users
+router.put('/', (req,res) => {
+
+	// The username wasn't found in the database
+	// Create insert query for new user
+	// Added a comment
+	new_followerBuddy = "CALL update_followersBuddy()";
+	// Execute the query to insert into the database
+	con.query(new_follower,(err, results) => {
+		if (err) throw err;
+		res.status(201).jsonp({results}).end;
 	})
 });
 
