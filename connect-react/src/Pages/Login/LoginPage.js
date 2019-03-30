@@ -55,8 +55,9 @@ export default class LoginPage extends Component {
 				if(results.data.use > 0) {
 
 					alert("logging in succesful userId: " + this.state.userId);
-					this.setState({redirect: true});
 					localStorage.setItem('userId', this.state.userId);
+					this.setState({redirect: true});
+
 				}
 				else if(this.state.userId < 0){
 					alert("username is not valid");
