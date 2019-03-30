@@ -86,7 +86,7 @@ export default class VenuePage extends Component {
                         <Col style = {{width: "200%"}}>
                             <Row>
                                 <h2>Carves created by user</h2></Row>
-                            <Row style = {{width:"200%"}}>
+                            <Row style = {{width:"100%"}}>
                                 <VenueCarveCard style = {{width:"100%"}}/></Row></Col>
                     </Row>
                 </>
