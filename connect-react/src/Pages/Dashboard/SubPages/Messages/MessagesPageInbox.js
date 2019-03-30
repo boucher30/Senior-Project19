@@ -14,10 +14,10 @@ class MessagesPageInbox extends Component {
             message_id: "",
             message_subject: "",
             message_body: "",
-            sender_id: 0,
+            sender_Id: 0,
             rec_Id: 0,
             type: "",
-            timestamp: "",
+            create_time: "",
             messages: [],
             check: true,
             show: false
@@ -45,8 +45,8 @@ class MessagesPageInbox extends Component {
                 return (
                     <tr>
                         <th>{message.message_subject}</th>
-                        <td>{message.sender_id}</td>
-                        <td>{message.timestamp}</td>
+                        <td>{message.sender_Id}</td>
+                        <td>{message.create_time}</td>
                         <td>{message.type}</td>
                         <td>{message.message_body}</td>
                         <td><i className ="fa fa-inbox text-white" /></td>

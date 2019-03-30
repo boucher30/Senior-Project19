@@ -17,7 +17,7 @@ router.get('/', (req,res) => {
     con.query(carve_list,[venueId], (err, results) => {
         if (err) throw err;
 
-        res.status(200).jsonp({msg:'carves list',results}).end;
+        res.status(200).jsonp({results}).end;
 
     })
 });
