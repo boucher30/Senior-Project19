@@ -4,18 +4,20 @@ const con = require('../../db');
 
 
 
-// Grabs all follows from db
+// Grabs all follows from db; needs get_all_user_follows procedure
 router.get('/', (req,res) => {
 	// Find all follows from database
-	follow_list = "CALL get_follows()";
+	console.log(req.params);
+	userId = req.params.userId;
+	follow_list = "CALL get_user_followed(?)";
 
 
 	console.log(req.query);
 
-	con.query(follow_list, (err, results) => {
+	con.query(follow_list, [userId], (err, results) => {
 		if (err) throw err;
 
-		res.status(200).jsonp({msg:'follows list',results}).end;
+		res.status(200).jsonp({results}).end;
 
 	})
 });
@@ -37,7 +39,7 @@ router.post('/', (req,res) => {
 		// Execute the query to insert into the database
 		con.query(new_follow,[user1, user2, ven, ty[0]], (err, results) => {
 			if (err) throw err;
-			res.status(201).jsonp({msg:'follow added',results}).end;
+			res.status(201).jsonp({results}).end;
 		})
 
 	}
@@ -53,7 +55,7 @@ router.put('/', (req,res) => {
 	// Execute the query to insert into the database
 	con.query(new_follow,(err, results) => {
 		if (err) throw err;
-		res.status(201).jsonp({msg:'follows updated',results}).end;
+		res.status(201).jsonp({results}).end;
 	})
 });
 
@@ -67,7 +69,7 @@ router.patch('/', (req,res) => {
 	// Execute the query to insert into the database
 	con.query(new_follow,(err, results) => {
 		if (err) throw err;
-		res.status(201).jsonp({msg:'follows updated',results}).end;
+		res.status(201).jsonp({results}).end;
 	})
 
 
@@ -78,10 +80,65 @@ router.delete('/', (req,res) => {
 	delete_follows = "CALL delete_follows()";
 	con.query(delete_follows, (err, results) => {
 		if (err) throw err;
-		res.status(201).jsonp({msg:'all follows deleted',results}).end;
+		res.status(201).jsonp({results}).end;
 	})
 
 
+});
+
+
+//get /followed
+router.get('/buddies', (req,res) => {
+	// Find all follows from database
+	console.log(req.params);
+	userId = req.params.userId;
+	follow_list = "CALL get_user_followed(?)";
+
+
+	console.log(req.query);
+
+	con.query(follow_list, [userId], (err, results) => {
+		if (err) throw err;
+
+		res.status(200).jsonp({results}).end;
+
+	})
+});
+
+//get /followed
+router.get('/venues', (req,res) => {
+	// Find all follows from database
+	console.log(req.params);
+	userId = req.params.userId;
+	follow_list = "CALL get_venues_followed(?)";
+
+
+	console.log(req.query);
+
+	con.query(follow_list, [userId], (err, results) => {
+		if (err) throw err;
+
+		res.status(200).jsonp({results}).end;
+
+	})
+});
+
+// Grabs all follows from db; needs get_all_user_follows procedure
+router.get('/followers', (req,res) => {
+	// Find all follows from database
+	console.log(req.params);
+	userId = req.params.userId;
+	follow_list = "CALL get_user_followers(?)";
+
+
+	console.log(req.query);
+
+	con.query(follow_list, [userId], (err, results) => {
+		if (err) throw err;
+
+		res.status(200).jsonp({results}).end;
+
+	})
 });
 
 // Grab specific follow by their id
@@ -91,7 +148,7 @@ router.get('/:followId', (req,res) => {
 	get_follow  = "call get_follow(?)";
 	con.query(get_follow, [followId],(err, results) => {
 		if (err) throw err;
-		res.status(200).jsonp({msg:'follow info:',results}).end;
+		res.status(200).jsonp({results}).end;
 	})
 });
 
@@ -104,7 +161,7 @@ router.put('/:followId', (req,res) => {
 
 	con.query(update_follow,[followId,user1, user2, ven, ty[0]],(err, results) => {
 		if (err) throw err;
-		res.status(201).jsonp({msg:'follow updated via put',results}).end;
+		res.status(201).jsonp({results}).end;
 	})
 });
 
@@ -117,7 +174,7 @@ router.patch('/:followId', (req,res) => {
 
 	con.query(update_follow,[followId,user1, user2, ven, ty[0]],(err, results) => {
 		if (err) throw err;
-		res.status(201).jsonp({msg:'follow updated via patch',results}).end;
+		res.status(201).jsonp({results}).end;
 	})
 });
 
@@ -134,8 +191,26 @@ router.delete('/:followId', (req,res) => {
 
 });
 // get /buddies/  returns buddy list for user procedure call => buddy_list(?) [userId]
+
 //get /followers
-//get /followed
+router.get('/?', (req,res) => {
+	// Find all follows from database
+	console.log(req.params);
+	userId = req.params.userId;
+	follow_list = "CALL get_user_followers(?)";
+
+
+	console.log(req.query);
+
+	con.query(follow_list, [userId], (err, results) => {
+		if (err) throw err;
+
+		res.status(200).jsonp({results}).end;
+
+	})
+});
+
+
 //put /follow ?venueId & userId
 
 router.post('/buddies/:userId1', (req,res) => {

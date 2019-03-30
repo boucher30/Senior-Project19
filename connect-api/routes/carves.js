@@ -6,17 +6,16 @@ const con = require('../db');
 
 // Grabs all carves from db
 router.get('/', (req,res) => {
-    // Find all carves from database
-    userId = req.params.userId;
-    carve_list = "CALL get_user_carves(?)";
+   
+    carve_list = "CALL get_carves()";
 
 
     console.log(req.query);
 
-    con.query(carve_list,[userId], (err, results) => {
+    con.query(carve_list, (err, results) => {
         if (err) throw err;
 
-        res.status(200).jsonp({msg:'carves list',results}).end;
+        res.status(200).jsonp({results}).end;
 
     })
 });
@@ -38,7 +37,7 @@ router.post('/', (req,res) => {
         // Execute the query to insert into the database
         con.query(new_carve,[carveName,creatorId,venueId,carveType[0],athlete,photo,date, snow_sports[0], water_sports[0], land_sports[0], air_sports[0]], (err, results) => {
             if (err) throw err;
-            res.status(201).jsonp({msg:'carve added',results}).end;
+            res.status(201).jsonp({results}).end;
         })
 
     }
@@ -54,7 +53,7 @@ router.put('/', (req,res) => {
     // Execute the query to insert into the database
     con.query(new_carve,(err, results) => {
         if (err) throw err;
-        res.status(201).jsonp({msg:'carves updated',results}).end;
+        res.status(201).jsonp({results}).end;
     })
 });
 
@@ -68,7 +67,7 @@ router.patch('/', (req,res) => {
     // Execute the query to insert into the database
     con.query(new_carve,(err, results) => {
         if (err) throw err;
-        res.status(201).jsonp({msg:'carves updated',results}).end;
+        res.status(201).jsonp({results}).end;
     })
 
 
@@ -79,7 +78,7 @@ router.delete('/', (req,res) => {
     delete_carves = "CALL delete_carves()";
     con.query(delete_carves, (err, results) => {
         if (err) throw err;
-        res.status(201).jsonp({msg:'all carves deleted',results}).end;
+        res.status(201).jsonp({results}).end;
     })
 
 
@@ -92,7 +91,7 @@ router.get('/:carveId', (req,res) => {
     get_carve  = "call get_carve(?)";
     con.query(get_carve, [carveId],(err, results) => {
         if (err) throw err;
-        res.status(200).jsonp({msg:'carve info:',results}).end;
+        res.status(200).jsonp({results}).end;
     })
 });
 
@@ -105,11 +104,11 @@ router.put('/:carveId', (req,res) => {
 
     con.query(update_carve,[carveId,carveName,creatorId,venueId,carveType[0],athlete,photo,date,completed, snow_sports[0], water_sports[0], land_sports[0], air_sports[0]],(err, results) => {
         if (err) throw err;
-        res.status(201).jsonp({msg:'carve updated via put',results}).end;
+        res.status(201).jsonp({results}).end;
     })
 });
 
-// updates all carves
+// updates all carves complete
 router.patch('/:carveId', (req,res) => {
     const carveId = req.params.carveId;
     const {carveName,creatorId,venueId,carveType,athlete,photo,date,completed, snow_sports, water_sports, land_sports, air_sports} = req.body;
@@ -118,7 +117,7 @@ router.patch('/:carveId', (req,res) => {
 
     con.query(update_carve,[carveId,carveName,creatorId,venueId,carveType[0],athlete,photo,date,completed, snow_sports[0], water_sports[0], land_sports[0], air_sports[0]],(err, results) => {
         if (err) throw err;
-        res.status(201).jsonp({msg:'carve updated via patch',results}).end;
+        res.status(201).jsonp({results}).end;
     })
 });
 

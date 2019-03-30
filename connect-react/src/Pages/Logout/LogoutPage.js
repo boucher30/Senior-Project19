@@ -1,31 +1,36 @@
-import React, { Component } from 'react';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
+import React, {Component} from 'react';
+
 import Carousel from 'react-bootstrap/Carousel';
 import Button from 'react-bootstrap/Button';
 import Snow from '../../images/snow1.jpg';
-import Skate from '../../images/skater1.jpeg';
-import Surf from '../../images/surf1.jpg';
+
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Dog from '../../images/dog.jpg';
-import FeaturedUserCard from '../../components/FeaturedUserCard';
-import Video_Placeholder from '../../images/video-placeholder.png';
+
 import CarouselCaption from 'react-bootstrap/CarouselCaption';
+import axios from "axios";
 
 
 class LogoutPage extends Component {
-    constructor(props){
-        super(props);
-        localStorage.clear();
+    componentWillMount()
+    {
+        axios.get(`http://localhost:8000/users/${localStorage.getItem('userId')}/logout`)
+            .then(res => {
+
+                this.setState({
+                    //messages: res.data.results[0][0]
+                });
+
+                //alert(JSON.stringify(res.data.users[0][0]))
+            });
+
     }
 
     render() {
+        localStorage.clear();
         return (
-
             <>
-
                 {/* Sliding carousel */}
                 <Carousel fade className="carousel" pauseOnHover={false}>
                     <Carousel.Item>

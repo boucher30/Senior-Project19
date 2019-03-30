@@ -15,7 +15,7 @@ router.get('/', (req,res) => {
     con.query(comment_list, (err, results) => {
         if (err) throw err;
 
-        res.status(200).jsonp({msg:'comments list',results}).end;
+        res.status(200).jsonp({results}).end;
 
     })
 });
@@ -37,7 +37,7 @@ router.post('/', (req,res) => {
         // Execute the query to insert into the database
         con.query(new_comment,[poster,carve,media,profile,comment], (err, results) => {
             if (err) throw err;
-            res.status(201).jsonp({msg:'comment added',results}).end;
+            res.status(201).jsonp({results}).end;
         })
 
     }
@@ -53,7 +53,7 @@ router.put('/', (req,res) => {
     // Execute the query to insert into the database
     con.query(new_comment,(err, results) => {
         if (err) throw err;
-        res.status(201).jsonp({msg:'comments updated',results}).end;
+        res.status(201).jsonp({results}).end;
     })
 });
 
@@ -67,7 +67,7 @@ router.patch('/', (req,res) => {
     // Execute the query to insert into the database
     con.query(new_comment,(err, results) => {
         if (err) throw err;
-        res.status(201).jsonp({msg:'comments updated',results}).end;
+        res.status(201).jsonp({results}).end;
     })
 
 
@@ -78,7 +78,7 @@ router.delete('/', (req,res) => {
     delete_comments = "CALL delete_comments()";
     con.query(delete_comments, (err, results) => {
         if (err) throw err;
-        res.status(201).jsonp({msg:'all comments deleted',results}).end;
+        res.status(201).jsonp({results}).end;
     })
 
 
@@ -91,7 +91,7 @@ router.get('/:commentId', (req,res) => {
     get_comment  = "call get_comment(?)";
     con.query(get_comment, [commentId],(err, results) => {
         if (err) throw err;
-        res.status(200).jsonp({msg:'comment info:',results}).end;
+        res.status(200).jsonp({results}).end;
     })
 });
 
@@ -104,7 +104,7 @@ router.put('/:commentId', (req,res) => {
 
     con.query(update_comment,[commentId,poster,carve,media,profile,comment],(err, results) => {
         if (err) throw err;
-        res.status(201).jsonp({msg:'comment updated via put',results}).end;
+        res.status(201).jsonp({results}).end;
     })
 });
 
@@ -117,7 +117,7 @@ router.patch('/:commentId', (req,res) => {
 
     con.query(update_comment,[commentId,poster,carve,media,profile,comment],(err, results) => {
         if (err) throw err;
-        res.status(201).jsonp({msg:'comment updated via patch',results}).end;
+        res.status(201).jsonp({results}).end;
     })
 });
 

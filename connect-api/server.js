@@ -3,18 +3,18 @@
 require('dotenv').config();
 const express = require('express');
 const app = express({mergeParams: true});
-const server = require('http').Server(app);
+const server = require('http').createServer(app);
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const pass = require('passport');
-const socket = require('socket.io');
 const PORT = process.env.PORT || 8000;
+const PORT2 = 8001;
 const LocalStrategy = require('passport-local');
 
+const io = require('socket.io')();
+const getApiAndEmit = "todo";
 
-
-
+//const server = http.createServer(app);
 
 // Check connection for success
 const con = require('./db');
@@ -37,6 +37,7 @@ const likRoutes = require('./routes/likes');
 const logRoutes = require('./routes/login');
 const medRoutes = require('./routes/media');
 const usrCarRoutes = require('./routes/users/carves');
+const carUsrRoutes = require('./routes/carves/users');
 const usrUfRoutes = require('./routes/users/follows');
 const carAtRoutes = require('./routes/carveAttendees');
 const usrMsgRoutes = require('./routes/users/messages');
@@ -95,13 +96,14 @@ app.use('/media', medRoutes);
 app.use('/likes', likRoutes);
 app.use('/login', logRoutes);
 app.use('/carveAt', carAtRoutes);
+app.use('/carves/:carveId/users', carUsrRoutes);
 app.use('/users/:userId/carves', usrCarRoutes);
 app.use('/users/:userId/follows', usrUfRoutes);
 app.use('/users/:userId/messages', usrMsgRoutes);
 app.use('/users/:userId/comments', usrComRoutes);
 app.use('/users/:userId/media', usrMedRoutes);
 app.use('/users/:userId/likes', usrLikRoutes);
-app.use('/users/:userId/carveAt',usrCarAtRoutes);
+app.use('/users/:userId/carveAttendees',usrCarAtRoutes);
 app.use('/venues/:venueId/media', venMedRoutes);
 app.use('/venues/:venueId/comments', venComRoutes);
 app.use('/venues/:venueId/carves', venCarRoutes);
@@ -112,3 +114,41 @@ app.listen(PORT, () => {
 	console.log("Connect API started on port "+ PORT + "!");
 });
 
+let
+	sequenceNumberByClient = new Map();
+let clients = 0;
+io.on('connection', (client) => {
+	console.info(`Client connected [id=${client.id}]`);
+	// initialize this client's sequence number
+	sequenceNumberByClient.set(client, 1);
+	clients++;
+	client.emit('newclientconnect',{ description: 'Hey, welcome!'});
+	client.broadcast.emit('newclientconnect',{ description: clients + ' clients connected!'});
+
+
+	// here you can start emitting events to the client
+	client.on('subscribeToTimer', (interval) => {
+
+		console.log('Hello from the server. client is subscribing to timer with interval ', interval);
+
+		setInterval(() => {
+
+			client.emit('timer', new Date());
+
+		}, interval);
+
+	});
+
+	client.on('disconnect', () => {
+		sequenceNumberByClient.delete(client);
+		clients--;
+		console.info(`Client gone [id=${client.id}]`);
+	client.broadcast.emit('newclientconnect',{ description: clients + ' clients connected!'});
+	});
+});
+
+
+
+io.listen(PORT2);
+
+console.log('socket io listening on port ', PORT2);
