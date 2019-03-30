@@ -1961,6 +1961,38 @@ END$$
 DELIMITER ;
 
 -- -----------------------------------------------------
+-- procedure get_carve_likes
+-- -----------------------------------------------------
+
+USE `CCv4`;
+DROP procedure IF EXISTS `CCv4`.`get_carve_likes`;
+
+DELIMITER $$
+USE `CCv4`$$
+CREATE PROCEDURE `get_carve_likes` (in id int)
+BEGIN
+select * from all_likes where carve = id and type = 'like';
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure get_carve_dislikes
+-- -----------------------------------------------------
+
+USE `CCv4`;
+DROP procedure IF EXISTS `CCv4`.`get_carve_dislikes`;
+
+DELIMITER $$
+USE `CCv4`$$
+CREATE PROCEDURE `get_carve_dislikes` (in id int)
+BEGIN
+select * from all_likes where carve = id and type = 'dislike';
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
 -- View `CCv4`.`all_users`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `CCv4`.`all_users`;

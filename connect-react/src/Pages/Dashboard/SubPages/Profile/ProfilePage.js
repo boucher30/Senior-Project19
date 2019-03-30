@@ -48,10 +48,10 @@ export default class ProfilePage extends Component {
 			let options;
 			if(isUserLoggedIn) {
 				options =
-					<div>
-						<Button variant="warning" onClick={this.handleShow}>Edit</Button>
+					<Row classname="justify-content-end" style ={{paddingTop:"15px"}}>
+						<Button variant="info" onClick={this.handleShow}>Edit</Button>
 				<Button onClick={this.handleClick} style={{ margin: '5px' }}>Create Carve</Button>
-				</div>
+				</Row>
 			} else {
 				options = <div style={{display:'flex'}}>
 					<Button style={{margin:'5px'}} variant="info">Follow</Button>
@@ -63,15 +63,18 @@ export default class ProfilePage extends Component {
 
 			return (
 				<>
-					<CreateCarveModal handleClose={this.handleClick} show={this.state.show}/>
+					<CreateCarveModal handleClose={this.handleClick} show={this.state.show1}/>
 					<EditProfileModal handleRefresh={this.getUserInfo} user={userInfo} show={this.state.show} handleClose={this.handleClose} />
-
+					<Row style={{paddingLeft:"20px"}}>
 					<div style={{ display: 'flex', marginTop: '8px', border: "0px solid slategrey" }}>
 						<h2 style={{ width: isUserLoggedIn ? '90%' : '80%' }}>{profilePrefix} Profile</h2>
-						{options}
+
+
 
 					</div>
-
+						<div >
+							{options}</div>
+					</Row>
 					{/* This is the row that will hold the profile picture and the information */}
 					<Row>
 
@@ -124,7 +127,7 @@ export default class ProfilePage extends Component {
 						</div>
 
 					</Col>
-					<Col style = {{width: "200%"}}>
+					<Col style = {{width: "100%"}}>
 						<Row>
 							<h2>Carves created by user</h2></Row>
 						<Row style = {{width:"200%"}}>

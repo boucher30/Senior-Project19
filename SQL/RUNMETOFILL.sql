@@ -63,7 +63,7 @@ INSERT INTO messages(sender_Id,rec_Id,message_subject,message_body,type,reply) V
 INSERT INTO messages(sender_Id,rec_Id,message_subject,message_body,type,reply) VALUES (3,5,'invite','yo bud come carve with me','invite',NULL);
 INSERT INTO messages(sender_Id,rec_Id,message_subject,message_body,type,reply) VALUES (3,6,'invite','yo bud come carve with me','invite',NULL);
 INSERT INTO messages(sender_Id,rec_Id,message_subject,message_body,type,reply) VALUES (3,7,'buddyRequest','be my buddy','buddyRequest',NULL);
-INSERT INTO messages(sender_Id,rec_Id,message_subject,message_body,type,reply) VALUES (3,8,'normal','hello there','normal',NULL);
+INSERT INTO messages(sender_Id,rec_Id,message_subject,message_body,type,reply) VALUES (3,1,'normal','hello there','normal',NULL);
 INSERT INTO messages(sender_Id,rec_Id,message_subject,message_body,type,reply) VALUES (3,9,'normal','hello there','normal',NULL);
 INSERT INTO messages(sender_Id,rec_Id,message_subject,message_body,type,reply) VALUES (3,10,'normal','hello there','normal',NULL);
 
