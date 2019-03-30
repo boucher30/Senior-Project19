@@ -6,8 +6,8 @@ import MessageModal from "../../../../components/MessageModal";
 
 const menuItems = {
 	'Compose  ': {href: '/dashboard/messages/ '},
-	'Inbox  ': {href: '/dashboard/messages/inbox '},
-	'Sent  ': {href: '/dashboard/messages/ '}
+	'Inbox  ': {href: '/dashboard/inbox '},
+	'Sent  ': {href: '/dashboard/outbox '}
 
 };
 
