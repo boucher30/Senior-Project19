@@ -1,12 +1,13 @@
 import React, {Component} from 'react'
 import Button from "react-bootstrap/Button";
 import CreateCarveModal from "../../../../components/CreateCarveModal";
+import CarveCard from "../../../../components/CarveCard";
 
 export default class ListingPage extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			show: true
+			show: false
 		}
 	}
 
@@ -23,8 +24,8 @@ export default class ListingPage extends Component {
 					<Button onClick={this.handleClick} style={{ margin: '5px' }}>Create Carve</Button>
 				</div>
 				<div>
-					This is where the list of carves go? We should prolly rename this page to
-					accomodate what we are actually showing
+					<h1>Carves open for attendance request</h1>
+					<CarveCard/>
 				</div>
 			</div>
 		);

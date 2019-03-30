@@ -103,7 +103,7 @@ export default class MessageModal extends Component {
                                 <option value = 'attendAccept'>Accept Carve Attend</option>
                                 <option value = 'buddyDecline'>Deny Buddy</option>
                                 <option value = 'inviteDeny'>Deny Invite</option>
-                                <option value = 'attendDeny'>Deny Carve Attendt</option>
+                                <option value = 'attendDeny'>Deny Carve Attend</option>
                             </Form.Control>
                         </Form.Group>
 

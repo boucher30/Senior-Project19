@@ -20,6 +20,23 @@ router.get('/', (req,res) => {
     })
 });
 
+// Grabs all carves from db
+router.get('/open', (req,res) => {
+
+    carve_list = "CALL get_open_carves()";
+
+
+    console.log(req.query);
+
+    con.query(carve_list, (err, results) => {
+        if (err) throw err;
+
+        res.status(200).jsonp({results}).end;
+
+    })
+});
+
+
 
 // Creates a new carve
 // call add_carve('bob',1,1,'open',5,5,'2019-03-29','snowboard');

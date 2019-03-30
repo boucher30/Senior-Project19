@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import axios from 'axios'
-import MessagesSidebar from "./MessagesSidebar";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import NotificationsSidebar from "./NotificationsSidebar";
 
 
-class MessagesPage extends Component {
+class NotificationsPageInbox extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -26,7 +26,7 @@ class MessagesPage extends Component {
     }
     componentWillMount()
     {
-        axios.get(`http://localhost:8000/users/${localStorage.getItem('userId')}/messages`)
+        axios.get(`http://localhost:8000/users/${localStorage.getItem('userId')}/messages/notifications`)
             .then(res => {
                 console.log("results: ", res.data.results[0]);
                 this.setState({
@@ -42,7 +42,6 @@ class MessagesPage extends Component {
 
         if(this.state.messages.length > 0){
             messageRows = this.state.messages.map((message, index) => {
-
                 return (
                     <tr>
                         <th>{message.message_subject}</th>
@@ -50,7 +49,8 @@ class MessagesPage extends Component {
                         <td>{message.timestamp}</td>
                         <td>{message.type}</td>
                         <td>{message.message_body}</td>
-                        <td><i className ="fa fa-inbox text-white" /></td>
+                        <td><i className ="fa fa-thumbs-o-up text-success" /></td>
+                        <td><i className ="fa fa-thumbs-o-down text-danger" /></td>
                         <td><i className ="fa fa-trash-o text-white" /></td>
                     </tr>
                 )
@@ -63,32 +63,33 @@ class MessagesPage extends Component {
 
                 <Row className="justify-content-md-center" style={{ paddingLeft: '0px',backgroundColor: "lightgray", height: "100%"}}>
 
-                <MessagesSidebar  style = {{paddingRight: '0px'}} />
+                    <NotificationsSidebar  style = {{paddingRight: '0px'}} />
 
                     <Col style={{ paddingLeft: '0px'}}>
 
-                <h3 className = 'border-bottom' style = {{  borderBottomColor: 'black',
-                    borderBottomWidth: 5, width: '150%' }}>Messages</h3>
+                        <h3 className = 'border-bottom' style = {{  borderBottomColor: 'black',
+                            borderBottomWidth: 5, width: '150%' }}>Inbox:</h3>
 
-                <div>
-                    <table className="table table-dark" style = {{color: "skyblue", paddingTop: "5px",width:"101%", bordered: '0.5px solid rgba(0, 0, 0, 0.5)'}}>
-                        <thead>
-                        <tr>
-                            <th scope="col" style={{width:"6%"}}>Subject</th>
-                            <th scope="col" style={{width:"6%"}}>Sender</th>
-                            <th scope="col" style={{width:"4%"}}>Timestamp</th>
-                            <th scope="col" style={{width:"4%"}}>Type</th>
-                            <th scope="col">Body</th>
-                            <th scope="col" style={{width:"1%"}}>Reply</th>
-                            <th scope="col" style={{width:"1%"}}>Delete</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {messageRows}
+                        <div>
+                            <table className="table table-dark" style = {{color: "skyblue", paddingTop: "5px",width:"101%", bordered: '0.5px solid rgba(0, 0, 0, 0.5)'}}>
+                                <thead>
+                                <tr>
+                                    <th scope="col" style={{width:"6%"}}>Subject</th>
+                                    <th scope="col" style={{width:"6%"}}>Sender</th>
+                                    <th scope="col" style={{width:"4%"}}>Timestamp</th>
+                                    <th scope="col" style={{width:"4%"}}>Type</th>
+                                    <th scope="col">Body</th>
+                                    <th scope="col" style={{width:"1%"}}>Approve</th>
+                                    <th scope="col" style={{width:"1%"}}>Deny</th>
+                                    <th scope="col" style={{width:"1%"}}>Delete</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {messageRows}
 
-                        </tbody>
-                    </table>
-                </div>
+                                </tbody>
+                            </table>
+                        </div>
                     </Col>
                 </Row>
             </a>
@@ -97,6 +98,6 @@ class MessagesPage extends Component {
 }
 
 
-export default MessagesPage;
+export default NotificationsPageInbox;
 
 

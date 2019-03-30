@@ -7,6 +7,7 @@ import Container from "react-bootstrap/Container";
 import Image from 'react-bootstrap/Image';
 import SnowProfilePic from '../../../../images/snowboard-profile-pic.jpg';
 import EditProfileModal from "./EditProfileModal";
+import CarveCardUserCreate from "../../../../components/CarveCardUserCreate";
 
 export default class ProfilePage extends Component {
 	constructor(props) {
@@ -91,21 +92,30 @@ export default class ProfilePage extends Component {
 
 					</Row>
 
-
+				<Row>
 					{/* Row will hold all of the media and such that we grab from the api */}
 					<Col style={{paddingLeft: "10%", border: '0px solid darkgrey'}}>
 						<h2 style = {{border:"0px solid slategrey"}}>Content</h2>
-
-						<container className="embed-responsive embed-responsive-16by9" style = {{justify: "center", width: "100%", paddingBottom: "40px", border: '2px solid slategrey'}}>
+						<div>
+						<container className="embed-responsive embed-responsive-16by9" style = {{ width: "100%", paddingBottom: "40px", border: '2px solid slategrey'}}>
 							<iframe title="Tour Video" className="embed-responsive-item"
 									 src="https://www.youtube.com/embed/7a0hbT0QtSw" allowFullScreen > </iframe>
 
 						</container>
-						<container className="embed-responsive embed-responsive-16by9" style = {{justify: "center", width: "100%", paddingTop: "20%", border: '2px solid slategrey'}}>
+						</div>
+						<div>                                                                                                    </div>
+						<div>
+						<container className="embed-responsive embed-responsive-16by9" style = {{ width: "100%", paddingTop: "20%", border: '2px solid slategrey'}}>
 							<iframe title="Prof vid2" className="embed-responsive-item"
 									src="https://www.youtube.com/embed/m8aM2XVffaE" allowFullScreen > </iframe>
 
-						</container></Col>
+						</container>
+						</div>
+
+					</Col>
+					<Col style = {{width: "100%"}}>
+						<h2>Carves created by user</h2>
+						<CarveCardUserCreate/></Col></Row>
 				</>
 			);
 		} else {
