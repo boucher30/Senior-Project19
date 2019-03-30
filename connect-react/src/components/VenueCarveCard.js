@@ -24,6 +24,8 @@ export default class VenueCarveCard extends Component {
             carveAtten: {},
             carveComm: {},
             carveMed: {},
+            carveLik: {},
+            carveDlik: {},
             completed: 0,
             sports: "",
             create_time: ""
@@ -40,7 +42,6 @@ export default class VenueCarveCard extends Component {
                 });
 
             });
-
         //currently only gets attendees for carve1. not dynamic per carve
         axios.get(`http://localhost:8000/carves/${1}/comments`)
             .then(res => {
@@ -76,6 +77,32 @@ export default class VenueCarveCard extends Component {
                 });
 
             });
+
+
+        //currently only gets attendees for carve1. not dynamic per carve
+        axios.get(`http://localhost:8000/carves/${1}/likes`)
+            .then(res => {
+                //alert("carve:" + JSON.stringify(res.data.results));
+                console.log("results: ", res.data.results[0]);
+                //alert(JSON.stringify(res.data.results[0]));
+                this.setState({
+                    carveLik: res.data.results[0]
+                });
+
+            });
+
+
+        //currently only gets attendees for carve1. not dynamic per carve
+        axios.get(`http://localhost:8000/carves/${1}/likes/dislike`)
+            .then(res => {
+                //alert("carve:" + JSON.stringify(res.data.results));
+                console.log("results: ", res.data.results[0]);
+                //alert(JSON.stringify(res.data.results[0]));
+                this.setState({
+                    carveDlik: res.data.results[0]
+                });
+
+            });
     }
 
     render() {
@@ -83,6 +110,8 @@ export default class VenueCarveCard extends Component {
         let carveAttendList;
         let carveComments;
         let carveMedia;
+        let lik =0;
+        let dlik =0;
         let color = "grey";
         let act = "secondary";
         let no = "not";
@@ -91,7 +120,10 @@ export default class VenueCarveCard extends Component {
             carveList = this.state.carveInfo.map((carve, index) => {
 
 
-
+                if(this.state.carveLik.length >0)
+                    lik = this.state.carveLik.length;
+                if(this.state.carveDlik.length >0)
+                    dlik = this.state.carveDlik.length;
                 if (this.state.carveAtten.length > 0) {
                     carveAttendList = this.state.carveAtten.map((attender, index) => {
                         return (
@@ -136,7 +168,6 @@ export default class VenueCarveCard extends Component {
                         );
                     });
                 }
-
 
                 if(carve.completed >0) {
                     color = "seagreen";
@@ -206,8 +237,8 @@ export default class VenueCarveCard extends Component {
                                         {att}
 
                                     </Col>
-                                    <Col><box style = {{color:"red", paddingTop:"10px"}}><i className ="fa fa-thumbs-o-down text-danger" /> Dislikes: 10</box></Col>
-                                    <Col><box style = {{color:"blue", paddingTop:"10px"}}><i className ="fa fa-hand-rock-o " style = {{color:"blue"}}/> Likes: 10</box></Col>
+                                    <Col><box style = {{color:"red", paddingTop:"10px"}}><i className ="fa fa-thumbs-o-down text-danger" /> Dislikes: {dlik}</box></Col>
+                                    <Col><box style = {{color:"blue", paddingTop:"10px"}}><i className ="fa fa-hand-rock-o " style = {{color:"blue"}}/> Likes: {lik}</box></Col>
                                 </Row>
                             </Card.Body>
                             <Card.Footer className="text-primary text-info">
@@ -247,3 +278,4 @@ export default class VenueCarveCard extends Component {
         )
     };
 }
+

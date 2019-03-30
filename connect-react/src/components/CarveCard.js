@@ -110,8 +110,8 @@ export default class CarveCard extends Component {
         let carveAttendList;
         let carveComments;
         let carveMedia;
-        let lik;
-        let dlik;
+        let lik =0;
+        let dlik =0;
         let color = "grey";
         let act = "secondary";
         let no = "not";
@@ -119,8 +119,9 @@ export default class CarveCard extends Component {
         if (this.state.carveInfo.length > 0) {
             carveList = this.state.carveInfo.map((carve, index) => {
 
-
+                if(this.state.carveLik.length >0)
                 lik = this.state.carveLik.length;
+                if(this.state.carveDlik.length >0)
                 dlik = this.state.carveDlik.length;
                 if (this.state.carveAtten.length > 0) {
                 carveAttendList = this.state.carveAtten.map((attender, index) => {
