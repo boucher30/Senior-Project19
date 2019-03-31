@@ -1993,17 +1993,17 @@ END$$
 DELIMITER ;
 
 -- -----------------------------------------------------
--- procedure EXP_buddy_list
+-- procedure buddy_list
 -- -----------------------------------------------------
 
 USE `CCv4`;
-DROP procedure IF EXISTS `CCv4`.`EXP_buddy_list`;
+DROP procedure IF EXISTS `CCv4`.`buddy_list`;
 
 DELIMITER $$
 USE `CCv4`$$
-CREATE PROCEDURE `EXP_buddy_list` (in id int)
+CREATE PROCEDURE `buddy_list` (in id int)
 BEGIN
-select CONCAT( user_id1,' ', user_id2) from all_follows where type = 'buddy' and user_id1 = id or user_id2 =id;
+select user_id2 from all_follows where type = 'buddy' and user_id1 = 1 union select user_id1 as user_id2 from all_follows where type = 'buddy' and user_id2 = 1 ;
 END$$
 
 DELIMITER ;
