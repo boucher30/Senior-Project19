@@ -99,7 +99,7 @@ router.get('/buddies', (req,res) => {
 
 	con.query(follow_list, [userId], (err, results) => {
 		if (err) throw err;
-
+		console.log(results);
 		res.status(200).jsonp({results}).end;
 
 	})

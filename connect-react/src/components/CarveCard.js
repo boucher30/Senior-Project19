@@ -5,6 +5,8 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import axios from 'axios';
 import ListGroup from 'react-bootstrap/ListGroup';
+import Form from 'react-bootstrap/Form';
+import CustomFormGroup from "./CustomFormGroup";
 
 
 export default class CarveCard extends Component {
@@ -105,6 +107,40 @@ export default class CarveCard extends Component {
             });
     }
 
+    like(e){
+        //currently only gets attendees for carve1. not dynamic per carve
+        axios.post(`http://localhost:8000/carves/${1}/likes`,
+        {
+            poster: localStorage.getItem('userId'),
+            carve : e
+        })
+            .then(res => {
+                //alert("carve:" + JSON.stringify(res.data.results));
+                console.log("results: ", res.data.results[0]);
+                //alert(JSON.stringify(res.data.results[0]));
+
+
+            });
+}
+
+    dislike = (e) =>{
+        //currently only gets attendees for carve1. not dynamic per carve
+        axios.post(`http://localhost:8000/carves/${1}/likes/dislikes`,
+            {
+                poster: localStorage.getItem('userId'),
+                carve : e
+            })
+            .then(res => {
+                //alert("carve:" + JSON.stringify(res.data.results));
+
+                //alert(JSON.stringify(res.data.results[0]));
+                this.setState({
+
+                });
+
+            });
+    };
+
     render() {
         let carveList;
         let carveAttendList;
@@ -116,6 +152,7 @@ export default class CarveCard extends Component {
         let act = "secondary";
         let no = "not";
         let att = <div></div>;
+        let val;
         if (this.state.carveInfo.length > 0) {
             carveList = this.state.carveInfo.map((carve, index) => {
 
@@ -146,7 +183,7 @@ export default class CarveCard extends Component {
 
                                 fontFamily: 'monospace', paddingRight: '0px', width: "100%"
                             }}>
-                                Carve Comment: {com.comment} userId
+                                 {com.comment} by: {com.poster}
 
                             </ListGroup.Item>
                         );
@@ -160,8 +197,9 @@ export default class CarveCard extends Component {
 
                                 fontFamily: 'monospace', paddingRight: '0px', width: "100%"
                             }}>
-                                Carve Media: 							<iframe title="Prof vid2" className="embed-responsive-item"
-                                                                                src={med.url} allowFullScreen > </iframe>
+                                <Row>Media Post:</Row>
+                                <Row><iframe title="Prof vid2" className="embed-responsive-item"
+                                                                                src={med.url} allowFullScreen > </iframe></Row>
 
                             </ListGroup.Item>
                         );
@@ -237,12 +275,20 @@ export default class CarveCard extends Component {
 
                                     </Col>
                                     <Col><box style = {{color:"red", paddingTop:"10px"}}><i className ="fa fa-thumbs-o-down text-danger" /> Dislikes: {dlik}</box></Col>
-                                    <Col><box style = {{color:"blue", paddingTop:"10px"}}><i className ="fa fa-hand-rock-o " style = {{color:"blue"}}/> Likes: {lik}</box></Col>
+                                    <Col><box style = {{color:"blue", paddingTop:"10px"}}><i className ="fa fa-hand-rock-o " style = {{color:"blue"}} /> Likes: {lik}</box></Col>
                                 </Row>
                             </Card.Body>
                             <Card.Footer className="text-primary text-info">
                             <Row>
-                                <Col>{carveComments}</Col>
+                                <Col>
+                                    <Row style={{width:"100%"}}>				<Form inline style ={{justify:"left"}} >
+                                        <CustomFormGroup value = {val} type="integer" placeholder="Add Comment" className=" mr-sm-2" controlId ="comment"   style ={{height:"40px",width:"150%"}}/>
+                                        <Button type="submit" href = {''} style = {{ justify:"left",color: "white"}} rounded   style ={{height:"45px", paddingBottom:"5px"}}>Comment</Button>
+
+                                    </Form></Row>
+                                    <Row>{carveComments}</Row>
+
+                                </Col>
                                 <Col>{carveMedia}</Col>
 
 

@@ -69,7 +69,7 @@ componentWillMount() {
 						backgroundColor: "seashell", color: "green",
 						fontFamily: 'monospace', paddingRight: '0px',width:"100%"
 					}}>
-						{"username "+this.state.buddies[index].user_Id2} <Image src={pic1} roundedCircle style = {{width:"20px",height:"20px"}}/>
+						{"username "+this.state.buddies[index].user_id2} <Image src={pic1} roundedCircle style = {{width:"20px",height:"20px"}}/>
 					</ListGroup.Item>
 				)
 			});
