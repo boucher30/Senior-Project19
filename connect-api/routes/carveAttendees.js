@@ -14,7 +14,7 @@ router.get('/', (req,res) => {
 
     con.query(carve_attendees_list, (err, results) => {
         if (err) throw err;
-
+        console.log(results);
         res.status(200).jsonp({results}).end;
 
     })

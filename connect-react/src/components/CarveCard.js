@@ -13,7 +13,7 @@ export default class CarveCard extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            carveId: 0,
+            carve_id: 0,
             name: "",
             creator: 0,
             venue: 0,
@@ -23,6 +23,7 @@ export default class CarveCard extends Component {
             description: null,
             date: "",
             carveInfo: {},
+            carveAt1: {},
             carveAtten: {},
             carveComm: {},
             carveMed: {},
@@ -32,6 +33,8 @@ export default class CarveCard extends Component {
             sports: "",
             create_time: ""
         };
+
+
     }
 
     componentWillMount() {
@@ -45,7 +48,7 @@ export default class CarveCard extends Component {
 
             });
         //currently only gets attendees for carve1. not dynamic per carve
-        axios.get(`http://localhost:8000/carves/${1}/comments`)
+        axios.get(`http://localhost:8000/comments`)
             .then(res => {
                 //alert("carve:" + JSON.stringify(res.data.results));
                 console.log("results: ", res.data.results[0]);
@@ -57,7 +60,7 @@ export default class CarveCard extends Component {
             });
 
         //currently only gets attendees for carve1. not dynamic per carve
-        axios.get(`http://localhost:8000/carves/${1}/media`)
+        axios.get(`http://localhost:8000/media`)
             .then(res => {
                 //alert("carve:" + JSON.stringify(res.data.results));
                 console.log("results: ", res.data.results[0]);
@@ -68,21 +71,21 @@ export default class CarveCard extends Component {
 
             });
 
-        //currently only gets attendees for carve1. not dynamic per carve
-        axios.get(`http://localhost:8000/carves/${1}/carveAttendees`)
+        //currently =dynamic per carve
+        axios.get(`http://localhost:8000/carveAt`)
             .then(res => {
                 //alert("carve:" + JSON.stringify(res.data.results));
                 console.log("results: ", res.data.results[0]);
                 //alert(JSON.stringify(res.data.results[0]));
                 this.setState({
-                    carveAtten: res.data.results[0]
+                    carveAt1: res.data.results
                 });
 
             });
 
 
         //currently only gets attendees for carve1. not dynamic per carve
-        axios.get(`http://localhost:8000/carves/${1}/likes`)
+        axios.get(`http://localhost:8000/likes`)
             .then(res => {
                 //alert("carve:" + JSON.stringify(res.data.results));
                 console.log("results: ", res.data.results[0]);
@@ -95,7 +98,7 @@ export default class CarveCard extends Component {
 
 
         //currently only gets attendees for carve1. not dynamic per carve
-        axios.get(`http://localhost:8000/carves/${1}/likes/dislike`)
+        axios.get(`http://localhost:8000/likes/dislikes`)
             .then(res => {
                 //alert("carve:" + JSON.stringify(res.data.results));
                 console.log("results: ", res.data.results[0]);
@@ -105,9 +108,11 @@ export default class CarveCard extends Component {
                 });
 
             });
+
     }
 
     like(e){
+        this.preventDefault(e);
         //currently only gets attendees for carve1. not dynamic per carve
         axios.post(`http://localhost:8000/carves/${1}/likes`,
         {
@@ -124,6 +129,7 @@ export default class CarveCard extends Component {
 }
 
     dislike = (e) =>{
+        this.preventDefault(e);
         //currently only gets attendees for carve1. not dynamic per carve
         axios.post(`http://localhost:8000/carves/${1}/likes/dislikes`,
             {
@@ -146,8 +152,8 @@ export default class CarveCard extends Component {
         let carveAttendList;
         let carveComments;
         let carveMedia;
-        let lik =0;
-        let dlik =0;
+        let currentCarve =0;
+
         let color = "grey";
         let act = "secondary";
         let no = "not";
@@ -155,20 +161,34 @@ export default class CarveCard extends Component {
         let val;
         if (this.state.carveInfo.length > 0) {
             carveList = this.state.carveInfo.map((carve, index) => {
+                let lik =0;
+                let dlik =0;
 
                 if(this.state.carveLik.length >0)
-                lik = this.state.carveLik.length;
+
+                for(let ind =0; ind<=this.state.carveLik.length;ind ++)
+                {
+                    if(this.state.carveLik[index].carve === carve.carve_id)
+                        lik+=1;
+                }
+
                 if(this.state.carveDlik.length >0)
-                dlik = this.state.carveDlik.length;
-                if (this.state.carveAtten.length > 0) {
-                carveAttendList = this.state.carveAtten.map((attender, index) => {
+                    for(let ind1 =0; ind1<=this.state.carveLik.length;ind1 ++)
+                    {
+                        if(this.state.carveDlik[index].carve === carve.carve_id)
+                            dlik++;
+                    }
+                if (this.state.carveAt1.length > 0) {
+                carveAttendList = this.state.carveAt1[0].map((attender, index1) => {
+
+                    if(attender.carve === carve.carve_id)
                     return (
 
-                        <ListGroup.Item key={index} style={{
+                        <ListGroup.Item key={index1} style={{
 
                             fontFamily: 'monospace', paddingRight: '0px', width: "100%"
                         }}>
-                            Carve Attendee: {attender.user} userId
+                            {attender.user} {attender.type}
 
                         </ListGroup.Item>
                     );
@@ -177,6 +197,7 @@ export default class CarveCard extends Component {
 
                 if (this.state.carveComm.length > 0) {
                     carveComments = this.state.carveComm.map((com, index) => {
+                        if(com.carve === carve.carve_id)
                         return (
 
                             <ListGroup.Item key={index} style={{
@@ -191,6 +212,7 @@ export default class CarveCard extends Component {
                 }
                 if (this.state.carveMed.length > 0) {
                     carveMedia = this.state.carveMed.map((med, index) => {
+                        if(med.carve === carve.carve_id)
                         return (
 
                             <ListGroup.Item key={index} style={{
@@ -200,6 +222,7 @@ export default class CarveCard extends Component {
                                 <Row>Media Post:</Row>
                                 <Row><iframe title="Prof vid2" className="embed-responsive-item"
                                                                                 src={med.url} allowFullScreen > </iframe></Row>
+
 
                             </ListGroup.Item>
                         );
@@ -226,28 +249,32 @@ export default class CarveCard extends Component {
                     }}>
 
                         <Card style = {{width: '100%', backgroundColor: [color]}}>
-                            <Card.Header style = {{color:"navy"}}>Carve is {no}
+                            <Card.Header style = {{color:"navy"}}>
                                 <Row style = {{justify: 'space-between'}}>
-                                    <Col style = {{position: 'left',margin: '15px', marginBottom: '-15px'}} >
-                                        <h5>Location: {carve.venue}</h5>
-                                        <p>Creator: {carve.creator}</p>
-                                    </Col>
-                                    <Col style = {{position: 'right'}}>
-                                        <h6 style = {{margin: '15px', marginLeft: '200px'}}>Type: {carve.type}</h6>
-                                    </Col>
+                                    <Card.Title>Name: {carve.name}</Card.Title>
+                                    <div style = {{margin: '15px', marginLeft: '20%'}}>Date: {carve.date}</div>
+                                    <h6 style = {{margin: '15px', marginLeft: '20%'}}>Type: {carve.type}</h6>
+
                                 </Row>
                             </Card.Header>
                             <Card.Body>
                                 <Row>
                                 <Col>
-                                <Card.Title>Name: {carve.name}</Card.Title>
-                                <Card.Text style = {{marginLeft: '30px'}}>
+
+                                <Card.Text style = {{}}>
                                     <Row>
-                                        Description: {carve.description} All carves created with null description for now....
+                                        Carve is {no}
                                     </Row>
+
+                                    <Row style = {{position: 'left'}} >
+                                        <h5>Location: {carve.venue}</h5>
+
+                                    </Row>
+                                    <Row><p>Creator: {carve.creator}</p></Row>
                                     <Row>
-                                        Date: {carve.date}
+                                        Description: {carve.description}
                                     </Row>
+
                                     <Row>
                                         Sports: {carve.sports} {/*can't do sports by itself */}
                                     </Row>
@@ -274,7 +301,7 @@ export default class CarveCard extends Component {
                                         {att}
 
                                     </Col>
-                                    <Col><box style = {{color:"red", paddingTop:"10px"}}><i className ="fa fa-thumbs-o-down text-danger" /> Dislikes: {dlik}</box></Col>
+                                    <Col><box style = {{color:"red", paddingTop:"10px"}}><i className ="fa fa-thumbs-o-down text-danger"  /> Dislikes: {dlik}</box></Col>
                                     <Col><box style = {{color:"blue", paddingTop:"10px"}}><i className ="fa fa-hand-rock-o " style = {{color:"blue"}} /> Likes: {lik}</box></Col>
                                 </Row>
                             </Card.Body>
@@ -289,7 +316,8 @@ export default class CarveCard extends Component {
                                     <Row>{carveComments}</Row>
 
                                 </Col>
-                                <Col>{carveMedia}</Col>
+                                <Col>{carveMedia}
+                                </Col>
 
 
                             </Row>
@@ -323,4 +351,3 @@ export default class CarveCard extends Component {
         )
     };
 }
-

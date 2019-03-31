@@ -84,7 +84,9 @@ export default class VenueListPage extends Component {
             );
         }else{
             return (
-                <div>Error loading venues list</div>
+                <div>
+                    <h1 className="fa fa-spinner fa-spin" style={{position: 'absolute', left: '50%', top: '50%'}}>Loading! </h1>
+                </div>
             );
         }
     }
