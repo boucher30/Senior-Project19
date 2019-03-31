@@ -85,7 +85,7 @@ export default class VenuePage extends Component {
                     </Col>
                         <Col style = {{width: "200%"}}>
                             <Row>
-                                <h2>Carves created by user</h2></Row>
+                                <h2>Carves at this venue</h2></Row>
                             <Row style = {{width:"100%"}}>
                                 <VenueCarveCard style = {{width:"100%"}}/></Row></Col>
                     </Row>
@@ -93,7 +93,9 @@ export default class VenuePage extends Component {
             );
         }else{
             return (
-                <p>Error loading venue profile page</p>
+                <div>
+                    <h1 className="fa fa-spinner fa-spin" style={{position: 'absolute', left: '50%', top: '50%'}}>Loading! </h1>
+                </div>
             );
         }
     }

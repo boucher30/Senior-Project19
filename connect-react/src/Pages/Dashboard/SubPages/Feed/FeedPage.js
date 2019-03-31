@@ -22,7 +22,7 @@ export default class FeedPage extends Component {
 			<>
 				<CreateCarveModal handleClose={this.handleClick} show={this.state.show}/>
 				<row>
-					<h1>Carves user is attending</h1>
+					<h1>Carves user will or has already attended</h1>
 					<Button onClick={this.handleClick} style={{ margin: '5px' }}>Create Carve</Button>
 				</row>
 
