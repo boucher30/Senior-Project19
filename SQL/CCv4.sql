@@ -2009,6 +2009,38 @@ END$$
 DELIMITER ;
 
 -- -----------------------------------------------------
+-- procedure get_all_likes
+-- -----------------------------------------------------
+
+USE `CCv4`;
+DROP procedure IF EXISTS `CCv4`.`get_all_likes`;
+
+DELIMITER $$
+USE `CCv4`$$
+CREATE PROCEDURE `get_all_likes` ()
+BEGIN
+select * from all_likes where type = 'like';
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure get_dislikes
+-- -----------------------------------------------------
+
+USE `CCv4`;
+DROP procedure IF EXISTS `CCv4`.`get_dislikes`;
+
+DELIMITER $$
+USE `CCv4`$$
+CREATE PROCEDURE `get_dislikes` ()
+BEGIN
+select * from likes where type = 'dislike';
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
 -- View `CCv4`.`all_users`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `CCv4`.`all_users`;

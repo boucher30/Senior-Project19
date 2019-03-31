@@ -38,7 +38,7 @@ router.get('/dislike', (req,res) => {
 });
 // Creates a new like
 router.post('/', (req,res) => {
-    const {poster,likeordislike,carve,media,comment} = req.body;
+    const {poster,carve} = req.body;
 
     console.log(" new like sent from: "+ poster);
     if(false)
@@ -50,14 +50,34 @@ router.post('/', (req,res) => {
         // Added a comment
         new_like = "CALL add_like(?,?,?,?,?)";
         // Execute the query to insert into the database
-        con.query(new_like,[poster,likeordislike[0],carve,media,comment], (err, results) => {
+        con.query(new_like,[poster,'like',carve,null,null], (err, results) => {
             if (err) throw err;
             res.status(201).jsonp({results}).end;
         })
 
     }
 });
+// Creates a new like
+router.post('/dislike', (req,res) => {
+    const {poster,carve} = req.body;
 
+    console.log(" new like sent from: "+ poster);
+    if(false)
+    {
+
+    }else{
+        // The likename wasn't found in the database
+        // Create insert query for new like
+        // Added a comment
+        new_like = "CALL add_like(?,?,?,?,?)";
+        // Execute the query to insert into the database
+        con.query(new_like,[poster,'dislike',carve,null,null], (err, results) => {
+            if (err) throw err;
+            res.status(201).jsonp({results}).end;
+        })
+
+    }
+});
 // updates all likes
 router.put('/', (req,res) => {
 
