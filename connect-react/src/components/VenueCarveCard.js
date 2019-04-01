@@ -7,6 +7,8 @@ import axios from 'axios';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Form from 'react-bootstrap/Form';
 import CustomFormGroup from "./CustomFormGroup";
+import CarveAttendRequestModal from "./CarveAttendRequestModal";
+import CarveInviteModal from "./CarveInviteModal";
 
 export default class VenueCarveCard extends Component {
     constructor(props) {
@@ -30,12 +32,20 @@ export default class VenueCarveCard extends Component {
             carveDlik: {},
             completed: 0,
             sports: "",
-            create_time: ""
+            create_time: "",
+            show5: false,
+            show6: false,
+            currentCid: 0,
+            curCr:0,
+            cId:0,
+            cRe:0,
+            followCheck: [],
+            userId: localStorage.getItem('userId')
         };
     }
 
     componentWillMount() {
-        axios.get(`http://localhost:8000/venues/1/carves`)
+        axios.get(`http://localhost:8000/venues/${this.props.venue_id}/carves`)
             .then(res => {
                 console.log("results: ", res.data.results[0]);
                 //alert(JSON.stringify(res.data.results[0]));
@@ -44,6 +54,17 @@ export default class VenueCarveCard extends Component {
                 });
 
             });
+
+        axios.get(`http://localhost:8000/users/${this.state.userId}/carveAttendees`)
+            .then(res => {
+                console.log("results: ", res.data.results[0]);
+                //alert(JSON.stringify(res.data.results[0]));
+                this.setState({
+                    followCheck: res.data.results[0]
+                });
+
+            });
+
         //currently only gets attendees for carve1. not dynamic per carve
         axios.get(`http://localhost:8000/comments`)
             .then(res => {
@@ -141,14 +162,20 @@ export default class VenueCarveCard extends Component {
             });
     };
 
+    handleClick6 = () => {
+
+        this.setState({ show6: !this.state.show6});
+    };
+
+
+
     render() {
         let carveList;
         let carveAttendList;
         let carveComments;
         let carveMedia;
         let currentCarve =0;
-        let lik =0;
-        let dlik =0;
+
         let color = "grey";
         let act = "secondary";
         let no = "not";
@@ -156,12 +183,9 @@ export default class VenueCarveCard extends Component {
         let val;
         if (this.state.carveInfo.length > 0) {
             carveList = this.state.carveInfo.map((carve, index) => {
+                let lik =0;
+                let dlik =0;
 
-
-                if(this.state.carveLik.length >0)
-                    lik = this.state.carveLik.length;
-                if(this.state.carveDlik.length >0)
-                    dlik = this.state.carveDlik.length;
 
                 if (this.state.carveAt1.length > 0) {
                     carveAttendList = this.state.carveAt1[0].map((attender, index1) => {
@@ -224,15 +248,19 @@ export default class VenueCarveCard extends Component {
                     color = "lightskyblue";
                     act = "Request to Attend";
                     no = "Upcoming";
-                    att =<Button variant="info" style = {{ paddingTop:"10px"}}  >{act}</Button>;
+
+                    att =<Button variant="info" style = {{ paddingTop:"10px"}} onClick = {() => this.handleClick5(carve.carve_id,carve.creator)} >{act}</Button>;
+
                 }
+
                 return (
 
                     <ListGroup.Item key={index} style={{
 
                         fontFamily: 'monospace', paddingRight: '0px', width: "100%"
                     }}>
-
+                        <CarveAttendRequestModal cid ={this.state.cId} cre = {this.state.cRe} handleClose={this.handleClick5} show={this.state.show5} />
+                        <CarveInviteModal cid ={this.state.currentCid} handleClose={this.handleClick5} show={this.state.show5} />
                         <Card style = {{width: '100%', backgroundColor: [color]}}>
                             <Card.Header style = {{color:"navy"}}>
                                 <Row style = {{justify: 'space-between'}}>
@@ -286,7 +314,7 @@ export default class VenueCarveCard extends Component {
                                         {att}
 
                                     </Col>
-                                    <Col><box style = {{color:"red", paddingTop:"10px"}}><i className ="fa fa-thumbs-o-down text-danger" /> Dislikes: {dlik}</box></Col>
+                                    <Col><box style = {{color:"red", paddingTop:"10px"}}><i className ="fa fa-thumbs-o-down text-danger"  /> Dislikes: {dlik}</box></Col>
                                     <Col><box style = {{color:"blue", paddingTop:"10px"}}><i className ="fa fa-hand-rock-o " style = {{color:"blue"}} /> Likes: {lik}</box></Col>
                                 </Row>
                             </Card.Body>

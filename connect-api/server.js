@@ -8,7 +8,7 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 //const cookieparser = require('cookie-parser');
 const PORT = process.env.PORT || 8000;
-const PORT2 = 8001;
+//const PORT2 = 8001;
 //const LocalStrategy = require('passport-local');
 
 //const io = require('socket.io')();
@@ -53,7 +53,7 @@ const venCarRoutes = require('./routes/venues/carves');
 const venUfRoutes = require('./routes/venues/follows');
 const venComRoutes = require('./routes/venues/comments');
 const venMedRoutes = require('./routes/venues/media');
-const handshake = require('socket.io-handshake');
+//const handshake = require('socket.io-handshake');
 
 
 var domain = require('domain');
@@ -116,4 +116,4 @@ app.listen(PORT, () => {
 
 
 
-console.log('socket io listening on port ', PORT2);
+//console.log('socket io listening on port ', PORT2);

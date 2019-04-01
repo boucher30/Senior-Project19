@@ -9,6 +9,7 @@ import SnowProfilePic from '../../../../images/snowboard-profile-pic.jpg';
 import EditProfileModal from "./EditProfileModal";
 import CarveCardUserCreate from "../../../../components/CarveCardUserCreate";
 import CreateCarveModal from "../../../../components/CreateCarveModal";
+import BuddyRequestModal from "../../../../components/BuddyRequestModal";
 
 export default class ProfilePage extends Component {
 	constructor(props) {
@@ -21,11 +22,13 @@ export default class ProfilePage extends Component {
 			pic : SnowProfilePic,
 			check: true,
 			show: false,
-			show1: false
+			show1: false,
+			show2: false
 		};
 
 		this.handleShow = this.handleShow.bind(this);
 		this.handleClose = this.handleClose.bind(this);
+		this.handleClose2 = this.handleClose2.bind(this);
 		this.getUserInfo = this.getUserInfo.bind(this);
 	}
 
@@ -36,6 +39,20 @@ export default class ProfilePage extends Component {
 
 	handleClick = () => {
 		this.setState({ show1: !this.state.show1 });
+	};
+
+	handleClick2 = () => {
+		this.setState({ show2: !this.state.show2 });
+	};
+
+
+	onClick1 = () =>{
+
+		axios.post('http://localhost:8000/follows', {
+			user1: localStorage.getItem('userId'),
+			user2: this.state.userInfo.user_id
+
+		});
 	};
 
 	// We need to conditionally render things based on the user in relation to who is logged in
@@ -54,8 +71,8 @@ export default class ProfilePage extends Component {
 				</Row>
 			} else {
 				options = <div style={{display:'flex'}}>
-					<Button style={{margin:'5px'}} variant="info">Follow</Button>
-					<Button style={{margin:'5px'}} variant="info">Add Buddy</Button>
+					<Button style={{margin:'5px'}} variant="info" onClick = {this.onClick1}>Follow</Button>
+					<Button style={{margin:'5px'}} variant="info" onClick = {this.handleClick2}>Add Buddy</Button>
 				</div>;
 
 
@@ -65,6 +82,7 @@ export default class ProfilePage extends Component {
 				<>
 					<CreateCarveModal handleClose={this.handleClick} show={this.state.show1}/>
 					<EditProfileModal handleRefresh={this.getUserInfo} user={userInfo} show={this.state.show} handleClose={this.handleClose} />
+					<BuddyRequestModal id ={this.state.userInfo.user_id} show={this.state.show2} handleClose={this.handleClose2}/>
 					<Row style={{paddingLeft:"20px"}}>
 					<div style={{ display: 'flex', marginTop: '8px', border: "0px solid slategrey" }}>
 						<h2 style={{ width: isUserLoggedIn ? '90%' : '80%' }}>{profilePrefix} Profile</h2>
@@ -131,7 +149,7 @@ export default class ProfilePage extends Component {
 						<Row>
 							<h2>Carves created by user</h2></Row>
 						<Row style = {{width:"100%"}}>
-							<CarveCardUserCreate style = {{width:"100%"}}/></Row></Col></Row>
+							<CarveCardUserCreate profile_id = {this.state.userId}style = {{width:"100%"}}/></Row></Col></Row>
 				</>
 			);
 		} else {
@@ -147,7 +165,9 @@ export default class ProfilePage extends Component {
 	handleClose() {
 		this.setState({ show: false });
 	}
-
+	handleClose2() {
+		this.setState({ show2: false });
+	}
 	handleShow() {
 		this.setState({ show: true });
 	}

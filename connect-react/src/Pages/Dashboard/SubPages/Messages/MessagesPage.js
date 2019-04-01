@@ -3,7 +3,7 @@ import axios from 'axios'
 import MessagesSidebar from "./MessagesSidebar";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import MessageModal from "../../../../components/MessageModal";
+import ReplyMsgModal from "../../../../components/ReplyMsgModal";
 
 
 class MessagesPage extends Component {
@@ -23,40 +23,41 @@ class MessagesPage extends Component {
             check: true,
             show: false,
             show1: false,
-            currentID: 0
+            currentID: 0,
+            replyId: 0,
+            replier: 0
         };
 
     }
     componentWillMount()
-    {
-        axios.get(`http://localhost:8000/users/${localStorage.getItem('userId')}/messages`)
-            .then(res => {
-                console.log("results: ", res.data.results[0]);
-                this.setState({
-                    messages: res.data.results[0]
-                });
+{
+    axios.get(`http://localhost:8000/users/${localStorage.getItem('userId')}/messages`)
+    .then(res => {
+    console.log("results: ", res.data.results[0]);
+    this.setState({
+    messages: res.data.results[0]
+    });
 
-                //alert(JSON.stringify(res.data.users[0][0]))
-            });
+    //alert(JSON.stringify(res.data.users[0][0]))
+    });
 
     }
 //onClick={this.onClick(message.message_id)}
-    onClick = (e) =>{
+    onClick2 = (e) =>{
+        console.log(" delete:" +e);
         axios.delete(`http://localhost:8000/messages/${e}`)
-            .then(res => {
 
-                this.setState({
 
-                });
 
-                //alert(JSON.stringify(res.data.users[0][0]))
-            });
     };
 //show: false
-    onClick1 =() => {
-        this.setState({ show: !this.state.show1 });
-    };
+    onClick1 =(e,e1) => {
+        this.setState({
+            replyId: e,
+            replier: e1,
+            show1: !this.state.show1 });
 
+    };
     render() {
         let messageRows;
 
@@ -70,8 +71,8 @@ class MessagesPage extends Component {
                         <td>{message.create_time}</td>
                         <td>{message.type}</td>
                         <td>{message.message_body}</td>
-                            <td> </td>
-                            <td > </td>
+                            <td><i onClick={() => this.onClick1(message.message_id,message.sender_Id)} className ="fa fa-inbox text-white"> </i></td>
+                            <td > <i  className ="fa fa-trash-o text-white" onClick={ () => { this.onClick2(message.message_id) } }> </i></td>
                         </tr>
                 )
             });
@@ -80,7 +81,7 @@ class MessagesPage extends Component {
         return (
 
             <>
-                <MessageModal handleClose={this.onClick1} show={this.state.show1} />
+                <ReplyMsgModal replyId = {this.state.replyID} replier = {this.state.replier} handleClose={this.onClick1} show={this.state.show1} />
                 <Row className="justify-content-md-center" style={{ paddingLeft: '0px',backgroundColor: "lightgray", height: "100%"}}>
 
                 <MessagesSidebar  style = {{paddingRight: '0px'}} />
@@ -88,7 +89,7 @@ class MessagesPage extends Component {
                     <Col style={{ paddingLeft: '0px'}}>
 
                 <h3 className = 'border-bottom' style = {{  borderBottomColor: 'black',
-                    borderBottomWidth: 5, width: '150%' }}>Messages</h3>
+                    borderBottomWidth: 5, width: '150%' }}>Messages </h3>
 
                 <div>
                     <table className="table table-dark" style = {{color: "skyblue", paddingTop: "5px",width:"101%", bordered: '0.5px solid rgba(0, 0, 0, 0.5)'}}>

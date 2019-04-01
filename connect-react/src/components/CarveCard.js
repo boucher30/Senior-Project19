@@ -8,6 +8,9 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import Form from 'react-bootstrap/Form';
 import CustomFormGroup from "./CustomFormGroup";
 
+import CarveInviteModal from "./CarveInviteModal";
+import CarveAttendRequestModal from "./CarveAttendRequestModal";
+
 
 export default class CarveCard extends Component {
     constructor(props) {
@@ -31,7 +34,13 @@ export default class CarveCard extends Component {
             carveDlik: {},
             completed: 0,
             sports: "",
-            create_time: ""
+            create_time: "",
+            show5: false,
+            show6: false,
+            currentCid: 0,
+            curCr:0,
+            cId:0,
+            cRe:0
         };
 
 
@@ -147,6 +156,21 @@ export default class CarveCard extends Component {
             });
     };
 
+    handleClick5 = (e,e2) => {
+
+        this.setState({ show5: !this.state.show5,
+        cId : e,
+           cRe:e2
+        });
+    };
+
+    handleClick6 = () => {
+
+        this.setState({ show6: !this.state.show6});
+    };
+
+
+
     render() {
         let carveList;
         let carveAttendList;
@@ -164,20 +188,7 @@ export default class CarveCard extends Component {
                 let lik =0;
                 let dlik =0;
 
-                if(this.state.carveLik.length >0)
 
-                for(let ind =0; ind<=this.state.carveLik.length;ind ++)
-                {
-                    if(this.state.carveLik[index].carve === carve.carve_id)
-                        lik+=1;
-                }
-
-                if(this.state.carveDlik.length >0)
-                    for(let ind1 =0; ind1<=this.state.carveLik.length;ind1 ++)
-                    {
-                        if(this.state.carveDlik[index].carve === carve.carve_id)
-                            dlik++;
-                    }
                 if (this.state.carveAt1.length > 0) {
                 carveAttendList = this.state.carveAt1[0].map((attender, index1) => {
 
@@ -239,15 +250,18 @@ export default class CarveCard extends Component {
                     color = "lightskyblue";
                     act = "Request to Attend";
                     no = "Upcoming";
-                    att =<Button variant="info" style = {{ paddingTop:"10px"}}  >{act}</Button>;
+                    att =<Button variant="info" style = {{ paddingTop:"10px"}} onClick = {() => this.handleClick5(carve.carve_id,carve.creator)} >{act}</Button>;
+
                 }
+
                 return (
 
                     <ListGroup.Item key={index} style={{
 
                         fontFamily: 'monospace', paddingRight: '0px', width: "100%"
                     }}>
-
+                        <CarveAttendRequestModal cid ={this.state.cId} cre = {this.state.cRe} handleClose={this.handleClick5} show={this.state.show5} />
+                        <CarveInviteModal cid ={this.state.currentCid} handleClose={this.handleClick5} show={this.state.show5} />
                         <Card style = {{width: '100%', backgroundColor: [color]}}>
                             <Card.Header style = {{color:"navy"}}>
                                 <Row style = {{justify: 'space-between'}}>

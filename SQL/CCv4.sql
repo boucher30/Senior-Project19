@@ -1,3 +1,4 @@
+
 -- MySQL Workbench Forward Engineering
 
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
@@ -113,10 +114,12 @@ CREATE TABLE IF NOT EXISTS `CCv4`.`MESSAGES` (
   `type` SET('normal', 'buddyRequest', 'buddyAccept', 'buddyDecline', 'attendRequest', 'attendAccept', 'attendDeny', 'invite', 'inviteAccept', 'inviteDeny', 'reply') NULL,
   `reply` INT NULL,
   `read` TINYINT NULL DEFAULT 0,
+  `carve` INT NULL,
   `create_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`message_id`),
   UNIQUE INDEX `message_id_UNIQUE` (`message_id` ASC) VISIBLE,
   INDEX `reply_idx` (`reply` ASC) VISIBLE,
+  INDEX `carve_idx` (`carve` ASC) VISIBLE,
   CONSTRAINT `sender`
     FOREIGN KEY (`sender_Id`)
     REFERENCES `CCv4`.`USERS` (`user_id`)
@@ -131,7 +134,12 @@ CREATE TABLE IF NOT EXISTS `CCv4`.`MESSAGES` (
     FOREIGN KEY (`reply`)
     REFERENCES `CCv4`.`MESSAGES` (`message_id`)
     ON DELETE CASCADE
-    ON UPDATE CASCADE)
+    ON UPDATE CASCADE,
+  CONSTRAINT `carve`
+    FOREIGN KEY (`carve`)
+    REFERENCES `CCv4`.`CARVES` (`carve_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
@@ -2041,6 +2049,38 @@ END$$
 DELIMITER ;
 
 -- -----------------------------------------------------
+-- procedure get_profile_media
+-- -----------------------------------------------------
+
+USE `CCv4`;
+DROP procedure IF EXISTS `CCv4`.`get_profile_media`;
+
+DELIMITER $$
+USE `CCv4`$$
+CREATE PROCEDURE `get_profile_media` (in id int)
+BEGIN
+select * from all_media where media = id;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure get_venue_media
+-- -----------------------------------------------------
+
+USE `CCv4`;
+DROP procedure IF EXISTS `CCv4`.`get_venue_media`;
+
+DELIMITER $$
+USE `CCv4`$$
+CREATE PROCEDURE `get_venue_media` (in id int)
+BEGIN
+select * from all_media where venue = id;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
 -- View `CCv4`.`all_users`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `CCv4`.`all_users`;
@@ -2142,3 +2182,4 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- begin attached script 'script'
 ALTER USER 'nodeuser'@'localhost' IDENTIFIED WITH mysql_native_password BY 'nodeuser@1234';
 -- end attached script 'script'
+

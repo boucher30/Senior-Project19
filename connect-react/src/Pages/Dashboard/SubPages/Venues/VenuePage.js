@@ -33,6 +33,15 @@ export default class VenuePage extends Component {
 			})
 	}
 
+    onClick1 = () =>{
+
+        axios.post('http://localhost:8000/follows', {
+            user1: localStorage.getItem('userId'),
+            v: this.state.venueInfo.venue_id
+
+        });
+    };
+
     render() {
         if(this.state.venueInfoLength > 0){
             const venueInfo = this.state.venueInfo;
@@ -47,6 +56,7 @@ export default class VenuePage extends Component {
                                     <Figure>
                                         <h1>{venueInfo.venue_name}</h1>
                                         <h4><em>{venueInfo.city}, {venueInfo.state}</em></h4>
+                                        <Button style={{margin:'5px'}} variant="info" onClick = {this.onClick1}>Follow</Button>
                                         <Figure.Image
                                             rounded
 
@@ -87,7 +97,7 @@ export default class VenuePage extends Component {
                             <Row>
                                 <h2>Carves at this venue</h2></Row>
                             <Row style = {{width:"100%"}}>
-                                <VenueCarveCard style = {{width:"100%"}}/></Row></Col>
+                                <VenueCarveCard venue_id = {this.state.venueId} style = {{width:"100%"}}/></Row></Col>
                     </Row>
                 </>
             );

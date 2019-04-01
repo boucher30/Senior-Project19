@@ -51,7 +51,7 @@ router.get('/notifications', (req,res) => {
 
     con.query(message_list, [userId], (err, results) => {
         if (err) throw err;
-
+        console.log(results);
         res.status(200).jsonp({results}).end;
 
     })
