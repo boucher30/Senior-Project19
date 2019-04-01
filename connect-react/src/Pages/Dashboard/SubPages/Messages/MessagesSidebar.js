@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import Col from 'react-bootstrap/Col';
 import ListGroup from 'react-bootstrap/ListGroup'
-
-import MessageModal from "../../../../components/MessageModal";
+import ReplyMsgModal from "../../../../components/ReplyMsgModal";
 
 const menuItems = {
 	'Compose  ': {href: '/dashboard/messages/ '},
@@ -27,7 +26,7 @@ export default class MessagesSidebar extends Component {
 render() {
 	return (
 		<>
-			<MessageModal handleClose={this.handleClick} show={this.state.show} />
+			<ReplyMsgModal handleClose={this.handleClick} show={this.state.show} />
 			{/* First column that holds the menu items */}
 			<Col xs={1} style={{ paddingLeft: "0px",paddingRight: '0px', backgroundColor: "grey",bordered: '0.5px solid rgba(0, 0, 0, 0.5)'}}>
 				<ListGroup variant="flush" defaultActiveKey="1"  style={{ paddingRight: '0px'}}>

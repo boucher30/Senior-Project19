@@ -3,6 +3,7 @@ import axios from 'axios'
 import MessagesSidebar from "./MessagesSidebar";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import ReplyMsgModal from "../../../../components/ReplyMsgModal";
 
 
 class MessagesPageInbox extends Component {
@@ -20,7 +21,9 @@ class MessagesPageInbox extends Component {
             create_time: "",
             messages: [],
             check: true,
-            show: false
+            show: false,
+            replyId: 0,
+            replier: 0
         };
 
     }
@@ -37,11 +40,31 @@ class MessagesPageInbox extends Component {
             });
 
     }
+//onClick={this.onClick(message.message_id)}
+    onClick2 = (e) =>{
+        console.log(" delete:" +e);
+        axios.delete(`http://localhost:8000/messages/${e}`)
+
+
+
+    };
+//show: false
+    onClick1 =(e,e1) => {
+        this.setState({
+            replyId: e,
+            replier: e1,
+            show1: !this.state.show1 });
+
+    };
+
+
+
     render() {
         let messageRows;
 
         if(this.state.messages.length > 0){
             messageRows = this.state.messages.map((message, index) => {
+
                 return (
                     <tr>
                         <th>{message.message_subject}</th>
@@ -49,8 +72,8 @@ class MessagesPageInbox extends Component {
                         <td>{message.create_time}</td>
                         <td>{message.type}</td>
                         <td>{message.message_body}</td>
-                        <td><i className ="fa fa-inbox text-white" /></td>
-                        <td><i className ="fa fa-trash-o text-white" /></td>
+                        <td><i onClick={() => this.onClick1(message.message_id,message.sender_Id)} className ="fa fa-inbox text-white"> </i></td>
+                        <td > <i  className ="fa fa-trash-o text-white" onClick={ () => { this.onClick2(message.message_id) } }> </i></td>
                     </tr>
                 )
             });
@@ -58,8 +81,8 @@ class MessagesPageInbox extends Component {
 
         return (
 
-            <a >
-
+            <>
+                <ReplyMsgModal replyId = {this.state.replyID} replier = {this.state.replier} handleClose={this.onClick1} show={this.state.show1} />
                 <Row className="justify-content-md-center" style={{ paddingLeft: '0px',backgroundColor: "lightgray", height: "100%"}}>
 
                     <MessagesSidebar  style = {{paddingRight: '0px'}} />
@@ -67,7 +90,7 @@ class MessagesPageInbox extends Component {
                     <Col style={{ paddingLeft: '0px'}}>
 
                         <h3 className = 'border-bottom' style = {{  borderBottomColor: 'black',
-                            borderBottomWidth: 5, width: '150%' }}>Inbox:</h3>
+                            borderBottomWidth: 5, width: '150%' }}>Messages </h3>
 
                         <div>
                             <table className="table table-dark" style = {{color: "skyblue", paddingTop: "5px",width:"101%", bordered: '0.5px solid rgba(0, 0, 0, 0.5)'}}>
@@ -83,14 +106,16 @@ class MessagesPageInbox extends Component {
                                 </tr>
                                 </thead>
                                 <tbody>
+
                                 {messageRows}
 
                                 </tbody>
                             </table>
                         </div>
                     </Col>
+
                 </Row>
-            </a>
+            </>
         );
     }
 }

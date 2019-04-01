@@ -2041,6 +2041,38 @@ END$$
 DELIMITER ;
 
 -- -----------------------------------------------------
+-- procedure get_profile_media
+-- -----------------------------------------------------
+
+USE `CCv4`;
+DROP procedure IF EXISTS `CCv4`.`get_profile_media`;
+
+DELIMITER $$
+USE `CCv4`$$
+CREATE PROCEDURE `get_profile_media` (in id int)
+BEGIN
+select * from all_media where media = id;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure get_venue_media
+-- -----------------------------------------------------
+
+USE `CCv4`;
+DROP procedure IF EXISTS `CCv4`.`get_venue_media`;
+
+DELIMITER $$
+USE `CCv4`$$
+CREATE PROCEDURE `get_venue_media` (in id int)
+BEGIN
+select * from all_media where venue = id;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
 -- View `CCv4`.`all_users`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `CCv4`.`all_users`;

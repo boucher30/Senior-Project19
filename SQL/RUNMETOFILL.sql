@@ -1,7 +1,7 @@
 #here it is...
 use CCv4;
 
-INSERT INTO USERS(username,email,password,first_name,last_name,description,type,snow_sports,water_sports,land_sports,air_sports) VALUES ('I am alive!','abc1@email.net','abcd1201','Sean','Klinglesmith','cool dude who LIKES to film using drones or otherwise','photographer,filmographer,droneOperator','snowboard','surf','skateboard,BMX,mountainBiking','skydive,hangGlide');
+INSERT INTO USERS(username,email,password,first_name,last_name,description,type,snow_sports,water_sports,land_sports,air_sports) VALUES ('user1','abc1@email.net','abcd1201','Sean','Klinglesmith','cool dude who LIKES to film using drones or otherwise','photographer,filmographer,droneOperator','snowboard','surf','skateboard,BMX,mountainBiking','skydive,hangGlide');
 INSERT INTO USERS(username,email,password,first_name,last_name,description,type,snow_sports,water_sports,land_sports,air_sports) VALUES ('user2','abc2@email.net','abcd1202','Christian','Marcy','rad man who loves to shred','athlete','ski','waterSki','skateboard','hangGlide');
 INSERT INTO USERS(username,email,password,first_name,last_name,description,type,snow_sports,water_sports,land_sports,air_sports) VALUES ('user3','abc3@email.net','abcd1203','RJ','Boucher','pro dude who knows how to carve','athlete,proAthlete','snowboard,ski,snowmobile','surf,waterSki','BMX','skydive,hangGlide');
 INSERT INTO USERS(username,email,password,first_name,last_name,description,type,snow_sports,water_sports,land_sports,air_sports) VALUES ('user4','abc4@email.net','abcd1204','Brandon','Wheeler','awesome bro who loves to shred the gnar','athlete','snowboard','surf','mountainBiking','skydive');
@@ -57,6 +57,35 @@ INSERT INTO MESSAGES(sender_Id,rec_Id,message_subject,message_body,type,reply) V
 INSERT INTO MESSAGES(sender_Id,rec_Id,message_subject,message_body,type,reply) VALUES (2,7,'invite','yo bud come carve with me','invite',NULL);
 INSERT INTO MESSAGES(sender_Id,rec_Id,message_subject,message_body,type,reply) VALUES (2,8,'invite','yo bud come carve with me','invite',NULL);
 INSERT INTO MESSAGES(sender_Id,rec_Id,message_subject,message_body,type,reply) VALUES (2,9,'normal','hello there','normal',NULL);
+INSERT INTO MESSAGES(sender_Id,rec_Id,message_subject,message_body,type,reply) VALUES (2,1,'normal','hello there','normal',NULL);
+INSERT INTO MESSAGES(sender_Id,rec_Id,message_subject,message_body,type,reply) VALUES (3,1,'normal','hello there','normal',NULL);
+INSERT INTO MESSAGES(sender_Id,rec_Id,message_subject,message_body,type,reply) VALUES (3,1,'buddyAccept','sure ill be your bud','buddyAccept',2);
+INSERT INTO MESSAGES(sender_Id,rec_Id,message_subject,message_body,type,reply) VALUES (3,2,'normal','hello there','normal',NULL);
+INSERT INTO MESSAGES(sender_Id,rec_Id,message_subject,message_body,type,reply) VALUES (3,3,'normal','hello there','normal',NULL);
+INSERT INTO MESSAGES(sender_Id,rec_Id,message_subject,message_body,type,reply) VALUES (3,4,'normal','hello there','normal',NULL);
+INSERT INTO MESSAGES(sender_Id,rec_Id,message_subject,message_body,type,reply) VALUES (3,5,'invite','yo bud come carve with me','invite',NULL);
+INSERT INTO MESSAGES(sender_Id,rec_Id,message_subject,message_body,type,reply) VALUES (3,6,'invite','yo bud come carve with me','invite',NULL);
+INSERT INTO MESSAGES(sender_Id,rec_Id,message_subject,message_body,type,reply) VALUES (3,7,'buddyRequest','be my buddy','buddyRequest',NULL);
+INSERT INTO MESSAGES(sender_Id,rec_Id,message_subject,message_body,type,reply) VALUES (3,1,'normal','hello there','normal',NULL);
+INSERT INTO MESSAGES(sender_Id,rec_Id,message_subject,message_body,type,reply) VALUES (3,9,'normal','hello there','normal',NULL);
+INSERT INTO MESSAGES(sender_Id,rec_Id,message_subject,message_body,type,reply) VALUES (3,10,'normal','hello there','normal',NULL);
+
+INSERT INTO MESSAGES(sender_Id,rec_Id,message_subject,message_body,type,reply) VALUES (1,2,'normal','hello there','normal',NULL);
+INSERT INTO MESSAGES(sender_Id,rec_Id,message_subject,message_body,type,reply) VALUES (1,3,'buddyRequest','be my buddy','buddyRequest',NULL);
+INSERT INTO MESSAGES(sender_Id,rec_Id,message_subject,message_body,type,reply) VALUES (1,4,'attendRequest','can I attend your carve?','attendRequest',NULL);
+INSERT INTO MESSAGES(sender_Id,rec_Id,message_subject,message_body,type,reply) VALUES (1,5,'invite','yo bud come carve with me','invite',NULL);
+INSERT INTO MESSAGES(sender_Id,rec_Id,message_subject,message_body,type,reply) VALUES (1,6,'normal','hello there','normal',NULL);
+INSERT INTO MESSAGES(sender_Id,rec_Id,message_subject,message_body,type,reply) VALUES (1,7,'invite','yo bud come carve with me','invite',NULL);
+INSERT INTO MESSAGES(sender_Id,rec_Id,message_subject,message_body,type,reply) VALUES (1,8,'normal','hello there','normal',NULL);
+INSERT INTO MESSAGES(sender_Id,rec_Id,message_subject,message_body,type,reply) VALUES (2,1,'reply','im getting back to you','reply',1);
+INSERT INTO MESSAGES(sender_Id,rec_Id,message_subject,message_body,type,reply) VALUES (2,4,'normal','hello there','normal',NULL);
+INSERT INTO MESSAGES(sender_Id,rec_Id,message_subject,message_body,type,reply) VALUES (2,5,'buddyRequest','be my buddy','buddyRequest',NULL);
+INSERT INTO MESSAGES(sender_Id,rec_Id,message_subject,message_body,type,reply) VALUES (2,6,'attendRequest','can I attend your carve?','attendRequest',NULL);
+INSERT INTO MESSAGES(sender_Id,rec_Id,message_subject,message_body,type,reply) VALUES (2,7,'invite','yo bud come carve with me','invite',NULL);
+INSERT INTO MESSAGES(sender_Id,rec_Id,message_subject,message_body,type,reply) VALUES (2,8,'invite','yo bud come carve with me','invite',NULL);
+INSERT INTO MESSAGES(sender_Id,rec_Id,message_subject,message_body,type,reply) VALUES (2,9,'normal','hello there','normal',NULL);
+INSERT INTO MESSAGES(sender_Id,rec_Id,message_subject,message_body,type,reply) VALUES (2,1,'normal','hello there','normal',NULL);
+INSERT INTO MESSAGES(sender_Id,rec_Id,message_subject,message_body,type,reply) VALUES (3,1,'normal','hello there','normal',NULL);
 INSERT INTO MESSAGES(sender_Id,rec_Id,message_subject,message_body,type,reply) VALUES (3,1,'buddyAccept','sure ill be your bud','buddyAccept',2);
 INSERT INTO MESSAGES(sender_Id,rec_Id,message_subject,message_body,type,reply) VALUES (3,2,'normal','hello there','normal',NULL);
 INSERT INTO MESSAGES(sender_Id,rec_Id,message_subject,message_body,type,reply) VALUES (3,3,'normal','hello there','normal',NULL);
@@ -177,36 +206,36 @@ INSERT INTO FOLLOWS(user_id1,venue_id,type) VALUES (3,8,'follow');
 INSERT INTO FOLLOWS(user_id1,venue_id,type) VALUES (3,9,'follow');
 INSERT INTO FOLLOWS(user_id1,venue_id,type) VALUES (3,10,'follow');
 
-INSERT INTO CARVES(name,creator,venue,type,max_athletes,max_photo,date,completed,sports) VALUES ('carve1',1,1,'open',5,1,'2019-03-24',0,'snowboard,ski');
-INSERT INTO CARVES(name,creator,venue,type,max_athletes,max_photo,date,completed,sports) VALUES ('carve2',1,11,'buddy',10,2,'2019-03-25',0,'surf');
-INSERT INTO CARVES(name,creator,venue,type,max_athletes,max_photo,date,completed,sports) VALUES ('carve3',1,18,'open',5,1,'2019-03-26',0,'skateboard');
-INSERT INTO CARVES(name,creator,venue,type,max_athletes,max_photo,date,completed,sports) VALUES ('carve4',1,24,'open',10,2,'2019-03-27',0,'BMX');
-INSERT INTO CARVES(name,creator,venue,type,max_athletes,max_photo,date,completed,sports) VALUES ('carve5',1,3,'open',5,1,'2019-03-28',0,'hangGlide');
-INSERT INTO CARVES(name,creator,venue,type,max_athletes,max_photo,date,completed,sports) VALUES ('carve6',2,2,'buddy',10,2,'2019-03-29',0,'snowmobile');
-INSERT INTO CARVES(name,creator,venue,type,max_athletes,max_photo,date,completed,sports) VALUES ('carve7',2,12,'buddy',10,1,'2019-03-30',0,'surf');
-INSERT INTO CARVES(name,creator,venue,type,max_athletes,max_photo,date,completed,sports) VALUES ('carve8',2,16,'open',10,2,'2019-03-31',0,'waterSki');
-INSERT INTO CARVES(name,creator,venue,type,max_athletes,max_photo,date,completed,sports) VALUES ('carve9',2,1,'open',10,1,'2019-04-01',0,'snowboard,ski');
-INSERT INTO CARVES(name,creator,venue,type,max_athletes,max_photo,date,completed,sports) VALUES ('carve10',2,11,'open',10,2,'2019-04-02',0,'surf');
-INSERT INTO CARVES(name,creator,venue,type,max_athletes,max_photo,date,completed,sports) VALUES ('carve11',3,18,'open',10,1,'2019-04-03',0,'skateboard');
-INSERT INTO CARVES(name,creator,venue,type,max_athletes,max_photo,date,completed,sports) VALUES ('carve12',4,24,'open',10,2,'2019-04-04',0,'BMX');
-INSERT INTO CARVES(name,creator,venue,type,max_athletes,max_photo,date,completed,sports) VALUES ('carve13',5,3,'open',10,1,'2019-04-05',0,'hangGlide');
-INSERT INTO CARVES(name,creator,venue,type,max_athletes,max_photo,date,completed,sports) VALUES ('carve14',6,2,'buddy',10,2,'2019-04-06',0,'snowmobile');
-INSERT INTO CARVES(name,creator,venue,type,max_athletes,max_photo,date,completed,sports) VALUES ('carve15',7,12,'open',10,3,'2019-04-07',0,'surf');
-INSERT INTO CARVES(name,creator,venue,type,max_athletes,max_photo,date,completed,sports) VALUES ('carve16',8,16,'open',10,1,'2019-03-01',1,'waterSki');
-INSERT INTO CARVES(name,creator,venue,type,max_athletes,max_photo,date,completed,sports) VALUES ('carve17',2,1,'open',10,2,'2019-03-02',1,'snowboard,ski');
-INSERT INTO CARVES(name,creator,venue,type,max_athletes,max_photo,date,completed,sports) VALUES ('carve18',3,11,'open',10,3,'2019-03-03',1,'surf');
-INSERT INTO CARVES(name,creator,venue,type,max_athletes,max_photo,date,completed,sports) VALUES ('carve19',4,18,'open',10,1,'2019-03-04',1,'skateboard');
-INSERT INTO CARVES(name,creator,venue,type,max_athletes,max_photo,date,completed,sports) VALUES ('carve20',5,24,'open',10,2,'2019-03-05',1,'BMX');
-INSERT INTO CARVES(name,creator,venue,type,max_athletes,max_photo,date,completed,sports) VALUES ('carve21',6,3,'open',10,3,'2019-03-06',1,'hangGlide');
-INSERT INTO CARVES(name,creator,venue,type,max_athletes,max_photo,date,completed,sports) VALUES ('carve22',7,2,'buddy',10,1,'2019-03-07',1,'snowmobile');
-INSERT INTO CARVES(name,creator,venue,type,max_athletes,max_photo,date,completed,sports) VALUES ('carve23',9,12,'open',10,2,'2019-03-08',1,'surf');
-INSERT INTO CARVES(name,creator,venue,type,max_athletes,max_photo,date,completed,sports) VALUES ('carve24',10,16,'open',10,3,'2019-03-09',1,'waterSki');
-INSERT INTO CARVES(name,creator,venue,type,max_athletes,max_photo,date,completed,sports) VALUES ('carve25',11,1,'open',10,1,'2019-03-10',1,'snowboard,ski');
-INSERT INTO CARVES(name,creator,venue,type,max_athletes,max_photo,date,completed,sports) VALUES ('carve26',12,11,'open',10,2,'2019-03-11',1,'surf');
-INSERT INTO CARVES(name,creator,venue,type,max_athletes,max_photo,date,completed,sports) VALUES ('carve27',1,18,'open',10,3,'2019-03-12',1,'skateboard');
-INSERT INTO CARVES(name,creator,venue,type,max_athletes,max_photo,date,completed,sports) VALUES ('carve28',1,24,'open',10,1,'2019-03-13',1,'BMX');
-INSERT INTO CARVES(name,creator,venue,type,max_athletes,max_photo,date,completed,sports) VALUES ('carve29',1,3,'open',10,2,'2019-03-14',1,'hangGlide');
-INSERT INTO CARVES(name,creator,venue,type,max_athletes,max_photo,date,completed,sports) VALUES ('carve30',1,2,'open',10,3,'2019-03-15',1,'snowmobile');
+INSERT INTO CARVES(name,creator,venue,type,max_athletes,max_photo,date,completed,sports,description) VALUES ('carve1',1,1,'open',5,1,'2019-03-24',0,'snowboard,ski',"I am Venue!");
+INSERT INTO CARVES(name,creator,venue,type,max_athletes,max_photo,date,completed,sports,description) VALUES ('carve2',1,11,'buddy',10,2,'2019-03-25',0,'surf',"I am Venue!");
+INSERT INTO CARVES(name,creator,venue,type,max_athletes,max_photo,date,completed,sports,description) VALUES ('carve3',1,18,'open',5,1,'2019-03-26',0,'skateboard',"I am Venue!");
+INSERT INTO CARVES(name,creator,venue,type,max_athletes,max_photo,date,completed,sports,description) VALUES ('carve4',1,24,'open',10,2,'2019-03-27',0,'BMX',"I am Venue!");
+INSERT INTO CARVES(name,creator,venue,type,max_athletes,max_photo,date,completed,sports,description) VALUES ('carve5',1,3,'open',5,1,'2019-03-28',0,'hangGlide',"I am Venue!");
+INSERT INTO CARVES(name,creator,venue,type,max_athletes,max_photo,date,completed,sports,description) VALUES ('carve6',2,2,'buddy',10,2,'2019-03-29',0,'snowmobile',"I am Venue!");
+INSERT INTO CARVES(name,creator,venue,type,max_athletes,max_photo,date,completed,sports,description) VALUES ('carve7',2,12,'buddy',10,1,'2019-03-30',0,'surf',"I am Venue!");
+INSERT INTO CARVES(name,creator,venue,type,max_athletes,max_photo,date,completed,sports,description) VALUES ('carve8',2,16,'open',10,2,'2019-03-31',0,'waterSki',"I am Venue!");
+INSERT INTO CARVES(name,creator,venue,type,max_athletes,max_photo,date,completed,sports,description) VALUES ('carve9',2,1,'open',10,1,'2019-04-01',0,'snowboard,ski',"I am Venue!");
+INSERT INTO CARVES(name,creator,venue,type,max_athletes,max_photo,date,completed,sports,description) VALUES ('carve10',2,11,'open',10,2,'2019-04-02',0,'surf',"I am Venue!");
+INSERT INTO CARVES(name,creator,venue,type,max_athletes,max_photo,date,completed,sports,description) VALUES ('carve11',3,18,'open',10,1,'2019-04-03',0,'skateboard',"I am Venue!");
+INSERT INTO CARVES(name,creator,venue,type,max_athletes,max_photo,date,completed,sports,description) VALUES ('carve12',4,24,'open',10,2,'2019-04-04',0,'BMX',"I am Venue!");
+INSERT INTO CARVES(name,creator,venue,type,max_athletes,max_photo,date,completed,sports,description) VALUES ('carve13',5,3,'open',10,1,'2019-04-05',0,'hangGlide',"I am Venue!");
+INSERT INTO CARVES(name,creator,venue,type,max_athletes,max_photo,date,completed,sports,description) VALUES ('carve14',6,2,'buddy',10,2,'2019-04-06',0,'snowmobile',"I am Venue!");
+INSERT INTO CARVES(name,creator,venue,type,max_athletes,max_photo,date,completed,sports,description) VALUES ('carve15',7,12,'open',10,3,'2019-04-07',0,'surf',"I am Venue!");
+INSERT INTO CARVES(name,creator,venue,type,max_athletes,max_photo,date,completed,sports,description) VALUES ('carve16',8,16,'open',10,1,'2019-03-01',1,'waterSki',"I am Venue!");
+INSERT INTO CARVES(name,creator,venue,type,max_athletes,max_photo,date,completed,sports,description) VALUES ('carve17',2,1,'open',10,2,'2019-03-02',1,'snowboard,ski',"I am Venue!");
+INSERT INTO CARVES(name,creator,venue,type,max_athletes,max_photo,date,completed,sports,description) VALUES ('carve18',3,11,'open',10,3,'2019-03-03',1,'surf',"I am Venue!");
+INSERT INTO CARVES(name,creator,venue,type,max_athletes,max_photo,date,completed,sports,description) VALUES ('carve19',4,18,'open',10,1,'2019-03-04',1,'skateboard',"I am Venue!");
+INSERT INTO CARVES(name,creator,venue,type,max_athletes,max_photo,date,completed,sports,description) VALUES ('carve20',5,24,'open',10,2,'2019-03-05',1,'BMX',"I am Venue!");
+INSERT INTO CARVES(name,creator,venue,type,max_athletes,max_photo,date,completed,sports,description) VALUES ('carve21',6,3,'open',10,3,'2019-03-06',1,'hangGlide',"I am Venue!");
+INSERT INTO CARVES(name,creator,venue,type,max_athletes,max_photo,date,completed,sports,description) VALUES ('carve22',7,2,'buddy',10,1,'2019-03-07',1,'snowmobile',"I am Venue!");
+INSERT INTO CARVES(name,creator,venue,type,max_athletes,max_photo,date,completed,sports,description) VALUES ('carve23',9,12,'open',10,2,'2019-03-08',1,'surf',"I am Venue!");
+INSERT INTO CARVES(name,creator,venue,type,max_athletes,max_photo,date,completed,sports,description) VALUES ('carve24',10,16,'open',10,3,'2019-03-09',1,'waterSki',"I am Venue!");
+INSERT INTO CARVES(name,creator,venue,type,max_athletes,max_photo,date,completed,sports,description) VALUES ('carve25',11,1,'open',10,1,'2019-03-10',1,'snowboard,ski',"I am Venue!");
+INSERT INTO CARVES(name,creator,venue,type,max_athletes,max_photo,date,completed,sports,description) VALUES ('carve26',12,11,'open',10,2,'2019-03-11',1,'surf',"I am Venue!");
+INSERT INTO CARVES(name,creator,venue,type,max_athletes,max_photo,date,completed,sports,description) VALUES ('carve27',1,18,'open',10,3,'2019-03-12',1,'skateboard',"I am Venue!");
+INSERT INTO CARVES(name,creator,venue,type,max_athletes,max_photo,date,completed,sports,description) VALUES ('carve28',1,24,'open',10,1,'2019-03-13',1,'BMX',"I am Venue!");
+INSERT INTO CARVES(name,creator,venue,type,max_athletes,max_photo,date,completed,sports,description) VALUES ('carve29',1,3,'open',10,2,'2019-03-14',1,'hangGlide',"I am Venue!");
+INSERT INTO CARVES(name,creator,venue,type,max_athletes,max_photo,date,completed,sports,description) VALUES ('carve30',1,2,'open',10,3,'2019-03-15',1,'snowmobile',"I am Venue!");
 
 
 
@@ -612,7 +641,7 @@ INSERT INTO LIKES(poster,type,MEDIA) VALUES (2,'like',NULL);
 INSERT INTO LIKES(poster,type,MEDIA) VALUES (2,'dislike',NULL);
 INSERT INTO LIKES(poster,type,MEDIA) VALUES (2,'like',NULL);
 INSERT INTO LIKES(poster,type,MEDIA) VALUES (2,'like',NULL);
-call get_users();
+
 
 
 
