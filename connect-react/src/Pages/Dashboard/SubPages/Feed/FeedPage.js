@@ -1,17 +1,33 @@
-import React, { Component } from 'react'
-import Mount_Snow from '../../../../images/mount_snow.png';
-import FeedCard from './FeedCard';
-import CarveCard from '../../../../components/CarveCard';
+import React, {Component} from 'react'
+import CarveCardUserAttend from "../../../../components/CarveCardUserAttend";
+import CreateCarveModal from "../../../../components/CreateCarveModal";
+import Button from "react-bootstrap/Button";
+
 
 export default class FeedPage extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			show: false,
+			show2: false
+		}
+	}
+
+	handleClick = () => {
+		this.setState({ show: !this.state.show });
+	};
+
 	render() {
 		return (
-			<div>
-				<h2>Feed Page</h2>
-				<h6>Posts Here....</h6>
-				<FeedCard key='venue-profile' img = {Mount_Snow} text = '@Mount Snow'/>
-				<CarveCard/>
-			</div>
+			<>
+				<CreateCarveModal handleClose={this.handleClick} show={this.state.show}/>
+				<row>
+					<h1>Carves user will or has already attended</h1>
+					<Button onClick={this.handleClick} style={{ margin: '5px' }}>Create Carve</Button>
+				</row>
+
+				<CarveCardUserAttend>Carves:</CarveCardUserAttend>
+				</>
 		);
 	}
 }

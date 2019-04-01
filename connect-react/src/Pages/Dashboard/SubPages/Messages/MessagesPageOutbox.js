@@ -3,10 +3,9 @@ import axios from 'axios'
 import MessagesSidebar from "./MessagesSidebar";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import ReplyMsgModal from "../../../../components/ReplyMsgModal";
 
 
-class MessagesPageInbox extends Component {
+class MessagesPageOutbox extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -21,15 +20,13 @@ class MessagesPageInbox extends Component {
             create_time: "",
             messages: [],
             check: true,
-            show: false,
-            replyId: 0,
-            replier: 0
+            show: false
         };
 
     }
     componentWillMount()
     {
-        axios.get(`http://localhost:8000/users/${localStorage.getItem('userId')}/messages`)
+        axios.get(`http://localhost:8000/users/${localStorage.getItem('userId')}/messages/sent`)
             .then(res => {
                 console.log("results: ", res.data.results[0]);
                 this.setState({
@@ -40,7 +37,7 @@ class MessagesPageInbox extends Component {
             });
 
     }
-//onClick={this.onClick(message.message_id)}
+    //onClick={this.onClick(message.message_id)}
     onClick2 = (e) =>{
         console.log(" delete:" +e);
         axios.delete(`http://localhost:8000/messages/${e}`)
@@ -48,15 +45,6 @@ class MessagesPageInbox extends Component {
 
 
     };
-//show: false
-    onClick1 =(e,e1) => {
-        this.setState({
-            replyId: e,
-            replier: e1,
-            show1: !this.state.show1 });
-
-    };
-
 
 
     render() {
@@ -72,7 +60,7 @@ class MessagesPageInbox extends Component {
                         <td>{message.create_time}</td>
                         <td>{message.type}</td>
                         <td>{message.message_body}</td>
-                        <td><i onClick={() => this.onClick1(message.message_id,message.sender_Id)} className ="fa fa-inbox text-white"> </i></td>
+
                         <td > <i  className ="fa fa-trash-o text-white" onClick={ () => { this.onClick2(message.message_id) } }> </i></td>
                     </tr>
                 )
@@ -82,7 +70,7 @@ class MessagesPageInbox extends Component {
         return (
 
             <>
-                <ReplyMsgModal replyId = {this.state.replyID} replier = {this.state.replier} handleClose={this.onClick1} show={this.state.show1} />
+
                 <Row className="justify-content-md-center" style={{ paddingLeft: '0px',backgroundColor: "lightgray", height: "100%"}}>
 
                     <MessagesSidebar  style = {{paddingRight: '0px'}} />
@@ -101,7 +89,7 @@ class MessagesPageInbox extends Component {
                                     <th scope="col" style={{width:"4%"}}>Timestamp</th>
                                     <th scope="col" style={{width:"4%"}}>Type</th>
                                     <th scope="col">Body</th>
-                                    <th scope="col" style={{width:"1%"}}>Reply</th>
+
                                     <th scope="col" style={{width:"1%"}}>Delete</th>
                                 </tr>
                                 </thead>
@@ -121,6 +109,7 @@ class MessagesPageInbox extends Component {
 }
 
 
-export default MessagesPageInbox;
+
+export default MessagesPageOutbox;
 
 

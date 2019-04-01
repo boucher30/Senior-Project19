@@ -1,4 +1,4 @@
-# Development BRANCH FOR CARVE CONNECT
+# Deployment BRANCH FOR CARVE CONNECT
 
 CARVE CONNECT
 Action Sport/Film Social Platform.
@@ -28,4 +28,6 @@ Node API (Back End)
 DATABASE
   - SQL FOLDER
     1) run ccv4
-    2) use workbench to fill tables. (ONLY USERS AND VENUES RIGHT NOW)
+
+    2) run RUNMETOFILL.sql 
+

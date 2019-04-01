@@ -1,6 +1,5 @@
-import openSocket from 'socket.io-client';
 import React from "react";
-
+/*
 const  socket = openSocket('http://localhost:8001');
 function subscribe(cb) {
     socket.on('timer', timestamp => cb(null, timestamp));
@@ -9,4 +8,4 @@ function subscribe(cb) {
     //socket.on('newclientconnect',function(data) {alert("new client connected")} );
 
 }
-export { subscribe };
+export { subscribe };*/

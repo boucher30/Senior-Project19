@@ -212,6 +212,7 @@ export default class SignUpPage extends Component {
 						<Form.Label>Profile Type (required)</Form.Label>
 						<Form.Control value={valueType} placeholder="Select type of profile..." onChange={this.handleChange3} as="select">
 							<option disabled value={-1}>Select an option...</option>
+							<option> </option>
 							<option value = 'athlete'>Athlete</option>
 							<option value = 'photographer'>Photographer</option>
 						</Form.Control>

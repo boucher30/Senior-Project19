@@ -7,7 +7,25 @@ const con = require('../../db');
 // Grabs all messages from db
 router.get('/', (req,res) => {
     // Find all messages from database
-    message_list = "CALL get_users_messages(?)";
+
+    message_list = "CALL get_users_inbox(?)";
+
+    userId = req.params.userId;
+
+    console.log(req.params);
+
+    con.query(message_list, [userId], (err, results) => {
+        if (err) throw err;
+
+        res.status(200).jsonp({results}).end;
+
+    })
+});
+
+// Grabs all messages from db
+router.get('/sent', (req,res) => {
+    // Find all messages from database
+    message_list = "CALL get_users_sent(?)";
     userId = req.params.userId;
 
     console.log(req.params);
@@ -21,6 +39,39 @@ router.get('/', (req,res) => {
 });
 
 
+
+
+// Grabs all messages from db
+router.get('/notifications', (req,res) => {
+    // Find all messages from database
+    message_list = "CALL get_user_notifications(?)";
+    userId = req.params.userId;
+
+    console.log(req.params);
+
+    con.query(message_list, [userId], (err, results) => {
+        if (err) throw err;
+        console.log(results);
+        res.status(200).jsonp({results}).end;
+
+    })
+});
+
+// Grabs all messages from db
+router.get('/notifications/sent', (req,res) => {
+    // Find all messages from database
+    message_list = "CALL get_user_sent_notifications(?)";
+    userId = req.params.userId;
+
+    console.log(req.params);
+
+    con.query(message_list, [userId], (err, results) => {
+        if (err) throw err;
+
+        res.status(200).jsonp({results}).end;
+
+    })
+});
 // Creates a new message
 router.post('/', (req,res) => {
     const {sender,reciever,subject,body, msgType} = req.body;

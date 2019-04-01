@@ -15,17 +15,43 @@ import {subscribe} from './api';
 class App extends Component {
   constructor(props) {
     super(props);
-    subscribe((err, timestamp) => this.setState({
+    /*subscribe((err, timestamp) => this.setState({
       timestamp
-    }));
-  }
+    }));*/
 
+  }
+/*
   state = {
     timestamp: 'no timestamp yet'
-  };
+  };*/
 
   render() {
       let data ="";
+    /* trying to execute logout on browser close.
+    window.addEventListener("beforeunload", (ev) =>
+    {
+     ev.preventDefault();
+      return ev.returnValue = 'Are you sure you want to close?';
+
+    });
+    window.addEventListener("onunload", (ev) =>
+    {
+      ev.preventDefault();
+
+      if(localStorage.getItem('userId') > 0){
+        axios.get(`http://localhost:8000/users/${localStorage.getItem('userId')}/logout`)
+            .then(res => {
+
+              this.setState({
+                //messages: res.data.results[0][0]
+              });
+
+              alert("Log out successful");
+            });
+      }
+
+
+    });*/
     return (
       <div className="App">
         {/* We keep the same navbar up top and we can change options based on where we are in sequence for user */}

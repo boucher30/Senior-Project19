@@ -8,6 +8,7 @@ import Mount_Snow from '../../../../images/mount_snow_bg.png'
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import axios from 'axios';
+import VenueCarveCard from "../../../../components/VenueCarveCard";
 
 
 export default class VenuePage extends Component {
@@ -32,6 +33,15 @@ export default class VenuePage extends Component {
 			})
 	}
 
+    onClick1 = () =>{
+
+        axios.post('http://localhost:8000/follows', {
+            user1: localStorage.getItem('userId'),
+            v: this.state.venueInfo.venue_id
+
+        });
+    };
+
     render() {
         if(this.state.venueInfoLength > 0){
             const venueInfo = this.state.venueInfo;
@@ -46,6 +56,7 @@ export default class VenuePage extends Component {
                                     <Figure>
                                         <h1>{venueInfo.venue_name}</h1>
                                         <h4><em>{venueInfo.city}, {venueInfo.state}</em></h4>
+                                        <Button style={{margin:'5px'}} variant="info" onClick = {this.onClick1}>Follow</Button>
                                         <Figure.Image
                                             rounded
 
@@ -67,24 +78,34 @@ export default class VenuePage extends Component {
                             <Button variant="secondary">Media</Button>
                         </ButtonGroup>
                     </Row>
-                    <Col style={{paddingLeft: "10%", border: '2px solid darkgrey'}}>
-                        <h2 style = {{border:"2px solid slategrey"}}>Content</h2>
+                    <Row>
+                    <Col style={{paddingLeft: "10%", border: '0px solid darkgrey'}}>
+                        <h2 style = {{border:"0px solid slategrey"}}>Content</h2>
 
-                        <container className="embed-responsive embed-responsive-16by9" style = {{justify: "center", width: "100%", paddingBottom: "40px", border: '2px solid slategrey'}}>
+                        <container className="embed-responsive embed-responsive-16by9" style = {{justify: "center", width: "100%", paddingBottom: "40px", border: '0px solid slategrey'}}>
                             <iframe title="Tour Video" className="embed-responsive-item"
                                     src="https://www.youtube.com/embed/7a0hbT0QtSw" allowFullScreen > </iframe>
 
                         </container>
-                        <container className="embed-responsive embed-responsive-16by9" style = {{justify: "center", width: "100%", paddingTop: "20%", border: '2px solid slategrey'}}>
+                        <container className="embed-responsive embed-responsive-16by9" style = {{justify: "center", width: "100%", paddingTop: "20%", border: '0px solid slategrey'}}>
                             <iframe title="Prof vid2" className="embed-responsive-item"
                                     src="https://www.youtube.com/embed/m8aM2XVffaE" allowFullScreen > </iframe>
 
-                        </container></Col>
+                        </container>
+                    </Col>
+                        <Col style = {{width: "200%"}}>
+                            <Row>
+                                <h2>Carves at this venue</h2></Row>
+                            <Row style = {{width:"100%"}}>
+                                <VenueCarveCard venue_id = {this.state.venueId} style = {{width:"100%"}}/></Row></Col>
+                    </Row>
                 </>
             );
         }else{
             return (
-                <p>Error loading venue profile page</p>
+                <div>
+                    <h1 className="fa fa-spinner fa-spin" style={{position: 'absolute', left: '50%', top: '50%'}}>Loading! </h1>
+                </div>
             );
         }
     }

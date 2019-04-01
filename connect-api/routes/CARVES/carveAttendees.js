@@ -1,20 +1,22 @@
 var express = require('express');
 var router = express.Router({mergeParams: true});
-const con = require('../db');
+const con = require('../../db');
 
 
 
 // Grabs all carve_attendees from db
 router.get('/', (req,res) => {
     // Find all carve_attendees from database
-    carve_attendees_list = "CALL get_carve_attendees()";
+    console.log(req.params);
+    carveId = req.params.carveId;
+    carve_attendees_list = "CALL get_carves_attendees(?)";
 
 
     console.log(req.query);
 
-    con.query(carve_attendees_list, (err, results) => {
+    con.query(carve_attendees_list, [carveId], (err, results) => {
         if (err) throw err;
-        console.log(results);
+
         res.status(200).jsonp({results}).end;
 
     })

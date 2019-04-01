@@ -7,6 +7,9 @@ import Container from "react-bootstrap/Container";
 import Image from 'react-bootstrap/Image';
 import SnowProfilePic from '../../../../images/snowboard-profile-pic.jpg';
 import EditProfileModal from "./EditProfileModal";
+import CarveCardUserCreate from "../../../../components/CarveCardUserCreate";
+import CreateCarveModal from "../../../../components/CreateCarveModal";
+import BuddyRequestModal from "../../../../components/BuddyRequestModal";
 
 export default class ProfilePage extends Component {
 	constructor(props) {
@@ -18,11 +21,14 @@ export default class ProfilePage extends Component {
 			isUserLoggedIn: props.match.params.number === localStorage.getItem('userId'),
 			pic : SnowProfilePic,
 			check: true,
-			show: false
+			show: false,
+			show1: false,
+			show2: false
 		};
 
 		this.handleShow = this.handleShow.bind(this);
 		this.handleClose = this.handleClose.bind(this);
+		this.handleClose2 = this.handleClose2.bind(this);
 		this.getUserInfo = this.getUserInfo.bind(this);
 	}
 
@@ -30,6 +36,24 @@ export default class ProfilePage extends Component {
 	componentWillMount() {
 		this.getUserInfo();
 	}
+
+	handleClick = () => {
+		this.setState({ show1: !this.state.show1 });
+	};
+
+	handleClick2 = () => {
+		this.setState({ show2: !this.state.show2 });
+	};
+
+
+	onClick1 = () =>{
+
+		axios.post('http://localhost:8000/follows', {
+			user1: localStorage.getItem('userId'),
+			user2: this.state.userInfo.user_id
+
+		});
+	};
 
 	// We need to conditionally render things based on the user in relation to who is logged in
 	render() {
@@ -40,11 +64,15 @@ export default class ProfilePage extends Component {
 			// Make button options for top right corner
 			let options;
 			if(isUserLoggedIn) {
-				options = <Button variant="warning" onClick={this.handleShow}>Edit</Button>;
+				options =
+					<Row classname="justify-content-end" style ={{paddingTop:"15px"}}>
+						<Button variant="info" onClick={this.handleShow}>Edit</Button>
+				<Button onClick={this.handleClick} style={{ margin: '5px' }}>Create Carve</Button>
+				</Row>
 			} else {
 				options = <div style={{display:'flex'}}>
-					<Button style={{margin:'5px'}} variant="info">Follow</Button>
-					<Button style={{margin:'5px'}} variant="info">Add Buddy</Button>
+					<Button style={{margin:'5px'}} variant="info" onClick = {this.onClick1}>Follow</Button>
+					<Button style={{margin:'5px'}} variant="info" onClick = {this.handleClick2}>Add Buddy</Button>
 				</div>;
 
 
@@ -52,14 +80,19 @@ export default class ProfilePage extends Component {
 
 			return (
 				<>
+					<CreateCarveModal handleClose={this.handleClick} show={this.state.show1}/>
 					<EditProfileModal handleRefresh={this.getUserInfo} user={userInfo} show={this.state.show} handleClose={this.handleClose} />
-
+					<BuddyRequestModal id ={this.state.userInfo.user_id} show={this.state.show2} handleClose={this.handleClose2}/>
+					<Row style={{paddingLeft:"20px"}}>
 					<div style={{ display: 'flex', marginTop: '8px', border: "0px solid slategrey" }}>
 						<h2 style={{ width: isUserLoggedIn ? '90%' : '80%' }}>{profilePrefix} Profile</h2>
-						{options}
+
+
 
 					</div>
-
+						<div >
+							{options}</div>
+					</Row>
 					{/* This is the row that will hold the profile picture and the information */}
 					<Row>
 
@@ -91,21 +124,32 @@ export default class ProfilePage extends Component {
 
 					</Row>
 
-
+				<Row>
 					{/* Row will hold all of the media and such that we grab from the api */}
 					<Col style={{paddingLeft: "10%", border: '0px solid darkgrey'}}>
 						<h2 style = {{border:"0px solid slategrey"}}>Content</h2>
-
-						<container className="embed-responsive embed-responsive-16by9" style = {{justify: "center", width: "100%", paddingBottom: "40px", border: '2px solid slategrey'}}>
+						<div>
+						<container className="embed-responsive embed-responsive-16by9" style = {{ width: "100%", paddingBottom: "40px", border: '2px solid slategrey'}}>
 							<iframe title="Tour Video" className="embed-responsive-item"
 									 src="https://www.youtube.com/embed/7a0hbT0QtSw" allowFullScreen > </iframe>
 
 						</container>
-						<container className="embed-responsive embed-responsive-16by9" style = {{justify: "center", width: "100%", paddingTop: "20%", border: '2px solid slategrey'}}>
+						</div>
+						<div>                                                                                                    </div>
+						<div>
+						<container className="embed-responsive embed-responsive-16by9" style = {{ width: "100%", paddingTop: "20%", border: '2px solid slategrey'}}>
 							<iframe title="Prof vid2" className="embed-responsive-item"
 									src="https://www.youtube.com/embed/m8aM2XVffaE" allowFullScreen > </iframe>
 
-						</container></Col>
+						</container>
+						</div>
+
+					</Col>
+					<Col style = {{width: "100%"}}>
+						<Row>
+							<h2>Carves created by user</h2></Row>
+						<Row style = {{width:"100%"}}>
+							<CarveCardUserCreate profile_id = {this.state.userId}style = {{width:"100%"}}/></Row></Col></Row>
 				</>
 			);
 		} else {
@@ -121,7 +165,9 @@ export default class ProfilePage extends Component {
 	handleClose() {
 		this.setState({ show: false });
 	}
-
+	handleClose2() {
+		this.setState({ show2: false });
+	}
 	handleShow() {
 		this.setState({ show: true });
 	}

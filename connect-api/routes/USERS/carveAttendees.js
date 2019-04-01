@@ -9,7 +9,7 @@ router.get('/', (req,res) => {
     // Find all carve_attendees from database
     console.log(req.params);
     userId = req.params.userId;
-    carve_attendees_list = "CALL get_users_carves_attendee(?)";
+    carve_attendees_list = "CALL get_user_attended(?)";
 
 
     console.log(req.query);

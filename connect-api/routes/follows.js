@@ -23,9 +23,11 @@ router.get('/', (req,res) => {
 
 // Creates a new follow
 router.post('/', (req,res) => {
-	const {user1, user2, ven, ty} = req.body;
-
-	console.log("user " + user1 + " now following user:" + user2 + "or venue :" + ven);
+	const {user1, user2,v} = req.body;
+	if(user2>0)
+	console.log("user " + user1 + " now following user:" + user2);
+	else
+		console.log("user " + user1 + " now following venue:" + v);
 	if(false)
 	{
 
@@ -35,7 +37,7 @@ router.post('/', (req,res) => {
 		// Added a comment
 		new_follow = "CALL add_follow(?,?,?,?)";
 		// Execute the query to insert into the database
-		con.query(new_follow,[user1, user2, ven, ty[0]], (err, results) => {
+		con.query(new_follow,[user1, user2,v , 'follow'], (err, results) => {
 			if (err) throw err;
 			res.status(201).jsonp({results}).end;
 		})
@@ -89,7 +91,7 @@ router.delete('/', (req,res) => {
 router.post('/buddies', (req,res) => {
 	const {user1, user2} = req.body;
 
-	console.log("user " + user1 + " now buddies with:" + user2 );
+
 	if(false)
 	{
 
@@ -98,6 +100,7 @@ router.post('/buddies', (req,res) => {
 		// Create insert query for new follow
 		// Added a comment
 		new_buddy = "CALL add_buddy(?,?)";
+		console.log("user " + user1 + " now buddies with:" + user2 );
 		// Execute the query to insert into the database
 		con.query(new_buddy,[user1, user2], (err, results) => {
 			if (err) throw err;

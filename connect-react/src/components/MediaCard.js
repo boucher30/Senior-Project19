@@ -8,11 +8,8 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import Form from 'react-bootstrap/Form';
 import CustomFormGroup from "./CustomFormGroup";
 
-import CarveInviteModal from "./CarveInviteModal";
-import CarveAttendRequestModal from "./CarveAttendRequestModal";
 
-
-export default class CarveCard extends Component {
+export default class MediaCard extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -34,13 +31,7 @@ export default class CarveCard extends Component {
             carveDlik: {},
             completed: 0,
             sports: "",
-            create_time: "",
-            show5: false,
-            show6: false,
-            currentCid: 0,
-            curCr:0,
-            cId:0,
-            cRe:0
+            create_time: ""
         };
 
 
@@ -124,10 +115,10 @@ export default class CarveCard extends Component {
         this.preventDefault(e);
         //currently only gets attendees for carve1. not dynamic per carve
         axios.post(`http://localhost:8000/carves/${1}/likes`,
-        {
-            poster: localStorage.getItem('userId'),
-            carve : e
-        })
+            {
+                poster: localStorage.getItem('userId'),
+                carve : e
+            })
             .then(res => {
                 //alert("carve:" + JSON.stringify(res.data.results));
                 console.log("results: ", res.data.results[0]);
@@ -135,7 +126,7 @@ export default class CarveCard extends Component {
 
 
             });
-}
+    }
 
     dislike = (e) =>{
         this.preventDefault(e);
@@ -156,21 +147,6 @@ export default class CarveCard extends Component {
             });
     };
 
-    handleClick5 = (e,e2) => {
-
-        this.setState({ show5: !this.state.show5,
-        cId : e,
-           cRe:e2
-        });
-    };
-
-    handleClick6 = () => {
-
-        this.setState({ show6: !this.state.show6});
-    };
-
-
-
     render() {
         let carveList;
         let carveAttendList;
@@ -190,78 +166,75 @@ export default class CarveCard extends Component {
 
 
                 if (this.state.carveAt1.length > 0) {
-                carveAttendList = this.state.carveAt1[0].map((attender, index1) => {
+                    carveAttendList = this.state.carveAt1[0].map((attender, index1) => {
 
-                    if(attender.carve === carve.carve_id)
-                    return (
+                        if(attender.carve === carve.carve_id)
+                            return (
 
-                        <ListGroup.Item key={index1} style={{
+                                <ListGroup.Item key={index1} style={{
 
-                            fontFamily: 'monospace', paddingRight: '0px', width: "100%"
-                        }}>
-                            {attender.user} {attender.type}
+                                    fontFamily: 'monospace', paddingRight: '0px', width: "100%"
+                                }}>
+                                    {attender.user} {attender.type}
 
-                        </ListGroup.Item>
-                    );
-                });
+                                </ListGroup.Item>
+                            );
+                    });
                 }
 
                 if (this.state.carveComm.length > 0) {
                     carveComments = this.state.carveComm.map((com, index) => {
                         if(com.carve === carve.carve_id)
-                        return (
+                            return (
 
-                            <ListGroup.Item key={index} style={{
+                                <ListGroup.Item key={index} style={{
 
-                                fontFamily: 'monospace', paddingRight: '0px', width: "100%"
-                            }}>
-                                 {com.comment} by: {com.poster}
+                                    fontFamily: 'monospace', paddingRight: '0px', width: "100%"
+                                }}>
+                                    {com.comment} by: {com.poster}
 
-                            </ListGroup.Item>
-                        );
+                                </ListGroup.Item>
+                            );
                     });
                 }
                 if (this.state.carveMed.length > 0) {
                     carveMedia = this.state.carveMed.map((med, index) => {
                         if(med.carve === carve.carve_id)
-                        return (
+                            return (
 
-                            <ListGroup.Item key={index} style={{
+                                <ListGroup.Item key={index} style={{
 
-                                fontFamily: 'monospace', paddingRight: '0px', width: "100%"
-                            }}>
-                                <Row>Media Post:</Row>
-                                <Row><iframe title="Prof vid2" className="embed-responsive-item"
-                                                                                src={med.url} allowFullScreen > </iframe></Row>
+                                    fontFamily: 'monospace', paddingRight: '0px', width: "100%"
+                                }}>
+                                    <Row>Media Post:</Row>
+                                    <Row><iframe title="Prof vid2" className="embed-responsive-item"
+                                                 src={med.url} allowFullScreen > </iframe></Row>
 
 
-                            </ListGroup.Item>
-                        );
+                                </ListGroup.Item>
+                            );
                     });
                 }
 
                 if(carve.completed >0) {
                     color = "seagreen";
                     act = "Carve Completed";
-                     no = "Completed";
+                    no = "Completed";
                     att = <div></div>;
                 }
                 else {
                     color = "lightskyblue";
                     act = "Request to Attend";
                     no = "Upcoming";
-                    att =<Button variant="info" style = {{ paddingTop:"10px"}} onClick = {() => this.handleClick5(carve.carve_id,carve.creator)} >{act}</Button>;
-
+                    att =<Button variant="info" style = {{ paddingTop:"10px"}}  >{act}</Button>;
                 }
-
                 return (
 
                     <ListGroup.Item key={index} style={{
 
                         fontFamily: 'monospace', paddingRight: '0px', width: "100%"
                     }}>
-                        <CarveAttendRequestModal cid ={this.state.cId} cre = {this.state.cRe} handleClose={this.handleClick5} show={this.state.show5} />
-                        <CarveInviteModal cid ={this.state.currentCid} handleClose={this.handleClick5} show={this.state.show5} />
+
                         <Card style = {{width: '100%', backgroundColor: [color]}}>
                             <Card.Header style = {{color:"navy"}}>
                                 <Row style = {{justify: 'space-between'}}>
@@ -273,40 +246,13 @@ export default class CarveCard extends Component {
                             </Card.Header>
                             <Card.Body>
                                 <Row>
-                                <Col>
+                                    <Col>
 
-                                <Card.Text style = {{}}>
-                                    <Row>
-                                        Carve is {no}
-                                    </Row>
+                                        <Card.Text style = {{}}>
 
-                                    <Row style = {{position: 'left'}} >
-                                        <h5>Location: {carve.venue}</h5>
 
-                                    </Row>
-                                    <Row><p>Creator: {carve.creator}</p></Row>
-                                    <Row>
-                                        Description: {carve.description}
-                                    </Row>
-
-                                    <Row>
-                                        Sports: {carve.sports} {/*can't do sports by itself */}
-                                    </Row>
-                                    <Row>
-                                        Max Athletes: {carve.max_athletes}
-                                    </Row>
-                                    <Row>
-                                        Max Film: {carve.max_photo}
-                                    </Row>
-                                    <Row>
-
-                                    </Row>
-                                    <Row>
-
-                                    </Row>
-
-                                </Card.Text>
-                                </Col>
+                                        </Card.Text>
+                                    </Col>
                                     <Col>
                                         <h3>Attendees:</h3>
                                         {carveAttendList}</Col></Row>
@@ -320,21 +266,20 @@ export default class CarveCard extends Component {
                                 </Row>
                             </Card.Body>
                             <Card.Footer className="text-primary text-info">
-                            <Row>
-                                <Col>
-                                    <Row style={{width:"100%"}}>				<Form inline style ={{justify:"left"}} >
-                                        <CustomFormGroup value = {val} type="integer" placeholder="Add Comment" className=" mr-sm-2" controlId ="comment"   style ={{height:"40px",width:"150%"}}/>
-                                        <Button type="submit" href = {''} style = {{ justify:"left",color: "white"}} rounded   style ={{height:"45px", paddingBottom:"5px"}}>Comment</Button>
+                                <Row>
+                                    <Col>
+                                        <Row style={{width:"100%"}}>				<Form inline style ={{justify:"left"}} >
+                                            <CustomFormGroup value = {val} type="integer" placeholder="Add Comment" className=" mr-sm-2" controlId ="comment"   style ={{height:"40px",width:"150%"}}/>
+                                            <Button type="submit" href = {''} style = {{ justify:"left",color: "white"}} rounded   style ={{height:"45px", paddingBottom:"5px"}}>Comment</Button>
 
-                                    </Form></Row>
-                                    <Row>{carveComments}</Row>
+                                        </Form></Row>
+                                        <Row>{carveComments}</Row>
 
-                                </Col>
-                                <Col>{carveMedia}
-                                </Col>
+                                    </Col>
 
 
-                            </Row>
+
+                                </Row>
 
                             </Card.Footer>
                         </Card>
@@ -361,7 +306,7 @@ export default class CarveCard extends Component {
                     {carveList}
                 </ListGroup>
 
-                </>
+            </>
         )
     };
 }
