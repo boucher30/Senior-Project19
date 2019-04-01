@@ -7,7 +7,23 @@ const con = require('../db');
 // Grabs all likes from db
 router.get('/', (req,res) => {
     // Find all likes from database
-    like_list = "CALL get_likes()";
+    like_list = "CALL get_all_likes()";
+
+
+    console.log(req.query);
+
+    con.query(like_list, (err, results) => {
+        if (err) throw err;
+
+        res.status(200).jsonp({results}).end;
+
+    })
+});
+
+// Grabs all likes from db
+router.get('/dislikes', (req,res) => {
+    // Find all likes from database
+    like_list = "CALL get_dislikes()";
 
 
     console.log(req.query);
