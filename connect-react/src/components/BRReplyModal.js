@@ -48,9 +48,7 @@ export default class BRReplyModal extends Component {
             reply_id: this.props.replyId
 
         });
-        return(
-            this.props.handleClose
-        )
+        this.props.handleClose();
     }
 
 

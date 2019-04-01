@@ -113,10 +113,12 @@ CREATE TABLE IF NOT EXISTS `CCv4`.`MESSAGES` (
   `type` SET('normal', 'buddyRequest', 'buddyAccept', 'buddyDecline', 'attendRequest', 'attendAccept', 'attendDeny', 'invite', 'inviteAccept', 'inviteDeny', 'reply') NULL,
   `reply` INT NULL,
   `read` TINYINT NULL DEFAULT 0,
+  `carve` INT NULL,
   `create_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`message_id`),
   UNIQUE INDEX `message_id_UNIQUE` (`message_id` ASC) VISIBLE,
   INDEX `reply_idx` (`reply` ASC) VISIBLE,
+  INDEX `carve_idx` (`carve` ASC) VISIBLE,
   CONSTRAINT `sender`
     FOREIGN KEY (`sender_Id`)
     REFERENCES `CCv4`.`USERS` (`user_id`)
@@ -131,7 +133,12 @@ CREATE TABLE IF NOT EXISTS `CCv4`.`MESSAGES` (
     FOREIGN KEY (`reply`)
     REFERENCES `CCv4`.`MESSAGES` (`message_id`)
     ON DELETE CASCADE
-    ON UPDATE CASCADE)
+    ON UPDATE CASCADE,
+  CONSTRAINT `carve`
+    FOREIGN KEY (`carve`)
+    REFERENCES `CCv4`.`CARVES` (`carve_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
