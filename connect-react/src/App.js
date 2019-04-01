@@ -9,24 +9,25 @@ import LoginPage from "./Pages/Login/LoginPage";
 import SignUpPage from "./Pages/SignUp/SignUpPage";
 import LogoutPage from "./Pages/Logout/LogoutPage";
 import ErrorPage from "./Pages/error/ErrorPage";
-import {subscribe} from './api';
+
+//import {subscribe} from './api';
 
 
 class App extends Component {
-  constructor(props) {
+  /*constructor(props) {
     super(props);
     /*subscribe((err, timestamp) => this.setState({
       timestamp
     }));*/
 
-  }
+
 /*
   state = {
     timestamp: 'no timestamp yet'
   };*/
 
   render() {
-      let data ="";
+      //let data ="";
     /* trying to execute logout on browser close.
     window.addEventListener("beforeunload", (ev) =>
     {

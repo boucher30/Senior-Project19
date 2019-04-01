@@ -174,7 +174,7 @@ export default class VenueCarveCard extends Component {
         let carveAttendList;
         let carveComments;
         let carveMedia;
-        let currentCarve =0;
+        //let currentCarve =0;
 
         let color = "grey";
         let act = "secondary";
@@ -201,6 +201,8 @@ export default class VenueCarveCard extends Component {
 
                                 </ListGroup.Item>
                             );
+                        else
+                            return(<></>)
                     });
                 }
 
@@ -217,6 +219,8 @@ export default class VenueCarveCard extends Component {
 
                                 </ListGroup.Item>
                             );
+                        else
+                            return(<></>)
                     });
                 }
                 if (this.state.carveMed.length > 0) {
@@ -235,6 +239,8 @@ export default class VenueCarveCard extends Component {
 
                                 </ListGroup.Item>
                             );
+                        else
+                            return(<></>)
                     });
                 }
 
@@ -323,7 +329,7 @@ export default class VenueCarveCard extends Component {
                                     <Col>
                                         <Row style={{width:"100%"}}>				<Form inline style ={{justify:"left"}} >
                                             <CustomFormGroup value = {val} type="integer" placeholder="Add Comment" className=" mr-sm-2" controlId ="comment"   style ={{height:"40px",width:"150%"}}/>
-                                            <Button type="submit" href = {''} style = {{ justify:"left",color: "white"}} rounded   style ={{height:"45px", paddingBottom:"5px"}}>Comment</Button>
+                                            <Button type="submit" href = {''} style = {{ justify:"left",color: "white", height:"45px", paddingBottom:"5px"}} rounded>Comment</Button>
 
                                         </Form></Row>
                                         <Row>{carveComments}</Row>

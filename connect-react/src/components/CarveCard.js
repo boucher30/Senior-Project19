@@ -176,7 +176,7 @@ export default class CarveCard extends Component {
         let carveAttendList;
         let carveComments;
         let carveMedia;
-        let currentCarve =0;
+        //let currentCarve =0;
 
         let color = "grey";
         let act = "secondary";
@@ -203,6 +203,8 @@ export default class CarveCard extends Component {
 
                         </ListGroup.Item>
                     );
+                    else
+                        return(<></>)
                 });
                 }
 
@@ -219,6 +221,8 @@ export default class CarveCard extends Component {
 
                             </ListGroup.Item>
                         );
+                        else
+                            return(<></>)
                     });
                 }
                 if (this.state.carveMed.length > 0) {
@@ -237,6 +241,8 @@ export default class CarveCard extends Component {
 
                             </ListGroup.Item>
                         );
+                        else
+                            return(<></>)
                     });
                 }
 
@@ -261,7 +267,7 @@ export default class CarveCard extends Component {
                         fontFamily: 'monospace', paddingRight: '0px', width: "100%"
                     }}>
                         <CarveAttendRequestModal cid ={this.state.cId} cre = {this.state.cRe} handleClose={this.handleClick5} show={this.state.show5} />
-                        <CarveInviteModal cid ={this.state.currentCid} handleClose={this.handleClick5} show={this.state.show5} />
+                        <CarveInviteModal cid ={this.state.currentCid} handleClose={this.handleClick6} show={this.state.show6} />
                         <Card style = {{width: '100%', backgroundColor: [color]}}>
                             <Card.Header style = {{color:"navy"}}>
                                 <Row style = {{justify: 'space-between'}}>
@@ -324,7 +330,7 @@ export default class CarveCard extends Component {
                                 <Col>
                                     <Row style={{width:"100%"}}>				<Form inline style ={{justify:"left"}} >
                                         <CustomFormGroup value = {val} type="integer" placeholder="Add Comment" className=" mr-sm-2" controlId ="comment"   style ={{height:"40px",width:"150%"}}/>
-                                        <Button type="submit" href = {''} style = {{ justify:"left",color: "white"}} rounded   style ={{height:"45px", paddingBottom:"5px"}}>Comment</Button>
+                                        <Button type="submit" href = {''} style = {{ justify:"left",color: "white", height:"45px", paddingBottom:"5px"}} rounded>Comment</Button>
 
                                     </Form></Row>
                                     <Row>{carveComments}</Row>

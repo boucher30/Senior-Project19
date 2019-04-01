@@ -1,4 +1,3 @@
-
 -- MySQL Workbench Forward Engineering
 
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
@@ -1883,7 +1882,7 @@ DELIMITER $$
 USE `CCv4`$$
 CREATE PROCEDURE `get_user_notifications` (in id int)
 BEGIN
-select * from messages where rec_id = id and (type != 'normal' and type !='reply');
+select * from messages where rec_id = id and type != 'normal' and type !='reply';
 END$$
 
 DELIMITER ;
@@ -1899,7 +1898,7 @@ DELIMITER $$
 USE `CCv4`$$
 CREATE PROCEDURE `get_user_sent_notifications` (in id int)
 BEGIN
-select * from messages where sender_id = id and (type != 'normal' and type !='reply');
+select * from messages where sender_id = id and type != 'normal' and type !='reply';
 END$$
 
 DELIMITER ;
@@ -2182,4 +2181,3 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- begin attached script 'script'
 ALTER USER 'nodeuser'@'localhost' IDENTIFIED WITH mysql_native_password BY 'nodeuser@1234';
 -- end attached script 'script'
-

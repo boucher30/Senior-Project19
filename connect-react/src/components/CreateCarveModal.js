@@ -64,7 +64,7 @@ export default class CreateCarveModal extends Component {
 
 	// Make sure that all fields are filled in
 	validateForm() {
-		const { name, description,venueId } = this.state;
+		const { name, description} = this.state;
 		return (
 				name.length > 0 &&
 				description.length > 0
