@@ -31,7 +31,7 @@ export default class CIReplyModal extends Component {
     // Hits API with body of carve
     sendMessage() {
 
-        if(this.props.type == 'inviteAccept')
+        if(this.props.type === 'inviteAccept')
         {
             axios.post('http://localhost:8000/carveAttendees', {
                 user: this.state.sender,

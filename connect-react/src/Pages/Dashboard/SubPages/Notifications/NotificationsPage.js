@@ -97,7 +97,7 @@ class NotificationsPage extends Component {
 
         return (
 
-            <a >
+            <>
 
                 <Row className="justify-content-md-center" style={{ paddingLeft: '0px',backgroundColor: "lightgray", height: "100%"}}>
 
@@ -130,7 +130,7 @@ class NotificationsPage extends Component {
                 </div>
                     </Col>
                 </Row>
-            </a>
+            </>
         );
     }
 }

@@ -31,6 +31,9 @@ componentWillMount() {
 			//alert(JSON.stringify(res.data.users[0][0]))
 		});
     }
+
+
+
 	render() {
 
 
@@ -65,7 +68,7 @@ componentWillMount() {
 		if(this.state.buddies.length > 0) {
 			buddiesList = this.state.buddies.map((buddy, index) => {
 				return (
-					<ListGroup.Item key={index}  style={{
+					<ListGroup.Item key={index} action href={`/dashboard/profile/${this.state.buddies[index].user_id2}`} style={{
 						backgroundColor: "seashell", color: "green",
 						fontFamily: 'monospace', paddingRight: '0px',width:"100%"
 					}}>

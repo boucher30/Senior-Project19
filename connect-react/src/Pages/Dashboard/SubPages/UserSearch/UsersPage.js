@@ -4,9 +4,14 @@ import React, {Component} from 'react';
 
 class UsersPage extends Component {
 
+
+
+
+
+
     render() {
         return (
-            <a>
+            <>
                 <div>
                 <h3>Users Page</h3>
                 <div><i className="fa fa-spinner fa-spin"> </i></div>
@@ -43,7 +48,7 @@ class UsersPage extends Component {
                         </tbody>
                     </table>
                 </div>
-            </a>
+            </>
         );
     }
 }
