@@ -33,3 +33,4 @@ select * from all_carves left join all_carve_attendees on all_carves.carve_id = 
 
 call get_all_likes();
 call buddy_list(6);
+call get_user_notifications(1);

@@ -38,7 +38,9 @@ export default class VenueCarveCard extends Component {
             currentCid: 0,
             curCr:0,
             cId:0,
-            cRe:0
+            cRe:0,
+            followCheck: [],
+            userId: localStorage.getItem('userId')
         };
     }
 
@@ -52,6 +54,17 @@ export default class VenueCarveCard extends Component {
                 });
 
             });
+
+        axios.get(`http://localhost:8000/users/${this.state.userId}/carveAttendees`)
+            .then(res => {
+                console.log("results: ", res.data.results[0]);
+                //alert(JSON.stringify(res.data.results[0]));
+                this.setState({
+                    followCheck: res.data.results[0]
+                });
+
+            });
+
         //currently only gets attendees for carve1. not dynamic per carve
         axios.get(`http://localhost:8000/comments`)
             .then(res => {
@@ -235,6 +248,7 @@ export default class VenueCarveCard extends Component {
                     color = "lightskyblue";
                     act = "Request to Attend";
                     no = "Upcoming";
+
                     att =<Button variant="info" style = {{ paddingTop:"10px"}} onClick = {() => this.handleClick5(carve.carve_id,carve.creator)} >{act}</Button>;
 
                 }
