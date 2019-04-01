@@ -75,15 +75,14 @@ router.patch('/', (req,res) => {
 
 });
 
-// deletes all follows
+// Route takes in the venue id and the user_id in the body
+// deletes all follows (Should be from specific user and not all of them)
 router.delete('/', (req,res) => {
 	delete_follows = "CALL delete_follows()";
 	con.query(delete_follows, (err, results) => {
 		if (err) throw err;
 		res.status(201).jsonp({results}).end;
 	})
-
-
 });
 
 
@@ -103,7 +102,7 @@ router.get('/buddies', (req,res) => {
 	})
 });
 
-//get /followed
+// Returns all venues followed by a specific user
 router.get('/venues', (req,res) => {
 	// Find all follows from database
 	console.log(req.params);
@@ -176,6 +175,20 @@ router.patch('/:followId', (req,res) => {
 	})
 });
 
+// Deletes venue follow
+router.delete('/venues', (req, res) => {
+	const { user_id1, venue_id } = req.body;
+	let sql = `DELETE FROM FOLLOWS WHERE user_id1=${user_id1} AND venue_id=${venue_id}`;
+	console.log(req.body);
+
+	con.query(sql, (err, results) => {
+		if (err) throw err;
+		res.status(200).jsonp({
+			results
+		}).end;
+	})
+});
+
 // deletes follow
 router.delete('/:followId', (req,res) => {
 	const followId = req.params.followId;
@@ -185,9 +198,8 @@ router.delete('/:followId', (req,res) => {
 		if (err) throw err;
 		res.status(201).jsonp({msg:'follow deleted'}).end;
 	})
-
-
 });
+
 // get /buddies/  returns buddy list for user procedure call => buddy_list(?) [userId]
 
 //get /followers

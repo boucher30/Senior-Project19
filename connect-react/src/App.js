@@ -15,9 +15,9 @@ import {subscribe} from './api';
 class App extends Component {
   constructor(props) {
     super(props);
-    subscribe((err, timestamp) => this.setState({
-      timestamp
-    }));
+    // subscribe((err, timestamp) => this.setState({
+    //   timestamp
+    // }));
 
   }
 

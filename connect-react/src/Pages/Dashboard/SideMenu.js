@@ -19,18 +19,17 @@ class SideMenu extends Component {
 
 
 
-componentWillMount() {
-	axios.get(`http://localhost:8000/users/${localStorage.getItem('userId')}/follows/buddies`)
-		.then(res => {
-			console.log("results: ", res.data.results[0]);
-			//alert("Buddy list:"+ JSON.stringify(res.data.results[0][0].user_Id2));
-			this.setState({
-				buddies: res.data.results[0]
+	componentWillMount() {
+		axios.get(`http://localhost:8000/users/${localStorage.getItem('userId')}/follows/buddies`)
+			.then(res => {
+				// console.log("results: ", res.data.results[0]);
+				//alert("Buddy list:"+ JSON.stringify(res.data.results[0][0].user_Id2));
+				this.setState({
+					buddies: res.data.results[0]
+				});
 			});
+	}
 
-			//alert(JSON.stringify(res.data.users[0][0]))
-		});
-    }
 	render() {
 
 
