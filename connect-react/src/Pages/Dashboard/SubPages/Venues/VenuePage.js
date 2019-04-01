@@ -87,7 +87,7 @@ export default class VenuePage extends Component {
                             <Row>
                                 <h2>Carves at this venue</h2></Row>
                             <Row style = {{width:"100%"}}>
-                                <VenueCarveCard style = {{width:"100%"}}/></Row></Col>
+                                <VenueCarveCard venue_id = {this.state.venueId} style = {{width:"100%"}}/></Row></Col>
                     </Row>
                 </>
             );

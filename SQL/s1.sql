@@ -29,4 +29,6 @@ select group_concat(distinct all_follows ) from all_follows;
 select user_id2 from all_follows where type = 'buddy' and user_id1 = 1 union
 select user_id1 as user_id2 from all_follows where type = 'buddy' and user_id2 = 1 ;
 
+select * from all_carves left join all_carve_attendees on all_carves.carve_id = all_carve_attendees.carve;
 
+call get_all_likes();

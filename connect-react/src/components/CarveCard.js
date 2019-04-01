@@ -164,20 +164,7 @@ export default class CarveCard extends Component {
                 let lik =0;
                 let dlik =0;
 
-                if(this.state.carveLik.length >0)
 
-                for(let ind =0; ind<=this.state.carveLik.length;ind ++)
-                {
-                    if(this.state.carveLik[index].carve === carve.carve_id)
-                        lik+=1;
-                }
-
-                if(this.state.carveDlik.length >0)
-                    for(let ind1 =0; ind1<=this.state.carveLik.length;ind1 ++)
-                    {
-                        if(this.state.carveDlik[index].carve === carve.carve_id)
-                            dlik++;
-                    }
                 if (this.state.carveAt1.length > 0) {
                 carveAttendList = this.state.carveAt1[0].map((attender, index1) => {
 

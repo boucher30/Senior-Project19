@@ -131,7 +131,7 @@ export default class ProfilePage extends Component {
 						<Row>
 							<h2>Carves created by user</h2></Row>
 						<Row style = {{width:"100%"}}>
-							<CarveCardUserCreate style = {{width:"100%"}}/></Row></Col></Row>
+							<CarveCardUserCreate profile_id = {this.state.userId}style = {{width:"100%"}}/></Row></Col></Row>
 				</>
 			);
 		} else {

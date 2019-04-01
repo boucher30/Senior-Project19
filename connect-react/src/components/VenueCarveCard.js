@@ -35,7 +35,7 @@ export default class VenueCarveCard extends Component {
     }
 
     componentWillMount() {
-        axios.get(`http://localhost:8000/venues/1/carves`)
+        axios.get(`http://localhost:8000/venues/${this.props.venue_id}/carves`)
             .then(res => {
                 console.log("results: ", res.data.results[0]);
                 //alert(JSON.stringify(res.data.results[0]));
