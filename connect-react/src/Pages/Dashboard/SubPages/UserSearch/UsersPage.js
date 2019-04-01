@@ -14,7 +14,8 @@ class UsersPage extends Component {
             <>
                 <div>
                 <h3>Users Page</h3>
-                <div><i className="fa fa-spinner fa-spin"> </i></div>
+                <div><i className="fa fa-spinner fa-spin"> </i>
+                </div>
             </div>
                 <div>
                     <table className="table table-dark">
