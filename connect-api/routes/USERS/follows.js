@@ -90,7 +90,7 @@ router.delete('/', (req,res) => {
 //get /followed
 router.get('/buddies', (req,res) => {
 	// Find all follows from database
-	console.log(req.params);
+
 	userId = req.params.userId;
 	follow_list = "CALL buddy_list(?)";
 

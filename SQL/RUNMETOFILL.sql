@@ -612,6 +612,7 @@ INSERT INTO LIKES(poster,type,MEDIA) VALUES (2,'like',NULL);
 INSERT INTO LIKES(poster,type,MEDIA) VALUES (2,'dislike',NULL);
 INSERT INTO LIKES(poster,type,MEDIA) VALUES (2,'like',NULL);
 INSERT INTO LIKES(poster,type,MEDIA) VALUES (2,'like',NULL);
+call get_users();
 
 
 

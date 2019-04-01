@@ -41,20 +41,16 @@ class MessagesPage extends Component {
 
     }
 //onClick={this.onClick(message.message_id)}
-    onClick = (e) =>{
+    onClick2 = (e) =>{
+        console.log(" delete:" +e);
         axios.delete(`http://localhost:8000/messages/${e}`)
-            .then(res => {
 
-                this.setState({
 
-                });
 
-                //alert(JSON.stringify(res.data.users[0][0]))
-            });
     };
 //show: false
     onClick1 =() => {
-        this.setState({ show: !this.state.show1 });
+        this.setState({ show1: !this.state.show1 });
     };
 
     render() {
@@ -70,8 +66,8 @@ class MessagesPage extends Component {
                         <td>{message.create_time}</td>
                         <td>{message.type}</td>
                         <td>{message.message_body}</td>
-                            <td> </td>
-                            <td > </td>
+                            <td><i onClick={this.onClick1} className ="fa fa-inbox text-white"> </i></td>
+                            <td > <button  className ="fa fa-trash-o text-white" onClick={ () => { this.onClick2(message.message_id) } }> </button></td>
                         </tr>
                 )
             });
@@ -88,7 +84,7 @@ class MessagesPage extends Component {
                     <Col style={{ paddingLeft: '0px'}}>
 
                 <h3 className = 'border-bottom' style = {{  borderBottomColor: 'black',
-                    borderBottomWidth: 5, width: '150%' }}>Messages</h3>
+                    borderBottomWidth: 5, width: '150%' }}>Messages </h3>
 
                 <div>
                     <table className="table table-dark" style = {{color: "skyblue", paddingTop: "5px",width:"101%", bordered: '0.5px solid rgba(0, 0, 0, 0.5)'}}>

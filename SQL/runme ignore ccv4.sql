@@ -5,7 +5,7 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
--- Schema CCv4
+-- Schema CCv4get_users
 -- -----------------------------------------------------
 -- latest and greatest database.
 DROP SCHEMA IF EXISTS `CCv4` ;
@@ -479,13 +479,13 @@ DELIMITER ;
 -- -----------------------------------------------------
 
 USE `CCv4`;
-DROP procedure IF EXISTS `CCv4`.`get_    USERS`;
+DROP procedure IF EXISTS `CCv4`.`get_users`;
 
 DELIMITER $$
 USE `CCv4`$$
-CREATE PROCEDURE `get_    USERS` ()
+CREATE PROCEDURE `get_users` ()
 BEGIN
-select * from all_    USERS;
+select * from all_USERS;
 END$$
 
 DELIMITER ;
@@ -501,7 +501,7 @@ DELIMITER $$
 USE `CCv4`$$
 CREATE PROCEDURE `get_user` (in id int)
 BEGIN
-select * from all_    USERS where user_id = id;
+select * from all_USERS where user_id = id;
 END$$
 
 DELIMITER ;
@@ -840,11 +840,11 @@ DELIMITER ;
 -- -----------------------------------------------------
 
 USE `CCv4`;
-DROP procedure IF EXISTS `CCv4`.`get_    USERS_CARVES_attendee`;
+DROP procedure IF EXISTS `CCv4`.`get_USERS_CARVES_attendee`;
 
 DELIMITER $$
 USE `CCv4`$$
-CREATE PROCEDURE `get_    USERS_CARVES_attendee` (in userId int)
+CREATE PROCEDURE `get_USERS_CARVES_attendee` (in userId int)
 BEGIN
 select * from all_CARVE_ATTENDEES where user = userId;
 END$$
@@ -1741,11 +1741,11 @@ DELIMITER ;
 -- -----------------------------------------------------
 
 USE `CCv4`;
-DROP procedure IF EXISTS `CCv4`.`get_    USERS_MESSAGES`;
+DROP procedure IF EXISTS `CCv4`.`get_USERS_MESSAGES`;
 
 DELIMITER $$
 USE `CCv4`$$
-CREATE PROCEDURE `get_    USERS_MESSAGES` (in id int)
+CREATE PROCEDURE `get_USERS_MESSAGES` (in id int)
 BEGIN
 select * from all_MESSAGES where sender_id = id or rec_id = id;
 END$$
@@ -1757,11 +1757,11 @@ DELIMITER ;
 -- -----------------------------------------------------
 
 USE `CCv4`;
-DROP procedure IF EXISTS `CCv4`.`get_    USERS_inbox`;
+DROP procedure IF EXISTS `CCv4`.`get_USERS_inbox`;
 
 DELIMITER $$
 USE `CCv4`$$
-CREATE PROCEDURE `get_    USERS_inbox` (in id int)
+CREATE PROCEDURE `get_USERS_inbox` (in id int)
 BEGIN
 select * from all_MESSAGES where rec_id = id and (type = 'normal' or type = 'reply');
 END$$
@@ -1995,10 +1995,10 @@ DELIMITER ;
 -- -----------------------------------------------------
 -- View `CCv4`.`all_    USERS`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `CCv4`.`all_    USERS`;
-DROP VIEW IF EXISTS `CCv4`.`all_    USERS` ;
+DROP TABLE IF EXISTS `CCv4`.`all_USERS`;
+DROP VIEW IF EXISTS `CCv4`.`all_USERS` ;
 USE `CCv4`;
-CREATE  OR REPLACE VIEW `all_    USERS` AS
+CREATE  OR REPLACE VIEW `all_USERS` AS
 select * from USERS;
 
 -- -----------------------------------------------------
