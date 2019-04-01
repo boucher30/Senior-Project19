@@ -276,8 +276,7 @@ export default class MediaCard extends Component {
                                         <Row>{carveComments}</Row>
 
                                     </Col>
-                                    <Col>{carveMedia}
-                                    </Col>
+
 
 
                                 </Row>

@@ -38,11 +38,47 @@ class NotificationsPage extends Component {
             });
 
     }
+
+    //onClick={this.onClick(message.message_id)}
+    onClick2 = (e) =>{
+        console.log(" delete:" +e);
+        axios.delete(`http://localhost:8000/messages/${e}`)
+
+
+
+    };
+
+    br = (e,e1,e2) => {
+        this.setState({
+            replyId: e,
+            replier: e1,
+            typ: e2,
+            show2: !this.state.show2
+        });
+
+    };
+
     render() {
         let messageRows;
+        let but1 = <i/>;
+        let but2 = <i/>;
+
 
         if(this.state.messages.length > 0){
             messageRows = this.state.messages.map((message, index) => {
+
+                if(message.type === 'buddyRequest') {
+                    but1 = <i className="fa fa-thumbs-o-up text-success" onClick={() =>  this.br(message.message_id,message.sender_Id,'buddyApprove')}/>;
+                    but2 = <i className ="fa fa-thumbs-o-down text-danger" onClick={() =>  this.br(message.message_id,message.sender_Id,'buddyDeny')} />;
+                }
+                else if(message.type === 'carveInvite') {
+                    but1 = <i className="fa fa-thumbs-o-up text-success"/>;
+                    but2 = <i className ="fa fa-thumbs-o-down text-white" />;
+                }
+                else if(message.type === 'carveAttendRequest') {
+                    but1 = <i className="fa fa-thumbs-o-up text-success"/>;
+                    but2 = <i className ="fa fa-thumbs-o-down text-white" />;
+                }
 
                 return (
                     <tr>
@@ -51,9 +87,9 @@ class NotificationsPage extends Component {
                         <td>{message.create_time}</td>
                         <td>{message.type}</td>
                         <td>{message.message_body}</td>
-                        <td><i className ="fa fa-thumbs-o-up text-success" /></td>
-                        <td><i className ="fa fa-thumbs-o-down text-danger" /></td>
-                        <td><i className ="fa fa-trash-o text-white" /></td>
+                        <td>{but1}</td>
+                        <td>{but2}</td>
+                        <td > <i  className ="fa fa-trash-o text-white" onClick={ () => { this.onClick2(message.message_id) } }> </i></td>
                     </tr>
                 )
             });
@@ -70,7 +106,7 @@ class NotificationsPage extends Component {
                     <Col style={{ paddingLeft: '0px'}}>
 
                 <h3 className = 'border-bottom' style = {{  borderBottomColor: 'black',
-                    borderBottomWidth: 5, width: '150%' }}>Notifications</h3>
+                    borderBottomWidth: 5, width: '150%' }}>Notifications:</h3>
 
                 <div>
                     <table className="table table-dark" style = {{color: "skyblue", paddingTop: "5px",width:"101%", bordered: '0.5px solid rgba(0, 0, 0, 0.5)'}}>

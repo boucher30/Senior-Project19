@@ -152,7 +152,7 @@ export default class CarveCardUserCreate extends Component {
         let color = "grey";
         let act = "secondary";
         let no = "not";
-        let att = <div></div>;
+        let att = <div> </div>;
         let val;
         if (this.state.carveInfo.length > 0) {
             carveList = this.state.carveInfo.map((carve, index) => {

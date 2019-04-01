@@ -3,7 +3,7 @@ import axios from 'axios'
 import MessagesSidebar from "./MessagesSidebar";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import MessageModal from "../../../../components/MessageModal";
+import ReplyMsgModal from "../../../../components/ReplyMsgModal";
 
 
 class MessagesPage extends Component {
@@ -23,21 +23,23 @@ class MessagesPage extends Component {
             check: true,
             show: false,
             show1: false,
-            currentID: 0
+            currentID: 0,
+            replyId: 0,
+            replier: 0
         };
 
     }
     componentWillMount()
-    {
-        axios.get(`http://localhost:8000/users/${localStorage.getItem('userId')}/messages`)
-            .then(res => {
-                console.log("results: ", res.data.results[0]);
-                this.setState({
-                    messages: res.data.results[0]
-                });
+{
+    axios.get(`http://localhost:8000/users/${localStorage.getItem('userId')}/messages`)
+    .then(res => {
+    console.log("results: ", res.data.results[0]);
+    this.setState({
+    messages: res.data.results[0]
+    });
 
-                //alert(JSON.stringify(res.data.users[0][0]))
-            });
+    //alert(JSON.stringify(res.data.users[0][0]))
+    });
 
     }
 //onClick={this.onClick(message.message_id)}
@@ -49,10 +51,13 @@ class MessagesPage extends Component {
 
     };
 //show: false
-    onClick1 =() => {
-        this.setState({ show1: !this.state.show1 });
-    };
+    onClick1 =(e,e1) => {
+        this.setState({
+            replyId: e,
+            replier: e1,
+            show1: !this.state.show1 });
 
+    };
     render() {
         let messageRows;
 
@@ -66,8 +71,8 @@ class MessagesPage extends Component {
                         <td>{message.create_time}</td>
                         <td>{message.type}</td>
                         <td>{message.message_body}</td>
-                            <td><i onClick={this.onClick1} className ="fa fa-inbox text-white"> </i></td>
-                            <td > <button  className ="fa fa-trash-o text-white" onClick={ () => { this.onClick2(message.message_id) } }> </button></td>
+                            <td><i onClick={() => this.onClick1(message.message_id,message.sender_Id)} className ="fa fa-inbox text-white"> </i></td>
+                            <td > <i  className ="fa fa-trash-o text-white" onClick={ () => { this.onClick2(message.message_id) } }> </i></td>
                         </tr>
                 )
             });
@@ -76,7 +81,7 @@ class MessagesPage extends Component {
         return (
 
             <>
-                <MessageModal handleClose={this.onClick1} show={this.state.show1} />
+                <ReplyMsgModal replyId = {this.state.replyID} replier = {this.state.replier} handleClose={this.onClick1} show={this.state.show1} />
                 <Row className="justify-content-md-center" style={{ paddingLeft: '0px',backgroundColor: "lightgray", height: "100%"}}>
 
                 <MessagesSidebar  style = {{paddingRight: '0px'}} />

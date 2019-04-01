@@ -99,7 +99,7 @@ class TopNav extends Component {
 
 						<NavDropdown className ="fa fa-bell text-danger"  id="collapsible-nav-dropdown" >
 							<NavDropdown.Item href="/dashboard/notinbox">Notifications</NavDropdown.Item>
-							<NavDropdown.Item href="/dashboard/notoutbox">Notif Sent</NavDropdown.Item>
+							<NavDropdown.Item href="/dashboard/notoutbox">Sent</NavDropdown.Item>
 							<NavDropdown.Divider />
 
 						</NavDropdown>

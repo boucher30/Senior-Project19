@@ -95,11 +95,9 @@ router.get('/buddies', (req,res) => {
 	follow_list = "CALL buddy_list(?)";
 
 
-	console.log(req.query);
-
 	con.query(follow_list, [userId], (err, results) => {
 		if (err) throw err;
-		console.log(results);
+
 		res.status(200).jsonp({results}).end;
 
 	})

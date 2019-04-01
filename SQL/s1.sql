@@ -32,3 +32,4 @@ select user_id1 as user_id2 from all_follows where type = 'buddy' and user_id2 =
 select * from all_carves left join all_carve_attendees on all_carves.carve_id = all_carve_attendees.carve;
 
 call get_all_likes();
+call buddy_list(6);

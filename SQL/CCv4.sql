@@ -1,3 +1,4 @@
+
 -- MySQL Workbench Forward Engineering
 
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
@@ -2051,7 +2052,7 @@ DELIMITER $$
 USE `CCv4`$$
 CREATE PROCEDURE `get_profile_media` (in id int)
 BEGIN
-select * from all_media where profile = id;
+select * from all_media where media = id;
 END$$
 
 DELIMITER ;
@@ -2071,6 +2072,7 @@ select * from all_media where venue = id;
 END$$
 
 DELIMITER ;
+
 -- -----------------------------------------------------
 -- View `CCv4`.`all_users`
 -- -----------------------------------------------------
@@ -2173,4 +2175,4 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- begin attached script 'script'
 ALTER USER 'nodeuser'@'localhost' IDENTIFIED WITH mysql_native_password BY 'nodeuser@1234';
 -- end attached script 'script'
-                                      
+
