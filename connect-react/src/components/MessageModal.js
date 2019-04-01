@@ -58,7 +58,7 @@ export default class MessageModal extends Component {
 
     // Make sure that all fields are filled in
     validateForm() {
-        const { subject, to, body, type } = this.state;
+        const { subject, to, body} = this.state;
         return (
             subject.length > 0 &&
             to.length > 0 &&

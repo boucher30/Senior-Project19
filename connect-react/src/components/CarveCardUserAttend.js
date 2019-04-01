@@ -147,13 +147,13 @@ export default class CarveCardUserAttend extends Component {
         let carveAttendList;
         let carveComments;
         let carveMedia;
-        let currentCarve =0;
+        //let currentCarve =0;
         let lik =0;
         let dlik =0;
         let color = "grey";
-        let act = "secondary";
+        //let act = "secondary";
         let no = "not";
-        let att = <div></div>;
+        ///let att = <div> </div>;
         let val;
         if (this.state.carveInfo.length > 0) {
             carveList = this.state.carveInfo.map((carve, index) => {
@@ -178,6 +178,8 @@ export default class CarveCardUserAttend extends Component {
 
                                 </ListGroup.Item>
                             );
+                        else
+                            return(<></>)
                     });
                 }
 
@@ -194,6 +196,8 @@ export default class CarveCardUserAttend extends Component {
 
                                 </ListGroup.Item>
                             );
+                        else
+                            return(<></>)
                     });
                 }
                 if (this.state.carveMed.length > 0) {
@@ -212,20 +216,22 @@ export default class CarveCardUserAttend extends Component {
 
                                 </ListGroup.Item>
                             );
+                        else
+                            return(<></>)
                     });
                 }
 
                 if(carve.completed >0) {
                     color = "seagreen";
-                    act = "Carve Completed";
+                    //act = "Carve Completed";
                     no = "Completed";
-                    att = <div></div>;
+                    //att = <div></div>;
                 }
                 else {
                     color = "lightskyblue";
-                    act = "Request to Attend";
+                    //act = "Request to Attend";
                     no = "Upcoming";
-                    att =<Button variant="info" style = {{ paddingTop:"10px"}}  >{act}</Button>;
+                    //att =<Button variant="info" style = {{ paddingTop:"10px"}}  >{act}</Button>;
                 }
                 return (
 
@@ -296,7 +302,7 @@ export default class CarveCardUserAttend extends Component {
                                     <Col>
                                         <Row style={{width:"100%"}}>				<Form inline style ={{justify:"left"}} >
                                             <CustomFormGroup value = {val} type="integer" placeholder="Add Comment" className=" mr-sm-2" controlId ="comment"   style ={{height:"40px",width:"150%"}}/>
-                                            <Button type="submit" href = {''} style = {{ justify:"left",color: "white"}} rounded   style ={{height:"45px", paddingBottom:"5px"}}>Comment</Button>
+                                            <Button type="submit" href = {''} style = {{ justify:"left",color: "white", height:"45px", paddingBottom:"5px"}}>Comment</Button>
 
                                         </Form></Row>
                                         <Row>{carveComments}</Row>

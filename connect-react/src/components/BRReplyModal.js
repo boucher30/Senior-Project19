@@ -31,7 +31,7 @@ export default class BRReplyModal extends Component {
     // Hits API with body of carve
     sendMessage() {
 
-        if(this.props.type == 'buddyAccept')
+        if(this.props.type === 'buddyAccept')
         {
             axios.post('http://localhost:8000/follows/buddies', {
                 user1: this.state.sender,
