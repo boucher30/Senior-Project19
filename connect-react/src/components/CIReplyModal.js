@@ -2,19 +2,18 @@ import React, {Component} from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
 import Container from "react-bootstrap/Container";
 import axios from 'axios'
 import "react-datepicker/dist/react-datepicker.css";
 
-export default class BuddyRequestModal extends Component {
+export default class CIReplyModal extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            subject: 'Buddy Request',
+            subject: 'RE: Carve Invite',
             to: '',
-            type: 'buddyRequest',
-            body: '',
+            type: '',
+            body: ' ',
             sender: localStorage.getItem('userId')
         };
 
@@ -32,13 +31,22 @@ export default class BuddyRequestModal extends Component {
     // Hits API with body of carve
     sendMessage() {
 
+        if(this.props.type == 'inviteAccept')
+        {
+            axios.post('http://localhost:8000/carveAttendees', {
+                user: this.state.sender,
+                carve:this.props.carI
+
+            });}
         console.log('Message created');
         axios.post('http://localhost:8000/messages', {
             sender: this.state.sender,
-            reciever: this.props.id,
-            subject: 'Buddy Request ',
+            reciever: this.props.replier,
+            subject: 'RE:carveInvite ',
             body: this.state.body,
-            msgType: 'buddyRequest'
+            msgType: this.props.type,
+            reply_id: this.props.replyId,
+            carve: this.props.cId
 
         });
         this.props.handleClose();
@@ -70,13 +78,8 @@ export default class BuddyRequestModal extends Component {
                     <Container>
 
                         <Row>Subject {this.state.subject}</Row>
-                        <Row>Sending to {this.props.id}</Row>
-
-                        {/* Description */}
-                        <Form.Group controlId="body">
-                            <Form.Label>Message:</Form.Label>
-                            <Form.Control value={this.state.description} onChange={this.handleChange} as="textarea" rows="2" placeholder="Enter Message text here..." />
-                        </Form.Group>
+                        <Row>Replying to {this.props.replier}</Row>
+                        <Row>Status is {this.props.type}</Row>
 
                         {/* Horizontal rule */}
                         <hr/>

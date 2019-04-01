@@ -50,7 +50,7 @@ export default class CreateCarveModal extends Component {
 			sports: [this.state.sport]
 
 		});
-return(this.props.handleClose)
+		this.props.handleClose();
 	}
 
 

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Col from 'react-bootstrap/Col';
 import ListGroup from 'react-bootstrap/ListGroup'
-import ReplyMsgModal from "../../../../components/ReplyMsgModal";
+import MessageModal from "../../../../components/MessageModal";
 
 const menuItems = {
 	'Compose  ': {href: '/dashboard/messages/ '},
@@ -16,23 +16,29 @@ export default class MessagesSidebar extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			show: false
+			show0: false
 		}
 	}
 
-	handleClick = () => {
-		this.setState({ show: !this.state.show });
+	handleClick0 = () => {
+
+		this.setState({ show0: !this.state.show0});
 	};
+
+	handleClose = () => {
+		this.setState({ show0: !this.state.show0 });
+	};
+
 render() {
 	return (
 		<>
-			<ReplyMsgModal handleClose={this.handleClick} show={this.state.show} />
+			<MessageModal handleClose={this.handleClick0} show={this.state.show0} />
 			{/* First column that holds the menu items */}
 			<Col xs={1} style={{ paddingLeft: "0px",paddingRight: '0px', backgroundColor: "grey",bordered: '0.5px solid rgba(0, 0, 0, 0.5)'}}>
 				<ListGroup variant="flush" defaultActiveKey="1"  style={{ paddingRight: '0px'}}>
 
 					<ListGroup.Item key={menuItems[1]}   style={{backgroundColor: "grey", color: "white"	,fontWeight:'bold',
-						fontFamily: 'monospace', paddingRight: '0px',bordered: '0.5px solid rgba(0, 0, 0, 0.5)'}} onClick={this.handleClick}>
+						fontFamily: 'monospace', paddingRight: '0px',bordered: '0.5px solid rgba(0, 0, 0, 0.5)'}} onClick={this.handleClick0}>
 						Compose
 						<i className ="fa fa-pencil text-white" />
 					</ListGroup.Item>
