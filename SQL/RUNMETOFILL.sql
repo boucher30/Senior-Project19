@@ -73,6 +73,10 @@ INSERT INTO MESSAGES(sender_Id,rec_Id,message_subject,message_body,type,reply) V
 INSERT INTO MESSAGES(sender_Id,rec_Id,message_subject,message_body,type,reply) VALUES (3,1,'normal','hello there','normal',NULL);
 INSERT INTO MESSAGES(sender_Id,rec_Id,message_subject,message_body,type,reply) VALUES (3,9,'normal','hello there','normal',NULL);
 INSERT INTO MESSAGES(sender_Id,rec_Id,message_subject,message_body,type,reply) VALUES (3,10,'normal','hello there','normal',NULL);
+INSERT INTO MESSAGES(sender_Id,rec_Id,message_subject,message_body,type,reply) VALUES (2,1,'invite','yo bud come carve with me','invite',NULL);
+
+
+
 
 INSERT INTO MESSAGES(sender_Id,rec_Id,message_subject,message_body,type,reply) VALUES (1,2,'normal','hello there','normal',NULL);
 INSERT INTO MESSAGES(sender_Id,rec_Id,message_subject,message_body,type,reply) VALUES (1,3,'buddyRequest','be my buddy','buddyRequest',NULL);

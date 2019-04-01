@@ -31,11 +31,11 @@ export default class CIReplyModal extends Component {
     // Hits API with body of carve
     sendMessage() {
 
-        if(this.props.type == 'buddyAccept')
+        if(this.props.type == 'inviteAccept')
         {
-            axios.post('http://localhost:8000/follows/buddies', {
-                user1: this.state.sender,
-                user2: this.props.replier
+            axios.post('http://localhost:8000/carveAttendees', {
+                user: this.state.sender,
+                carve:this.props.carI
 
             });}
         console.log('Message created');
@@ -45,7 +45,8 @@ export default class CIReplyModal extends Component {
             subject: 'RE:carveInvite ',
             body: this.state.body,
             msgType: this.props.type,
-            reply_id: this.props.replyId
+            reply_id: this.props.replyId,
+            carve: this.props.cId
 
         });
         this.props.handleClose();

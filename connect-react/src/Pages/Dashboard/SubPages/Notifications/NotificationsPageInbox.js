@@ -24,11 +24,14 @@ class NotificationsPageInbox extends Component {
             check: true,
             show: false,
             show2: false,
+            show3:false,
             typ: [],
             rep: 0,
-            replier: 0
+            replier: 0,
+            carI:0
         };
         this.handleClose2 = this.handleClose2.bind(this);
+        this.handleClose3 = this.handleClose3.bind(this);
     }
     componentWillMount()
     {
@@ -58,7 +61,9 @@ class NotificationsPageInbox extends Component {
     handleClose2() {
         this.setState({ show2: false });
     };
-
+    handleClose3() {
+        this.setState({ show3: false });
+    };
     br = (e,e1,e2,e3) => {
         this.setState({
             rep: e,
@@ -70,11 +75,12 @@ class NotificationsPageInbox extends Component {
     };
 
 
-    ci = (e,e1,e2,e3) => {
+    ci = (e,e1,e2,e3,e4) => {
         this.setState({
             rep: e,
             replier: e1,
             typ: e2,
+            carI: e4,
             show3: !this.state.show3
         });
         axios.delete(`http://localhost:8000/messages/${e3}`)
@@ -103,11 +109,11 @@ class NotificationsPageInbox extends Component {
                     but1 = <i className="fa fa-thumbs-o-up text-success" onClick={() =>  this.br(message.message_id,message.sender_Id,'buddyAccept',message.message_id)}/>;
                     but2 = <i className ="fa fa-thumbs-o-down text-danger" onClick={() =>  this.br(message.message_id,message.sender_Id,'buddyDecline',message.message_id)} />;
                 }
-                else if(message.type === 'carveInvite') {
-                    but1 = <i className="fa fa-thumbs-o-up text-success" onClick={() =>  this.ci(message.message_id,message.sender_Id,'inviteAccept',message.message_id)}/>;
-                    but2 = <i className ="fa fa-thumbs-o-down text-danger"onClick={() =>  this.ci(message.message_id,message.sender_Id,'inviteDeny',message.message_id)}/>;
+                else if(message.type === 'invite') {
+                    but1 = <i className="fa fa-thumbs-o-up text-success" onClick={() =>  this.ci(message.message_id,message.sender_Id,'inviteAccept',message.message_id,message.carve)}/>;
+                    but2 = <i className ="fa fa-thumbs-o-down text-danger"onClick={() =>  this.ci(message.message_id,message.sender_Id,'inviteDeny',message.message_id,message.carve)}/>;
                 }
-                else if(message.type === 'carveAttendRequest') {
+                else if(message.type === 'attendRequest') {
                     but1 = <i className="fa fa-thumbs-o-up text-success"/>;
                     but2 = <i className ="fa fa-thumbs-o-down text-danger" />;
                 }
@@ -131,7 +137,7 @@ class NotificationsPageInbox extends Component {
 
             <a >
                 <BRReplyModal replier={this.state.replier} replyId={this.state.rep} type ={[this.state.typ]} show={this.state.show2} handleClose={this.handleClose2}/>
-                <CIReplyModal/>
+                <CIReplyModal carve = {this.state.carI} replier={this.state.replier} replyId={this.state.rep} type ={[this.state.typ]} show={this.state.show3} handleClose={this.handleClose3}/>
                 <Row className="justify-content-md-center" style={{ paddingLeft: '0px',backgroundColor: "lightgray", height: "100%"}}>
 
                     <NotificationsSidebar  style = {{paddingRight: '0px'}} />
