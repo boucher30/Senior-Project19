@@ -15,7 +15,7 @@ export default class VenuePage extends Component {
     constructor(props){
         super(props);
         this.state = {
-            venueId: props.match.params.number,
+            venueId: Number(props.match.params.number),
             venueInfo: {},
             venueInfoLength: 0,
             followsVenue: false,
@@ -159,8 +159,8 @@ export default class VenuePage extends Component {
               let followsVenue = false;
 
               // Iterate over venues that the user follows and check to see if it is the one we are on now
-              venues.map((venue, index) => {
-                  if(venue.venue_Id == this.state.venueId) {
+              venues.forEach((venue) => {
+                  if(venue.venue_Id === this.state.venueId) {
                       followsVenue = true;
                   }
               });

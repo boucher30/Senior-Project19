@@ -111,7 +111,7 @@ CREATE TABLE IF NOT EXISTS `CCv4`.`MESSAGES` (
   `sender_Id` INT NOT NULL,
   `rec_Id` INT NOT NULL,
   `type` SET('normal', 'buddyRequest', 'buddyAccept', 'buddyDecline', 'attendRequest', 'attendAccept', 'attendDeny', 'invite', 'inviteAccept', 'inviteDeny', 'reply') NULL,
-  `reply` INT NULL,
+  `reply` INT DEFAULT NULL,
   `read` TINYINT NULL DEFAULT 0,
   `carve` INT NULL,
   `create_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -436,12 +436,12 @@ DROP procedure IF EXISTS `CCv4`.`add_message`;
 
 DELIMITER $$
 USE `CCv4`$$
-CREATE PROCEDURE `add_message` (in sender int, in reciever int, in subject varchar(50), in body varchar(500), 
+CREATE PROCEDURE `add_message` (in sender int, in reciever int, in subject varchar(50), in body varchar(500), in reply int,
 in msgType SET('normal','buddyRequest', 'buddyAccept', 'buddyDecline', 'attendRequest', 'attendAccept', 'attendDeny', 'invite', 'inviteAccept', 'inviteDeny', 'reply'))
 BEGIN
 
-insert into messages (sender_Id, rec_Id,message_subject,message_body, type)
-values(sender,reciever,subject,body, msgType);
+insert into messages (sender_Id, rec_Id, message_subject, message_body, type, reply)
+values(sender,reciever,subject,body, msgType, reply);
 
 END$$
 
