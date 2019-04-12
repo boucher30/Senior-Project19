@@ -23,19 +23,22 @@ router.get('/', (req,res) => {
 
 // Creates a new message
 router.post('/', (req,res) => {
-    const {sender,reciever,subject,body, msgType} = req.body;
+    const {sender, reciever, subject, body, msgType} = req.body;
+    let values = [sender, reciever, subject, body, msgType];
+    let reply;
 
-    console.log(" new message sent from: " + sender + "to: "+reciever +" of type: "+msgType);
-    if(false)
-    {
+    // Check to see if the message is a reply, if it is then we grab the number of the message we are replying to
+    if(req.body.reply) {
+        reply = Number(req.body.reply);
+        values.push(reply);
+    }
 
-    }else{
-        // The messagename wasn't found in the database
-        // Create insert query for new message
-        // Added a comment
-        new_message = "CALL add_message(?,?,?,?,?)";
-        // Execute the query to insert into the database
-        con.query(new_message,[sender,reciever,subject,body, msgType], (err, results) => {
+    // console.log(" new message sent from: " + sender + "to: "+reciever +" of type: "+msgType + " replying to message #" + reply);
+    if(false) {
+
+    } else {
+        new_message = "CALL add_message(?,?,?,?,?,?)";
+        con.query(new_message,[sender, reciever, subject, body, reply, msgType], (err, results) => {
             if (err) throw err;
             res.status(201).jsonp({results}).end;
         })

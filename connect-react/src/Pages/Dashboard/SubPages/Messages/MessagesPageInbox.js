@@ -27,8 +27,7 @@ class MessagesPageInbox extends Component {
         };
 
     }
-    componentWillMount()
-    {
+    componentWillMount() {
         axios.get(`http://localhost:8000/users/${localStorage.getItem('userId')}/messages`)
             .then(res => {
                 console.log("results: ", res.data.results[0]);
