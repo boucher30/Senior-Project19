@@ -37,8 +37,8 @@ router.post('/', (req,res) => {
     if(false) {
 
     } else {
-        new_message = "CALL add_message(?,?,?,?,?,?)";
-        con.query(new_message,[sender, reciever, subject, body, reply, msgType], (err, results) => {
+        new_message = "CALL add_message(?,?,?,?,?)";
+        con.query(new_message,[sender, reciever, subject, body, msgType], (err, results) => {
             if (err) throw err;
             res.status(201).jsonp({results}).end;
         })
