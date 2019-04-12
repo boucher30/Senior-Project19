@@ -253,18 +253,18 @@ CREATE TABLE IF NOT EXISTS `CCv4`.`MEDIA` (
   CONSTRAINT `venue4`
     FOREIGN KEY (`venue`)
     REFERENCES `CCv4`.`VENUES` (`venue_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `user11`
     FOREIGN KEY (`profile`)
     REFERENCES `CCv4`.`USERS` (`user_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `user4`
     FOREIGN KEY (`poster`)
     REFERENCES `CCv4`.`USERS` (`user_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `carve4`
     FOREIGN KEY (`carve`)
     REFERENCES `CCv4`.`CARVES` (`carve_id`)
@@ -293,21 +293,27 @@ CREATE TABLE IF NOT EXISTS `CCv4`.`MESSAGES` (
   INDEX `sender_idx` (`sender_id` ASC) VISIBLE,
   INDEX `reciever_idx` (`rec_id` ASC) VISIBLE,
   INDEX `carve_idx` (`carve` ASC) VISIBLE,
+  INDEX `reply_idx` (`reply` ASC) VISIBLE,
   CONSTRAINT `sender`
     FOREIGN KEY (`sender_id`)
     REFERENCES `CCv4`.`USERS` (`user_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `reciever`
     FOREIGN KEY (`rec_id`)
     REFERENCES `CCv4`.`USERS` (`user_id`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `carve`
     FOREIGN KEY (`carve`)
     REFERENCES `CCv4`.`CARVES` (`carve_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE NO ACTION,
+  CONSTRAINT `reply`
+    FOREIGN KEY (`reply`)
+    REFERENCES `CCv4`.`MESSAGES` (`message_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 USE `CCv4` ;
