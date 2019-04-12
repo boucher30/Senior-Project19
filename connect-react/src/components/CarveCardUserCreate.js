@@ -46,7 +46,7 @@ export default class CarveCardUserCreate extends Component {
     componentWillMount() {
         axios.get(`http://localhost:8000/users/${this.props.profile_id}/carves/`)
             .then(res => {
-                console.log("results: ", res.data.results[0]);
+                // console.log("results: ", res.data.results[0]);
                 //alert(JSON.stringify(res.data.results[0]));
                 this.setState({
                     carveInfo: res.data.results[0]
@@ -57,7 +57,7 @@ export default class CarveCardUserCreate extends Component {
         axios.get(`http://localhost:8000/comments`)
             .then(res => {
                 //alert("carve:" + JSON.stringify(res.data.results));
-                console.log("results: ", res.data.results[0]);
+                // console.log("results: ", res.data.results[0]);
                 //alert(JSON.stringify(res.data.results[0]));
                 this.setState({
                     carveComm: res.data.results[0]
@@ -69,7 +69,7 @@ export default class CarveCardUserCreate extends Component {
         axios.get(`http://localhost:8000/media`)
             .then(res => {
                 //alert("carve:" + JSON.stringify(res.data.results));
-                console.log("results: ", res.data.results[0]);
+                // console.log("results: ", res.data.results[0]);
                 //alert(JSON.stringify(res.data.results[0]));
                 this.setState({
                     carveMed: res.data.results[0]
@@ -81,7 +81,7 @@ export default class CarveCardUserCreate extends Component {
         axios.get(`http://localhost:8000/carveAt`)
             .then(res => {
                 //alert("carve:" + JSON.stringify(res.data.results));
-                console.log("results: ", res.data.results[0]);
+                // console.log("results: ", res.data.results[0]);
                 //alert(JSON.stringify(res.data.results[0]));
                 this.setState({
                     carveAt1: res.data.results
@@ -94,7 +94,7 @@ export default class CarveCardUserCreate extends Component {
         axios.get(`http://localhost:8000/carves/${1}/likes`)
             .then(res => {
                 //alert("carve:" + JSON.stringify(res.data.results));
-                console.log("results: ", res.data.results[0]);
+                // console.log("results: ", res.data.results[0]);
                 //alert(JSON.stringify(res.data.results[0]));
                 this.setState({
                     carveLik: res.data.results[0]
@@ -107,7 +107,7 @@ export default class CarveCardUserCreate extends Component {
         axios.get(`http://localhost:8000/carves/${1}/likes/dislike`)
             .then(res => {
                 //alert("carve:" + JSON.stringify(res.data.results));
-                console.log("results: ", res.data.results[0]);
+                // console.log("results: ", res.data.results[0]);
                 //alert(JSON.stringify(res.data.results[0]));
                 this.setState({
                     carveDlik: res.data.results[0]
@@ -189,13 +189,8 @@ export default class CarveCardUserCreate extends Component {
 
                         if(attender.carve === carve.carve_id)
                             return (
-
-                                <ListGroup.Item key={index1} style={{
-
-                                    fontFamily: 'monospace', paddingRight: '0px', width: "100%"
-                                }}>
+                                <ListGroup.Item key={index1} style={{fontFamily: 'monospace', paddingRight: '0px', width: "100%"}}>
                                     {attender.user} {attender.type}
-
                                 </ListGroup.Item>
                             );
                         else
@@ -207,13 +202,8 @@ export default class CarveCardUserCreate extends Component {
                     carveComments = this.state.carveComm.map((com, index) => {
                         if(com.carve === carve.carve_id)
                             return (
-
-                                <ListGroup.Item key={index} style={{
-
-                                    fontFamily: 'monospace', paddingRight: '0px', width: "100%"
-                                }}>
+                                <ListGroup.Item key={index} style={{fontFamily: 'monospace', paddingRight: '0px', width: "100%"}}>
                                     {com.comment} by: {com.poster}
-
                                 </ListGroup.Item>
                             );
                         else
