@@ -1,4 +1,4 @@
-# Development BRANCH FOR CARVE CONNECT
+# Deployment BRANCH FOR CARVE CONNECT
 
 CARVE CONNECT
 Action Sport/Film Social Platform.
