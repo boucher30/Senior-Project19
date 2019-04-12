@@ -4,19 +4,14 @@ const con = require('../db');
 
 
 
-// Grabs all follows from db
+// Grabs all follows from the database
 router.get('/', (req,res) => {
-	// Find all follows from database
+	// Find all follows from the database
 	follow_list = "CALL get_follows()";
-
-
-	console.log(req.query);
-
+	// Execute the query
 	con.query(follow_list, (err, results) => {
 		if (err) throw err;
-
 		res.status(200).jsonp({results}).end;
-
 	})
 });
 
@@ -24,33 +19,19 @@ router.get('/', (req,res) => {
 // Creates a new follow
 router.post('/', (req,res) => {
 	const {user1, user2,v} = req.body;
-	if(user2>0)
-	console.log("user " + user1 + " now following user:" + user2);
-	else
-		console.log("user " + user1 + " now following venue:" + v);
-	if(false)
-	{
-
-	}else{
-		// The followname wasn't found in the database
-		// Create insert query for new follow
-		// Added a comment
-		new_follow = "CALL add_follow(?,?,?,?)";
-		// Execute the query to insert into the database
-		con.query(new_follow,[user1, user2,v , 'follow'], (err, results) => {
-			if (err) throw err;
-			res.status(201).jsonp({results}).end;
-		})
-
-	}
+	// The followname wasn't found in the database
+	// Create insert query for new follow
+	new_follow = "CALL add_follow(?,?,?,?)";
+	// Execute the query to insert into the database
+	con.query(new_follow,[user1, user2,v , 'follow'], (err, results) => {
+		if (err) throw err;
+		res.status(201).jsonp({results}).end;
+	})
 });
 
 // updates all follows
 router.put('/', (req,res) => {
-
-	// The followname wasn't found in the database
 	// Create insert query for new follow
-	// Added a comment
 	new_follow = "CALL update_follows()";
 	// Execute the query to insert into the database
 	con.query(new_follow,(err, results) => {
@@ -61,103 +42,88 @@ router.put('/', (req,res) => {
 
 // updates all follows
 router.patch('/', (req,res) => {
-
-	// The followname wasn't found in the database
 	// Create insert query for new follow
-	// Added a comment
 	new_follow = "CALL update_follows()";
 	// Execute the query to insert into the database
 	con.query(new_follow,(err, results) => {
 		if (err) throw err;
 		res.status(201).jsonp({results}).end;
 	})
-
-
 });
 
-// deletes all follows
+// Deletes all follows from the database
 router.delete('/', (req,res) => {
+	// Create query to delete all follows from the database
 	delete_follows = "CALL delete_follows()";
+	// Execute the delete query
 	con.query(delete_follows, (err, results) => {
 		if (err) throw err;
 		res.status(201).jsonp({results}).end;
 	})
-
-
 });
 
 
-// Creates a new follow
+// Creates a new buddy
 router.post('/buddies', (req,res) => {
 	const {user1, user2} = req.body;
-
-
-	if(false)
-	{
-
-	}else{
-		// The followname wasn't found in the database
-		// Create insert query for new follow
-		// Added a comment
-		new_buddy = "CALL add_buddy(?,?)";
-		console.log("user " + user1 + " now buddies with:" + user2 );
-		// Execute the query to insert into the database
-		con.query(new_buddy,[user1, user2], (err, results) => {
-			if (err) throw err;
-			res.status(201).jsonp({results}).end;
-		})
-
-	}
+	// The followname wasn't found in the database
+	// Create insert query for new buddy
+	new_buddy = "CALL add_buddy(?,?)";
+	// Execute the query to insert into the database
+	con.query(new_buddy,[user1, user2], (err, results) => {
+		if (err) throw err;
+		res.status(201).jsonp({results}).end;
+	})
 });
 
-// Grab specific follow by their id
+// Grab specific follow by its ID
 router.get('/:followId', (req,res) => {
 	const followId = req.params.followId;
-
+	// Create query to get a specific follow from the database
 	get_follow  = "call get_follow(?)";
+	// Execute the query
 	con.query(get_follow, [followId],(err, results) => {
 		if (err) throw err;
 		res.status(200).jsonp({results}).end;
 	})
 });
 
-// updates follow
+// Updates the specific follow by its ID
 router.put('/:followId', (req,res) => {
 	const followId = req.params.followId;
 	const {user1, user2, ven, ty} = req.body;
-	console.log("via put follow updated with id: " + followId);
+	// Create query to update a specific follow in the database
 	update_follow = "CALL update_follow(?,?,?,?,?)";
-
+	// Execute the update query
 	con.query(update_follow,[followId,user1, user2, ven, ty[0]],(err, results) => {
 		if (err) throw err;
 		res.status(201).jsonp({results}).end;
 	})
 });
 
-// updates all follows
+// Updates the specific follow by its ID
 router.patch('/:followId', (req,res) => {
 	const followId = req.params.followId;
 	const {user1, user2, ven, ty} = req.body;
-	console.log(" via patch follow updated with id: " + followId);
+	// Create query to update a specific follow in the database
 	update_follow = "CALL update_follow(?,?,?,?,?)";
-
+	// Execute the update query
 	con.query(update_follow,[followId,user1, user2, ven, ty[0]],(err, results) => {
 		if (err) throw err;
 		res.status(201).jsonp({results}).end;
 	})
 });
 
-// deletes follow
+// Deletes the specific follow by its ID
 router.delete('/:followId', (req,res) => {
 	const followId = req.params.followId;
-	console.log(" deleting follow with follow id: " + followId);
+	// Create query to delete the specified follow from the database
 	delete_follows = "CALL delete_follow(?)";
+	// Execute the delete query
 	con.query(delete_follows, [followId],(err, results) => {
 		if (err) throw err;
 		res.status(201).jsonp({msg:'follow deleted'}).end;
 	})
-
-
 });
 
 

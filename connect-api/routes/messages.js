@@ -8,44 +8,30 @@ const con = require('../db');
 router.get('/', (req,res) => {
     // Find all messages from database
     message_list = "CALL get_messages()";
-
-
     console.log(req.query);
-
     con.query(message_list, (err, results) => {
         if (err) throw err;
-
         res.status(200).jsonp({results}).end;
-
     })
 });
-
 
 // Creates a new message
 router.post('/', (req,res) => {
     const {sender,reciever,subject,body, msgType} = req.body;
-
     console.log(" new message sent from: " + sender + "to: "+reciever +" of type: "+msgType);
-    if(false)
-    {
-
-    }else{
-        // The messagename wasn't found in the database
-        // Create insert query for new message
-        // Added a comment
-        new_message = "CALL add_message(?,?,?,?,?)";
-        // Execute the query to insert into the database
-        con.query(new_message,[sender,reciever,subject,body, msgType], (err, results) => {
-            if (err) throw err;
-            res.status(201).jsonp({results}).end;
-        })
-
-    }
+    // The messagename wasn't found in the database
+    // Create insert query for new message
+    // Added a comment
+    new_message = "CALL add_message(?,?,?,?,?)";
+    // Execute the query to insert into the database
+    con.query(new_message,[sender,reciever,subject,body, msgType], (err, results) => {
+        if (err) throw err;
+        res.status(201).jsonp({results}).end;
+    })
 });
 
-// updates all messages
+// Updates all messages
 router.put('/', (req,res) => {
-
     // The messagename wasn't found in the database
     // Create insert query for new message
     // Added a comment
@@ -57,9 +43,8 @@ router.put('/', (req,res) => {
     })
 });
 
-// updates all messages
+// Updates all messages
 router.patch('/', (req,res) => {
-
     // The messagename wasn't found in the database
     // Create insert query for new message
     // Added a comment
@@ -69,25 +54,20 @@ router.patch('/', (req,res) => {
         if (err) throw err;
         res.status(201).jsonp({results}).end;
     })
-
-
 });
 
-// deletes all messages
+// Deletes all messages
 router.delete('/', (req,res) => {
     delete_messages = "CALL delete_messages()";
     con.query(delete_messages, (err, results) => {
         if (err) throw err;
         res.status(201).jsonp({results}).end;
     })
-
-
 });
 
 // Grab specific message by their id
 router.get('/:messageId', (req,res) => {
     const messageId = req.params.messageId;
-
     get_message  = "call get_message(?)";
     con.query(get_message, [messageId],(err, results) => {
         if (err) throw err;
@@ -95,7 +75,7 @@ router.get('/:messageId', (req,res) => {
     })
 });
 
-// updates message
+// Updates a specific message
 router.put('/:messageId', (req,res) => {
     const messageId = req.params.messageId;
     const {sender,reciever,subject,body, msgType} = req.body;
@@ -108,7 +88,7 @@ router.put('/:messageId', (req,res) => {
     })
 });
 
-// updates all messages
+// Updates a specific messasge
 router.patch('/:messageId', (req,res) => {
     const messageId = req.params.messageId;
     const {sender,reciever,subject,body, msgType} = req.body;
@@ -121,7 +101,7 @@ router.patch('/:messageId', (req,res) => {
     })
 });
 
-// deletes message
+// Deletes a specific message
 router.delete('/:messageId', (req,res) => {
     const messageId = req.params.messageId;
     console.log(" deleting message with message id: " + messageId);
@@ -130,8 +110,6 @@ router.delete('/:messageId', (req,res) => {
         if (err) throw err;
         res.status(201).jsonp({msg:'message deleted'}).end;
     })
-
-
 });
 
 
