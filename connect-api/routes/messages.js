@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router({mergeParams: true});
 const con = require('../db');
-
+const io = require('../server');
 
 
 // Grabs all messages from db
@@ -41,8 +41,8 @@ router.post('/', (req,res) => {
         con.query(new_message,[sender, reciever, subject, body, msgType], (err, results) => {
             if (err) throw err;
             res.status(201).jsonp({results}).end;
-        })
-
+        });
+        io.emit("message sent");
     }
 });
 
