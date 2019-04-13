@@ -37,7 +37,7 @@ class SideMenu extends Component {
 
 		const menuItems = {
 			'My Profile': {href: `/dashboard/profile/${localStorage.getItem('userId')}`},
-			'My Messages': {href: '/dashboard/messages/ '},
+			'My Messages': {href: '/dashboard/inbox/ '},
 			'Venues': {href: '/dashboard/venues'},
 			'Users': {href: '/dashboard/users'},
 			'Explore': {href: '/dashboard/explore'},
