@@ -11,6 +11,7 @@ import CarveCardUserCreate from "../../../../components/CarveCardUserCreate";
 import CreateCarveModal from "../../../../components/CreateCarveModal";
 import BuddyRequestModal from "../../../../components/BuddyRequestModal";
 
+
 export default class ProfilePage extends Component {
 	constructor(props) {
 		super(props);
@@ -102,7 +103,7 @@ export default class ProfilePage extends Component {
 						<Col xs={4}>
 							<Container style={{  border: "0px solid black" }}>
 
-								<Image src={this.state.pic} fluid />
+								<Image src={userInfo.photo} fluid />
 							</Container>
 						</Col>
 						<Col xs={4}>

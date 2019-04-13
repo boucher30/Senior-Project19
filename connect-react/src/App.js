@@ -23,7 +23,7 @@ class App extends Component {
     };
   }
 
-  componentDidMount() {
+  componentWillMount() {
     const { endpoint } = this.state;
 
 
