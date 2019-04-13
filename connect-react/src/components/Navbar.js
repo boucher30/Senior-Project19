@@ -7,6 +7,7 @@ import {link} from 'react-router'
 
 import CustomFormGroup from "./CustomFormGroup";
 import NavbarBrand from "react-bootstrap/NavbarBrand";
+import axios from "axios";
 
 class TopNav extends Component {
 	constructor(props){
@@ -16,7 +17,9 @@ class TopNav extends Component {
 				search: "",
 				redirect: false,
 				show: false,
-				show1: false}
+				show1: false,
+				messages: [],
+				notifications: []};
 	}
 
 	handleClick() {
@@ -54,6 +57,28 @@ class TopNav extends Component {
 
 
 	}};
+	componentWillMount()
+	{
+		axios.get(`http://localhost:8000/users/${localStorage.getItem('userId')}/messages/notifications`)
+			.then(res => {
+				console.log("results: ", res.data.results[0]);
+				this.setState({
+					messages: res.data.results[0]
+				});
+				//alert("you have "+this.state.messages.length+" notifications");
+				//alert(JSON.stringify(res.data.users[0][0]))
+			});
+
+		axios.get(`http://localhost:8000/users/${localStorage.getItem('userId')}/messages/inbox`)
+			.then(res => {
+				console.log("Messages from inbox: ", res.data.messages);
+				this.setState({
+					notifications: res.data.messages
+				});
+				//alert("you have "+this.state.messages.notifications+" messages");
+			});
+
+	}
 
 
 	render(){
@@ -83,14 +108,19 @@ class TopNav extends Component {
 								<div>
 
 									<NavDropdown className ="fa fa-envelope text-white"  id="collapsible-nav-dropdown">
+										<h6>Messages: {this.state.messages.length}</h6>
 										<NavDropdown.Item href="/dashboard/messages">Messages</NavDropdown.Item>
 										<NavDropdown.Item href="/dashboard/messages/inbox">Inbox</NavDropdown.Item>
 										<NavDropdown.Item href="/dashboard/messages/outbox">Sent</NavDropdown.Item>
 										<NavDropdown.Divider />
+
 										<NavDropdown.Item onClick={this.handleClick1}>Send Message</NavDropdown.Item>
+
 									</NavDropdown>
 
+
 									<NavDropdown className ="fa fa-bell text-danger"  id="collapsible-nav-dropdown" >
+										<h6>Notifications: {this.state.notifications.length}</h6>
 										<NavDropdown.Item href="/dashboard/notinbox">Notifications</NavDropdown.Item>
 										<NavDropdown.Item href="/dashboard/notoutbox">Sent</NavDropdown.Item>
 										<NavDropdown.Divider />
@@ -98,6 +128,7 @@ class TopNav extends Component {
 									</NavDropdown>
 
 									<NavDropdown className="fa fa-cogs text-secondary"  id="collapsible-nav-dropdown" >
+
 										<NavDropdown.Item href="#">Settings</NavDropdown.Item>
 										<NavDropdown.Item href="#">Privacy</NavDropdown.Item>
 										<NavDropdown.Item href="#">Help</NavDropdown.Item>

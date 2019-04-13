@@ -44,7 +44,9 @@ class MessagesPage extends Component {
           this.setState({
             messages: res.data.messages
           });
+            alert("you have "+this.state.messages.length+" messages");
         });
+
     }
 
     // Deletes a specific message when the trash can icon is clicked
@@ -63,7 +65,7 @@ class MessagesPage extends Component {
             replyModalShow: true
         });
 
-    }
+    };
 
     // Handle closing the modal instead of else where
     handleModalClose() {
