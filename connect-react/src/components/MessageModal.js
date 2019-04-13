@@ -12,7 +12,7 @@ export default class MessageModal extends Component {
         this.state = {
             subject: '',
             to: '',
-            type: '',
+            type: 'normal',
             body: '',
             sender: localStorage.getItem('userId')
         };
@@ -28,29 +28,24 @@ export default class MessageModal extends Component {
         });
     };
 
-    // Hits API with body of carve
+    // Sends a new message to a specific user
     sendMessage() {
-
-       if(this.state.type === 'buddyAccept')
-       {
+       if(this.state.type === 'buddyAccept') {
            axios.post('http://localhost:8000/follows/buddy', {
                user1: this.state.sender,
                user2: this.state.to
-
-
            })
-       }
-        console.log('Message created');
-        axios.post('http://localhost:8000/messages', {
+       } else {
+         console.log('Message created');
+         axios.post('http://localhost:8000/messages', {
            sender: this.state.sender,
-            reciever: this.state.to,
-            subject: this.state.subject,
-            body: this.state.body,
-            msgType: 'normal'
-
-
-        });
-        this.props.handleClose();
+           reciever: this.state.to,
+           subject: this.state.subject,
+           body: this.state.body,
+           msgType: 'normal'
+         });
+         this.props.handleClose();
+       }
 
 
     }

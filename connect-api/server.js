@@ -3,15 +3,15 @@
 require('dotenv').config();
 const express = require('express');
 const app = express({mergeParams: true});
-//const server = require('http').createServer(app);
+const server = require('http').createServer(app);
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 //const cookieparser = require('cookie-parser');
 const PORT = process.env.PORT || 8000;
-//const PORT2 = 8001;
+const PORT2 = 8001;
 //const LocalStrategy = require('passport-local');
-
-//const io = require('socket.io')();
+const axios = require("axios");
+const io = require('socket.io')();
 //const getApiAndEmit = "todo";
 
 //const server = http.createServer(app);
@@ -21,7 +21,7 @@ const con = require('./db');
 
 con.connect( function(err) {
   if (err) throw err;
-  console.log("Connected to Carve Connect database version 4");
+  console.log("Connected to Carve Connect database version 5");
 });
 
 // Define routes ahead of time
@@ -79,6 +79,31 @@ app.use((req, res, next) => {
 });
 
 
+io.on("connection", socket => {
+	console.log("New client connected"), setInterval(
+		() => getApiAndEmit(socket),
+		10000
+	);
+	socket.on("disconnect", () => console.log("Client disconnected"));
+});
+
+const getApiAndEmit = async socket => {
+	try {
+
+		const res = await axios.get(
+			"https://api.darksky.net/forecast/bbff14bd3175f4c57780384515a1ceb3/43.7695,11.2558"
+		);
+		socket.emit("FromAPI", res.data.currently.temperature);
+	} catch (error) {
+		console.error(`Error: ${error.code}`);
+	}
+};
+
+const messageNot = async socket => {
+
+    socket.emit("testing1")
+
+};
 
 // Tells the App specific routes to use using router in each file
 // any new file needs to be added in order for it to function.
@@ -116,4 +141,5 @@ app.listen(PORT, () => {
 
 
 
-//console.log('socket io listening on port ', PORT2);
+console.log('socket io listening on port ', PORT2);
+io.listen( 8001,() => console.log(`listening on port ${PORT2}`));

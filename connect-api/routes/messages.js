@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router({mergeParams: true});
 const con = require('../db');
-
+const io = require('../server');
 
 
 // Grabs all messages from db
@@ -17,6 +17,7 @@ router.get('/', (req,res) => {
 
 // Creates a new message
 router.post('/', (req,res) => {
+
     const {sender,reciever,subject,body, msgType} = req.body;
     console.log(" new message sent from: " + sender + "to: "+reciever +" of type: "+msgType);
     // The messagename wasn't found in the database

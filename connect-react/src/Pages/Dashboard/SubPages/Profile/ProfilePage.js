@@ -11,6 +11,7 @@ import CarveCardUserCreate from "../../../../components/CarveCardUserCreate";
 import CreateCarveModal from "../../../../components/CreateCarveModal";
 import BuddyRequestModal from "../../../../components/BuddyRequestModal";
 
+
 export default class ProfilePage extends Component {
 	constructor(props) {
 		super(props);
@@ -23,7 +24,9 @@ export default class ProfilePage extends Component {
 			check: true,
 			show: false,
 			show1: false,
-			show2: false
+			show2: false,
+			buddies: 0,
+			follows: 0
 		};
 
 		this.handleShow = this.handleShow.bind(this);
@@ -35,6 +38,7 @@ export default class ProfilePage extends Component {
 	// Retrieves info before component is mounted to the DOM
 	componentWillMount() {
 		this.getUserInfo();
+		this.getUserCounts();
 	}
 
 	handleClick = () => {
@@ -99,7 +103,7 @@ export default class ProfilePage extends Component {
 						<Col xs={4}>
 							<Container style={{  border: "0px solid black" }}>
 
-								<Image src={this.state.pic} fluid />
+								<Image src={userInfo.photo} fluid />
 							</Container>
 						</Col>
 						<Col xs={4}>
@@ -113,8 +117,8 @@ export default class ProfilePage extends Component {
 						<Col xs={4}>
 						<Container style={{ border: " 0px solid black", backgroundColor:'slategrey', width:"100%%", height: "100%" }}>
 							<h3>Profile Info</h3>
-							<p>Buddy Count: {1}</p>
-							<p> Follower Count: [0] </p>
+							<p>Buddy Count: {this.state.buddies}</p>
+							<p> Follower Count: {this.state.follows} </p>
 							<p> Winter Sports: {userInfo.snow_sports}</p>
 							<p> Water Sports: {userInfo.water_sports}</p>
 							<p> Land Sports: {userInfo.land_sports}</p>
@@ -175,16 +179,15 @@ export default class ProfilePage extends Component {
 	getUserInfo() {
 		// Getting the user id from the url param
 		if(this.state.userId >0)
-		axios.get(`http://localhost:8000/users/${this.state.userId}`)
-			.then(res => {
-				this.setState({
-					userInfo: res.data.users[0][0],
-					userInfoLength: Object.keys(res.data.users[0][0]).length
+			axios.get(`http://localhost:8000/users/${this.state.userId}`)
+				.then(res => {
+					this.setState({
+						userInfo: res.data.users[0][0],
+						userInfoLength: Object.keys(res.data.users[0][0]).length
+					});
+
+					//alert(JSON.stringify(res.data.users[0][0]))
 				});
-
-				//alert(JSON.stringify(res.data.users[0][0]))
-			});
-
 		else {
 
 			axios.get(`http://localhost:8000/users/${0}`)
@@ -197,6 +200,30 @@ export default class ProfilePage extends Component {
 			//window.location.reload();
 		}
 	}
+	getUserCounts() {
+		// Getting the user id from the url param
 
+			axios.get(`http://localhost:8000/users/${this.state.userId}/follows/buddies`)
+				.then(res => {
+					this.setState({
+						userInfo: res.data[0][0],
+						buddies: Object.keys(res.data[0][0]).length
+					});
+
+					//alert(JSON.stringify(res.data.users[0][0]))
+				});
+
+
+			axios.get(`http://localhost:8000/users/${this.state.userId}/follows/followers`)
+				.then(res => {
+					this.setState({
+						userInfo: res.data.users[0][0],
+						follows: Object.keys(res.data[0][0]).length
+
+					});
+				})
+			//window.location.reload();
+
+	}
 
 }
