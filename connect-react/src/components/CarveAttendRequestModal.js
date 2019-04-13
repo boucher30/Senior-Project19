@@ -15,7 +15,8 @@ export default class CarveAttendRequestModal extends Component {
             to: '',
             type: 'attendRequest',
             body: '',
-            sender: localStorage.getItem('userId')
+            sender: localStorage.getItem('userId'),
+            carve: 0
         };
 
         this.sendMessage = this.sendMessage.bind(this);
@@ -39,7 +40,7 @@ export default class CarveAttendRequestModal extends Component {
             subject: 'Attend Carve Request ',
             body: this.state.body,
             msgType: 'attendRequest',
-            carve: this.props.cId
+            carve: this.props.cid
         });
         this.props.handleClose();
     }
@@ -47,11 +48,9 @@ export default class CarveAttendRequestModal extends Component {
 
     // Make sure that all fields are filled in
     validateForm() {
-        const {  body, to } = this.state;
+        const {  body} = this.state;
         return (
-            body.length > 0&&
-            to.length >0 &&
-            to.length <39
+            body.length > 0
         );
     }
 
@@ -62,9 +61,9 @@ export default class CarveAttendRequestModal extends Component {
                    centered
                    show={this.props.show}
                    onHide={this.props.handleClose}
-                   style = {{}}>
+                   style = {{color:"black"}}>
                 <Modal.Header closeButton style = {{color: "lightgrey",backgroundColor:"darkslategrey"}}>
-                    <Modal.Title id="contained-modal-title-vcenter">Carve Invite</Modal.Title>
+                    <Modal.Title id="contained-modal-title-vcenter">Carve Attend Request</Modal.Title>
                 </Modal.Header>
 
 
@@ -72,7 +71,7 @@ export default class CarveAttendRequestModal extends Component {
                     <Container>
 
                         <Row>Subject {this.state.subject}</Row>
-                        <Row>sending to {this.props.cRe} for carve {this.state.carve}</Row>
+                        <Row>sending to {this.props.cRe} for carve {this.props.cid}</Row>
                         {/* Location */}
 
                         {/* Description */}

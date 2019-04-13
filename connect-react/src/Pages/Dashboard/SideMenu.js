@@ -19,18 +19,18 @@ class SideMenu extends Component {
 
 
 
-componentWillMount() {
-	axios.get(`http://localhost:8000/users/${localStorage.getItem('userId')}/follows/buddies`)
-		.then(res => {
-			console.log("results: ", res.data.results[0]);
-			//alert("Buddy list:"+ JSON.stringify(res.data.results[0][0].user_Id2));
-			this.setState({
-				buddies: res.data.results[0]
+	componentWillMount() {
+		axios.get(`http://localhost:8000/users/${localStorage.getItem('userId')}/follows/buddies`)
+			.then(res => {
+				// console.log("results: ", res.data.results[0]);
+				//alert("Buddy list:"+ JSON.stringify(res.data.results[0][0].user_Id2));
+				this.setState({
+					buddies: res.data.results[0]
+				});
 			});
+	}
 
-			//alert(JSON.stringify(res.data.users[0][0]))
-		});
-    }
+
 	render() {
 
 
@@ -65,7 +65,7 @@ componentWillMount() {
 		if(this.state.buddies.length > 0) {
 			buddiesList = this.state.buddies.map((buddy, index) => {
 				return (
-					<ListGroup.Item key={index}  style={{
+					<ListGroup.Item key={index} action href={`/dashboard/profile/${this.state.buddies[index].user_id2}`} style={{
 						backgroundColor: "seashell", color: "green",
 						fontFamily: 'monospace', paddingRight: '0px',width:"100%"
 					}}>

@@ -1,4 +1,3 @@
-
 -- MySQL Workbench Forward Engineering
 
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
@@ -38,6 +37,7 @@ CREATE TABLE IF NOT EXISTS `CCv4`.`USERS` (
   `land_sports` SET('skateboard', 'BMX', 'mountainBiking') NULL,
   `air_sports` SET('skyDive', 'hangGlide') NULL,
   `logged_in` TINYINT NULL DEFAULT 0,
+  `picture` VARCHAR(45) NULL,
   `create_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`user_id`),
   UNIQUE INDEX `user_id_UNIQUE` (`user_id` ASC) VISIBLE,
@@ -60,6 +60,9 @@ CREATE TABLE IF NOT EXISTS `CCv4`.`VENUES` (
   `water_sports` SET('surf', 'waterski') NULL,
   `land_sports` SET('skateboard', 'BMX', 'mountainBiking') NULL,
   `air_sports` SET('skyDive', 'hangGlide') NULL,
+  `lattitude` VARCHAR(45) NULL,
+  `longitutde` VARCHAR(45) NULL,
+  `url` VARCHAR(45) NULL,
   `create_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`venue_id`),
   UNIQUE INDEX `venue_id_UNIQUE` (`venue_id` ASC) VISIBLE,
@@ -96,49 +99,6 @@ CREATE TABLE IF NOT EXISTS `CCv4`.`CARVES` (
     FOREIGN KEY (`venue`)
     REFERENCES `CCv4`.`VENUES` (`venue_id`)
     ON DELETE CASCADE
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `CCv4`.`MESSAGES`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `CCv4`.`MESSAGES` ;
-
-CREATE TABLE IF NOT EXISTS `CCv4`.`MESSAGES` (
-  `message_id` INT NOT NULL AUTO_INCREMENT,
-  `message_subject` VARCHAR(50) NULL,
-  `message_body` VARCHAR(500) NULL,
-  `sender_Id` INT NOT NULL,
-  `rec_Id` INT NOT NULL,
-  `type` SET('normal', 'buddyRequest', 'buddyAccept', 'buddyDecline', 'attendRequest', 'attendAccept', 'attendDeny', 'invite', 'inviteAccept', 'inviteDeny', 'reply') NULL,
-  `reply` INT NULL,
-  `read` TINYINT NULL DEFAULT 0,
-  `carve` INT NULL,
-  `create_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`message_id`),
-  UNIQUE INDEX `message_id_UNIQUE` (`message_id` ASC) VISIBLE,
-  INDEX `reply_idx` (`reply` ASC) VISIBLE,
-  INDEX `carve_idx` (`carve` ASC) VISIBLE,
-  CONSTRAINT `sender`
-    FOREIGN KEY (`sender_Id`)
-    REFERENCES `CCv4`.`USERS` (`user_id`)
-    ON DELETE CASCADE
-    ON UPDATE NO ACTION,
-  CONSTRAINT `reciever`
-    FOREIGN KEY (`rec_Id`)
-    REFERENCES `CCv4`.`USERS` (`user_id`)
-    ON DELETE CASCADE
-    ON UPDATE NO ACTION,
-  CONSTRAINT `reply`
-    FOREIGN KEY (`reply`)
-    REFERENCES `CCv4`.`MESSAGES` (`message_id`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
-  CONSTRAINT `carve`
-    FOREIGN KEY (`carve`)
-    REFERENCES `CCv4`.`CARVES` (`carve_id`)
-    ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -203,47 +163,6 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `CCv4`.`MEDIA`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `CCv4`.`MEDIA` ;
-
-CREATE TABLE IF NOT EXISTS `CCv4`.`MEDIA` (
-  `media_id` INT NOT NULL AUTO_INCREMENT,
-  `poster` INT NOT NULL,
-  `carve` INT NULL,
-  `profile` INT NULL,
-  `venue` INT NULL,
-  `url` VARCHAR(50) NULL,
-  `description` VARCHAR(100) NULL,
-  `time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-  INDEX `venue_idx` (`venue` ASC) VISIBLE,
-  PRIMARY KEY (`media_id`),
-  UNIQUE INDEX `media_id_UNIQUE` (`media_id` ASC) VISIBLE,
-  INDEX `user11_idx` (`profile` ASC) VISIBLE,
-  CONSTRAINT `carve4`
-    FOREIGN KEY (`carve`)
-    REFERENCES `CCv4`.`CARVES` (`carve_id`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
-  CONSTRAINT `user4`
-    FOREIGN KEY (`poster`)
-    REFERENCES `CCv4`.`USERS` (`user_id`)
-    ON DELETE CASCADE
-    ON UPDATE NO ACTION,
-  CONSTRAINT `venue4`
-    FOREIGN KEY (`venue`)
-    REFERENCES `CCv4`.`VENUES` (`venue_id`)
-    ON DELETE CASCADE
-    ON UPDATE NO ACTION,
-  CONSTRAINT `user11`
-    FOREIGN KEY (`profile`)
-    REFERENCES `CCv4`.`USERS` (`user_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `CCv4`.`COMMENTS`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `CCv4`.`COMMENTS` ;
@@ -257,7 +176,6 @@ CREATE TABLE IF NOT EXISTS `CCv4`.`COMMENTS` (
   `profile` INT NULL,
   INDEX `carve_idx` (`carve` ASC) VISIBLE,
   INDEX `user_idx` (`poster` ASC) VISIBLE,
-  INDEX `media_idx` (`media` ASC) VISIBLE,
   PRIMARY KEY (`comment_id`),
   UNIQUE INDEX `comment_id_UNIQUE` (`comment_id` ASC) VISIBLE,
   INDEX `user10_idx` (`profile` ASC) VISIBLE,
@@ -271,11 +189,6 @@ CREATE TABLE IF NOT EXISTS `CCv4`.`COMMENTS` (
     REFERENCES `CCv4`.`USERS` (`user_id`)
     ON DELETE CASCADE
     ON UPDATE NO ACTION,
-  CONSTRAINT `media1`
-    FOREIGN KEY (`media`)
-    REFERENCES `CCv4`.`MEDIA` (`media_id`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
   CONSTRAINT `user10`
     FOREIGN KEY (`profile`)
     REFERENCES `CCv4`.`USERS` (`user_id`)
@@ -298,7 +211,6 @@ CREATE TABLE IF NOT EXISTS `CCv4`.`LIKES` (
   `media` INT NULL,
   `timestamp` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
   INDEX `comment_idx` (`comment` ASC) VISIBLE,
-  INDEX `media_idx` (`media` ASC) VISIBLE,
   PRIMARY KEY (`like_id`),
   UNIQUE INDEX `like_id_UNIQUE` (`like_id` ASC) VISIBLE,
   CONSTRAINT `carve3`
@@ -315,10 +227,91 @@ CREATE TABLE IF NOT EXISTS `CCv4`.`LIKES` (
     FOREIGN KEY (`comment`)
     REFERENCES `CCv4`.`COMMENTS` (`comment_id`)
     ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `CCv4`.`MEDIA`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `CCv4`.`MEDIA` ;
+
+CREATE TABLE IF NOT EXISTS `CCv4`.`MEDIA` (
+  `media_id` INT NOT NULL AUTO_INCREMENT,
+  `poster` INT NULL,
+  `carve` INT NULL,
+  `profile` INT NULL,
+  `venue` INT NULL,
+  `url` VARCHAR(45) NULL,
+  `description` VARCHAR(200) NULL,
+  `time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`media_id`),
+  INDEX `venue_idx` (`venue` ASC) VISIBLE,
+  INDEX `profile_idx` (`profile` ASC) VISIBLE,
+  INDEX `user4_idx` (`poster` ASC) VISIBLE,
+  INDEX `carve4_idx` (`carve` ASC) VISIBLE,
+  CONSTRAINT `venue4`
+    FOREIGN KEY (`venue`)
+    REFERENCES `CCv4`.`VENUES` (`venue_id`)
+    ON DELETE CASCADE
     ON UPDATE CASCADE,
-  CONSTRAINT `media3`
-    FOREIGN KEY (`media`)
-    REFERENCES `CCv4`.`MEDIA` (`media_id`)
+  CONSTRAINT `user11`
+    FOREIGN KEY (`profile`)
+    REFERENCES `CCv4`.`USERS` (`user_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `user4`
+    FOREIGN KEY (`poster`)
+    REFERENCES `CCv4`.`USERS` (`user_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `carve4`
+    FOREIGN KEY (`carve`)
+    REFERENCES `CCv4`.`CARVES` (`carve_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `CCv4`.`MESSAGES`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `CCv4`.`MESSAGES` ;
+
+CREATE TABLE IF NOT EXISTS `CCv4`.`MESSAGES` (
+  `message_id` INT NOT NULL AUTO_INCREMENT,
+  `sender_id` INT NULL,
+  `rec_id` INT NULL,
+  `message_subject` VARCHAR(50) NULL,
+  `message_body` VARCHAR(500) NULL,
+  `type` SET('normal', 'buddyRequest', 'buddyAccept', 'buddyDecline', 'attendRequest', 'attendAccept', 'attendDeny', 'invite', 'inviteAccept', 'inviteDeny', 'reply') NULL,
+  `reply` INT NULL,
+  `read` TINYINT NULL,
+  `carve` INT NULL,
+  `create_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`message_id`),
+  INDEX `sender_idx` (`sender_id` ASC) VISIBLE,
+  INDEX `reciever_idx` (`rec_id` ASC) VISIBLE,
+  INDEX `carve_idx` (`carve` ASC) VISIBLE,
+  INDEX `reply_idx` (`reply` ASC) VISIBLE,
+  CONSTRAINT `sender`
+    FOREIGN KEY (`sender_id`)
+    REFERENCES `CCv4`.`USERS` (`user_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `reciever`
+    FOREIGN KEY (`rec_id`)
+    REFERENCES `CCv4`.`USERS` (`user_id`)
+    ON DELETE CASCADE
+    ON UPDATE NO ACTION,
+  CONSTRAINT `carve`
+    FOREIGN KEY (`carve`)
+    REFERENCES `CCv4`.`CARVES` (`carve_id`)
+    ON DELETE CASCADE
+    ON UPDATE NO ACTION,
+  CONSTRAINT `reply`
+    FOREIGN KEY (`reply`)
+    REFERENCES `CCv4`.`MESSAGES` (`message_id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
@@ -1883,7 +1876,7 @@ DELIMITER $$
 USE `CCv4`$$
 CREATE PROCEDURE `get_user_notifications` (in id int)
 BEGIN
-select * from messages where rec_id = id and (type != 'normal' and type !='reply');
+select * from messages where rec_id = id and type != 'normal' and type !='reply';
 END$$
 
 DELIMITER ;
@@ -1899,7 +1892,7 @@ DELIMITER $$
 USE `CCv4`$$
 CREATE PROCEDURE `get_user_sent_notifications` (in id int)
 BEGIN
-select * from messages where sender_id = id and (type != 'normal' and type !='reply');
+select * from messages where sender_id = id and type != 'normal' and type !='reply';
 END$$
 
 DELIMITER ;
@@ -2182,4 +2175,3 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- begin attached script 'script'
 ALTER USER 'nodeuser'@'localhost' IDENTIFIED WITH mysql_native_password BY 'nodeuser@1234';
 -- end attached script 'script'
-

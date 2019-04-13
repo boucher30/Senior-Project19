@@ -135,7 +135,7 @@ class NotificationsPageInbox extends Component {
 
         return (
 
-            <a >
+            <>
                 <BRReplyModal replier={this.state.replier} replyId={this.state.rep} type ={[this.state.typ]} show={this.state.show2} handleClose={this.handleClose2}/>
                 <CIReplyModal carve = {this.state.carI} replier={this.state.replier} replyId={this.state.rep} type ={[this.state.typ]} show={this.state.show3} handleClose={this.handleClose3}/>
                 <Row className="justify-content-md-center" style={{ paddingLeft: '0px',backgroundColor: "lightgray", height: "100%"}}>
@@ -169,7 +169,7 @@ class NotificationsPageInbox extends Component {
                         </div>
                     </Col>
                 </Row>
-            </a>
+            </>
         );
     }
 }

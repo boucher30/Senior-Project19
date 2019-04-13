@@ -47,7 +47,7 @@ export default class VenueCarveCard extends Component {
     componentWillMount() {
         axios.get(`http://localhost:8000/venues/${this.props.venue_id}/carves`)
             .then(res => {
-                console.log("results: ", res.data.results[0]);
+                // console.log("results: ", res.data.results[0]);
                 //alert(JSON.stringify(res.data.results[0]));
                 this.setState({
                     carveInfo: res.data.results[0]
@@ -69,7 +69,7 @@ export default class VenueCarveCard extends Component {
         axios.get(`http://localhost:8000/comments`)
             .then(res => {
                 //alert("carve:" + JSON.stringify(res.data.results));
-                console.log("results: ", res.data.results[0]);
+                // console.log("results: ", res.data.results[0]);
                 //alert(JSON.stringify(res.data.results[0]));
                 this.setState({
                     carveComm: res.data.results[0]
@@ -81,7 +81,7 @@ export default class VenueCarveCard extends Component {
         axios.get(`http://localhost:8000/media`)
             .then(res => {
                 //alert("carve:" + JSON.stringify(res.data.results));
-                console.log("results: ", res.data.results[0]);
+                // console.log("results: ", res.data.results[0]);
                 //alert(JSON.stringify(res.data.results[0]));
                 this.setState({
                     carveMed: res.data.results[0]
@@ -93,7 +93,7 @@ export default class VenueCarveCard extends Component {
         axios.get(`http://localhost:8000/carveAt`)
             .then(res => {
                 //alert("carve:" + JSON.stringify(res.data.results));
-                console.log("results: ", res.data.results[0]);
+                // console.log("results: ", res.data.results[0]);
                 //alert(JSON.stringify(res.data.results[0]));
                 this.setState({
                     carveAt1: res.data.results
@@ -106,7 +106,7 @@ export default class VenueCarveCard extends Component {
         axios.get(`http://localhost:8000/carves/${1}/likes`)
             .then(res => {
                 //alert("carve:" + JSON.stringify(res.data.results));
-                console.log("results: ", res.data.results[0]);
+                // console.log("results: ", res.data.results[0]);
                 //alert(JSON.stringify(res.data.results[0]));
                 this.setState({
                     carveLik: res.data.results[0]
@@ -119,7 +119,7 @@ export default class VenueCarveCard extends Component {
         axios.get(`http://localhost:8000/carves/${1}/likes/dislike`)
             .then(res => {
                 //alert("carve:" + JSON.stringify(res.data.results));
-                console.log("results: ", res.data.results[0]);
+                // console.log("results: ", res.data.results[0]);
                 //alert(JSON.stringify(res.data.results[0]));
                 this.setState({
                     carveDlik: res.data.results[0]
@@ -174,8 +174,6 @@ export default class VenueCarveCard extends Component {
         let carveAttendList;
         let carveComments;
         let carveMedia;
-        let currentCarve =0;
-
         let color = "grey";
         let act = "secondary";
         let no = "not";
@@ -193,48 +191,42 @@ export default class VenueCarveCard extends Component {
                         if(attender.carve === carve.carve_id)
                             return (
 
-                                <ListGroup.Item key={index1} style={{
-
-                                    fontFamily: 'monospace', paddingRight: '0px', width: "100%"
-                                }}>
+                                <ListGroup.Item tag="div" key={index1} style={{fontFamily: 'monospace', paddingRight: '0px', width: "100%"}}>
                                     {attender.user} {attender.type}
-
                                 </ListGroup.Item>
                             );
+                        else
+                            return(<></>)
                     });
                 }
 
                 if (this.state.carveComm.length > 0) {
                     carveComments = this.state.carveComm.map((com, index) => {
-                        if(com.carve === carve.carve_id)
-                            return (
-
-                                <ListGroup.Item key={index} style={{
-
-                                    fontFamily: 'monospace', paddingRight: '0px', width: "100%"
-                                }}>
-                                    {com.comment} by: {com.poster}
-
-                                </ListGroup.Item>
-                            );
+                        if(com.carve === carve.carve_id) {
+                          return (
+                            <ListGroup.Item tag="div" key={index}
+                                            style={{fontFamily: 'monospace', paddingRight: '0px', width: "100%"}}>
+                              {com.comment} by: {com.poster}
+                            </ListGroup.Item>
+                          );
+                        } else {
+                            return(<></>)
+                        }
                     });
                 }
+
                 if (this.state.carveMed.length > 0) {
                     carveMedia = this.state.carveMed.map((med, index) => {
                         if(med.carve === carve.carve_id)
                             return (
 
-                                <ListGroup.Item key={index} style={{
-
-                                    fontFamily: 'monospace', paddingRight: '0px', width: "100%"
-                                }}>
+                                <ListGroup.Item tag="div" key={index} style={{fontFamily: 'monospace', paddingRight: '0px', width: "100%"}}>
                                     <Row>Media Post:</Row>
-                                    <Row><iframe title="Prof vid2" className="embed-responsive-item"
-                                                 src={med.url} allowFullScreen > </iframe></Row>
-
-
+                                    <Row><iframe title="Prof vid2" className="embed-responsive-item" src={med.url} allowFullScreen></iframe></Row>
                                 </ListGroup.Item>
                             );
+                        else
+                            return(<></>)
                     });
                 }
 
@@ -248,17 +240,12 @@ export default class VenueCarveCard extends Component {
                     color = "lightskyblue";
                     act = "Request to Attend";
                     no = "Upcoming";
-
                     att =<Button variant="info" style = {{ paddingTop:"10px"}} onClick = {() => this.handleClick5(carve.carve_id,carve.creator)} >{act}</Button>;
-
                 }
 
                 return (
 
-                    <ListGroup.Item key={index} style={{
-
-                        fontFamily: 'monospace', paddingRight: '0px', width: "100%"
-                    }}>
+                    <ListGroup.Item key={index} style={{fontFamily: 'monospace', paddingRight: '0px', width: "100%"}}>
                         <CarveAttendRequestModal cid ={this.state.cId} cre = {this.state.cRe} handleClose={this.handleClick5} show={this.state.show5} />
                         <CarveInviteModal cid ={this.state.currentCid} handleClose={this.handleClick5} show={this.state.show5} />
                         <Card style = {{width: '100%', backgroundColor: [color]}}>
@@ -267,55 +254,35 @@ export default class VenueCarveCard extends Component {
                                     <Card.Title>Name: {carve.name}</Card.Title>
                                     <div style = {{margin: '15px', marginLeft: '20%'}}>Date: {carve.date}</div>
                                     <h6 style = {{margin: '15px', marginLeft: '20%'}}>Type: {carve.type}</h6>
-
                                 </Row>
                             </Card.Header>
                             <Card.Body>
                                 <Row>
                                     <Col>
-
-                                        <Card.Text style = {{}}>
-                                            <Row>
-                                                Carve is {no}
-                                            </Row>
-
-                                            <Row style = {{position: 'left'}} >
-                                                <h5>Location: {carve.venue}</h5>
-
-                                            </Row>
-                                            <Row><p>Creator: {carve.creator}</p></Row>
-                                            <Row>
-                                                Description: {carve.description}
-                                            </Row>
-
-                                            <Row>
-                                                Sports: {carve.sports} {/*can't do sports by itself */}
-                                            </Row>
-                                            <Row>
-                                                Max Athletes: {carve.max_athletes}
-                                            </Row>
-                                            <Row>
-                                                Max Film: {carve.max_photo}
-                                            </Row>
-                                            <Row>
-
-                                            </Row>
-                                            <Row>
-
-                                            </Row>
-
+                                        <Card.Text>
+                                            <Row>Carve is {no}</Row>
+                                            <Row style={{position: 'left'}} ><h5>Location: {carve.venue}</h5></Row>
+                                            <Row>Creator: {carve.creator}</Row>
+                                            <Row>Description: {carve.description}</Row>
+                                            <Row>Sports: {carve.sports} {/*can't do sports by itself */}</Row>
+                                            <Row>Max Athletes: {carve.max_athletes}</Row>
+                                            <Row>Max Film: {carve.max_photo}</Row>
                                         </Card.Text>
                                     </Col>
                                     <Col>
                                         <h3>Attendees:</h3>
-                                        {carveAttendList}</Col></Row>
-                                <Row style = {{paddingTop:"5%",bordered:"5px solid black"}}>
-                                    <Col>
-                                        {att}
-
+                                        {carveAttendList}
                                     </Col>
+{/*<<<<<<< HEAD*/}
                                     <Col><box style = {{color:"red", paddingTop:"10px"}}><i className ="fa fa-thumbs-o-down text-danger"  /> Dislikes: {dlik}</box></Col>
                                     <Col><box style = {{color:"blue", paddingTop:"10px"}}><i className ="fa fa-hand-rock-o " style = {{color:"blue"}} /> Likes: {lik}</box></Col>
+{/*=======*/}
+{/*                                </Row>*/}
+{/*                                <Row style = {{paddingTop:"5%",bordered:"5px solid black"}}>*/}
+{/*                                    <Col>{att}</Col>*/}
+{/*                                    <Col><div style = {{color:"red", paddingTop:"10px"}}><i className ="fa fa-thumbs-o-down text-danger" /> Dislikes: {dlik}</div></Col>*/}
+{/*                                    <Col><div style = {{color:"blue", paddingTop:"10px"}}><i className ="fa fa-hand-rock-o " style = {{color:"blue"}} /> Likes: {lik}</div></Col>*/}
+{/*>>>>>>> followButtonFix*/}
                                 </Row>
                             </Card.Body>
                             <Card.Footer className="text-primary text-info">
@@ -323,8 +290,7 @@ export default class VenueCarveCard extends Component {
                                     <Col>
                                         <Row style={{width:"100%"}}>				<Form inline style ={{justify:"left"}} >
                                             <CustomFormGroup value = {val} type="integer" placeholder="Add Comment" className=" mr-sm-2" controlId ="comment"   style ={{height:"40px",width:"150%"}}/>
-                                            <Button type="submit" href = {''} style = {{ justify:"left",color: "white"}} rounded   style ={{height:"45px", paddingBottom:"5px"}}>Comment</Button>
-
+                                            <Button type="submit" href = {''} style = {{ justify:"left",color: "white", height:"45px", paddingBottom:"5px"}}>Comment</Button>
                                         </Form></Row>
                                         <Row>{carveComments}</Row>
 
@@ -337,17 +303,6 @@ export default class VenueCarveCard extends Component {
 
                             </Card.Footer>
                         </Card>
-
-
-
-
-
-
-
-
-
-
-
                     </ListGroup.Item>
                 )
             });
@@ -356,7 +311,7 @@ export default class VenueCarveCard extends Component {
         return (
             <>
 
-                <ListGroup variant="flush" defaultActiveKey="1" style ={{paddingTop:"20px",width:"100%"}}>
+                <ListGroup tag="div" variant="flush" defaultActiveKey="1" style ={{paddingTop:"20px",width:"100%"}}>
                     {carveList}
                 </ListGroup>
 

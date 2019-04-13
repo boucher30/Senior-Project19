@@ -46,7 +46,7 @@ export default class CarveCardUserCreate extends Component {
     componentWillMount() {
         axios.get(`http://localhost:8000/users/${this.props.profile_id}/carves/`)
             .then(res => {
-                console.log("results: ", res.data.results[0]);
+                // console.log("results: ", res.data.results[0]);
                 //alert(JSON.stringify(res.data.results[0]));
                 this.setState({
                     carveInfo: res.data.results[0]
@@ -57,7 +57,7 @@ export default class CarveCardUserCreate extends Component {
         axios.get(`http://localhost:8000/comments`)
             .then(res => {
                 //alert("carve:" + JSON.stringify(res.data.results));
-                console.log("results: ", res.data.results[0]);
+                // console.log("results: ", res.data.results[0]);
                 //alert(JSON.stringify(res.data.results[0]));
                 this.setState({
                     carveComm: res.data.results[0]
@@ -69,7 +69,7 @@ export default class CarveCardUserCreate extends Component {
         axios.get(`http://localhost:8000/media`)
             .then(res => {
                 //alert("carve:" + JSON.stringify(res.data.results));
-                console.log("results: ", res.data.results[0]);
+                // console.log("results: ", res.data.results[0]);
                 //alert(JSON.stringify(res.data.results[0]));
                 this.setState({
                     carveMed: res.data.results[0]
@@ -81,7 +81,7 @@ export default class CarveCardUserCreate extends Component {
         axios.get(`http://localhost:8000/carveAt`)
             .then(res => {
                 //alert("carve:" + JSON.stringify(res.data.results));
-                console.log("results: ", res.data.results[0]);
+                // console.log("results: ", res.data.results[0]);
                 //alert(JSON.stringify(res.data.results[0]));
                 this.setState({
                     carveAt1: res.data.results
@@ -94,7 +94,7 @@ export default class CarveCardUserCreate extends Component {
         axios.get(`http://localhost:8000/carves/${1}/likes`)
             .then(res => {
                 //alert("carve:" + JSON.stringify(res.data.results));
-                console.log("results: ", res.data.results[0]);
+                // console.log("results: ", res.data.results[0]);
                 //alert(JSON.stringify(res.data.results[0]));
                 this.setState({
                     carveLik: res.data.results[0]
@@ -107,7 +107,7 @@ export default class CarveCardUserCreate extends Component {
         axios.get(`http://localhost:8000/carves/${1}/likes/dislike`)
             .then(res => {
                 //alert("carve:" + JSON.stringify(res.data.results));
-                console.log("results: ", res.data.results[0]);
+                // console.log("results: ", res.data.results[0]);
                 //alert(JSON.stringify(res.data.results[0]));
                 this.setState({
                     carveDlik: res.data.results[0]
@@ -161,6 +161,7 @@ export default class CarveCardUserCreate extends Component {
 
         this.setState({ show6: !this.state.show6,
             cId : e1});
+
     };
 
 
@@ -170,7 +171,7 @@ export default class CarveCardUserCreate extends Component {
         let carveAttendList;
         let carveComments;
         let carveMedia;
-        let currentCarve =0;
+        //let currentCarve =0;
 
         let color = "grey";
         let act = "secondary";
@@ -188,15 +189,12 @@ export default class CarveCardUserCreate extends Component {
 
                         if(attender.carve === carve.carve_id)
                             return (
-
-                                <ListGroup.Item key={index1} style={{
-
-                                    fontFamily: 'monospace', paddingRight: '0px', width: "100%"
-                                }}>
+                                <ListGroup.Item key={index1} style={{fontFamily: 'monospace', paddingRight: '0px', width: "100%"}}>
                                     {attender.user} {attender.type}
-
                                 </ListGroup.Item>
                             );
+                        else
+                            return(<></>)
                     });
                 }
 
@@ -204,15 +202,12 @@ export default class CarveCardUserCreate extends Component {
                     carveComments = this.state.carveComm.map((com, index) => {
                         if(com.carve === carve.carve_id)
                             return (
-
-                                <ListGroup.Item key={index} style={{
-
-                                    fontFamily: 'monospace', paddingRight: '0px', width: "100%"
-                                }}>
+                                <ListGroup.Item key={index} style={{fontFamily: 'monospace', paddingRight: '0px', width: "100%"}}>
                                     {com.comment} by: {com.poster}
-
                                 </ListGroup.Item>
                             );
+                        else
+                            return(<></>)
                     });
                 }
                 if (this.state.carveMed.length > 0) {
@@ -231,6 +226,8 @@ export default class CarveCardUserCreate extends Component {
 
                                 </ListGroup.Item>
                             );
+                        else
+                            return(<></>)
                     });
                 }
 
@@ -318,7 +315,7 @@ export default class CarveCardUserCreate extends Component {
                                     <Col>
                                         <Row style={{width:"100%"}}>				<Form inline style ={{justify:"left"}} >
                                             <CustomFormGroup value = {val} type="integer" placeholder="Add Comment" className=" mr-sm-2" controlId ="comment"   style ={{height:"40px",width:"150%"}}/>
-                                            <Button type="submit" href = {''} style = {{ justify:"left",color: "white"}} rounded   style ={{height:"45px", paddingBottom:"5px"}}>Comment</Button>
+                                            <Button type="submit" href = {''} style = {{ justify:"left",color: "white", height:"45px", paddingBottom:"5px"}} rounded>Comment</Button>
 
                                         </Form></Row>
                                         <Row>{carveComments}</Row>

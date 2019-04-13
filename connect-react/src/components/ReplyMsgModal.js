@@ -15,7 +15,7 @@ export default class ReplyMsgModal extends Component {
             to: '',
             type: 'reply',
             body: '',
-            sender: localStorage.getItem('userId')
+            sender: Number(localStorage.getItem('userId'))
         };
 
         this.sendMessage = this.sendMessage.bind(this);
@@ -31,20 +31,22 @@ export default class ReplyMsgModal extends Component {
 
     // Hits API with body of carve
     sendMessage() {
-
-        console.log('Message created');
-        axios.post('http://localhost:8000/messages', {
+        // Construct the message here
+        const message = {
             sender: this.state.sender,
             reciever: this.props.replier,
             subject: 'RE: ',
             body: this.state.body,
             msgType: 'reply',
-            reply_id: this.props.replyId
+            reply: this.props.replyId
+        };
 
-        });
-        return(
-            this.props.handleClose
-        )
+        // Post message body to api
+        axios.post('http://localhost:8000/messages', message)
+          .then(() => {
+              this.props.refresh();
+              this.props.handleClose();
+          });
     }
 
 
