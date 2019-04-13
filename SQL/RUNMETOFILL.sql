@@ -886,7 +886,7 @@ INSERT INTO FOLLOWS(user_id1,venue_id,type) VALUES (3,8,'follow');
 INSERT INTO FOLLOWS(user_id1,venue_id,type) VALUES (3,9,'follow');
 INSERT INTO FOLLOWS(user_id1,venue_id,type) VALUES (3,10,'follow');
 
-NSERT INTO CARVES(name,creator,venue,description,type,max_athletes,max_photo,date,completed,sports) VALUES ('carve1',1,1,'let''s carve bros!','open',5,1,'3/24/2019',0,'snowboard,ski');
+INSERT INTO CARVES(name,creator,venue,description,type,max_athletes,max_photo,date,completed,sports) VALUES ('carve1',1,1,'let''s carve bros!','open',5,1,'3/24/2019',0,'snowboard,ski');
 INSERT INTO CARVES(name,creator,venue,description,type,max_athletes,max_photo,date,completed,sports) VALUES ('carve2',1,11,'let''s carve bros!','buddy',10,2,'3/25/2019',0,'surf');
 INSERT INTO CARVES(name,creator,venue,description,type,max_athletes,max_photo,date,completed,sports) VALUES ('carve3',1,18,'let''s carve bros!','open',5,1,'3/26/2019',0,'skateboard');
 INSERT INTO CARVES(name,creator,venue,description,type,max_athletes,max_photo,date,completed,sports) VALUES ('carve4',1,24,'let''s carve bros!','open',10,2,'3/27/2019',0,'BMX');
