@@ -264,7 +264,7 @@ export default class CarveCard extends Component {
 
                     <ListGroup.Item key={index} style={{
 
-                        fontFamily: 'monospace', paddingRight: '0px', width: "100%"
+                        fontFamily: 'monospace', paddingRight: '0px', paddingLeft: '0px',paddingTop: '0px',paddingBottom: '10px',width: "100%"
                     }}>
                         <CarveAttendRequestModal cid ={this.state.cId} cre = {this.state.cRe} handleClose={this.handleClick5} show={this.state.show5} />
                         <CarveInviteModal cid ={this.state.currentCid} handleClose={this.handleClick6} show={this.state.show6} />

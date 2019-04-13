@@ -207,7 +207,7 @@ export default class CarveCardUserAttend extends Component {
 
                                 <ListGroup.Item key={index} style={{
 
-                                    fontFamily: 'monospace', paddingRight: '0px', width: "100%"
+                                    fontFamily: 'monospace', paddingRight: '0px', paddingLeft: '0px',paddingTop: '0px',paddingBottom: '10px', width: "100%"
                                 }}>
                                     <Row>Media Post:</Row>
                                     <Row><iframe title="Prof vid2" className="embed-responsive-item"
