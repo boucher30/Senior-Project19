@@ -4,11 +4,13 @@ const con = require('../db');
 
 
 
-// Grabs all users from db
+// Gets users based on the query parameters, if no parameters are given, it gets all users from db
 router.get('/', (req,res) => {
 	// Find all users from database
 	user_list = "CALL get_users()";
-
+	username = req.query.username;
+	first_name = req.query.first_name;
+	last_name = req.query.last_name;
 
 	console.log(req.query);
 
@@ -20,7 +22,7 @@ router.get('/', (req,res) => {
 	})
 });
 
-// Grab specific user by their id
+// Logs out all users
 router.get('/logout', (req,res) => {
 
     console.log(" all users logged out " );
@@ -38,7 +40,6 @@ router.post('/', (req,res) => {
 
 	usrCheck = "Call username_check(?)";
 
-
     con.query(usrCheck,[username], (err,results)=> {
         if (results[0][0][0] != 0)
         {
@@ -48,31 +49,24 @@ router.post('/', (req,res) => {
         }
         else {
 
-                   // The username wasn't found in the database
-                    // Create insert query for new user
-                    // Added a comment
-                    console.log("adding user now with username: " + username);
-                    new_user = "CALL add_user(?,?,?,?,?,?,?,?,?,?,?)";
-                    // Execute the query to insert into the database
-                    con.query(new_user,[username, email, password, first_name, last_name, description, type[0], snow_sports[0], water_sports[0], land_sports[0], air_sports[0]], (err, results1) => {
-                        if (err) throw err;
-                        con.query(usrCheck,[username], (err,results3)=> {
-                            if (err) throw err;
-                            check = results3[0][0].user_Id;
-                            res.status(201).jsonp({check}).end;
-                            console.log(check);
-                        })
-
-                    })
-                }
-
+            // The username wasn't found in the database
+            // Create insert query for new user
+            // Added a comment
+            console.log("adding user now with username: " + username);
+            new_user = "CALL add_user(?,?,?,?,?,?,?,?,?,?,?)";
+            // Execute the query to insert into the database
+            con.query(new_user,[username, email, password, first_name, last_name, description, type[0], snow_sports[0], water_sports[0], land_sports[0], air_sports[0]], (err, results1) => {
+                if (err) throw err;
+                con.query(usrCheck,[username], (err,results3)=> {
+                    if (err) throw err;
+                    check = results3[0][0].user_Id;
+                    res.status(201).jsonp({check}).end;
+                    console.log(check);
+                })
             })
-
-
-
-
-
-	});
+        }
+    })
+});
 
 // updates all users
 router.put('/', (req,res) => {
@@ -100,8 +94,6 @@ router.patch('/', (req,res) => {
         if (err) throw err;
         res.status(201).jsonp({results}).end;
     })
-
-
 });
 
 // deletes all users
@@ -111,15 +103,11 @@ router.delete('/', (req,res) => {
         if (err) throw err;
         res.status(201).jsonp({results}).end;
     })
-
-
 });
-
 
 // Grab specific user by their id
 router.get('/:userId', (req,res) => {
 	const userId = req.params.userId;
-
 	get_user  = "call get_user(?)";
 	con.query(get_user, [userId],(err, results) => {
 		if (err) throw err;
@@ -128,7 +116,7 @@ router.get('/:userId', (req,res) => {
 	})
 });
 
-// Grab specific user by their id
+// Log out the current user
 router.get('/:userId/logout', (req,res) => {
     const userId = req.params.userId;
     console.log("user logged out: " +userId);
@@ -139,7 +127,7 @@ router.get('/:userId/logout', (req,res) => {
     })
 });
 
-// updates user
+// updates a specific user
 router.put('/:userId', (req,res) => {
     const userId = req.params.userId;
     const {username, email, password, first_name, last_name, description, type, snow_sports, water_sports, land_sports, air_sports} = req.body;
@@ -152,7 +140,7 @@ router.put('/:userId', (req,res) => {
     })
 });
 
-// updates all users
+// updates a specific user
 router.patch('/:userId', (req,res) => {
     const userId = req.params.userId;
     const {username, email, password, first_name, last_name, description, type, snow_sports, water_sports, land_sports, air_sports} = req.body;
@@ -174,8 +162,6 @@ router.delete('/:userId', (req,res) => {
         if (err) throw err;
         res.status(201).jsonp({msg:'user deleted'}).end;
     })
-
-
 });
 
 

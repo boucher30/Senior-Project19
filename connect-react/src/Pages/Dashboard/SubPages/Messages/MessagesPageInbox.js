@@ -34,7 +34,7 @@ class MessagesPageInbox extends Component {
                 this.setState({
                     messages: res.data.results[0]
                 });
-
+                alert("you have "+this.state.messages.length+" messages");
                 //alert(JSON.stringify(res.data.users[0][0]))
             });
 

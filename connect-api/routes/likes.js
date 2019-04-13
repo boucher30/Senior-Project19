@@ -8,15 +8,10 @@ const con = require('../db');
 router.get('/', (req,res) => {
     // Find all likes from database
     like_list = "CALL get_all_likes()";
-
-
     console.log(req.query);
-
     con.query(like_list, (err, results) => {
         if (err) throw err;
-
         res.status(200).jsonp({results}).end;
-
     })
 });
 
@@ -24,15 +19,10 @@ router.get('/', (req,res) => {
 router.get('/dislikes', (req,res) => {
     // Find all likes from database
     like_list = "CALL get_dislikes()";
-
-
     console.log(req.query);
-
     con.query(like_list, (err, results) => {
         if (err) throw err;
-
         res.status(200).jsonp({results}).end;
-
     })
 });
 
@@ -40,28 +30,20 @@ router.get('/dislikes', (req,res) => {
 // Creates a new like
 router.post('/', (req,res) => {
     const {poster,likeordislike,carve,media,comment} = req.body;
-
     console.log(" new like sent from: "+ poster);
-    if(false)
-    {
-
-    }else{
-        // The likename wasn't found in the database
-        // Create insert query for new like
-        // Added a comment
-        new_like = "CALL add_like(?,?,?,?,?)";
-        // Execute the query to insert into the database
-        con.query(new_like,[poster,likeordislike[0],carve,media,comment], (err, results) => {
-            if (err) throw err;
-            res.status(201).jsonp({results}).end;
-        })
-
-    }
+    // The likename wasn't found in the database
+    // Create insert query for new like
+    // Added a comment
+    new_like = "CALL add_like(?,?,?,?,?)";
+    // Execute the query to insert into the database
+    con.query(new_like,[poster,likeordislike[0],carve,media,comment], (err, results) => {
+        if (err) throw err;
+        res.status(201).jsonp({results}).end;
+    })
 });
 
 // updates all likes
 router.put('/', (req,res) => {
-
     // The likename wasn't found in the database
     // Create insert query for new like
     // Added a comment
@@ -75,7 +57,6 @@ router.put('/', (req,res) => {
 
 // updates all likes
 router.patch('/', (req,res) => {
-
     // The likename wasn't found in the database
     // Create insert query for new like
     // Added a comment
@@ -85,8 +66,6 @@ router.patch('/', (req,res) => {
         if (err) throw err;
         res.status(201).jsonp({results}).end;
     })
-
-
 });
 
 // deletes all likes
@@ -96,14 +75,11 @@ router.delete('/', (req,res) => {
         if (err) throw err;
         res.status(201).jsonp({results}).end;
     })
-
-
 });
 
 // Grab specific like by their id
 router.get('/:likeId', (req,res) => {
     const likeId = req.params.likeId;
-
     get_like  = "call get_like(?)";
     con.query(get_like, [likeId],(err, results) => {
         if (err) throw err;
@@ -130,14 +106,13 @@ router.patch('/:likeId', (req,res) => {
     const {poster,likeordislike,carve,media,comment} = req.body;
     console.log("like updated via patch with likeId: " + likeId);
     update_like = "CALL update_like(?,?,?,?,?,?)";
-
     con.query(update_like,[likeId,poster,likeordislike[0],carve,media,comment],(err, results) => {
         if (err) throw err;
         res.status(201).jsonp({results}).end;
     })
 });
 
-// deletes like
+// Removes a like
 router.delete('/:likeId', (req,res) => {
     const likeId = req.params.likeId;
     console.log(" deleting like with like id: " + likeId);
