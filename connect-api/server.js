@@ -6,13 +6,21 @@ const app = express({mergeParams: true});
 const server = require('http').createServer(app);
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
-//const cookieparser = require('cookie-parser');
+const cookieParser = require('cookie-parser');
 const PORT = process.env.PORT || 8000;
 const PORT2 = 8001;
 //const LocalStrategy = require('passport-local');
 const axios = require("axios");
 const io = require('socket.io')();
 //const getApiAndEmit = "todo";
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+const flash = require('connect-flash');
+const session = require('express-session');
+const path = require('path');
+
+
+
 
 //const server = http.createServer(app);
 
@@ -62,7 +70,12 @@ var d = domain.create();
 app.use(morgan('dev'));																// Logger for api
 app.use(bodyParser.urlencoded({extended: true}));			// Allows us to parse body of post request
 app.use(bodyParser.json());
-
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({ secret: 'shhsecret' }));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
 
 // Allows our RESTful API to be accessed by any server and not only the port that the serve is running on
 // gutted for excess calls that were not needed.
@@ -91,11 +104,11 @@ const getApiAndEmit = async socket => {
 	try {
 
 		const res = await axios.get(
-			"https://api.darksky.net/forecast/bbff14bd3175f4c57780384515a1ceb3/43.7695,11.2558"
+			`https://api.darksky.net/forecast/${process.env.DS_API}/43.7695,11.2558`
 		);
 		socket.emit("FromAPI", res.data.currently.temperature);
 	} catch (error) {
-		console.error(`Error: ${error.code}`);
+		//console.error(`Error: ${error.code}`);
 	}
 };
 
