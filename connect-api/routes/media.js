@@ -68,13 +68,39 @@ router.delete('/', (req,res) => {
     })
 });
 
-// Grab a specific media post by its id
+// Grab specific media by their id
+router.get('/profile/:userId', (req,res) => {
+    const userId = req.params.userId;
+
+    get_media  = "call get_profile_media(?)";
+    con.query(get_media, [userId],(err, results) => {
+        if (err) throw err;
+        //console.log("results" + JSON.stringify(results));
+        res.status(200).jsonp({results}).end;
+    })
+});
+
+// Grab specific media by their id
+router.get('/venue/:venueId', (req,res) => {
+    const venueId = req.params.venueId;
+
+    get_media  = "call get_venue_media(?)";
+    con.query(get_media, [venueId],(err, results) => {
+        if (err) throw err;
+        //console.log("results" + JSON.stringify(results));
+        res.status(200).jsonp({results}).end;
+    })
+});
+
+// Grab specific media by their id
+
 router.get('/:mediaId', (req,res) => {
     const mediaId = req.params.mediaId;
 
     get_media  = "call get_medi(?)";
     con.query(get_media, [mediaId],(err, results) => {
         if (err) throw err;
+        //console.log("results" + JSON.stringify(results));
         res.status(200).jsonp({results}).end;
     })
 });

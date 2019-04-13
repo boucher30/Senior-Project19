@@ -66,9 +66,9 @@ export default class MediaCard extends Component {
                 console.log("results: ", res.data.results[0]);
                 //alert(JSON.stringify(res.data.results[0]));
                 this.setState({
-                    carveMed: res.data.results[0]
+                    carveMed: res.data.results[0][0].media_id
                 });
-
+                alert("results" + JSON.stringify(res));
             });
 
         //currently =dynamic per carve

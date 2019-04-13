@@ -103,7 +103,7 @@ export default class ProfilePage extends Component {
 						<Col xs={4}>
 							<Container style={{  border: "0px solid black" }}>
 
-								<Image src={userInfo.photo} fluid />
+								<Image src={this.state.pic} fluid />
 							</Container>
 						</Col>
 						<Col xs={4}>
@@ -183,7 +183,8 @@ export default class ProfilePage extends Component {
 				.then(res => {
 					this.setState({
 						userInfo: res.data.users[0][0],
-						userInfoLength: Object.keys(res.data.users[0][0]).length
+						userInfoLength: Object.keys(res.data.users[0][0]).length,
+						//pic: this.state.userInfo.photo
 					});
 
 					//alert(JSON.stringify(res.data.users[0][0]))
@@ -194,7 +195,8 @@ export default class ProfilePage extends Component {
 				.then(res => {
 					this.setState({
 						userInfo: res.data.users[0][0],
-						userInfoLength: Object.keys(res.data.users[0][0]).length
+						userInfoLength: Object.keys(res.data.users[0][0]).length,
+						//pic: this.state.userInfo.photo
 					});
 				})
 			//window.location.reload();
@@ -207,7 +209,8 @@ export default class ProfilePage extends Component {
 				.then(res => {
 					this.setState({
 						userInfo: res.data[0][0],
-						buddies: Object.keys(res.data[0][0]).length
+						buddies: Object.keys(res.data[0][0]).length,
+
 					});
 
 					//alert(JSON.stringify(res.data.users[0][0]))
