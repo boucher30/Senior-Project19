@@ -1,0 +1,62 @@
+venue_name,city,state,about,snow_sports,water_sports,land_sports,air_sports,lattitude,longitude,url
+Catamount,Hillsdale,NY,,"snowboard,ski",,,,"42°10'07.5""N ","73°28'36.6""W",https://www.onthesnow.com/new-york/catamount-ski-ride-area/ski-resort.html
+Bristol Mountain,Canandaigua,NY,,"snowboard,ski",,,,"42°44'40.0""N","77°24'12.9""W",https://www.onthesnow.com/new-york/bristol-mountain/ski-resort.html
+Holiday Valley,Ellicotville,NY,,"snowboard,ski",,,,"42°15'43.8""N","78°40'03.9""W",https://www.onthesnow.com/new-york/holiday-valley/ski-resort.html
+Whiteface Mountain,WIlmington,NY,,"snowboard,ski",,,,"42°15'43.9""N","78°40'23.5""W",https://www.onthesnow.com/new-york/whiteface-mountain-resort/ski-resort.html
+Belleayre Mountain,Highmount,NY,,"snowboard,ski",,,,"42°07'52.3""N","74°30'16.6""W",https://www.onthesnow.com/new-york/belleayre/ski-resort.html
+Windham Mountain,Windham,NY,,"snowboard,ski",,,,"42°17'44.1""N","74°15'24.4""W",https://www.onthesnow.com/new-york/windham-mountain/ski-resort.html
+Hunter Mountain,Hunter,NY,,"snowboard,ski",,,,"42°10'40.6""N","74°13'47.2""W",https://www.onthesnow.com/new-york/hunter-mountain/ski-resort.html
+Gore Mountain ,North Creek,NY,,"snowboard,ski",,,,"43°40'23.7""N","74°00'24.6""W",https://www.onthesnow.com/new-york/gore-mountain/ski-resort.html
+Mount Peter,Warwick,NY,,"snowboard,ski",,,,"41°14'52.0""N","74°17'42.9""W",https://www.onthesnow.com/new-york/mount-peter-ski-area/ski-resort.html
+Jack Frost,White Haven,PA,,"snowboard,ski",,,,"41°06'33.2""N","75°39'05.9""W",https://www.onthesnow.com/pennsylvania/jack-frost/ski-resort.html
+Camelback Mountain,Tannersville,PA,,"snowboard,ski",,,,"41°03'04.8""N","75°21'19.2""W",https://www.onthesnow.com/pennsylvania/camelback-mountain-resort/ski-resort.html
+Campgaw Mountain,Mahwah,NJ,,"snowboard,ski,snowmobile",,"
+",,"41°03'31.8""N","74°11'41.6""W",https://www.onthesnow.com/new-jersey/campgaw-mountain/ski-resort.html
+Mountain Creek Resort,Vernon,NJ,,"snowboard,ski,snowmobile",,mountainBiking,,"41°11'24.7""N","74°30'20.0""W",https://www.onthesnow.com/new-jersey/mountain-creek-resort/ski-resort.html
+Mount Snow,West Dover,VT,,"snowboard,ski,snowmobile",,,,"42°58'08.1""N","72°53'43.8""W",https://www.onthesnow.com/vermont/mount-snow/ski-resort.html
+Killington Resort,Killington,VT,,"snowboard,ski",,,,"43°37'09.5""N","72°48'08.4""W",https://www.onthesnow.com/vermont/killington-resort/ski-resort.html
+Shawnee Peak,Bridgton,ME,,"snowboard,ski",,mountainBiking,,"44°03'32.7""N","70°48'57.4""W",https://www.onthesnow.com/maine/shawnee-peak/ski-resort.html
+Sundance Resort,Sundance,UT,,"snowboard,ski		mountainBiking",,,hangGlide,"40°23'44.1""N","111°35'12.1""W",https://www.onthesnow.com/utah/sundance/ski-resort.html
+Powder Mountain,Eden,UT,,"snowboard,ski		mountainBiking",,,hangGlide,"41°22'45.2""N","111°46'57.0""W",https://www.onthesnow.com/utah/powder-mountain/ski-resort.html
+Keystone,Keystone,CO,,"snowboard,ski		mountainBiking",,,,"39°36'29.7""N","105°56'37.5""W",https://www.onthesnow.com/colorado/keystone/ski-resort.html
+Aspen/ SNOWMASS,ASPEN,CO,,"snowboard,ski		mountainBiking",,,,"39°12'31.9""N","106°56'52.6""W",https://www.onthesnow.com/colorado/aspen-snowmass/ski-resort.html
+Spring Lake Beach,Spring Lake,NJ,,,surf,,,,,https://www.surfline.com/surf-forecasts/new-jersey/58581a836630e24c44878fda
+Belmar Beach,Belmar,NJ,,,surf,,,,,https://www.surfline.com/surf-forecasts/new-jersey/58581a836630e24c44878fda
+Avon Beach,Avon,NJ,,,surf,,,,,https://www.surfline.com/surf-forecasts/new-jersey/58581a836630e24c44878fda
+Manasquan Beach,Manasquan,NJ,,,surf,,,,,https://www.surfline.com/surf-forecasts/new-jersey/58581a836630e24c44878fda
+Manasquan inlet,Manasquan,NJ,,,waterski,,,,,https://www.surfline.com/surf-forecasts/new-jersey/58581a836630e24c44878fda
+Seagirt Beach,Seagirt,NJ,,,surf,,,,,https://www.surfline.com/surf-forecasts/new-jersey/58581a836630e24c44878fda
+Asburry Beach,Asburry,NJ,,,surf,,,,,https://www.surfline.com/surf-forecasts/new-jersey/58581a836630e24c44878fda
+Waikiki Beach,Waikiki,HI,,,"surf,waterski",,,,,https://www.surfline.com/surf-forecasts/new-jersey/58581a836630e24c44878fda
+Sunset beach,Oahu,HI,,,surf,,,,,https://www.surfline.com/surf-forecasts/new-jersey/58581a836630e24c44878fda
+Waimea Bay,Oahu,HI,,,surf,,,,,https://www.surfline.com/surf-forecasts/new-jersey/58581a836630e24c44878fda
+Ehukai Beach,Oahu,HI,,,surf,,,,,https://www.surfline.com/surf-forecasts/new-jersey/58581a836630e24c44878fda
+Haleiwa Alii Beach,Oahu,HI,,,surf,,,,,https://www.surfline.com/surf-forecasts/new-jersey/58581a836630e24c44878fda
+Haleiwa Beach,Oahu,HI,,,surf,,,,,https://www.surfline.com/surf-forecasts/new-jersey/58581a836630e24c44878fda
+Chun's Reef,Oahu,HI,,,surf,,,,,https://www.surfline.com/surf-forecasts/new-jersey/58581a836630e24c44878fda
+Ke Waena Beach,Oahu,HI,,,surf,,,,,https://www.surfline.com/surf-forecasts/new-jersey/58581a836630e24c44878fda
+Turtle Bay,Oahu,HI,,,surf,,,,,https://www.surfline.com/surf-forecasts/new-jersey/58581a836630e24c44878fda
+Black's Beach,San Diego,CA,,,surf,,,,,
+Ocean City Beach,Ocean City,MD,,,surf,,,,,
+Windansea Beach,San Diego,CA,,,surf,,,,,
+Cocoa Beach,Cape Canaveral,FL,,,surf,,,,,
+Lake Buena Vista,Orlando,FL,,,waterski,,,,,
+Lake Carnegie,Princeton,NJ,,,waterski,,,,,
+Greenwood Lake,Greenwood Lake,NY,,,waterski,,,,,
+Lake Mohawk,Byram Township,NJ,,,waterski,,,,,
+Union Lake,Millville,NJ,,,waterski,,,,,
+Burnside Skate Park ,Portland,OR,,,,skateboard,,,,
+Skate Lab ,Atlantic Beach,FL,,,,skateboard,,,,
+Denver Skate Park ,Denver,CO,,,,skateboard,,,,
+David Armstrong Extreme Park,Lousiville,KY,,,,skateboard,,,,
+Lincoln City Skate Park ,Lincoln City,OR,,,,skateboard,,,,
+Ray's MTB Park ,Cleveland,OH,,,,BMX,,,,
+Chula Vista ,San Diego,CA,,,,BMX,,,,
+ The Unit ,Greenville,NC,,,,BMX,,,,
+ Mesh,Longwood,FL,,,,BMX,,,,
+The Flow ,Colombus,OH,,,,BMX,,,,
+Pensylvania Skydiving Center,Hazleton,PA,,,,,Skydive,,,http://paskydive.com/
+Sky Dive Key West,Summerland Key,FL,,,,,Skydive,,,https://skydivekeywest.com/
+Alaska SkyDive Center,Palmer,AK,,,,,Skydive,,,http://alaskaskydivecenter.com/
+Skydive Hawaii,Waialua,HI,,,,,Skydive,,,http://www.skydivehawaii.com/
+Skydive Zion,Hurricane,UT,,,,,Skydive,,,http://www.skydivezion.com/
