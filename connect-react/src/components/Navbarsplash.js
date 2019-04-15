@@ -1,4 +1,6 @@
 import React from 'react'
+import {Link} from "react-router-dom";
+import Col from 'react-bootstrap/Col';
 
 const TopNav1 = () => {
 	/*var styles = {
@@ -11,13 +13,25 @@ const TopNav1 = () => {
 
 	return (
 		<nav className="navbar navbar-dark bg-dark">
-			<a className="navbar-brand" href="/" style = {{color:'lightskyblue',
+			<Col>
+			<a className="navbar-brand" href = "/" style = {{color:'lightskyblue',
 				textShadowColor: 'black',
 				fontWeight:'bold',
 				fontFamily: 'monospace'}}>Carve Connect
 			</a>
-			<i className="fa fa-picture-o text-white"> </i>
-			<i className="fa fa-map text-white"> </i>
+			</Col>
+						<Col>
+							<div>
+							<Link className ="Button" to = '/login' variant="dark" size="lg">Login</Link>
+						</div>
+						</Col>
+
+						<Col>
+							<div>
+							<Link className ="Button" to = '/sign-up' variant="dark" size="lg">Sign Up</Link>
+							</div>
+						</Col>
+
 
 		</nav>
 	);

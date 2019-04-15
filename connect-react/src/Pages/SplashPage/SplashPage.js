@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Carousel from 'react-bootstrap/Carousel';
-import Button from 'react-bootstrap/Button';
 import Snow from '../../images/winter.jpeg';
 import Skate from '../../images/skater1.jpeg';
 import Surf from '../../images/surf1.jpg';
@@ -15,7 +14,6 @@ import dogskate from '../../images/dogskate.jpeg';
 import dogphoto from '../../images/dogphoto.jpeg';
 import dogsurf from '../../images/dogsurf.jpeg';
 import FeaturedUserCard from '../../components/FeaturedUserCard';
-import CarouselCaption from 'react-bootstrap/CarouselCaption';
 import TopNav1 from "../../components/Navbarsplash";
 
 
@@ -27,30 +25,13 @@ class SplashPage extends Component {
               <TopNav1/>
             {/* Sliding carousel */}
             <Carousel fade className="carousel" pauseOnHover={false}>
+
               <Carousel.Item>
                 <img
                   className="d-block w-100"
                   src={Snow}
                   alt="First slide"
                 />
-                <CarouselCaption>
-                  <Container>
-                    <Row style = {{marginBottom: '20px'}}>
-                      <Col>
-                        <Button href='/login' variant="dark" size="lg">
-                          Login
-                        </Button>
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col>
-                        <Button href='/sign-up' variant="info" size="lg">
-                          Sign Up
-                        </Button>
-                      </Col>
-                    </Row>
-                  </Container>
-                </CarouselCaption>
               </Carousel.Item>
               <Carousel.Item>
                 <img
@@ -58,24 +39,6 @@ class SplashPage extends Component {
                   src = {Skate}
                   alt="Third slide"
                 />
-                <CarouselCaption>
-                <Container>
-                    <Row style = {{marginBottom: '20px'}}>
-                      <Col>
-                        <Button href='/login' variant="dark" size="lg">
-                          Login
-                        </Button>
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col>
-                      <Button href='/sign-up' variant="info" size="lg">
-                          Sign Up
-                        </Button>
-                      </Col>
-                    </Row>
-                  </Container>
-                </CarouselCaption>
               </Carousel.Item>
               <Carousel.Item>
                 <img
@@ -83,24 +46,6 @@ class SplashPage extends Component {
                   src= {Surf}
                   alt="fourth slide"
                 />
-                <CarouselCaption>
-                <Container>
-                    <Row style = {{marginBottom: '20px'}}>
-                      <Col>
-                        <Button href='/login' variant="dark" size="lg">
-                          Login
-                        </Button>
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col>
-                      <Button href='/sign-up' variant="info" size="lg">
-                          Sign Up
-                        </Button>
-                      </Col>
-                    </Row>
-                  </Container>
-                </CarouselCaption>
               </Carousel.Item>
                 <Carousel.Item>
                     <img
@@ -108,24 +53,6 @@ class SplashPage extends Component {
                         src= {dirt}
                         alt="fifth slide"
                     />
-                    <CarouselCaption>
-                        <Container>
-                            <Row style = {{marginBottom: '20px'}}>
-                                <Col>
-                                    <Button href='/login' variant="dark" size="lg">
-                                        Login
-                                    </Button>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col>
-                                    <Button href='/sign-up' variant="info" size="lg">
-                                        Sign Up
-                                    </Button>
-                                </Col>
-                            </Row>
-                        </Container>
-                    </CarouselCaption>
                 </Carousel.Item>
                 <Carousel.Item>
                     <img
@@ -133,25 +60,9 @@ class SplashPage extends Component {
                         src= {drone}
                         alt="sixth slide"
                     />
-                    <CarouselCaption>
-                        <Container>
-                            <Row style = {{marginBottom: '20px'}}>
-                                <Col>
-                                    <Button href='/login' variant="dark" size="lg">
-                                        Login
-                                    </Button>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col>
-                                    <Button href='/sign-up' variant="info" size="lg">
-                                        Sign Up
-                                    </Button>
-                                </Col>
-                            </Row>
-                        </Container>
-                    </CarouselCaption>
+
                 </Carousel.Item>
+
             </Carousel>
 
             

@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
-import Col from "react-bootstrap/Col";
-import {Route, Switch} from 'react-router-dom';
+import {Route, Router} from 'react-router-dom';
 
 
 import ListingPage from "./SubPages/ListingPage/ListingPage";
@@ -27,24 +26,22 @@ export default class Container extends Component {
 
 	render() {
 		return (
-			<Col xs={10} style={{ textAlign: 'left', bordered: '0.5px solid rgba(0, 0, 0, 0.5)' }}>
-				<Switch >
-					{/* Remember to parse integer because the number is returned a string */}
-					{/* Can be accessed by props.match.params.number in Profile Page.... */}
-					<Route path="/dashboard/profile/:number" component={ProfilePage} />
-					<Route path="/dashboard/venues/:number" component={VenuePage} />
-					<Route path = "/dashboard/venues" component={VenueListPage} />
-					<Route path = "/dashboard/messages" component={MessagesPage} />
-					<Route path = "/dashboard/notifications" component={NotificationsPage} />
-					<Route path = "/dashboard/notinbox" component={NotificationsPageInbox} />
-					<Route path = "/dashboard/notoutbox" component={NotificationsPageOutbox} />
-					<Route path = "/dashboard/inbox" component={MessagesPageInbox} />
-					<Route path = "/dashboard/outbox" component={MessagesPageOutbox} />
-					<Route path = "/dashboard/feed" component={FeedPage} />
-					<Route path = "/dashboard/users" component={UsersPage} />
-					<Route path = "/dashboard/listings" component={ListingPage} />
-				</Switch>
-			</Col>
+			<>
+			<Router history={}>
+				<Route path="/dashboard/profile/:number" component={ProfilePage} />
+				<Route path="/dashboard/venues/:number" component={VenuePage} />
+				<Route path = "/dashboard/venues" component={VenueListPage} />
+				<Route path = "/dashboard/messages" component={MessagesPage} />
+				<Route path = "/dashboard/notifications" component={NotificationsPage} />
+				<Route path = "/dashboard/notinbox" component={NotificationsPageInbox} />
+				<Route path = "/dashboard/notoutbox" component={NotificationsPageOutbox} />
+				<Route path = "/dashboard/inbox" component={MessagesPageInbox} />
+				<Route path = "/dashboard/outbox" component={MessagesPageOutbox} />
+				<Route path = "/dashboard/feed" component={FeedPage} />
+				<Route path = "/dashboard/users" component={UsersPage} />
+				<Route path = "/dashboard/listings" component={ListingPage} />
+			</Router>
+			</>
 		);
 	}
 

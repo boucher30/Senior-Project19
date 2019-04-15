@@ -93,7 +93,7 @@ class TopNav extends Component {
 			<>
 				<Nav className="navbar navbar-dark bg-dark nav-fill" >
 				{/*<a className="navbar-brand" href="/">Carve Connect</a>*/}
-					<NavbarBrand href='/' style = {{color:'lightskyblue',textShadowColor:'black',fontWeight:'bold',fontFamily:'monospace'}}>Carve Connect</NavbarBrand>
+					<NavbarBrand href={`/dashboard/profile/${this.state.userId}`} style = {{color:'lightskyblue',textShadowColor:'black',fontWeight:'bold',fontFamily:'monospace'}}>Carve Connect</NavbarBrand>
 					<li>
 						<div style={{justify:"left"}}>
 							<Form inline style={{justify:"left"}} >
