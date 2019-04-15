@@ -25,7 +25,6 @@ export default class MediaCard extends Component {
             mediaInfo: {},
             description: "", 
             time: "",
-            typeOfMedia: 0 //0 = profile, 1 = venue, 2 = carve
         };
 
 
@@ -40,117 +39,7 @@ export default class MediaCard extends Component {
                         mediaInfo: res.data.results[0],
                     });
                 });
-
-    //     axios.get(`http://localhost:8000/carves/open`)
-    //         .then(res => {
-    //             console.log("results: ", res.data.results[0]);
-    //             //alert(JSON.stringify(res.data.results[0]));
-    //             this.setState({
-    //                 carveInfo: res.data.results[0]
-    //             });
-
-    //         });
-    //     //currently only gets attendees for carve1. not dynamic per carve
-    //     axios.get(`http://localhost:8000/comments`)
-    //         .then(res => {
-    //             //alert("carve:" + JSON.stringify(res.data.results));
-    //             console.log("results: ", res.data.results[0]);
-    //             //alert(JSON.stringify(res.data.results[0]));
-    //             this.setState({
-    //                 carveComm: res.data.results[0]
-    //             });
-
-    //         });
-
-    //     //currently only gets attendees for carve1. not dynamic per carve
-    //     axios.get(`http://localhost:8000/media`)
-    //         .then(res => {
-    //             //alert("carve:" + JSON.stringify(res.data.results));
-    //             console.log("results: ", res.data.results[0]);
-    //             //alert(JSON.stringify(res.data.results[0]));
-    //             this.setState({
-    //                 carveMed: res.data.results[0]
-    //             });
-
-    //         });
-
-    //     //currently =dynamic per carve
-    //     axios.get(`http://localhost:8000/carveAt`)
-    //         .then(res => {
-    //             //alert("carve:" + JSON.stringify(res.data.results));
-    //             console.log("results: ", res.data.results[0]);
-    //             //alert(JSON.stringify(res.data.results[0]));
-    //             this.setState({
-    //                 carveAt1: res.data.results
-    //             });
-
-    //         });
-
-
-    //     //currently only gets attendees for carve1. not dynamic per carve
-    //     axios.get(`http://localhost:8000/likes`)
-    //         .then(res => {
-    //             //alert("carve:" + JSON.stringify(res.data.results));
-    //             console.log("results: ", res.data.results[0]);
-    //             //alert(JSON.stringify(res.data.results[0]));
-    //             this.setState({
-    //                 carveLik: res.data.results[0]
-    //             });
-
-    //         });
-
-
-    //     //currently only gets attendees for carve1. not dynamic per carve
-    //     axios.get(`http://localhost:8000/likes/dislikes`)
-    //         .then(res => {
-    //             //alert("carve:" + JSON.stringify(res.data.results));
-    //             console.log("results: ", res.data.results[0]);
-    //             //alert(JSON.stringify(res.data.results[0]));
-    //             this.setState({
-    //                 carveDlik: res.data.results[0]
-    //             });
-
-    //         });
-
-    // }
-
-    // like(e){
-    //     this.preventDefault(e);
-    //     //currently only gets attendees for carve1. not dynamic per carve
-    //     axios.post(`http://localhost:8000/carves/${1}/likes`,
-    //         {
-    //             poster: localStorage.getItem('userId'),
-    //             carve : e
-    //         })
-    //         .then(res => {
-    //             //alert("carve:" + JSON.stringify(res.data.results));
-    //             console.log("results: ", res.data.results[0]);
-    //             //alert(JSON.stringify(res.data.results[0]));
-
-
-    //         });
-    // }
-
-    // dislike = (e) =>{
-    //     this.preventDefault(e);
-    //     //currently only gets attendees for carve1. not dynamic per carve
-    //     axios.post(`http://localhost:8000/carves/${1}/likes/dislikes`,
-    //         {
-    //             poster: localStorage.getItem('userId'),
-    //             carve : e
-    //         })
-    //         .then(res => {
-    //             //alert("carve:" + JSON.stringify(res.data.results));
-
-    //             //alert(JSON.stringify(res.data.results[0]));
-    //             this.setState({
-
-    //             });
-
-    //         });
-    };
-
-
+            }
 
     render() {
         let mediaList;
@@ -171,7 +60,7 @@ export default class MediaCard extends Component {
                             <Card.Body>
                                 <container>
                                     <Row style = {{marginTop: '-1rem', borderBottom:'1px dashed grey'}}>
-                                    <Card.Link href = "#">{media.media_id}</Card.Link>
+                                    <Card.Link href = "#">{media.poster}</Card.Link>
                                         :{media.description}
                                     </Row>
                                     <Row style= {{marginTop: '1rem'}}>
@@ -215,7 +104,7 @@ export default class MediaCard extends Component {
                                 </tbody>
     
                             </Table>
-                            <Card.Footer style = {{fontSize: '10px'}}><em>Create_Time{media.time}</em></Card.Footer>
+                            <Card.Footer style = {{fontSize: '10px'}}><em>Create_Time: {media.time}</em></Card.Footer>
                         </Card>
                     </ListGroup.Item>
                 ) //return
