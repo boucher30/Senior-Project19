@@ -36,15 +36,8 @@ export default class MediaCard extends Component {
                 .then(res => {
                     this.setState({
                         mediaInfo: res.data.results[0],
-                        mediaInfoLength: Object.keys(res.data.results[0][0]).length
                     });
                 });
-
-
-
-
-
-
 
     //     axios.get(`http://localhost:8000/carves/open`)
     //         .then(res => {
