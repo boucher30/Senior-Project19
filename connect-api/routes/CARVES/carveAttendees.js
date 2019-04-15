@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router({mergeParams: true});
 const con = require('../../db');
 
-const getInfo = require('../../Utils/GetUsers');
+const getInfo = require('../../Utils/GetInfo');
 
 // Grabs all carve_attendees from db
 router.get('/', (req,res) => {
@@ -113,6 +113,5 @@ router.delete('/:carve_attendeesId', (req,res) => {
         res.status(201).jsonp({msg:'carve_attendees deleted'}).end;
     })
 });
-
 
 module.exports = router;
