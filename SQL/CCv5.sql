@@ -2053,7 +2053,7 @@ DELIMITER $$
 USE `CCv5`$$
 CREATE PROCEDURE `get_profile_media` (in id int)
 BEGIN
-select * from media where profile = id;
+select * from all_media where profile = id;
 END$$
 
 DELIMITER ;
@@ -2159,22 +2159,6 @@ USE `CCv5`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `get_users_inbox_read`(in id int)
 BEGIN
 select * from all_messages where rec_id = id and (type = 'normal' or type = 'reply') and ( 'read'=1);
-END$$
-
-DELIMITER ;
-
--- -----------------------------------------------------
--- procedure get_profile_media
--- -----------------------------------------------------
-
-USE `CCv5`;
-DROP procedure IF EXISTS `CCv5`.`get_profile_media`;
-
-DELIMITER $$
-USE `CCv5`$$
-CREATE PROCEDURE `get_profile_media` (in id int)
-BEGIN
-select * from media where profile = id;
 END$$
 
 DELIMITER ;
