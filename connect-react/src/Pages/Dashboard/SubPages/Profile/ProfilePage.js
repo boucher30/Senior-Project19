@@ -134,7 +134,7 @@ export default class ProfilePage extends Component {
 					<Col style={{paddingLeft: "10%", border: '0px solid darkgrey'}}>
 						<h2 style = {{border:"0px solid slategrey"}}>Content</h2>
 						<div>
-							<MediaCard content_id = {this.state.userId}/>
+							<MediaCard type = "profile" content_id = {this.state.userId}/>
 						</div>
 						<div>                                                                                                    </div>
 

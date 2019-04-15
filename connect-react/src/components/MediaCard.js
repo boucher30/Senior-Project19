@@ -31,28 +31,13 @@ export default class MediaCard extends Component {
 
     }
 
+
+
     componentWillMount() {
-            axios.get(`http://localhost:8000/media/profile/${this.props.content_id}/`)
+            axios.get(`http://localhost:8000/media/${this.props.type}/${this.props.content_id}/`)
                 .then(res => {
                     this.setState({
                         mediaInfo: res.data.results[0],
-                        typeOfMedia: 0
-                    });
-                });
-
-                axios.get(`http://localhost:8000/media/venue/${this.props.content_id}/`)
-                .then(res => {
-                    this.setState({
-                        mediaInfo: res.data.results[0],
-                        typeOfMedia: 1
-                    });
-                });
-
-                axios.get(`http://localhost:8000/media/carves/${this.props.content_id}/`)
-                .then(res => {
-                    this.setState({
-                        mediaInfo: res.data.results[0],
-                        typeOfMedia: 2
                     });
                 });
 
@@ -166,8 +151,10 @@ export default class MediaCard extends Component {
     };
 
 
+
     render() {
         let mediaList;
+        
         if(this.state.mediaInfo.length > 0){
             mediaList = this.state.mediaInfo.map((media, index) => {
                 return (
@@ -184,7 +171,7 @@ export default class MediaCard extends Component {
                             <Card.Body>
                                 <container>
                                     <Row style = {{marginTop: '-1rem', borderBottom:'1px dashed grey'}}>
-                                        <Card.Link href = "#">{media.media_id}</Card.Link>
+                                    <Card.Link href = "#">{media.media_id}</Card.Link>
                                         :{media.description}
                                     </Row>
                                     <Row style= {{marginTop: '1rem'}}>
@@ -218,7 +205,7 @@ export default class MediaCard extends Component {
                                     <tr>
                                         <Card.Link href = "#">CMarcy98</Card.Link>
                                         <td>Wow this was so cool! I am testing word wrap aadf akjdf dfdfasdf sak df d a;akje fadkjfw</td>
-                                        <td className = "text-muted" style = {{fontSize: '13px'}}><em>3mins ago</em></td>
+                                        <td className = "text-muted" style = {{fontSize: '13px'}}><em>3 mins ago</em></td>
                                     </tr>
                                     <tr>
                                         <Card.Link href = "#">frosty</Card.Link>
@@ -244,4 +231,5 @@ export default class MediaCard extends Component {
             </>
         )
     }
+    
 }//class

@@ -110,7 +110,7 @@ export default class VenuePage extends Component {
                     <Row>
                     <Col style={{paddingLeft: "10%", border: '0px solid darkgrey'}}>
                         <h2 style = {{border:"0px solid slategrey"}}>Content</h2>
-                        <MediaCard content_id = {this.state.venueId}/>
+                        <MediaCard type = "venue" content_id = {this.state.venueId}/>
                     </Col>
                         <Col style = {{width: "200%"}}>
                             <Row>
