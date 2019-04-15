@@ -163,8 +163,8 @@ export default class MediaCard extends Component {
                 <>
                     <Card style = {{width: '35rem'}}>
                             <container className="embed-responsive embed-responsive-16by9" style = {{ width: "100%", paddingBottom: "40px", border: '1px solid grey'}}>
-                                    <iframe title="Tour Video" className="embed-responsive-item"
-                                            src="https://www.youtube.com/embed/7a0hbT0QtSw" allowFullScreen > </iframe>
+                                    <iframe title="User Media" className="embed-responsive-item"
+                                            src= {mediaInfo.url} allowFullScreen > </iframe>
                                             
                             </container>
                         <Card.Body>
