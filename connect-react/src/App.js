@@ -30,7 +30,7 @@ class App extends Component {
     this.setState({socket: socket});
       socket.on("FromAPI", data => this.setState({ response: data }));
       socket.emit("I am alive");
-    socket.on("connection", alert("connection detected from server"));
+    //socket.on("connection", alert("connection detected from server"));
     //socket.on("message sent", alert("someone sent a message"));
   }
 

@@ -2196,6 +2196,38 @@ END$$
 DELIMITER ;
 
 -- -----------------------------------------------------
+-- procedure get_buddy_count
+-- -----------------------------------------------------
+
+USE `CCv5`;
+DROP procedure IF EXISTS `CCv5`.`get_buddy_count`;
+
+DELIMITER $$
+USE `CCv5`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_buddy_count`(in usr int)
+BEGIN
+select count(user_Id2) as 'total_buddy_follow' from follows where user_Id1 = usr and type ='buddy';
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure count_venue_followers
+-- -----------------------------------------------------
+
+USE `CCv5`;
+DROP procedure IF EXISTS `CCv5`.`count_venue_followers`;
+
+DELIMITER $$
+USE `CCv5`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `count_venue_followers`(in ven int)
+BEGIN
+select count(follow_id) as 'total_vanue_follow' from follows where venue_id = 1;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
 -- View `CCv5`.`all_users`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `CCv5`.`all_users`;

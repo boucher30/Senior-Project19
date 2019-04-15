@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router({mergeParams: true});
 const con = require('../../db');
 
-const getInfo = require('../../Utils/GetUsers');
+const getInfo = require('../Utils/GetInfo');
 
 // Grabs all carve_attendees from db
 router.get('/', (req,res) => {
@@ -98,10 +98,10 @@ router.get('/:carve_attendeesId', (req,res) => {
 });
 
 // updates carve_attendees
-router.put('/:carve_attendeesId', getInfo('carve'));
+//router.put('/:carve_attendeesId', getInfo('carve'));
 
 // updates all carve_attendeess
-router.patch('/:carve_attendeesId', getInfo('carve'))
+//router.patch('/:carve_attendeesId', getInfo('carve'));
 
 // deletes carve_attendees
 router.delete('/:carve_attendeesId', (req,res) => {
