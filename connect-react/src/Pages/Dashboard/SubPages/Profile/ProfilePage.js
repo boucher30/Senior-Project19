@@ -10,6 +10,7 @@ import EditProfileModal from "./EditProfileModal";
 import CarveCardUserCreate from "../../../../components/CarveCardUserCreate";
 import CreateCarveModal from "../../../../components/CreateCarveModal";
 import BuddyRequestModal from "../../../../components/BuddyRequestModal";
+import MediaCard from "../../../../components/MediaCard";
 
 
 export default class ProfilePage extends Component {
@@ -38,7 +39,7 @@ export default class ProfilePage extends Component {
 	// Retrieves info before component is mounted to the DOM
 	componentWillMount() {
 		this.getUserInfo();
-		this.getUserCounts();
+		//this.getUserCounts();
 	}
 
 	handleClick = () => {
@@ -133,19 +134,11 @@ export default class ProfilePage extends Component {
 					<Col style={{paddingLeft: "10%", border: '0px solid darkgrey'}}>
 						<h2 style = {{border:"0px solid slategrey"}}>Content</h2>
 						<div>
-						<container className="embed-responsive embed-responsive-16by9" style = {{ width: "100%", paddingBottom: "40px", border: '2px solid slategrey'}}>
-							<iframe title="Tour Video" className="embed-responsive-item"
-									 src="https://www.youtube.com/embed/7a0hbT0QtSw" allowFullScreen > </iframe>
-
-						</container>
+							<MediaCard profile_id = {this.state.userId}/>
 						</div>
 						<div>                                                                                                    </div>
 						<div>
-						<container className="embed-responsive embed-responsive-16by9" style = {{ width: "100%", paddingTop: "20%", border: '2px solid slategrey'}}>
-							<iframe title="Prof vid2" className="embed-responsive-item"
-									src="https://www.youtube.com/embed/m8aM2XVffaE" allowFullScreen > </iframe>
-
-						</container>
+							<MediaCard profile_id = {this.state.userId}/>
 						</div>
 
 					</Col>
@@ -153,7 +146,7 @@ export default class ProfilePage extends Component {
 						<Row>
 							<h2>Carves created by user</h2></Row>
 						<Row style = {{width:"100%"}}>
-							<CarveCardUserCreate profile_id = {this.state.userId}style = {{width:"100%"}}/></Row></Col></Row>
+							<CarveCardUserCreate profile_id = {this.state.userId} style = {{width:"100%"}}/></Row></Col></Row>
 				</>
 			);
 		} else {
