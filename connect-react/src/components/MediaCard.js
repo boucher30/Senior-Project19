@@ -55,7 +55,7 @@ export default class MediaCard extends Component {
 
                 if(this.state.mediaComments.length > 0){
                     commentList = this.state.mediaComments.map((com, index) => {
-                        if(com.media === media.carve){
+                        if(com.media === media.media_id){
                             return (
                                 <tr key = {index}>
                                     <td>{com.poster}</td>
