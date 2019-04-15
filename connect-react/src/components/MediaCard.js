@@ -23,6 +23,7 @@ export default class MediaCard extends Component {
             venue: 0,
             url: "",
             mediaInfo: {},
+            mediaComments: {},
             description: "", 
             time: "",
         };
@@ -35,14 +36,38 @@ export default class MediaCard extends Component {
                         mediaInfo: res.data.results[0],
                     });
                 });
+
+            axios.get(`http://localhost:8000/comments`)
+                .then(res => {
+                    this.setState({
+                        mediaComments: res.data.results[0]
+                    });
+                });
             }
 
-            
+
     render() {
         let mediaList;
+        let commentList;
         
         if(this.state.mediaInfo.length > 0){
             mediaList = this.state.mediaInfo.map((media, index) => {
+
+                if(this.state.mediaComments.length > 0){
+                    commentList = this.state.mediaComments.map((com, index) => {
+                        if(com.media === media.carve){
+                            return (
+                                <tr key = {index}>
+                                    <td>{com.poster}</td>
+                                    <td>{com.comment}</td>
+                                    <td>3 mins ago</td>
+                                </tr>
+                            );
+                            }else{
+                                return(<></>)
+                            }
+                    });
+                }
                 return (
                         <ListGroup.Item key={index} style={{
 
@@ -88,16 +113,7 @@ export default class MediaCard extends Component {
                                     </th>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <Card.Link href = "#">CMarcy98</Card.Link>
-                                        <td>Wow this was so cool! I am testing word wrap aadf akjdf dfdfasdf sak df d a;akje fadkjfw</td>
-                                        <td className = "text-muted" style = {{fontSize: '13px'}}><em>3 mins ago</em></td>
-                                    </tr>
-                                    <tr>
-                                        <Card.Link href = "#">frosty</Card.Link>
-                                        <td>I wish I could've made it.</td>
-                                        <td className = "text-muted" style = {{fontSize: '13px'}}><em>1 hour ago</em></td>
-                                    </tr>
+                                    {commentList}
                                 </tbody>
     
                             </Table>
