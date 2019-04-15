@@ -3,7 +3,6 @@ var router = express.Router({mergeParams: true});
 const con = require('../db');
 
 
-
 // Grabs all carve_attendees from the database
 router.get('/', (req,res) => {
     // Find all carve_attendees from database
@@ -81,7 +80,6 @@ router.get('/:carve_attendeesId', (req,res) => {
 router.put('/:carve_attendeesId', (req,res) => {
     const carve_attendeesId = req.params.carve_attendeesId;
     const {carve,user,userType} = req.body;
-    console.log("carve_attendees updated via put with carve_attendeesId: " + carve_attendeesId);
     // Create query to update the specified carve_attendee in the database
     update_carve_attendees = "CALL update_carve_attendee(?,?,?,?)";
     // Execute query to update the specific resource in the database

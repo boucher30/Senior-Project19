@@ -2,7 +2,9 @@ var express = require('express');
 var router = express.Router({mergeParams: true});
 const con = require('../db');
 
-
+/*
+ * Endpoint for all comment related requests
+ */
 
 // Grabs all comments from the database
 router.get('/', (req,res) => {

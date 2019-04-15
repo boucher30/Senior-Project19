@@ -2,21 +2,21 @@ var express = require('express');
 var router = express.Router({mergeParams: true});
 const con = require('../../db');
 
-
+/*
+ * Endpoint for all carve requests related to a venue
+ */
 
 // Grabs all carves from the database
 router.get('/', (req,res) => {
     venueId = req.params.venueId;
     // Create a query to get all carves from the database
     carve_list = "CALL get_venue_carve(?)";
-    // "CALL get_venue_carves(?)"   [venueId]
     // Execute the query
     con.query(carve_list,[venueId], (err, results) => {
         if (err) throw err;
         res.status(200).jsonp({results}).end;
     })
 });
-
 
 // Creates a new carve
 router.post('/', (req,res) => {
