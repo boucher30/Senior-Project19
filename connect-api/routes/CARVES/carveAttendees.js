@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router({mergeParams: true});
 const con = require('../../db');
 
-
+const getInfo = require('../Utils/GetInfo');
 
 // Grabs all carve_attendees from db
 router.get('/', (req,res) => {
@@ -98,30 +98,10 @@ router.get('/:carve_attendeesId', (req,res) => {
 });
 
 // updates carve_attendees
-router.put('/:carve_attendeesId', (req,res) => {
-    const carve_attendeesId = req.params.carve_attendeesId;
-    const {carve,user,userType} = req.body;
-    console.log("carve_attendees updated via put with carve_attendeesId: " + carve_attendeesId);
-    update_carve_attendees = "CALL update_carve_attendee(?,?,?,?)";
-
-    con.query(update_carve_attendees,[carve_attendeesId,carve,user,userType[0]],(err, results) => {
-        if (err) throw err;
-        res.status(201).jsonp({results}).end;
-    })
-});
+//router.put('/:carve_attendeesId', getInfo('carve'));
 
 // updates all carve_attendeess
-router.patch('/:carve_attendeesId', (req,res) => {
-    const carve_attendeesId = req.params.carve_attendeesId;
-    const {carve,user,userType} = req.body;
-    console.log("carve_attendees updated via patch with carve_attendeesId: " + carve_attendeesId);
-    update_carve_attendees = "CALL update_carve_attendee(?,?,?,?)";
-
-    con.query(update_carve_attendees,[carve_attendeesId,carve,user,userType[0]],(err, results) => {
-        if (err) throw err;
-        res.status(201).jsonp({results}).end;
-    })
-});
+//router.patch('/:carve_attendeesId', getInfo('carve'));
 
 // deletes carve_attendees
 router.delete('/:carve_attendeesId', (req,res) => {
@@ -132,8 +112,6 @@ router.delete('/:carve_attendeesId', (req,res) => {
         if (err) throw err;
         res.status(201).jsonp({msg:'carve_attendees deleted'}).end;
     })
-
-
 });
 
 

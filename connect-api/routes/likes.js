@@ -2,13 +2,15 @@ var express = require('express');
 var router = express.Router({mergeParams: true});
 const con = require('../db');
 
-
+/*
+ * Endpoint for all like/dislike related requests
+ */
 
 // Grabs all likes from db
 router.get('/', (req,res) => {
     // Find all likes from database
     like_list = "CALL get_all_likes()";
-    console.log(req.query);
+
     con.query(like_list, (err, results) => {
         if (err) throw err;
         res.status(200).jsonp({results}).end;
@@ -19,7 +21,7 @@ router.get('/', (req,res) => {
 router.get('/dislikes', (req,res) => {
     // Find all likes from database
     like_list = "CALL get_dislikes()";
-    console.log(req.query);
+
     con.query(like_list, (err, results) => {
         if (err) throw err;
         res.status(200).jsonp({results}).end;
@@ -30,7 +32,6 @@ router.get('/dislikes', (req,res) => {
 // Creates a new like
 router.post('/', (req,res) => {
     const {poster,likeordislike,carve,media,comment} = req.body;
-    console.log(" new like sent from: "+ poster);
     // The likename wasn't found in the database
     // Create insert query for new like
     // Added a comment
@@ -70,7 +71,9 @@ router.patch('/', (req,res) => {
 
 // deletes all likes
 router.delete('/', (req,res) => {
+
     delete_likes = "CALL delete_likes()";
+
     con.query(delete_likes, (err, results) => {
         if (err) throw err;
         res.status(201).jsonp({results}).end;
@@ -80,7 +83,9 @@ router.delete('/', (req,res) => {
 // Grab specific like by their id
 router.get('/:likeId', (req,res) => {
     const likeId = req.params.likeId;
+
     get_like  = "call get_like(?)";
+
     con.query(get_like, [likeId],(err, results) => {
         if (err) throw err;
         res.status(200).jsonp({results}).end;
@@ -91,7 +96,7 @@ router.get('/:likeId', (req,res) => {
 router.put('/:likeId', (req,res) => {
     const likeId = req.params.likeId;
     const {poster,likeordislike,carve,media,comment} = req.body;
-    console.log("like updated via put with likeId: " + likeId);
+
     update_like = "CALL update_like(?,?,?,?,?,?)";
 
     con.query(update_like,[likeId,poster,likeordislike[0],carve,media,comment],(err, results) => {
@@ -104,8 +109,9 @@ router.put('/:likeId', (req,res) => {
 router.patch('/:likeId', (req,res) => {
     const likeId = req.params.likeId;
     const {poster,likeordislike,carve,media,comment} = req.body;
-    console.log("like updated via patch with likeId: " + likeId);
+
     update_like = "CALL update_like(?,?,?,?,?,?)";
+
     con.query(update_like,[likeId,poster,likeordislike[0],carve,media,comment],(err, results) => {
         if (err) throw err;
         res.status(201).jsonp({results}).end;
@@ -115,8 +121,9 @@ router.patch('/:likeId', (req,res) => {
 // Removes a like
 router.delete('/:likeId', (req,res) => {
     const likeId = req.params.likeId;
-    console.log(" deleting like with like id: " + likeId);
+
     delete_likes = "CALL delete_like(?)";
+
     con.query(delete_likes, [likeId],(err, results) => {
         if (err) throw err;
         res.status(201).jsonp({msg:'like deleted'}).end;
