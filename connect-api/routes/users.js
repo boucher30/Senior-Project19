@@ -2,7 +2,9 @@ var express = require('express');
 var router = express.Router({mergeParams: true});
 const con = require('../db');
 
-
+/*
+ * Endpoint for all user related requests
+ */
 
 // Gets users based on the query parameters, if no parameters are given, it gets all users from db
 router.get('/', (req,res) => {
@@ -11,8 +13,6 @@ router.get('/', (req,res) => {
 	username = req.query.username;
 	first_name = req.query.first_name;
 	last_name = req.query.last_name;
-
-	console.log(req.query);
 
 	con.query(user_list, (err, results) => {
 		if (err) throw err;
@@ -25,7 +25,6 @@ router.get('/', (req,res) => {
 // Logs out all users
 router.get('/logout', (req,res) => {
 
-    console.log(" all users logged out " );
     get_user  = "call logout_all()";
     con.query(get_user,(err, results) => {
         if (err) throw err;
@@ -36,8 +35,6 @@ router.get('/logout', (req,res) => {
 // Creates a new user
 router.post('/', (req,res) => {
 	const {username, email, password, first_name, last_name, description, type, snow_sports, water_sports, land_sports, air_sports} = req.body;
-    console.log(type+snow_sports+water_sports+land_sports+air_sports);
-
 	usrCheck = "Call username_check(?)";
 
     con.query(usrCheck,[username], (err,results)=> {
@@ -52,7 +49,6 @@ router.post('/', (req,res) => {
             // The username wasn't found in the database
             // Create insert query for new user
             // Added a comment
-            console.log("adding user now with username: " + username);
             new_user = "CALL add_user(?,?,?,?,?,?,?,?,?,?,?)";
             // Execute the query to insert into the database
             con.query(new_user,[username, email, password, first_name, last_name, description, type[0], snow_sports[0], water_sports[0], land_sports[0], air_sports[0]], (err, results1) => {
@@ -98,7 +94,9 @@ router.patch('/', (req,res) => {
 
 // deletes all users
 router.delete('/', (req,res) => {
+
     delete_users = "CALL delete_users()";
+
     con.query(delete_users, (err, results) => {
         if (err) throw err;
         res.status(201).jsonp({results}).end;
@@ -108,7 +106,9 @@ router.delete('/', (req,res) => {
 // Grab specific user by their id
 router.get('/:userId', (req,res) => {
 	const userId = req.params.userId;
+
 	get_user  = "call get_user(?)";
+
 	con.query(get_user, [userId],(err, results) => {
 		if (err) throw err;
 		console.log(results[0][0]);
@@ -119,8 +119,9 @@ router.get('/:userId', (req,res) => {
 // Log out the current user
 router.get('/:userId/logout', (req,res) => {
     const userId = req.params.userId;
-    console.log("user logged out: " +userId);
+
     get_user  = "call logout(?)";
+
     con.query(get_user, [userId],(err, results) => {
         if (err) throw err;
         res.status(200).jsonp({users: results}).end;
@@ -131,7 +132,7 @@ router.get('/:userId/logout', (req,res) => {
 router.put('/:userId', (req,res) => {
     const userId = req.params.userId;
     const {username, email, password, first_name, last_name, description, type, snow_sports, water_sports, land_sports, air_sports} = req.body;
-    console.log(" user updated via put with username: " + username);
+
     update_user = "CALL update_user(?,?,?,?,?,?,?,?,?,?,?,?)";
 
     con.query(update_user,[userId,username, email, password, first_name, last_name, description, type[0], snow_sports[0], water_sports[0], land_sports[0], air_sports[0]],(err, results) => {
@@ -144,7 +145,7 @@ router.put('/:userId', (req,res) => {
 router.patch('/:userId', (req,res) => {
     const userId = req.params.userId;
     const {username, email, password, first_name, last_name, description, type, snow_sports, water_sports, land_sports, air_sports} = req.body;
-    console.log("  user updated via patch with username: " + username);
+
     update_user = "CALL update_user(?,?,?,?,?,?,?,?,?,?,?,?)";
 
     con.query(update_user,[userId,username, email, password, first_name, last_name, description, type[0], snow_sports[0], water_sports[0], land_sports[0], air_sports[0]],(err, results) => {
@@ -156,14 +157,14 @@ router.patch('/:userId', (req,res) => {
 // deletes user
 router.delete('/:userId', (req,res) => {
     const userId = req.params.userId;
-    console.log(" deleting user with user id: " + userId);
+
     delete_users = "CALL delete_user(?)";
+
     con.query(delete_users, [userId],(err, results) => {
         if (err) throw err;
         res.status(201).jsonp({msg:'user deleted'}).end;
     })
 });
-
 
 
 module.exports = router;

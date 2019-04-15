@@ -2,7 +2,9 @@ var express = require('express');
 var router = express.Router({mergeParams: true});
 const con = require('../db');
 
-
+/*
+ * Endpoint for all carve related requests
+ */
 
 // Grabs all follows from the database
 router.get('/', (req,res) => {
@@ -82,6 +84,7 @@ router.get('/:venueId', (req,res) => {
 	const venueId = req.params.venueId;
 
 	get_venue  = "call get_venue(?)";
+
 	con.query(get_venue, [venueId],(err, results) => {
 		if (err) throw err;
 		res.status(200).jsonp({msg:'follow info:',results}).end;
@@ -93,6 +96,7 @@ router.get('/:userId', (req,res) => {
 	const userId = req.params.userId;
 
 	get_user  = "call get_user(?)";
+
 	con.query(get_user, [userId],(err, results) => {
 		if (err) throw err;
 		res.status(200).jsonp({msg:'follow info:',results}).end;
