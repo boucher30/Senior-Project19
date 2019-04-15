@@ -24,10 +24,10 @@ React Proj (Front End)
 Node API (Back End)
 - use nodemon to run
 1) run : nodemon server.js
+(if no nodemon, use npm start. will not auto restart though)
 
 DATABASE
   - SQL FOLDER
     1) run ccv4
 
     2) run RUNMETOFILL.sql 
-
