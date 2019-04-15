@@ -9,6 +9,7 @@ import Form from 'react-bootstrap/Form';
 import CustomFormGroup from "./CustomFormGroup";
 import CarveAttendRequestModal from "./CarveAttendRequestModal";
 import CarveInviteModal from "./CarveInviteModal";
+import MediaCard from './MediaCard';
 
 
 export default class CarveCardUserCreate extends Component {
@@ -321,7 +322,9 @@ export default class CarveCardUserCreate extends Component {
                                         <Row>{carveComments}</Row>
 
                                     </Col>
-                                    <Col>{carveMedia}
+                                    <Col>
+                                    {carveMedia}
+                                    {/* <MediaCard type = "carves" content_id = {this.props.carveId}/> */}
                                     </Col>
 
 

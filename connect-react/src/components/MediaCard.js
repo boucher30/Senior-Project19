@@ -26,11 +26,7 @@ export default class MediaCard extends Component {
             description: "", 
             time: "",
         };
-
-
     }
-
-
 
     componentWillMount() {
             axios.get(`http://localhost:8000/media/${this.props.type}/${this.props.content_id}/`)
@@ -41,6 +37,7 @@ export default class MediaCard extends Component {
                 });
             }
 
+            
     render() {
         let mediaList;
         
