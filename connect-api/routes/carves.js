@@ -2,6 +2,9 @@ var express = require('express');
 var router = express.Router({mergeParams: true});
 const con = require('../db');
 
+/*
+ * Endpoint for all carve related requests
+ */
 
 // Grabs all carves from the database
 router.get('/', (req,res) => {
