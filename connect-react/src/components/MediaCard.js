@@ -25,17 +25,34 @@ export default class MediaCard extends Component {
             mediaInfo: {},
             description: "", 
             time: "",
-            mediaInfoLength: 0
+            typeOfMedia: 0 //0 = profile, 1 = venue, 2 = carve
         };
 
 
     }
 
     componentWillMount() {
-            axios.get(`http://localhost:8000/users/${this.props.profile_id}/media/`)
+            axios.get(`http://localhost:8000/media/profile/${this.props.content_id}/`)
                 .then(res => {
                     this.setState({
                         mediaInfo: res.data.results[0],
+                        typeOfMedia: 0
+                    });
+                });
+
+                axios.get(`http://localhost:8000/media/venue/${this.props.content_id}/`)
+                .then(res => {
+                    this.setState({
+                        mediaInfo: res.data.results[0],
+                        typeOfMedia: 1
+                    });
+                });
+
+                axios.get(`http://localhost:8000/media/carves/${this.props.content_id}/`)
+                .then(res => {
+                    this.setState({
+                        mediaInfo: res.data.results[0],
+                        typeOfMedia: 2
                     });
                 });
 
@@ -153,7 +170,6 @@ export default class MediaCard extends Component {
         let mediaList;
         if(this.state.mediaInfo.length > 0){
             mediaList = this.state.mediaInfo.map((media, index) => {
-                const {mediaInfo} = this.state;
                 return (
                         <ListGroup.Item key={index} style={{
 
@@ -168,7 +184,7 @@ export default class MediaCard extends Component {
                             <Card.Body>
                                 <container>
                                     <Row style = {{marginTop: '-1rem', borderBottom:'1px dashed grey'}}>
-                                        <Card.Link href = "#">{media.poster}</Card.Link>
+                                        <Card.Link href = "#">{media.media_id}</Card.Link>
                                         :{media.description}
                                     </Row>
                                     <Row style= {{marginTop: '1rem'}}>

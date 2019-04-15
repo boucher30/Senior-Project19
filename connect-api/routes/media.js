@@ -82,6 +82,17 @@ router.get('/profile/:userId', (req,res) => {
     })
 });
 
+router.get('/carves/:carveId', (req,res) => {
+    const carveId = req.params.carveId;
+
+    get_media  = "call get_carve_media(?)";
+    con.query(get_media, [carveId],(err, results) => {
+        if (err) throw err;
+        //console.log("results" + JSON.stringify(results));
+        res.status(200).jsonp({results}).end;
+    })
+});
+
 // Grab specific media by their id
 router.get('/venue/:venueId', (req,res) => {
     const venueId = req.params.venueId;
