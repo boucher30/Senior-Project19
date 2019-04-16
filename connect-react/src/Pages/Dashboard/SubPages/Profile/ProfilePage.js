@@ -11,6 +11,7 @@ import CarveCardUserCreate from "../../../../components/CarveCardUserCreate";
 import CreateCarveModal from "../../../../components/CreateCarveModal";
 import BuddyRequestModal from "../../../../components/BuddyRequestModal";
 import MediaCard from "../../../../components/MediaCard";
+import ProfileInfoCard from './ProfileInfoCard';
 
 
 export default class ProfilePage extends Component {
@@ -89,18 +90,20 @@ export default class ProfilePage extends Component {
 					<EditProfileModal handleRefresh={this.getUserInfo} user={userInfo} show={this.state.show} handleClose={this.handleClose} />
 					<BuddyRequestModal id ={this.state.userInfo.user_id} show={this.state.show2} handleClose={this.handleClose2}/>
 					<Row style={{paddingLeft:"20px"}}>
-					<div style={{ display: 'flex', marginTop: '8px', border: "0px solid slategrey" }}>
-						<h2 style={{ width: isUserLoggedIn ? '90%' : '80%' }}>{profilePrefix} Profile</h2>
-
-
-
-					</div>
+						<div style={{ display: 'flex', marginTop: '8px', border: "0px solid slategrey" }}>
+							<h2 style={{ width: isUserLoggedIn ? '90%' : '80%' }}>{profilePrefix} Profile</h2>
+						</div>
 						<div >
-							{options}</div>
+							{options}
+						</div>
 					</Row>
-					{/* This is the row that will hold the profile picture and the information */}
-					<Row>
 
+					{/* This is the row that will hold the profile picture and the information */}
+					
+				<div>
+					<ProfileInfoCard img={this.state.pic} username={userInfo.username}/>
+				</div>
+					{/* <Row>
 						<Col xs={4}>
 							<Container style={{  border: "0px solid black" }}>
 
@@ -127,7 +130,7 @@ export default class ProfilePage extends Component {
 						</Container>
 						</Col>
 
-					</Row>
+					</Row> */}
 
 				<Row>
 					{/* Row will hold all of the media and such that we grab from the api */}
