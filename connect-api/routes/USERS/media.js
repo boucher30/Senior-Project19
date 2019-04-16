@@ -7,12 +7,10 @@ const con = require('../../db');
 // Grabs all medias from db
 router.get('/', (req,res) => {
     // Find all medias from database
-    media_list = "CALL get_media()";
+    media_list = "CALL get_profile_media(?)";
+    userId = req.params.userId;
 
-
-    console.log(req.query);
-
-    con.query(media_list, (err, results) => {
+    con.query(media_list,[userId], (err, results) => {
         if (err) throw err;
 
         res.status(200).jsonp({results}).end;
