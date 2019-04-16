@@ -9,7 +9,7 @@ import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import axios from 'axios';
 import VenueCarveCard from "../../../../components/VenueCarveCard";
-import MediaCard from '../../../../components/MediaCard';
+import MediaGroup from '../../../../components/MediaGroup';
 
 
 export default class VenuePage extends Component {
@@ -110,7 +110,7 @@ export default class VenuePage extends Component {
                     <Row>
                     <Col style={{paddingLeft: "10%", border: '0px solid darkgrey'}}>
                         <h2 style = {{border:"0px solid slategrey"}}>Content</h2>
-                        <MediaCard type = "venue" content_id = {this.state.venueId}/>
+                        <MediaGroup type = "venue" content_id = {this.state.venueId}/>
                     </Col>
                         <Col style = {{width: "200%"}}>
                             <Row>

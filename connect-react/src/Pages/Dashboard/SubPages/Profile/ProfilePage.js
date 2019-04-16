@@ -10,7 +10,7 @@ import EditProfileModal from "./EditProfileModal";
 import CarveCardUserCreate from "../../../../components/CarveCardUserCreate";
 import CreateCarveModal from "../../../../components/CreateCarveModal";
 import BuddyRequestModal from "../../../../components/BuddyRequestModal";
-import MediaCard from "../../../../components/MediaCard";
+import MediaGroup from "../../../../components/MediaGroup";
 import ProfileInfoCard from './ProfileInfoCard';
 import CardColumns from 'react-bootstrap/CardColumns';
 import Card from 'react-bootstrap/Card';
@@ -110,7 +110,7 @@ export default class ProfilePage extends Component {
 					<Col style = {{marginLeft: "3%", marginTop: '2%', marginBottom: '2%'}}>
 						<h2 >My Media</h2>
 						<CardColumns>
-							<MediaCard type = "profile" content_id = {this.state.userId}/>
+							<MediaGroup type = "profile" content_id = {this.state.userId}/>
 						</CardColumns>                                                                                                 
 
 					</Col>
