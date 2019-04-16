@@ -26,7 +26,71 @@ export default class MediaCard extends Component {
             mediaComments: {},
             description: "", 
             time: "",
+            comment: "",
         };
+
+        this.onSetCarveID = this.onSetCarveID.bind(this);
+        this.onSetMediaID = this.onSetMediaID.bind(this);
+        this.onSetPosterID = this.onSetPosterID.bind(this);
+        this.onSetComment = this.onSetComment.bind(this);
+        this.onSetProfileID = this.onSetProfileID.bind(this);
+
+    }
+
+    onSetCarveID = event => {
+        this.setState({
+            carve: event.target.value
+        });
+    }
+
+    onSetMediaID = event => {
+        this.setState({
+            carve: event.target.value
+        });
+    }
+
+    onSetPosterID = event => {
+        this.setState({
+            carve: event.target.value
+        });
+    }
+
+    onSetComment = event => {
+        this.setState({
+            carve: event.target.value
+        });
+    }
+
+    onSetProfileID = event => {
+        this.setState({
+            carve: event.target.value
+        });
+    }
+
+    onSubmit = event => {
+        event.preventDefault();
+
+        const newComment = {
+            carve: this.state.carve,
+            media: this.state.media_id,
+            poster: this.state.poster,
+            comment: this.state.comment,
+            profile: this.state.profile,
+        };
+
+        axios.post(`http://localhost:8000/comments/`, {newComment})
+            .then(res => {
+                console.log("res: " + res);
+                console.log("data: " + res.data);
+        });
+
+        this.setState({
+            carve: '',
+            media: '',
+            poster: '',
+            comment: '',
+            profile: '',
+        });
     }
 
     componentWillMount() {
@@ -44,6 +108,7 @@ export default class MediaCard extends Component {
                     });
                 });
             }
+
 
 
     render() {
@@ -86,17 +151,19 @@ export default class MediaCard extends Component {
                                         :{media.description}
                                     </Row>
                                     <Row style= {{marginTop: '1rem'}}>
-                                        
+                                    <Form onSubmit={this.onSubmit}>
                                         <FormGroup>
                                             <Form.Row>
                                                 <Col className = "col-18">
-                                                    <Form.Control size = "sm" type="text" placeholder="Say something interesting..." />
+                                                    <Form.Control onChange={this.onSetComment} value={this.state.comment} size = "sm" type="text" placeholder="Say something interesting..." />
                                                 </Col>
                                                 <Col className = "col-1">
-                                                    <Button size = "sm">Enter</Button>
+                                                    <Button type = "submit" size = "sm">Enter</Button>
                                                 </Col>
                                             </Form.Row>
                                         </FormGroup>
+                                    </Form>
+  
                                     </Row>
                                 </container>
                             </Card.Body>
