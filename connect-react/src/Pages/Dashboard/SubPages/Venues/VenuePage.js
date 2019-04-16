@@ -10,6 +10,7 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import axios from 'axios';
 import VenueCarveCard from "../../../../components/VenueCarveCard";
 import MediaGroup from '../../../../components/MediaGroup';
+import CardColumns from 'react-bootstrap/CardColumns';
 
 
 export default class VenuePage extends Component {
@@ -107,18 +108,21 @@ export default class VenuePage extends Component {
                     </Row>
 
                     {/* Carves at the venue */}
-                    <Row>
-                    <Col style={{paddingLeft: "10%", border: '0px solid darkgrey'}}>
-                        <h2 style = {{border:"0px solid slategrey"}}>Content</h2>
-                        <MediaGroup type = "venue" content_id = {this.state.venueId}/>
-                    </Col>
-                        <Col style = {{width: "200%"}}>
-                            <Row>
-                                <h2>Carves at this venue</h2>
-                            </Row>
-                            <Row style = {{width:"100%"}}>
-                                <VenueCarveCard venue_id = {this.state.venueId} style = {{width:"100%"}}/>
-                            </Row></Col>
+                    <Row style={{marginTop: '2rem'}}>
+                        <Col>
+                        <CardColumns>
+                                <MediaGroup type = "venue" content_id = {this.state.venueId}/>
+                        </CardColumns>  
+                        </Col>
+  
+                    {/* <Col style = {{width: "200%"}}>
+                        <Row>
+                            <h2>Carves at this venue</h2>
+                        </Row>
+                        <Row style = {{width:"100%"}}>
+                            <VenueCarveCard venue_id = {this.state.venueId} style = {{width:"100%"}}/>
+                        </Row>
+                    </Col> */}
                     </Row>
                 </>
             );
