@@ -12,12 +12,13 @@ import Button from 'react-bootstrap/Button';
 const ProfileInfoCard = (props) => {
     return (
         <>
+        <EditProfileModal handleRefresh={props.refresh} user={props.user} show={props.show} handleClose={props.close} />
             <Container  
                 style= {{
                     width: '75%',
                     height:'50%',
                     border: 'solid 1px #555',
-                    backgroundColor: '#74bde8',
+                    backgroundColor: '#96d5fa',
                     boxShadow:  '0 0 10px 5px rgba(0,0,0,0.6)',
                     borderRadius: '10px',
                     padding: '.5rem',
@@ -53,7 +54,7 @@ const ProfileInfoCard = (props) => {
                         </table>
                     </Col>
                     <Col xs={1} style={{fontSize: '24px'}}>
-                        <Button variant="link" style={{color: 'black'}}><i class="fa fa-ellipsis-h fa-10x"></i></Button>
+                        <Button onClick={props.handleShow} variant="link" style={{color: 'black'}}><i class="fa fa-ellipsis-h fa-10x"></i></Button>
                     </Col>
 
                     

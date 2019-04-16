@@ -72,7 +72,6 @@ export default class ProfilePage extends Component {
 			if(isUserLoggedIn) {
 				options =
 					<Row classname="justify-content-end" style ={{paddingTop:"15px"}}>
-						<Button variant="info" onClick={this.handleShow}>Edit</Button>
 				<Button onClick={this.handleClick} style={{ margin: '5px' }}>Create Carve</Button>
 				</Row>
 			} else {
@@ -101,45 +100,13 @@ export default class ProfilePage extends Component {
 					{/* This is the row that will hold the profile picture and the information */}
 					
 				<div>
-					<ProfileInfoCard firstName={userInfo.first_name} lastName={userInfo.last_name} img={this.state.pic} username={userInfo.username} description={userInfo.description} type={userInfo.type} snow={userInfo.snow_sports} water={userInfo.water_sports} land={userInfo.land_sports}/>
+					<ProfileInfoCard handleShow={this.handleShow} close={this.handleClose} show={this.state.show} refresh= {this.getUserInfo} user={userInfo} firstName={userInfo.first_name} lastName={userInfo.last_name} img={this.state.pic} username={userInfo.username} description={userInfo.description} type={userInfo.type} snow={userInfo.snow_sports} water={userInfo.water_sports} land={userInfo.land_sports}/>
 				</div>
-					{/* <Row>
-						<Col xs={4}>
-							<Container style={{  border: "0px solid black" }}>
-
-								<Image src={this.state.pic} fluid />
-							</Container>
-						</Col>
-						<Col xs={4}>
-							<Container style={{ backgroundColor: "darkgrey", height: "100%", width:"100%",border: "0px double black"}} bordered>
-								<h1> {userInfo.username}</h1>
-								<h4> {userInfo.first_name} {userInfo.last_name}</h4>
-								<p style={{flexDirection:'row'}} > <i className="fa fa-video-camera"> </i> {userInfo.type} </p>
-								<p style = {{paddingLeft: "10%",}}> About me: {userInfo.description}</p>
-							</Container>
-						</Col>
-						<Col xs={4}>
-						<Container style={{ border: " 0px solid black", backgroundColor:'slategrey', width:"100%%", height: "100%" }}>
-							<h3>Profile Info</h3>
-							<p>Buddy Count: {this.state.buddies}</p>
-							<p> Follower Count: {this.state.follows} </p>
-							<p> Winter Sports: {userInfo.snow_sports}</p>
-							<p> Water Sports: {userInfo.water_sports}</p>
-							<p> Land Sports: {userInfo.land_sports}</p>
-							<p> Air Sports: {userInfo.air_sports}</p>
-						</Container>
-						</Col>
-
-					</Row> */}
 
 				<Row>
 					{/* Row will hold all of the media and such that we grab from the api */}
 					<Col style={{paddingLeft: "10%", border: '0px solid darkgrey'}}>
 						<h2 style = {{border:"0px solid slategrey"}}>Content</h2>
-						<div>
-							<MediaCard profile_id = {this.state.userId}/>
-						</div>
-						<div>                                                                                                    </div>
 						<div>
 							<MediaCard profile_id = {this.state.userId}/>
 						</div>
