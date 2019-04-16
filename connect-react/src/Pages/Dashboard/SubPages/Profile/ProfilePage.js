@@ -12,6 +12,8 @@ import CreateCarveModal from "../../../../components/CreateCarveModal";
 import BuddyRequestModal from "../../../../components/BuddyRequestModal";
 import MediaCard from "../../../../components/MediaCard";
 import ProfileInfoCard from './ProfileInfoCard';
+import CardColumns from 'react-bootstrap/CardColumns';
+import Card from 'react-bootstrap/Card';
 
 
 export default class ProfilePage extends Component {
@@ -72,13 +74,14 @@ export default class ProfilePage extends Component {
 			if(isUserLoggedIn) {
 				options =
 					<Row classname="justify-content-end" style ={{paddingTop:"15px"}}>
-				<Button onClick={this.handleClick} style={{ margin: '5px' }}>Create Carve</Button>
-				</Row>
+						<Button onClick={this.handleClick} style={{ marginLeft: '50px', marginTop: '-7px' }}>Create Carve</Button>
+					</Row>
 			} else {
-				options = <div style={{display:'flex'}}>
-					<Button style={{margin:'5px'}} variant="info" onClick = {this.onClick1}>Follow</Button>
-					<Button style={{margin:'5px'}} variant="info" onClick = {this.handleClick2}>Add Buddy</Button>
-				</div>;
+				options = 
+					<div style={{display:'flex'}}>
+						<Button style={{margin:'5px'}} variant="info" onClick = {this.onClick1}>Follow</Button>
+						<Button style={{margin:'5px'}} variant="info" onClick = {this.handleClick2}>Add Buddy</Button>
+					</div>;
 
 
 			}
@@ -87,35 +90,50 @@ export default class ProfilePage extends Component {
 				<>
 					<CreateCarveModal handleClose={this.handleClick} show={this.state.show1}/>
 					<BuddyRequestModal id ={this.state.userInfo.user_id} show={this.state.show2} handleClose={this.handleClose2}/>
-					<Row style={{paddingLeft:"20px"}}>
+					<Row style={{marginLeft: "3%", marginTop: '2%', marginBottom: '2%'}}>
 						<div style={{ display: 'flex', marginTop: '8px', border: "0px solid slategrey" }}>
-							<h2 style={{ width: isUserLoggedIn ? '90%' : '80%' }}>{profilePrefix} Profile</h2>
+							<h2>{profilePrefix} Profile</h2>
 						</div>
 						<div >
 							{options}
 						</div>
 					</Row>
 
-					{/* This is the row that will hold the profile picture and the information */}
 					
+				{/* This is the row that will hold the profile picture and the information */}
 				<div>
 					<ProfileInfoCard loggedIn={isUserLoggedIn} handleShow={this.handleShow} close={this.handleClose} show={this.state.show} refresh= {this.getUserInfo} user={userInfo} firstName={userInfo.first_name} lastName={userInfo.last_name} img={this.state.pic} username={userInfo.username} description={userInfo.description} type={userInfo.type} snow={userInfo.snow_sports} water={userInfo.water_sports} land={userInfo.land_sports}/>
 				</div>
 
 				<Row>
 					{/* Row will hold all of the media and such that we grab from the api */}
-					<Col style={{paddingLeft: "10%", border: '0px solid darkgrey'}}>
-						<h2 style = {{border:"0px solid slategrey"}}>Content</h2>
-						<div>
+					<Col style={{marginLeft: "3%", marginTop: '5%'}}>
+						<h2 >My Media</h2>
+						<CardColumns>
+							{/* <Card>
+								<Card.Img variant="top" src="holder.js/100px160" />
+								<Card.Body>
+									<Card.Title>Card title that wraps to a new line</Card.Title>
+									<Card.Text>
+										This is a longer card with supporting text below as a natural lead-in to
+										additional content. This content is a little bit longer.
+									</Card.Text>
+								</Card.Body>
+							</Card> */}
 							<MediaCard profile_id = {this.state.userId}/>
-						</div>
+						</CardColumns>
+													
+						
 
 					</Col>
-					<Col style = {{width: "100%"}}>
+					{/* <Col style = {{width: "100%"}}>
 						<Row>
-							<h2>Carves created by user</h2></Row>
-						<Row style = {{width:"100%"}}>
-							<CarveCardUserCreate profile_id = {this.state.userId} style = {{width:"100%"}}/></Row></Col></Row>
+							<h2>Carves created by user</h2></Row> */}
+						{/* <Row style = {{width:"100%"}}>
+							<CarveCardUserCreate profile_id = {this.state.userId} style = {{width:"100%"}}/>
+						</Row>
+					</Col> */}
+				</Row>
 				</>
 			);
 		} else {

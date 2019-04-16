@@ -161,7 +161,7 @@ export default class MediaCard extends Component {
             const {mediaInfo} = this.state;
             return (
                 <>
-                    <Card style = {{width: '35rem'}}>
+                    <Card style = {{width: '25rem'}}>
                             <container className="embed-responsive embed-responsive-16by9" style = {{ width: "100%", paddingBottom: "40px", border: '1px solid grey'}}>
                                     <iframe title="User Media" className="embed-responsive-item"
                                             src= {mediaInfo.url} allowFullScreen > </iframe>
@@ -216,7 +216,6 @@ export default class MediaCard extends Component {
                         </Table>
                         <Card.Footer style = {{fontSize: '10px'}}><em>Create_Time{mediaInfo.time}</em></Card.Footer>
                     </Card>
-
                 </>
             )
         }else {
