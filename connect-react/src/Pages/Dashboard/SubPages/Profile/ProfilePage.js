@@ -107,23 +107,12 @@ export default class ProfilePage extends Component {
 
 				<Row>
 					{/* Row will hold all of the media and such that we grab from the api */}
-					<Col style={{marginLeft: "3%", marginTop: '5%'}}>
-						<h2 style={{marginBottom: '2%'}}>My Media</h2>
-						<CardColumns>
-							{/* <Card>
-								<Card.Img variant="top" src="holder.js/100px160" />
-								<Card.Body>
-									<Card.Title>Card title that wraps to a new line</Card.Title>
-									<Card.Text>
-										This is a longer card with supporting text below as a natural lead-in to
-										additional content. This content is a little bit longer.
-									</Card.Text>
-								</Card.Body>
-							</Card> */}
-							<MediaCard profile_id = {this.state.userId}/>
-						</CardColumns>
-													
-						
+					<Col style={{paddingLeft: "10%", border: '0px solid darkgrey'}}>
+						<h2 style = {{border:"0px solid slategrey"}}>Content</h2>
+						<div>
+							<MediaCard type = "profile" content_id = {this.state.userId}/>
+						</div>
+						<div>                                                                                                    </div>
 
 					</Col>
 					{/* <Col style = {{width: "100%"}}>
