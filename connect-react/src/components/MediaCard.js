@@ -9,6 +9,8 @@ import Form from 'react-bootstrap/Form';
 import CustomFormGroup from "./CustomFormGroup";
 import FormGroup from 'react-bootstrap/FormGroup';
 import Table from 'react-bootstrap/Table';
+import CardColumns from 'react-bootstrap/CardColumns'
+import { Container } from 'react-bootstrap';
 
 
 
@@ -117,7 +119,7 @@ export default class MediaCard extends Component {
         
         if(this.state.mediaInfo.length > 0){
             mediaList = this.state.mediaInfo.map((media, index) => {
-
+                
                 if(this.state.mediaComments.length > 0){
                     commentList = this.state.mediaComments.map((com, index) => {
                         if(com.media === media.media_id){
@@ -134,59 +136,56 @@ export default class MediaCard extends Component {
                     });
                 }
                 return (
-                        <ListGroup.Item key={index} style={{
-
-                            fontFamily: 'monospace', paddingRight: '0px', paddingLeft: '0px',paddingTop: '0px',paddingBottom: '10px', width: "100%"
-                        }}>
-                        <Card style = {{width: '25rem'}}>
-                                <container className="embed-responsive embed-responsive-16by9" style = {{ width: "100%", paddingBottom: "40px", border: '1px solid grey'}}>
-                                        <iframe title="User Media" className="embed-responsive-item"
-                                                src= {media.url} allowFullScreen > </iframe>
-                                                
-                                </container>
-                            <Card.Body>
-                                <container>
-                                    <Row style = {{marginTop: '-1rem', borderBottom:'1px dashed grey'}}>
-                                    <Card.Link href = "#">{media.poster}</Card.Link>
-                                        :{media.description}
-                                    </Row>
-                                    <Row style= {{marginTop: '1rem'}}>
-                                    <Form onSubmit={this.onSubmit}>
-                                        <FormGroup>
-                                            <Form.Row>
-                                                <Col className = "col-18">
-                                                    <Form.Control onChange={this.onSetComment} value={this.state.comment} size = "sm" type="text" placeholder="Say something interesting..." />
-                                                </Col>
-                                                <Col className = "col-1">
-                                                    <Button type = "submit" size = "sm">Enter</Button>
-                                                </Col>
-                                            </Form.Row>
-                                        </FormGroup>
-                                    </Form>
-  
-                                    </Row>
-                                </container>
-                            </Card.Body>
-                            <Table striped borderless hover size = "sm" style = {{marginTop: '-2rem'}}>
-                                <thead>
-                                    <th>
-                                        username
-                                    </th>
-                                    <th>
-                                        comment
-                                    </th>
-                                    <th>
-                                        timestamp
-                                    </th>
-                                </thead>
-                                <tbody>
-                                    {commentList}
-                                </tbody>
+                            <ListGroup.Item key={index}>
+                            <Card style = {{width: '25rem'}}>
+                                    <container className="embed-responsive embed-responsive-16by9" style = {{ width: "100%", paddingBottom: "40px", border: '1px solid grey'}}>
+                                            <iframe title="User Media" className="embed-responsive-item"
+                                                    src= {media.url} allowFullScreen > </iframe>
+                                                    
+                                    </container>
+                                <Card.Body>
+                                    <container>
+                                        <Row style = {{marginTop: '-1rem', borderBottom:'1px dashed grey'}}>
+                                        <Card.Link href = "#">{media.poster}</Card.Link>
+                                            :{media.description}
+                                        </Row>
+                                        <Row style= {{marginTop: '1rem'}}>
+                                        <Form onSubmit={this.onSubmit}>
+                                            <FormGroup>
+                                                <Form.Row>
+                                                    <Col className = "col-18">
+                                                        <Form.Control onChange={this.onSetComment} value={this.state.comment} size = "sm" type="text" placeholder="Say something interesting..." />
+                                                    </Col>
+                                                    <Col className = "col-1">
+                                                        <Button type = "submit" size = "sm">Enter</Button>
+                                                    </Col>
+                                                </Form.Row>
+                                            </FormGroup>
+                                        </Form>
     
-                            </Table>
-                            <Card.Footer style = {{fontSize: '10px'}}><em>Create_Time: {media.time}</em></Card.Footer>
-                        </Card>
-                    </ListGroup.Item>
+                                        </Row>
+                                    </container>
+                                </Card.Body>
+                                <Table striped borderless hover size = "sm" style = {{marginTop: '-2rem'}}>
+                                    <thead>
+                                        <th>
+                                            username
+                                        </th>
+                                        <th>
+                                            comment
+                                        </th>
+                                        <th>
+                                            timestamp
+                                        </th>
+                                    </thead>
+                                    <tbody>
+                                        {commentList}
+                                    </tbody>
+        
+                                </Table>
+                                <Card.Footer style = {{fontSize: '10px'}}><em>Create_Time: {media.time}</em></Card.Footer>
+                            </Card>
+                        </ListGroup.Item>
                 ) //return
             });
         }
