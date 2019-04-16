@@ -4,6 +4,8 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Container from "react-bootstrap/Container";
 import Image from 'react-bootstrap/Image';
+import EditProfileModal from "./EditProfileModal";
+import Button from 'react-bootstrap/Button';
 
 
 
@@ -27,9 +29,6 @@ const ProfileInfoCard = (props) => {
                     </Col>
                     <Col style={{marginLeft: '12rem'}}>
                         <table>
-                            <thead>
-
-                            </thead>
                             <tbody>
                                 <tr>
                                     <td><h1>{props.firstName} {props.lastName}</h1></td>
@@ -52,7 +51,9 @@ const ProfileInfoCard = (props) => {
                                 </tr>
                             </tbody>
                         </table>
-                        
+                    </Col>
+                    <Col xs={1} style={{fontSize: '24px'}}>
+                        <Button variant="link" style={{color: 'black'}}><i class="fa fa-ellipsis-h fa-10x"></i></Button>
                     </Col>
 
                     
