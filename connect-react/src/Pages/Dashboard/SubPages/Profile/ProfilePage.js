@@ -101,7 +101,7 @@ export default class ProfilePage extends Component {
 					{/* This is the row that will hold the profile picture and the information */}
 					
 				<div>
-					<ProfileInfoCard img={this.state.pic} username={userInfo.username}/>
+					<ProfileInfoCard firstName={userInfo.first_name} lastName={userInfo.last_name} img={this.state.pic} username={userInfo.username} description={userInfo.description} type={userInfo.type} snow={userInfo.snow_sports} water={userInfo.water_sports} land={userInfo.land_sports}/>
 				</div>
 					{/* <Row>
 						<Col xs={4}>
