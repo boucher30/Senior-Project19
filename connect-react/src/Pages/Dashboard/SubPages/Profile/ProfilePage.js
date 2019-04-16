@@ -108,7 +108,7 @@ export default class ProfilePage extends Component {
 				<Row>
 					{/* Row will hold all of the media and such that we grab from the api */}
 					<Col style={{marginLeft: "3%", marginTop: '5%'}}>
-						<h2 >My Media</h2>
+						<h2 style={{marginBottom: '2%'}}>My Media</h2>
 						<CardColumns>
 							{/* <Card>
 								<Card.Img variant="top" src="holder.js/100px160" />
