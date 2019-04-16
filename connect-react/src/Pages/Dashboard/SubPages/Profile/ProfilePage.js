@@ -86,7 +86,6 @@ export default class ProfilePage extends Component {
 			return (
 				<>
 					<CreateCarveModal handleClose={this.handleClick} show={this.state.show1}/>
-					<EditProfileModal handleRefresh={this.getUserInfo} user={userInfo} show={this.state.show} handleClose={this.handleClose} />
 					<BuddyRequestModal id ={this.state.userInfo.user_id} show={this.state.show2} handleClose={this.handleClose2}/>
 					<Row style={{paddingLeft:"20px"}}>
 						<div style={{ display: 'flex', marginTop: '8px', border: "0px solid slategrey" }}>
@@ -100,7 +99,7 @@ export default class ProfilePage extends Component {
 					{/* This is the row that will hold the profile picture and the information */}
 					
 				<div>
-					<ProfileInfoCard handleShow={this.handleShow} close={this.handleClose} show={this.state.show} refresh= {this.getUserInfo} user={userInfo} firstName={userInfo.first_name} lastName={userInfo.last_name} img={this.state.pic} username={userInfo.username} description={userInfo.description} type={userInfo.type} snow={userInfo.snow_sports} water={userInfo.water_sports} land={userInfo.land_sports}/>
+					<ProfileInfoCard loggedIn={isUserLoggedIn} handleShow={this.handleShow} close={this.handleClose} show={this.state.show} refresh= {this.getUserInfo} user={userInfo} firstName={userInfo.first_name} lastName={userInfo.last_name} img={this.state.pic} username={userInfo.username} description={userInfo.description} type={userInfo.type} snow={userInfo.snow_sports} water={userInfo.water_sports} land={userInfo.land_sports}/>
 				</div>
 
 				<Row>

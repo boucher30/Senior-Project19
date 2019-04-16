@@ -10,6 +10,16 @@ import Button from 'react-bootstrap/Button';
 
 
 const ProfileInfoCard = (props) => {
+    let editButton;
+    if(props.loggedIn){
+        editButton = 
+                    <Col xs={1} style={{fontSize: '24px'}}>
+                        <Button onClick={props.handleShow} variant="link" style={{color: 'black'}}><i class="fa fa-ellipsis-h fa-10x"></i></Button>
+                    </Col>;
+    }
+    else{
+        editButton = "";
+    }
     return (
         <>
         <EditProfileModal handleRefresh={props.refresh} user={props.user} show={props.show} handleClose={props.close} />
@@ -53,9 +63,7 @@ const ProfileInfoCard = (props) => {
                             </tbody>
                         </table>
                     </Col>
-                    <Col xs={1} style={{fontSize: '24px'}}>
-                        <Button onClick={props.handleShow} variant="link" style={{color: 'black'}}><i class="fa fa-ellipsis-h fa-10x"></i></Button>
-                    </Col>
+                    {editButton}
 
                     
                 </Row>
