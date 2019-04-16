@@ -138,7 +138,7 @@ export default class MediaCard extends Component {
 
                             fontFamily: 'monospace', paddingRight: '0px', paddingLeft: '0px',paddingTop: '0px',paddingBottom: '10px', width: "100%"
                         }}>
-                        <Card style = {{width: '35rem'}}>
+                        <Card style = {{width: '25rem'}}>
                                 <container className="embed-responsive embed-responsive-16by9" style = {{ width: "100%", paddingBottom: "40px", border: '1px solid grey'}}>
                                         <iframe title="User Media" className="embed-responsive-item"
                                                 src= {media.url} allowFullScreen > </iframe>

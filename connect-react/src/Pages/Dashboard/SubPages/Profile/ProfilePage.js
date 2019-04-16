@@ -107,12 +107,11 @@ export default class ProfilePage extends Component {
 
 				<Row>
 					{/* Row will hold all of the media and such that we grab from the api */}
-					<Col style={{paddingLeft: "10%", border: '0px solid darkgrey'}}>
-						<h2 style = {{border:"0px solid slategrey"}}>Content</h2>
-						<div>
+					<Col style = {{marginLeft: "3%", marginTop: '2%', marginBottom: '2%'}}>
+						<h2 >My Media</h2>
+						<CardColumns>
 							<MediaCard type = "profile" content_id = {this.state.userId}/>
-						</div>
-						<div>                                                                                                    </div>
+						</CardColumns>                                                                                                 
 
 					</Col>
 					{/* <Col style = {{width: "100%"}}>
