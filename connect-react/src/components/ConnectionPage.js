@@ -38,11 +38,11 @@ export default class ConnectionPage extends Component {
 	// Creates a user in the database
 	createConnection() {
 		this.setState({ loading: true });
-		axios.post('http://localhost:8000/users', this.state.newUser)
+		axios.post('http://ec2-3-92-212-119.compute-1.amazonaws.com:8000/users', this.state.newUser)
 			.then(res => {
 				// After making a new user, lets go get the new list of users from the api
 				this.setState({ show: false });
-				axios.get('http://localhost:8000/users')
+				axios.get('http://ec2-3-92-212-119.compute-1.amazonaws.com:8000/users')
 					.then(res => {
 						console.log('Reloaded all users from db');
 						this.setState({
@@ -55,7 +55,7 @@ export default class ConnectionPage extends Component {
 
 	componentWillMount() {
 		this.setState({ loading: true });
-		axios.get('http://localhost:8000/users')
+		axios.get('http://ec2-3-92-212-119.compute-1.amazonaws.com:8000/users')
 			.then(res => {
 				this.setState({
 					users: res.data.users,

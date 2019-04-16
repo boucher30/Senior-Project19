@@ -20,7 +20,7 @@ class SideMenu extends Component {
 
 
 	componentWillMount() {
-		axios.get(`http://localhost:8000/users/${localStorage.getItem('userId')}/follows/buddies`)
+		axios.get(`http://ec2-3-92-212-119.compute-1.amazonaws.com:8000/users/${localStorage.getItem('userId')}/follows/buddies`)
 			.then(res => {
 				// console.log("results: ", res.data.results[0]);
 				//alert("Buddy list:"+ JSON.stringify(res.data.results[0][0].user_Id2));

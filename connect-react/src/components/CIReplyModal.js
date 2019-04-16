@@ -33,13 +33,13 @@ export default class CIReplyModal extends Component {
 
         if(this.props.type === 'inviteAccept')
         {
-            axios.post('http://localhost:8000/carveAttendees', {
+            axios.post('http://ec2-3-92-212-119.compute-1.amazonaws.com:8000/carveAttendees', {
                 user: this.state.sender,
                 carve:this.props.carI
 
             });}
         console.log('Message created');
-        axios.post('http://localhost:8000/messages', {
+        axios.post('http://ec2-3-92-212-119.compute-1.amazonaws.com:8000/messages', {
             sender: this.state.sender,
             reciever: this.props.replier,
             subject: 'RE:carveInvite ',

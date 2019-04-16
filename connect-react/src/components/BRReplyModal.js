@@ -33,13 +33,13 @@ export default class BRReplyModal extends Component {
 
         if(this.props.type === 'buddyAccept')
         {
-            axios.post('http://localhost:8000/follows/buddies', {
+            axios.post('http://ec2-3-92-212-119.compute-1.amazonaws.com:8000/follows/buddies', {
                 user1: this.state.sender,
                 user2: this.props.replier
 
             });}
         console.log('Message created');
-        axios.post('http://localhost:8000/messages', {
+        axios.post('http://ec2-3-92-212-119.compute-1.amazonaws.com:8000/messages', {
             sender: this.state.sender,
             reciever: this.props.replier,
             subject: 'RE:Buddy Request ',

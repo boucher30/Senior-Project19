@@ -53,7 +53,7 @@ export default class ProfilePage extends Component {
 
 	onClick1 = () =>{
 
-		axios.post('http://localhost:8000/follows', {
+		axios.post('http://ec2-3-92-212-119.compute-1.amazonaws.com:8000/follows', {
 			user1: localStorage.getItem('userId'),
 			user2: this.state.userInfo.user_id
 
@@ -172,7 +172,7 @@ export default class ProfilePage extends Component {
 	getUserInfo() {
 		// Getting the user id from the url param
 		if(this.state.userId >0)
-			axios.get(`http://localhost:8000/users/${this.state.userId}`)
+			axios.get(`http://ec2-3-92-212-119.compute-1.amazonaws.com:8000/users/${this.state.userId}`)
 				.then(res => {
 					this.setState({
 						userInfo: res.data.users[0][0],
@@ -184,7 +184,7 @@ export default class ProfilePage extends Component {
 				});
 		else {
 
-			axios.get(`http://localhost:8000/users/${0}`)
+			axios.get(`http://ec2-3-92-212-119.compute-1.amazonaws.com:8000/users/${0}`)
 				.then(res => {
 					this.setState({
 						userInfo: res.data.users[0][0],
@@ -198,7 +198,7 @@ export default class ProfilePage extends Component {
 	getUserCounts() {
 		// Getting the user id from the url param
 
-			axios.get(`http://localhost:8000/users/${this.state.userId}/follows/buddies`)
+			axios.get(`http://ec2-3-92-212-119.compute-1.amazonaws.com:8000/users/${this.state.userId}/follows/buddies`)
 				.then(res => {
 					this.setState({
 						userInfo: res.data[0][0],
@@ -210,7 +210,7 @@ export default class ProfilePage extends Component {
 				});
 
 
-			axios.get(`http://localhost:8000/users/${this.state.userId}/follows/followers`)
+			axios.get(`http://ec2-3-92-212-119.compute-1.amazonaws.com:8000/users/${this.state.userId}/follows/followers`)
 				.then(res => {
 					this.setState({
 						userInfo: res.data.users[0][0],

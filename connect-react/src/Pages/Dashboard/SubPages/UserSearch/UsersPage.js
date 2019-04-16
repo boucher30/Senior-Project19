@@ -26,7 +26,7 @@ class UsersPage extends Component {
 
     componentWillMount() {
         // Getting the user id from the url param
-        axios.get(`http://localhost:8000/users`)
+        axios.get(`http://ec2-3-92-212-119.compute-1.amazonaws.com:8000/users`)
             .then(res => {
                 this.setState({
                     venues: res.data.users[0],

@@ -98,7 +98,7 @@ export default class SignUpPage extends Component {
 		e.preventDefault();
 		console.log('Submitted form:', this.state);
 
-		axios.post('http://localhost:8000/users', {
+		axios.post('http://ec2-3-92-212-119.compute-1.amazonaws.com:8000/users', {
 			username: this.state.username,
 			password: this.state.password,
 			email: this.state.email,

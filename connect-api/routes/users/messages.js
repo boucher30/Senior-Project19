@@ -103,7 +103,7 @@ function findReplyMessages(messages, userId) {
 router.get('/inbox', (req,res) => {
     sql = "CALL get_users_inbox(?)";
 
-    tempSql = "select * from messages where (rec_id = 1 or sender_Id = 1) and (type = 'normal' or type = 'reply') order by message_id desc;"
+    tempSql = "select * from messages where (rec_id = 1 or sender_Id = 1) and (type = 'normal' or type = 'reply') order by message_id desc;";
     userId = Number(req.params.userId);
 
     // Query the db for the rows that have a receiver_id equal to the userId

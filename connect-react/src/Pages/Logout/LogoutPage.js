@@ -15,7 +15,7 @@ import axios from "axios";
 class LogoutPage extends Component {
     componentWillMount()
     {
-        axios.get(`http://localhost:8000/users/${localStorage.getItem('userId')}/logout`)
+        axios.get(`http://ec2-3-92-212-119.compute-1.amazonaws.com:8000/users/${localStorage.getItem('userId')}/logout`)
             .then(res => {
 
                 this.setState({

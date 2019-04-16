@@ -28,7 +28,7 @@ class MessagesPageInbox extends Component {
 
     }
     componentWillMount() {
-        axios.get(`http://localhost:8000/users/${localStorage.getItem('userId')}/messages`)
+        axios.get(`http://ec2-3-92-212-119.compute-1.amazonaws.com:8000/users/${localStorage.getItem('userId')}/messages`)
             .then(res => {
                 console.log("results: ", res.data.results[0]);
                 this.setState({
@@ -42,7 +42,7 @@ class MessagesPageInbox extends Component {
 //onClick={this.onClick(message.message_id)}
     onClick2 = (e) =>{
         console.log(" delete:" +e);
-        axios.delete(`http://localhost:8000/messages/${e}`)
+        axios.delete(`http://ec2-3-92-212-119.compute-1.amazonaws.com:8000/messages/${e}`)
 
 
 

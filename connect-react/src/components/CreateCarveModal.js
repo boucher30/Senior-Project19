@@ -40,7 +40,7 @@ export default class CreateCarveModal extends Component {
 		const date = `${startDate.getFullYear()}-${startDate.getMonth() + 1}-${startDate.getDate()}`;
 		console.log('Date:', date);
 //carveName,creatorId,venueId,carveType,athlete,photo,date, sports
-		axios.post('http://localhost:8000/carves', {
+		axios.post('http://ec2-3-92-212-119.compute-1.amazonaws.com:8000/carves', {
 			carveName: this.state.name,
 			creatorId: localStorage.getItem('userId'),
 			venueId: this.state.venue,

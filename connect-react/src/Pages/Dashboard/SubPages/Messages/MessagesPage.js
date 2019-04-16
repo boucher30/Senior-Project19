@@ -38,7 +38,7 @@ class MessagesPage extends Component {
 
     // Fetches messages from API
     fetchMessages() {
-      axios.get(`http://localhost:8000/users/${localStorage.getItem('userId')}/messages/inbox`)
+      axios.get(`http://ec2-3-92-212-119.compute-1.amazonaws.com:8000/users/${localStorage.getItem('userId')}/messages/inbox`)
         .then(res => {
           console.log("Messages from inbox: ", res.data.messages);
           this.setState({
@@ -52,7 +52,7 @@ class MessagesPage extends Component {
     // Deletes a specific message when the trash can icon is clicked
     deleteMessage = (e) =>{
         console.log(" delete:" +e);
-        axios.delete(`http://localhost:8000/messages/${e}`)
+        axios.delete(`http://ec2-3-92-212-119.compute-1.amazonaws.com:8000/messages/${e}`)
     };
 
     // This function passes the data to the Reply Message Modal

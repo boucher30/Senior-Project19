@@ -31,13 +31,13 @@ export default class MessageModal extends Component {
     // Sends a new message to a specific user
     sendMessage() {
        if(this.state.type === 'buddyAccept') {
-           axios.post('http://localhost:8000/follows/buddy', {
+           axios.post('http://ec2-3-92-212-119.compute-1.amazonaws.com:8000/follows/buddy', {
                user1: this.state.sender,
                user2: this.state.to
            })
        } else {
          console.log('Message created');
-         axios.post('http://localhost:8000/messages', {
+         axios.post('http://ec2-3-92-212-119.compute-1.amazonaws.com:8000/messages', {
            sender: this.state.sender,
            reciever: this.state.to,
            subject: this.state.subject,

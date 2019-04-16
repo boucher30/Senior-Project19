@@ -33,7 +33,7 @@ export default class BuddyRequestModal extends Component {
     sendMessage() {
 
         console.log('Message created');
-        axios.post('http://localhost:8000/messages', {
+        axios.post('http://ec2-3-92-212-119.compute-1.amazonaws.com:8000/messages', {
             sender: this.state.sender,
             reciever: this.props.id,
             subject: 'Buddy Request ',

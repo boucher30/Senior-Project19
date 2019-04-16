@@ -42,7 +42,7 @@ export default class ReplyMsgModal extends Component {
         };
 
         // Post message body to api
-        axios.post('http://localhost:8000/messages', message)
+        axios.post('http://ec2-3-92-212-119.compute-1.amazonaws.com:8000/messages', message)
           .then(() => {
               this.props.refresh();
               this.props.handleClose();

@@ -44,7 +44,7 @@ export default class CarveCardUserCreate extends Component {
     }
 
     componentWillMount() {
-        axios.get(`http://localhost:8000/users/${this.props.profile_id}/carves/`)
+        axios.get(`http://ec2-3-92-212-119.compute-1.amazonaws.com:8000/users/${this.props.profile_id}/carves/`)
             .then(res => {
                 // console.log("results: ", res.data.results[0]);
                 //alert(JSON.stringify(res.data.results[0]));
@@ -54,7 +54,7 @@ export default class CarveCardUserCreate extends Component {
 
             });
         //currently only gets attendees for carve1. not dynamic per carve
-        axios.get(`http://localhost:8000/comments`)
+        axios.get(`http://ec2-3-92-212-119.compute-1.amazonaws.com:8000/comments`)
             .then(res => {
                 //alert("carve:" + JSON.stringify(res.data.results));
                 // console.log("results: ", res.data.results[0]);
@@ -66,7 +66,7 @@ export default class CarveCardUserCreate extends Component {
             });
 
         //currently only gets attendees for carve1. not dynamic per carve
-        axios.get(`http://localhost:8000/media`)
+        axios.get(`http://ec2-3-92-212-119.compute-1.amazonaws.com:8000/media`)
             .then(res => {
                 //alert("carve:" + JSON.stringify(res.data.results));
                 // console.log("results: ", res.data.results[0]);
@@ -78,7 +78,7 @@ export default class CarveCardUserCreate extends Component {
             });
 
         //currently =dynamic per carve
-        axios.get(`http://localhost:8000/carveAt`)
+        axios.get(`http://ec2-3-92-212-119.compute-1.amazonaws.com:8000/carveAt`)
             .then(res => {
                 //alert("carve:" + JSON.stringify(res.data.results));
                 // console.log("results: ", res.data.results[0]);
@@ -91,7 +91,7 @@ export default class CarveCardUserCreate extends Component {
 
 
         //currently only gets attendees for carve1. not dynamic per carve
-        axios.get(`http://localhost:8000/carves/${1}/likes`)
+        axios.get(`http://ec2-3-92-212-119.compute-1.amazonaws.com:8000/carves/${1}/likes`)
             .then(res => {
                 //alert("carve:" + JSON.stringify(res.data.results));
                 // console.log("results: ", res.data.results[0]);
@@ -104,7 +104,7 @@ export default class CarveCardUserCreate extends Component {
 
 
         //currently only gets attendees for carve1. not dynamic per carve
-        axios.get(`http://localhost:8000/carves/${1}/likes/dislike`)
+        axios.get(`http://ec2-3-92-212-119.compute-1.amazonaws.com:8000/carves/${1}/likes/dislike`)
             .then(res => {
                 //alert("carve:" + JSON.stringify(res.data.results));
                 // console.log("results: ", res.data.results[0]);
@@ -118,7 +118,7 @@ export default class CarveCardUserCreate extends Component {
 
     like(e){
         //currently only gets attendees for carve1. not dynamic per carve
-        axios.post(`http://localhost:8000/carves/${1}/likes`,
+        axios.post(`http://ec2-3-92-212-119.compute-1.amazonaws.com:8000/carves/${1}/likes`,
             {
                 poster: localStorage.getItem('userId'),
                 carve : e
@@ -134,7 +134,7 @@ export default class CarveCardUserCreate extends Component {
 
     dislike = (e) =>{
         //currently only gets attendees for carve1. not dynamic per carve
-        axios.post(`http://localhost:8000/carves/${1}/likes/dislikes`,
+        axios.post(`http://ec2-3-92-212-119.compute-1.amazonaws.com:8000/carves/${1}/likes/dislikes`,
             {
                 poster: localStorage.getItem('userId'),
                 carve : e

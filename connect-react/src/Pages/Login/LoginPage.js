@@ -42,10 +42,10 @@ export default class LoginPage extends Component {
 		//const user = { username: this.state.username, password: this.state.password, userId : this.state.userId };
 		//alert('User Info:'+ user);
 		//alert('a login was started: ' + this.state.username +" "+ this.state.password);
-		/*axios.get('http://localhost:8000/users')
+		/*axios.get('http://ec2-3-92-212-119.compute-1.amazonaws.com:8000/users')
 			.then( alert('i got'));*/
 
-		axios.post('http://localhost:8000/login', {
+		axios.post(`http://ec2-3-92-212-119.compute-1.amazonaws.com:8000/login`, {
 						username: this.state.username,
 						password: this.state.password
 

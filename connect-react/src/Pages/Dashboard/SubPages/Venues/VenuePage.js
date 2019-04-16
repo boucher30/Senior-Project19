@@ -20,7 +20,7 @@ export default class VenuePage extends Component {
             venueInfoLength: 0,
             followsVenue: false,
             venueLoading: true
-        }
+        };
 
         this.unFollowVenue = this.unFollowVenue.bind(this);
     }
@@ -32,7 +32,7 @@ export default class VenuePage extends Component {
 
 	  // Allows the user to follow the venue that they are on.
     followVenue = () => {
-        axios.post('http://localhost:8000/follows', {
+        axios.post('http://ec2-3-92-212-119.compute-1.amazonaws.com:8000/follows', {
             user1: localStorage.getItem('userId'),
             v: this.state.venueInfo.venue_id
         }).then((res) => {
@@ -42,7 +42,7 @@ export default class VenuePage extends Component {
 
     // Unfollows the venue that we are on
     unFollowVenue() {
-        axios.delete(`http://localhost:8000/users/${localStorage.getItem('userId')}/follows/venues`, {
+        axios.delete(`http://ec2-3-92-212-119.compute-1.amazonaws.com:8000/users/${localStorage.getItem('userId')}/follows/venues`, {
             data: { user_id1: localStorage.getItem('userId'), venue_id: this.state.venueId }
         })
           .then((res) => {
@@ -142,7 +142,7 @@ export default class VenuePage extends Component {
     }
 
     getVenueInfo() {
-        axios.get(`http://localhost:8000/venues/${this.state.venueId}`)
+        axios.get(`http://ec2-3-92-212-119.compute-1.amazonaws.com:8000/venues/${this.state.venueId}`)
           .then(res => {
               // console.log('Venue:', res.data);
               this.setState({
@@ -153,7 +153,7 @@ export default class VenuePage extends Component {
     }
 
     getFollowingVenues() {
-        axios.get(`http://localhost:8000/users/${localStorage.getItem('userId')}/follows/venues`)
+        axios.get(`http://ec2-3-92-212-119.compute-1.amazonaws.com:8000/users/${localStorage.getItem('userId')}/follows/venues`)
           .then( (res) => {
               let venues = res.data.results[0];
               let followsVenue = false;
