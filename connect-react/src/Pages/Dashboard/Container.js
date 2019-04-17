@@ -10,7 +10,6 @@ import VenueListPage from "./SubPages/Venues/VenueListPage";
 import MessagesPage from "./SubPages/Messages/MessagesPage";
 import UsersPage from "./SubPages/UserSearch/UsersPage";
 import MessagesPageInbox from "./SubPages/Messages/MessagesPageInbox";
-import ProfilePage from "./SubPages/Profile/ProfilePage";
 import MessagesPageOutbox from "./SubPages/Messages/MessagesPageOutbox";
 import NotificationsPage from "./SubPages/Notifications/NotificationsPage";
 import NotificationsPageInbox from "./SubPages/Notifications/NotificationsPageInbox";
@@ -27,8 +26,7 @@ export default class Container extends Component {
 	render() {
 		return (
 			<>
-			<Router history={}>
-				<Route path="/dashboard/profile/:number" component={ProfilePage} />
+			<Router>as
 				<Route path="/dashboard/venues/:number" component={VenuePage} />
 				<Route path = "/dashboard/venues" component={VenueListPage} />
 				<Route path = "/dashboard/messages" component={MessagesPage} />
