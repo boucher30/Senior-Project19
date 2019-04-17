@@ -1,12 +1,10 @@
 import React from 'react';
-import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Container from "react-bootstrap/Container";
 import Image from 'react-bootstrap/Image';
 import EditProfileModal from "./EditProfileModal";
 import Button from 'react-bootstrap/Button';
-
 
 
 const ProfileInfoCard = (props) => {
@@ -22,7 +20,7 @@ const ProfileInfoCard = (props) => {
     }
     return (
         <>
-        <EditProfileModal handleRefresh={props.refresh} user={props.user} show={props.show} handleClose={props.close} />
+        <EditProfileModal handleRefresh={props.refresh} id={props.id} user={props.user} show={props.show} handleClose={props.close} />
             <Container  
                 style= {{
                     width: '75%',
