@@ -8,15 +8,28 @@ import {Button, Form, FormControl, FormGroup} from "react-bootstrap";
 import Redirect from "react-router/Redirect";
 import './Login.css';
 import axios from "axios";
+import jwt from "jsonwebtoken";
+import {Cookies, withCookies} from 'react-cookie';
+import {instanceOf, propTypes} from 'prop-types';
 
-export default class LoginPage extends Component {
+class LoginPage extends Component {
+
+	static propTypes = {
+		cookies: instanceOf(Cookies).isRequired
+	};
+
 	constructor(props) {
 		super(props);
-
+		const { cookies } = props;
+		const cookiemonster = new Cookies();
+		cookiemonster.set('id',0, {path: '/'});
 		this.state = {
 			username: "",
 			password: "",
 			userId: 0,
+			token: [],
+			cookie: cookies.get('id')||1,
+			cookiemonster: cookiemonster,
 			redirect: false
 		};
 	}
@@ -52,14 +65,27 @@ export default class LoginPage extends Component {
 				})
 			.then(results => {
 				this.setState({
-					userId: results.data.use
+					userId: results.data.use,
+					token: results.data.token
 				});
 
-				if(results.data.use > 0) {
+				if(this.state.token.length > 0) {
+					const decoded = jwt.verify(this.state.token, 'wowwow');
+					alert("decoded " + JSON.stringify(decoded));
+					const us = decoded.session.us.user_Id;
 
+					this.setState({
+						userId: us
+
+					});
 					alert("logging in succesful userId: " + this.state.userId);
-					localStorage.setItem('userId', results.data.use);
+					//alert("cookie monster1: " + this.state.cookiemonster.get('id'));
+					this.state.cookiemonster.set('id',us,{ path: '/' });
+
+					alert("cookie monster: " + this.state.cookiemonster.get('id'));
+					localStorage.setItem('userId', us);
 					this.setState({redirect: true});
+
 
 				}
 				else if(this.state.userId === -1){
@@ -73,7 +99,7 @@ export default class LoginPage extends Component {
 					this.setState({redirect: false});
 				}
 				else {
-					alert("password is not valid or user is already logged in");
+					alert("password is not valid");
 
 					this.setState({redirect: false});
 				}
@@ -92,7 +118,7 @@ export default class LoginPage extends Component {
 	render() {
 		const { redirect } = this.state;
 		if(redirect) {
-			return <Redirect to={`/dashboard/profile/${localStorage.getItem('userId')}`}/>;
+			return <Redirect id={this.state.cookiemonster}  to={`/dashboard/profile/${this.state.cookiemonster.get('id')}`}/>;
 		}
 
 		return (
@@ -129,3 +155,5 @@ export default class LoginPage extends Component {
 		);
 	}
 }
+
+export default withCookies(LoginPage);
