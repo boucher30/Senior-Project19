@@ -13,13 +13,61 @@ const PORT2 = 8001;
 const axios = require("axios");
 const io = require('socket.io')();
 //const getApiAndEmit = "todo";
-const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const flash = require('connect-flash');
 const session = require('express-session');
 const path = require('path');
+const Sequelize = require('sequelize');
+
+const jwt = require('jsonwebtoken');
 
 
+
+const passport = require('passport');
+
+const passportJWT = require('passport-jwt');
+
+
+
+const ExtractJwt = passportJWT.ExtractJwt;
+
+const JwtStrategy = passportJWT.Strategy;
+
+
+
+const jwtOptions = {};
+
+jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
+
+jwtOptions.secretOrKey = 'wowwow';
+
+
+
+// lets create our strategy for web token
+
+const strategy = new JwtStrategy(jwtOptions, function(jwt_payload, next) {
+
+	console.log('payload received', jwt_payload);
+
+	var user = getUser({ id: jwt_payload.id });
+
+
+
+	if (user) {
+
+		next(null, user);
+
+	} else {
+
+		next(null, false);
+
+	}
+
+});
+
+// use the strategy
+
+passport.use(strategy);
 
 
 //const server = http.createServer(app);
@@ -117,6 +165,25 @@ const messageNot = async socket => {
     socket.emit("testing1")
 
 };
+
+
+const sequelize = new Sequelize(
+	{
+	database: process.env.DB_NAME,
+	username: process.env.DB_USER,
+	password: process.env.DB_PASSWORD,
+	dialect: 'mysql',
+}
+);
+
+// check the databse connection
+sequelize
+	.authenticate()
+	.then(() => console.log('Connection has been established successfully.'))
+.catch(err => console.error('Unable to connect to the database:', err));
+
+
+
 
 // Tells the App specific routes to use using router in each file
 // any new file needs to be added in order for it to function.

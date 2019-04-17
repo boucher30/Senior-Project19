@@ -60,7 +60,7 @@ class App extends Component {
         {/* Main routing methods can be found here */}
         <Switch>
           <Route exact path='/' component={SplashPage} />
-          <Route path='/dashboard' component={Dashboard} />
+          <Route protected path='/dashboard' component={Dashboard} />
           <Route path='/login' component={LoginPage} />
           <Route path='/logout' component={LogoutPage} />
           <Route path='/sign-up' component={SignUpPage} />
