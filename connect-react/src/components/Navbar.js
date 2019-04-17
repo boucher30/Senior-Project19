@@ -7,7 +7,6 @@ import {link} from 'react-router'
 
 import CustomFormGroup from "./CustomFormGroup";
 import NavbarBrand from "react-bootstrap/NavbarBrand";
-import axios from "axios";
 
 class TopNav extends Component {
 	constructor(props){
@@ -59,6 +58,7 @@ class TopNav extends Component {
 	}};
 	componentWillMount()
 	{
+		/*
 		axios.get(`http://ec2-3-92-212-119.compute-1.amazonaws.com:8000/users/${localStorage.getItem('userId')}/messages/notifications`)
 			.then(res => {
 				console.log("results: ", res.data.results[0]);
@@ -77,7 +77,7 @@ class TopNav extends Component {
 				});
 				//alert("you have "+this.state.messages.notifications+" messages");
 			});
-
+		*/
 	}
 
 

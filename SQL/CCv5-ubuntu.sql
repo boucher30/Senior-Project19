@@ -1957,7 +1957,7 @@ DELIMITER $$
 USE `CCv5`$$
 CREATE PROCEDURE `get_user_attended` (in id int)
 BEGIN
-select * from all_carves where carve_id  in (select carve from carve_attendees where user = 1);
+select * from all_carves where carve_id  in (select carve from CARVE_ATTENDEES where user = 1);
 END$$
 
 DELIMITER ;
