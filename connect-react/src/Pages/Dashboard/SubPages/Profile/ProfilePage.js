@@ -3,17 +3,12 @@ import axios from 'axios'
 import Button from "react-bootstrap/Button";
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Container from "react-bootstrap/Container";
-import Image from 'react-bootstrap/Image';
 import SnowProfilePic from '../../../../images/snowboard-profile-pic.jpg';
-import EditProfileModal from "./EditProfileModal";
-import CarveCardUserCreate from "../../../../components/CarveCardUserCreate";
 import CreateCarveModal from "../../../../components/CreateCarveModal";
 import BuddyRequestModal from "../../../../components/BuddyRequestModal";
 import MediaGroup from "../../../../components/MediaGroup";
 import ProfileInfoCard from './ProfileInfoCard';
 import CardColumns from 'react-bootstrap/CardColumns';
-import Card from 'react-bootstrap/Card';
 
 
 export default class ProfilePage extends Component {
@@ -23,7 +18,7 @@ export default class ProfilePage extends Component {
 			userId: props.match.params.number,
 			userInfo: {},
 			userInfoLength: 0,
-			isUserLoggedIn: props.match.params.number === localStorage.getItem('userId'),
+			isUserLoggedIn: props.match.params.number === props.id,
 			pic : SnowProfilePic,
 			check: true,
 			show: false,
@@ -57,8 +52,8 @@ export default class ProfilePage extends Component {
 	onClick1 = () =>{
 
 		axios.post('http://localhost:8000/follows', {
-			user1: localStorage.getItem('userId'),
-			user2: this.state.userInfo.user_id
+			user1: this.state.isUserLoggedIn,
+			user2: this.state.userId
 
 		});
 	};
@@ -102,7 +97,7 @@ export default class ProfilePage extends Component {
 					
 				{/* This is the row that will hold the profile picture and the information */}
 				<div>
-					<ProfileInfoCard loggedIn={isUserLoggedIn} handleShow={this.handleShow} close={this.handleClose} show={this.state.show} refresh= {this.getUserInfo} user={userInfo} firstName={userInfo.first_name} lastName={userInfo.last_name} img={this.state.pic} username={userInfo.username} description={userInfo.description} type={userInfo.type} snow={userInfo.snow_sports} water={userInfo.water_sports} land={userInfo.land_sports}/>
+					<ProfileInfoCard loggedIn={isUserLoggedIn} handleShow={this.handleShow} close={this.handleClose} show={this.state.show} refresh= {this.getUserInfo} user={userInfo} firstName={userInfo.first_name} lastName={userInfo.last_name} img={this.state.pic} id = {isUserLoggedIn} username={userInfo.username} description={userInfo.description} type={userInfo.type} snow={userInfo.snow_sports} water={userInfo.water_sports} land={userInfo.land_sports}/>
 				</div>
 
 				<Row>
@@ -177,7 +172,7 @@ export default class ProfilePage extends Component {
 				.then(res => {
 					this.setState({
 						userInfo: res.data[0][0],
-						buddies: Object.keys(res.data[0][0]).length,
+						buddies: res.data[0][0].length,
 
 					});
 
@@ -189,7 +184,7 @@ export default class ProfilePage extends Component {
 				.then(res => {
 					this.setState({
 						userInfo: res.data.users[0][0],
-						follows: Object.keys(res.data[0][0]).length
+						follows: res.data[0][0].length
 
 					});
 				})

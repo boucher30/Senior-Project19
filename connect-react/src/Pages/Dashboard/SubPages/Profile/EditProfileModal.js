@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import CustomFormGroup from '../../../../components/CustomFormGroup';
@@ -14,7 +14,8 @@ export default class EditProfileModal extends Component {
 			sport_type: props.user.sport,
 			firstName: props.user.first_name,
 			lastName: props.user.last_name,
-			profileType: props.user.profile_type
+			profileType: props.user.profile_type,
+			id: props.id
 		}
 	}
 
@@ -38,7 +39,7 @@ export default class EditProfileModal extends Component {
 	handleSubmit = e => {
 		// We go to endpoint here to update users info and send the new info that is stored in state
 		e.preventDefault();
-		axios.put(`http://localhost:8000/users/${localStorage.getItem('userId')}`, this.state)
+		axios.put(`http://localhost:8000/users/${this.state.id}`, this.state)
 			.then(res => {
 				console.log('Resulting information from API:', res);
 				this.props.handleRefresh();
