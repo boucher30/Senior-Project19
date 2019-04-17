@@ -10,7 +10,10 @@ import EditProfileModal from "./EditProfileModal";
 import CarveCardUserCreate from "../../../../components/CarveCardUserCreate";
 import CreateCarveModal from "../../../../components/CreateCarveModal";
 import BuddyRequestModal from "../../../../components/BuddyRequestModal";
-import MediaCard from "../../../../components/MediaCard";
+import MediaGroup from "../../../../components/MediaGroup";
+import ProfileInfoCard from './ProfileInfoCard';
+import CardColumns from 'react-bootstrap/CardColumns';
+import Card from 'react-bootstrap/Card';
 
 
 export default class ProfilePage extends Component {
@@ -71,14 +74,14 @@ export default class ProfilePage extends Component {
 			if(isUserLoggedIn) {
 				options =
 					<Row classname="justify-content-end" style ={{paddingTop:"15px"}}>
-						<Button variant="info" onClick={this.handleShow}>Edit</Button>
-				<Button onClick={this.handleClick} style={{ margin: '5px' }}>Create Carve</Button>
-				</Row>
+						<Button onClick={this.handleClick} style={{ marginLeft: '50px', marginTop: '-7px' }}>Create Carve</Button>
+					</Row>
 			} else {
-				options = <div style={{display:'flex'}}>
-					<Button style={{margin:'5px'}} variant="info" onClick = {this.onClick1}>Follow</Button>
-					<Button style={{margin:'5px'}} variant="info" onClick = {this.handleClick2}>Add Buddy</Button>
-				</div>;
+				options = 
+					<div style={{display:'flex'}}>
+						<Button style={{margin:'5px'}} variant="info" onClick = {this.onClick1}>Follow</Button>
+						<Button style={{margin:'5px'}} variant="info" onClick = {this.handleClick2}>Add Buddy</Button>
+					</div>;
 
 
 			}
@@ -86,64 +89,39 @@ export default class ProfilePage extends Component {
 			return (
 				<>
 					<CreateCarveModal handleClose={this.handleClick} show={this.state.show1}/>
-					<EditProfileModal handleRefresh={this.getUserInfo} user={userInfo} show={this.state.show} handleClose={this.handleClose} />
 					<BuddyRequestModal id ={this.state.userInfo.user_id} show={this.state.show2} handleClose={this.handleClose2}/>
-					<Row style={{paddingLeft:"20px"}}>
-					<div style={{ display: 'flex', marginTop: '8px', border: "0px solid slategrey" }}>
-						<h2 style={{ width: isUserLoggedIn ? '90%' : '80%' }}>{profilePrefix} Profile</h2>
-
-
-
-					</div>
+					<Row style={{marginLeft: "3%", marginTop: '2%', marginBottom: '2%'}}>
+						<div style={{ display: 'flex', marginTop: '8px', border: "0px solid slategrey" }}>
+							<h2>{profilePrefix} Profile</h2>
+						</div>
 						<div >
-							{options}</div>
+							{options}
+						</div>
 					</Row>
-					{/* This is the row that will hold the profile picture and the information */}
-					<Row>
 
-						<Col xs={4}>
-							<Container style={{  border: "0px solid black" }}>
-
-								<Image src={this.state.pic} fluid />
-							</Container>
-						</Col>
-						<Col xs={4}>
-							<Container style={{ backgroundColor: "darkgrey", height: "100%", width:"100%",border: "0px double black"}} bordered>
-								<h1> {userInfo.username}</h1>
-								<h4> {userInfo.first_name} {userInfo.last_name}</h4>
-								<p style={{flexDirection:'row'}} > <i className="fa fa-video-camera"> </i> {userInfo.type} </p>
-								<p style = {{paddingLeft: "10%",}}> About me: {userInfo.description}</p>
-							</Container>
-						</Col>
-						<Col xs={4}>
-						<Container style={{ border: " 0px solid black", backgroundColor:'slategrey', width:"100%%", height: "100%" }}>
-							<h3>Profile Info</h3>
-							<p>Buddy Count: {this.state.buddies}</p>
-							<p> Follower Count: {this.state.follows} </p>
-							<p> Winter Sports: {userInfo.snow_sports}</p>
-							<p> Water Sports: {userInfo.water_sports}</p>
-							<p> Land Sports: {userInfo.land_sports}</p>
-							<p> Air Sports: {userInfo.air_sports}</p>
-						</Container>
-						</Col>
-
-					</Row>
+					
+				{/* This is the row that will hold the profile picture and the information */}
+				<div>
+					<ProfileInfoCard loggedIn={isUserLoggedIn} handleShow={this.handleShow} close={this.handleClose} show={this.state.show} refresh= {this.getUserInfo} user={userInfo} firstName={userInfo.first_name} lastName={userInfo.last_name} img={this.state.pic} username={userInfo.username} description={userInfo.description} type={userInfo.type} snow={userInfo.snow_sports} water={userInfo.water_sports} land={userInfo.land_sports}/>
+				</div>
 
 				<Row>
 					{/* Row will hold all of the media and such that we grab from the api */}
-					<Col style={{paddingLeft: "10%", border: '0px solid darkgrey'}}>
-						<h2 style = {{border:"0px solid slategrey"}}>Content</h2>
-						<div>
-							<MediaCard type = "profile" content_id = {this.state.userId}/>
-						</div>
-						<div>                                                                                                    </div>
+					<Col style = {{marginLeft: "3%", marginTop: '2%', marginBottom: '2%'}}>
+						<h2 >My Media</h2>
+						<CardColumns>
+							<MediaGroup type = "profile" content_id = {this.state.userId}/>
+						</CardColumns>                                                                                                 
 
 					</Col>
-					<Col style = {{width: "100%"}}>
+					{/* <Col style = {{width: "100%"}}>
 						<Row>
-							<h2>Carves created by user</h2></Row>
-						<Row style = {{width:"100%"}}>
-							<CarveCardUserCreate profile_id = {this.state.userId} style = {{width:"100%"}}/></Row></Col></Row>
+							<h2>Carves created by user</h2></Row> */}
+						{/* <Row style = {{width:"100%"}}>
+							<CarveCardUserCreate profile_id = {this.state.userId} style = {{width:"100%"}}/>
+						</Row>
+					</Col> */}
+				</Row>
 				</>
 			);
 		} else {

@@ -9,7 +9,7 @@ import Form from 'react-bootstrap/Form';
 import CustomFormGroup from "./CustomFormGroup";
 import CarveAttendRequestModal from "./CarveAttendRequestModal";
 import CarveInviteModal from "./CarveInviteModal";
-import MediaCard from './MediaCard';
+import MediaGroup from './MediaGroup';
 
 
 export default class CarveCardUserCreate extends Component {
