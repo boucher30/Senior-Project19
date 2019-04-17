@@ -11,7 +11,7 @@ const passport = require('passport');
 
 const passportJWT = require('passport-jwt');
 
-
+const session = require('../server');
 
 const ExtractJwt = passportJWT.ExtractJwt;
 
@@ -122,7 +122,27 @@ router.post('/', async function(req, res, next) {
                         const token = jwt.sign(payload, jwtOptions.secretOrKey);
                         console.log("check" + JSON.stringify(results1[0][0]));
 
+                        passport.serializeUser((user, done) => {
+                            console.log('Inside serializeUser callback. User id is save to the session file store here');
+                            done(null, user.id);
+                        });
+
+                        passport.authenticate('local', (err, user, info) => {
+                            console.log('Inside passport.authenticate() callback');
+                            console.log(`req.session.passport: ${JSON.stringify(req.session.passport)}`);
+                            console.log(`req.user: ${JSON.stringify(req.user)}`);
+                            req.login(user, (err) => {
+                                console.log('Inside req.login() callback');
+                                console.log(`req.session.passport: ${JSON.stringify(req.session.passport)}`);
+                                console.log(`req.user: ${JSON.stringify(req.user)}`);
+                                return res.send('You were authenticated & logged in!\n');
+                            })
+
+                        });
+
+
                         res.status(202).jsonp({ msg: 'ok', token: token}).end;
+
                     }
 
                 });
