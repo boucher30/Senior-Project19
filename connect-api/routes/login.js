@@ -90,60 +90,61 @@ router.post('/', async function(req, res, next) {
 
         con.query(userCheck, [username], (err, results) => {
             if (results[0][0][0] == 0) {
-                const user = -1;
+                const userId = -1;
                 //req.flash('loginMessage', 'No user found.');
-                res.status(202).jsonp({user, message: 'No such user found'}).end;
-                console.log('logging in with username fail ' + results[0][0][0]);
+                const session = ({us: userId});
+                const payload = {session};
+                const token = jwt.sign(payload, jwtOptions.secretOrKey);
+                res.status(202).jsonp({token, message: 'No such user found'}).end;
+                console.log('logging in with username fail ' + results[0][0]);
             }
             else {
-                const user = ({username: username, password: password});
+
 
                 con.query(logi, [username, password], (err, results1) => {
-                    console.log(results1[0][0][0]);
-                    if (results1[0][0][0] == 0) {
-                        const user = -3;
-                        res.status(202).jsonp({user}).end;
-                        //req.flash('loginMessage', 'Wrong password.');
-                        console.log("passwordfail" + user);
-
+                    console.log(results1[0][0]);
+                    var  userId = 0;
+                    if(results1[0][0].user_Id >0) {
+                        userId = results1[0][0].user_Id;
                     }
-                    else if(results1[0][0][0] <0)
+                    else if(results1[0][0][0] === 0)
                     {
-                        const user = -2;
-
-                        res.status(202).jsonp({user}).end;
-                        console.log("user already logged in"+ user);
-
+                        userId = 0;
                     }
-                    else {
+                    else
+                    {
+                        userId = -2;
+                    }
 
-                        const session = ({us: results1[0][0], username: username});
+                        const session = ({us: userId, username: username});
                         const payload = {session};
                         const token = jwt.sign(payload, jwtOptions.secretOrKey);
-                        console.log("check" + JSON.stringify(results1[0][0]));
+                        console.log("username exists" + JSON.stringify(results1[0][0]));
 
-                        passport.serializeUser((user, done) => {
-                            console.log('Inside serializeUser callback. User id is save to the session file store here');
-                            done(null, user.id);
-                        });
-
-                        passport.authenticate('local', (err, user, info) => {
-                            console.log('Inside passport.authenticate() callback');
-                            console.log(`req.session.passport: ${JSON.stringify(req.session.passport)}`);
-                            console.log(`req.user: ${JSON.stringify(req.user)}`);
-                            req.login(user, (err) => {
-                                console.log('Inside req.login() callback');
-                                console.log(`req.session.passport: ${JSON.stringify(req.session.passport)}`);
-                                console.log(`req.user: ${JSON.stringify(req.user)}`);
-                                return res.send('You were authenticated & logged in!\n');
-                            })
-
-                        });
 
 
                         res.status(202).jsonp({ msg: 'ok', token: token}).end;
 
-                    }
+
+
+                });
+                const user = ({username: username, password: password});
+
+                passport.serializeUser((user, done) => {
+                    console.log('Inside serializeUser callback. User id is save to the session file store here');
+                    done(null, user.id);
+                });
+
+                passport.authenticate('local', (err, user, info) => {
+                    console.log('Inside passport.authenticate() callback');
+                    console.log(`req.session.passport: ${JSON.stringify(req.session.passport)}`);
+                    console.log(`req.user: ${JSON.stringify(req.user)}`);
+                    req.login(user, (err) => {
+                        console.log('Inside req.login() callback');
+                        console.log(`req.session.passport: ${JSON.stringify(req.session.passport)}`);
+                        console.log(`req.user: ${JSON.stringify(req.user)}`);
+                        return res.send('You were authenticated & logged in!\n');
+                    })
 
                 });
             }

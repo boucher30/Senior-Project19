@@ -18,7 +18,7 @@ export default class ProfilePage extends Component {
 			userId: props.match.params.number,
 			userInfo: {},
 			userInfoLength: 0,
-			isUserLoggedIn: props.match.params.number === props.id,
+			isUserLoggedIn: props.id,
 			pic : SnowProfilePic,
 			check: true,
 			show: false,
@@ -76,6 +76,7 @@ export default class ProfilePage extends Component {
 					<div style={{display:'flex'}}>
 						<Button style={{margin:'5px'}} variant="info" onClick = {this.onClick1}>Follow</Button>
 						<Button style={{margin:'5px'}} variant="info" onClick = {this.handleClick2}>Add Buddy</Button>
+						<h3>state: {this.state.isUserLoggedIn}</h3>
 					</div>;
 
 

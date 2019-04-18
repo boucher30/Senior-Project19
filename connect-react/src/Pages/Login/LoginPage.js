@@ -68,11 +68,12 @@ class LoginPage extends Component {
 					userId: results.data.use,
 					token: results.data.token
 				});
+				const decoded = jwt.verify(this.state.token, 'wowwow');
+				alert("decoded " + JSON.stringify(decoded));
+				if(decoded.session.us > 0) {
 
-				if(this.state.token.length > 0) {
-					const decoded = jwt.verify(this.state.token, 'wowwow');
 					alert("decoded " + JSON.stringify(decoded));
-					const us = decoded.session.us.user_Id;
+					const us = decoded.session.us;
 
 					this.setState({
 						userId: us
@@ -88,12 +89,12 @@ class LoginPage extends Component {
 
 
 				}
-				else if(this.state.userId === -1){
+				else if(decoded.session.us === -1){
 					alert("username is not valid");
 
 					this.setState({redirect: false});
 				}
-				else if(this.state.userId === -2){
+				else if(decoded.session.us == -2){
 					alert("user is already logged in");
 
 					this.setState({redirect: false});
