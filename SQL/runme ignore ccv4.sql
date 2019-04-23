@@ -3,7 +3,7 @@
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
-
+SET @lower_case_table_names=1;
 -- -----------------------------------------------------
 -- Schema CCv4
 -- -----------------------------------------------------
@@ -39,8 +39,8 @@ CREATE TABLE IF NOT EXISTS `CCv4`.`USERS` (
   `logged_in` TINYINT NULL DEFAULT 0,
   `create_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`user_id`),
-  UNIQUE INDEX `user_id_UNIQUE` (`user_id` ASC) VISIBLE,
-  UNIQUE INDEX `username_UNIQUE` (`username` ASC) VISIBLE)
+  UNIQUE INDEX `user_id_UNIQUE` (`user_id` ASC),
+  UNIQUE INDEX `username_UNIQUE` (`username` ASC))
 ENGINE = InnoDB;
 
 
@@ -61,8 +61,8 @@ CREATE TABLE IF NOT EXISTS `CCv4`.`VENUES` (
   `air_sports` SET('skyDive', 'hangGlide') NULL,
   `create_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`venue_id`),
-  UNIQUE INDEX `venue_id_UNIQUE` (`venue_id` ASC) VISIBLE,
-  UNIQUE INDEX `venue_name_UNIQUE` (`venue_name` ASC) VISIBLE)
+  UNIQUE INDEX `venue_id_UNIQUE` (`venue_id` ASC),
+  UNIQUE INDEX `venue_name_UNIQUE` (`venue_name` ASC))
 ENGINE = InnoDB;
 
 
@@ -84,7 +84,7 @@ CREATE TABLE IF NOT EXISTS `CCv4`.`CARVES` (
   `completed` TINYINT NULL,
   `sports` SET('snowboard', 'ski', 'snowmobile', 'surf', 'waterski', 'skyDive', 'hangGlide', 'skateboard', 'BMX', 'mountainBike') NULL,
   `create_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-  UNIQUE INDEX `carve_id_UNIQUE` (`carve_id` ASC) VISIBLE,
+  UNIQUE INDEX `carve_id_UNIQUE` (`carve_id` ASC),
   PRIMARY KEY (`carve_id`),
   CONSTRAINT `creator`
     FOREIGN KEY (`creator`)
@@ -116,9 +116,9 @@ CREATE TABLE IF NOT EXISTS `CCv4`.`MESSAGES` (
   `carve` INT NULL,
   `create_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`message_id`),
-  UNIQUE INDEX `message_id_UNIQUE` (`message_id` ASC) VISIBLE,
-  INDEX `reply_idx` (`reply` ASC) VISIBLE,
-  INDEX `carve_idx` (`carve` ASC) VISIBLE,
+  UNIQUE INDEX `message_id_UNIQUE` (`message_id` ASC),
+  INDEX `reply_idx` (`reply` ASC),
+  INDEX `carve_idx` (`carve` ASC),
   CONSTRAINT `sender`
     FOREIGN KEY (`sender_Id`)
     REFERENCES `CCv4`.`USERS` (`user_id`)
@@ -153,9 +153,9 @@ CREATE TABLE IF NOT EXISTS `CCv4`.`FOLLOWS` (
   `user_id2` INT NULL,
   `venue_id` INT NULL,
   `type` SET('buddy', 'follow', 'block') NULL,
-  INDEX `venue9_idx` (`venue_id` ASC) VISIBLE,
+  INDEX `venue9_idx` (`venue_id` ASC),
   PRIMARY KEY (`follow_id`),
-  UNIQUE INDEX `follow_id_UNIQUE` (`follow_id` ASC) VISIBLE,
+  UNIQUE INDEX `follow_id_UNIQUE` (`follow_id` ASC),
   CONSTRAINT `user5`
     FOREIGN KEY (`user_id1`)
     REFERENCES `CCv4`.`USERS` (`user_id`)
@@ -184,10 +184,10 @@ CREATE TABLE IF NOT EXISTS `CCv4`.`CARVE_ATTENDEES` (
   `carve` INT NOT NULL,
   `user` INT NOT NULL,
   `type` SET('photographer', 'filmographer', 'droneOperator', 'athlete', 'proAthlete', 'fan') NOT NULL,
-  INDEX `carve_idx` (`carve` ASC) VISIBLE,
-  INDEX `user_idx` (`user` ASC) VISIBLE,
+  INDEX `carve_idx` (`carve` ASC),
+  INDEX `user_idx` (`user` ASC),
   PRIMARY KEY (`carve_attend_id`),
-  UNIQUE INDEX `carve_attend_id_UNIQUE` (`carve_attend_id` ASC) VISIBLE,
+  UNIQUE INDEX `carve_attend_id_UNIQUE` (`carve_attend_id` ASC),
   CONSTRAINT `carve1`
     FOREIGN KEY (`carve`)
     REFERENCES `CCv4`.`CARVES` (`carve_id`)
@@ -215,10 +215,10 @@ CREATE TABLE IF NOT EXISTS `CCv4`.`MEDIA` (
   `url` VARCHAR(50) NULL,
   `description` VARCHAR(100) NULL,
   `time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-  INDEX `venue_idx` (`venue` ASC) VISIBLE,
+  INDEX `venue_idx` (`venue` ASC),
   PRIMARY KEY (`media_id`),
-  UNIQUE INDEX `media_id_UNIQUE` (`media_id` ASC) VISIBLE,
-  INDEX `user11_idx` (`profile` ASC) VISIBLE,
+  UNIQUE INDEX `media_id_UNIQUE` (`media_id` ASC),
+  INDEX `user11_idx` (`profile` ASC),
   CONSTRAINT `carve4`
     FOREIGN KEY (`carve`)
     REFERENCES `CCv4`.`CARVES` (`carve_id`)
@@ -254,12 +254,12 @@ CREATE TABLE IF NOT EXISTS `CCv4`.`COMMENTS` (
   `poster` INT NOT NULL,
   `comment` VARCHAR(200) NULL,
   `profile` INT NULL,
-  INDEX `carve_idx` (`carve` ASC) VISIBLE,
-  INDEX `user_idx` (`poster` ASC) VISIBLE,
-  INDEX `media_idx` (`media` ASC) VISIBLE,
+  INDEX `carve_idx` (`carve` ASC),
+  INDEX `user_idx` (`poster` ASC),
+  INDEX `media_idx` (`media` ASC),
   PRIMARY KEY (`comment_id`),
-  UNIQUE INDEX `comment_id_UNIQUE` (`comment_id` ASC) VISIBLE,
-  INDEX `user10_idx` (`profile` ASC) VISIBLE,
+  UNIQUE INDEX `comment_id_UNIQUE` (`comment_id` ASC),
+  INDEX `user10_idx` (`profile` ASC),
   CONSTRAINT `carve2`
     FOREIGN KEY (`carve`)
     REFERENCES `CCv4`.`CARVES` (`carve_id`)
@@ -296,10 +296,10 @@ CREATE TABLE IF NOT EXISTS `CCv4`.`LIKES` (
   `comment` INT NULL,
   `media` INT NULL,
   `timestamp` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-  INDEX `comment_idx` (`comment` ASC) VISIBLE,
-  INDEX `media_idx` (`media` ASC) VISIBLE,
+  INDEX `comment_idx` (`comment` ASC),
+  INDEX `media_idx` (`media` ASC),
   PRIMARY KEY (`like_id`),
-  UNIQUE INDEX `like_id_UNIQUE` (`like_id` ASC) VISIBLE,
+  UNIQUE INDEX `like_id_UNIQUE` (`like_id` ASC),
   CONSTRAINT `carve3`
     FOREIGN KEY (`carve`)
     REFERENCES `CCv4`.`CARVES` (`carve_id`)
@@ -2086,7 +2086,7 @@ DROP TABLE IF EXISTS `CCv4`.`all_users`;
 DROP VIEW IF EXISTS `CCv4`.`all_users` ;
 USE `CCv4`;
 CREATE  OR REPLACE VIEW `all_users` AS
-select * from users;
+select * from USERS;
 
 -- -----------------------------------------------------
 -- View `CCv4`.`all_venues`
@@ -2095,7 +2095,7 @@ DROP TABLE IF EXISTS `CCv4`.`all_venues`;
 DROP VIEW IF EXISTS `CCv4`.`all_venues` ;
 USE `CCv4`;
 CREATE  OR REPLACE VIEW `all_venues` AS
-select * from venues;
+select * from VENUES;
 
 -- -----------------------------------------------------
 -- View `CCv4`.`all_carves`
@@ -2104,7 +2104,7 @@ DROP TABLE IF EXISTS `CCv4`.`all_carves`;
 DROP VIEW IF EXISTS `CCv4`.`all_carves` ;
 USE `CCv4`;
 CREATE  OR REPLACE VIEW `all_carves` AS 
-select * from carves;
+select * from CARVES;
 
 -- -----------------------------------------------------
 -- View `CCv4`.`all_media`
@@ -2122,7 +2122,7 @@ DROP TABLE IF EXISTS `CCv4`.`all_messages`;
 DROP VIEW IF EXISTS `CCv4`.`all_messages` ;
 USE `CCv4`;
 CREATE  OR REPLACE VIEW `all_messages` AS
-select * from messages;
+select * from MESSAGES;
 
 -- -----------------------------------------------------
 -- View `CCv4`.`all_likes`
@@ -2131,7 +2131,7 @@ DROP TABLE IF EXISTS `CCv4`.`all_likes`;
 DROP VIEW IF EXISTS `CCv4`.`all_likes` ;
 USE `CCv4`;
 CREATE  OR REPLACE VIEW `all_likes` AS
-select * from likes;
+select * from LIKES;
 
 -- -----------------------------------------------------
 -- View `CCv4`.`all_carve_attendees`
@@ -2140,7 +2140,7 @@ DROP TABLE IF EXISTS `CCv4`.`all_carve_attendees`;
 DROP VIEW IF EXISTS `CCv4`.`all_carve_attendees` ;
 USE `CCv4`;
 CREATE  OR REPLACE VIEW `all_carve_attendees` AS
-select * from carve_attendees;
+select * from CARVE_ATTENDEES;
 
 -- -----------------------------------------------------
 -- View `CCv4`.`all_follows`
@@ -2158,7 +2158,7 @@ DROP TABLE IF EXISTS `CCv4`.`all_comments`;
 DROP VIEW IF EXISTS `CCv4`.`all_comments` ;
 USE `CCv4`;
 CREATE  OR REPLACE VIEW `all_comments` AS
-select * from comments;
+select * from COMMENTS;
 
 -- -----------------------------------------------------
 -- View `CCv4`.`view1`
@@ -2167,11 +2167,11 @@ DROP TABLE IF EXISTS `CCv4`.`view1`;
 DROP VIEW IF EXISTS `CCv4`.`view1` ;
 USE `CCv4`;
 CREATE  OR REPLACE VIEW `view1` AS
-select type from likes;
+select type from LIKES;
 SET SQL_MODE = '';
 DROP USER IF EXISTS nodeuser;
 SET SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
-CREATE USER 'nodeuser' IDENTIFIED BY 'nodeuser@1234';
+CREATE USER 'nodeuser' IDENTIFIED BY 'Nodeuser@1234';
 
 GRANT ALL ON `CCv4`.* TO 'nodeuser';
 
@@ -2179,5 +2179,5 @@ SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- begin attached script 'script'
-ALTER USER 'nodeuser'@'localhost' IDENTIFIED WITH mysql_native_password BY 'nodeuser@1234';
+ALTER USER 'nodeuser'@'localhost' IDENTIFIED WITH mysql_native_password BY 'Nodeuser@1234';
 -- end attached script 'script'

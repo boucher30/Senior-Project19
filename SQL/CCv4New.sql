@@ -105,11 +105,11 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `CCv4`.`MESSAGES` ;
 
 CREATE TABLE IF NOT EXISTS `CCv4`.`MESSAGES` (
-  `message_id` INT NOT NULL AUTO_INCREMENT,
+  `message_id` INT NOT NULL,
   `message_subject` VARCHAR(50) NULL,
   `message_body` VARCHAR(500) NULL,
   `sender_Id` INT NOT NULL,
-  `rec_Id` INT NOT NULL,
+  `rec_Id` INT NOT NULL AUTO_INCREMENT,
   `type` SET('normal', 'buddyRequest', 'buddyAccept', 'buddyDecline', 'attendRequest', 'attendAccept', 'attendDeny', 'invite', 'inviteAccept', 'inviteDeny', 'reply') NULL,
   `reply` INT NULL,
   `read` TINYINT NULL DEFAULT 0,
@@ -2075,6 +2075,95 @@ USE `CCv4`$$
 CREATE PROCEDURE `get_venue_media` (in id int)
 BEGIN
 select * from all_media where venue = id;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure get_users_inbox_read
+-- -----------------------------------------------------
+
+USE `CCv4`;
+DROP procedure IF EXISTS `CCv4`.`get_users_inbox_read`;
+
+DELIMITER $$
+USE `CCv4`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_users_inbox_read`(in id int)
+BEGIN
+select * from all_messages where rec_id = id and (type = 'normal' or type = 'reply') and ( 'read'=1);
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure get_users_inbox_Unread
+-- -----------------------------------------------------
+
+USE `CCv4`;
+DROP procedure IF EXISTS `CCv4`.`get_users_inbox_Unread`;
+
+DELIMITER $$
+USE `CCv4`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_users_inbox_Unread`(in id int)
+BEGIN
+select * from all_messages where rec_id = id and (type = 'normal' or type = 'reply') and ( 'read'=0);
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure update_message_read
+-- -----------------------------------------------------
+
+USE `CCv4`;
+DROP procedure IF EXISTS `CCv4`.`update_message_read`;
+
+DELIMITER $$
+USE `CCv4`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_message_read`(in id int)
+BEGIN
+update messages
+set
+messages.read=1
+where message_id = id;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure add_photographer_to_carve
+-- -----------------------------------------------------
+
+USE `CCv4`;
+DROP procedure IF EXISTS `CCv4`.`add_photographer_to_carve`;
+
+DELIMITER $$
+USE `CCv4`$$
+CREATE PROCEDURE `add_photographer_to_carve` (in car int, in us int)
+BEGIN
+if((select max_photo from carves where carve_id =car)>0) then 
+update carves Set max_photo=max_photo-1 where carve_id=car;
+call add_carve_attendee( car, us , 'photographer');
+end if;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure add_athlete_to_carve
+-- -----------------------------------------------------
+
+USE `CCv4`;
+DROP procedure IF EXISTS `CCv4`.`add_athlete_to_carve`;
+
+DELIMITER $$
+USE `CCv4`$$
+CREATE PROCEDURE `add_athlete_to_carve` (in car int, in us int)
+BEGIN
+if((select max_athletes from carves where carve_id =car)>0) then 
+update carves Set max_athletes=max_athletes-1 where carve_id=car;
+call add_carve_attendee( car, us , 'athlete');
+end if;
 END$$
 
 DELIMITER ;
